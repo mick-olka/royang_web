@@ -1,0 +1,18 @@
+
+.sectionsPagePane {
+    background-color: #999;
+    margin: 0.5rem;
+    padding: 0.5rem;
+}
+
+.sectionsPane {
+    margin: 1rem;
+    padding: 0.5rem;
+    border: 2px solid grey;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.section {
+
+}

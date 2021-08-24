@@ -1,0 +1,22 @@
+
+.item {
+    margin: 0.2rem;
+    padding: 0.2rem;
+    background-color: #fff;
+    border: 2px solid black;
+    height: 2.3rem;
+    position: relative;
+    display: flex;
+}
+
+.photoBox {
+    position: relative;
+    margin-left: 2rem;
+    max-height: 100%;
+    max-width: 4rem;
+}
+
+.photo {
+    max-height: 100%;
+    max-width: 100%;
+}
