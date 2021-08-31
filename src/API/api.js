@@ -1,8 +1,10 @@
 import * as axios from "axios";
 
+export const apiURL = 'http://192.168.1.163:7500/';
+
 const instance = axios.create({
     withCredentials: true,
-    baseURL: 'http://192.168.1.162:7500',
+    baseURL: apiURL,
     headers: {
 
     },

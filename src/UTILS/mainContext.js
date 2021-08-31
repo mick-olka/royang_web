@@ -1,10 +1,12 @@
 import React, {Component} from "react";
+import {apiURL} from "../API/api.js";
+
 const Context = React.createContext();
 
 class MainContextProvider extends Component {
 
     state ={
-        apiURL: "http://192.168.1.162:7500/"
+        apiURL: apiURL,
     }
 
     render() {

@@ -1,7 +1,7 @@
 import React from 'react';
 import s from "./MainPage.module.css";
-import Slider from "../Slider/Slider";
 import SectionsPane from "../SectionsPaneC/SectionsPane";
+import SlickSlider from "../Slider/SlickSlider";
 
 const MainPage=(props)=>{
 
@@ -9,7 +9,7 @@ const MainPage=(props)=>{
         <div className={s.mainPage} >
             <h1>MAIN PAGE</h1>
 
-            <Slider />
+            <SlickSlider />
 
             <SectionsPane products={props.products} />
         </div>

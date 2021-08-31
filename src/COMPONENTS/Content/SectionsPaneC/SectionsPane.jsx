@@ -11,12 +11,12 @@ const SectionsPane=(props)=>{
            name={p.name}
            thumbnail={p.thumbnail}
            price={p.price}
-           //url={p.url}
+
        />
     });
 
     return (
-        <div className={s.sectionsPagePane} >
+        <div className={s.sectionsPage} >
             <h1>SECTIONS</h1>
         <div className={s.sectionsPane} >
             {productsList}

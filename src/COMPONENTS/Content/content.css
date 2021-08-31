@@ -1,20 +1,20 @@
 .content_pane {
-    flex: available;
-    width: 100%;
-    padding: 0.5rem;
-    margin:  0 0.5rem;
+    flex: 80%;
+    width: 80%;
+    /*padding: 0.5rem;*/
+    margin: 0 0.2rem;
     background-color: #666;
-    height: 2000px;
 }
 
 .navbar_pane {
-    flex: 15rem;
+    flex: 8rem 0;
 }
 
 .middle_pane {
     position: relative;
-    margin: 0.5rem auto;
+    margin: 0.2rem auto;
     display: flex;
+    justify-content: center;
 }
 
 .adminNavbar {
@@ -25,5 +25,6 @@
     .middle_pane {
         width: 70rem;
     }
+
 }
 

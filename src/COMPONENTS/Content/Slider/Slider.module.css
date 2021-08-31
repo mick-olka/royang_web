@@ -2,3 +2,13 @@
     background-color: #fff !important;
     max-height: 25rem;
 }
+
+.slickSlider {
+    margin: 0 auto;
+    max-width: 80%;
+    height: 8rem;
+}
+
+.slickSlider__item {
+    height: 6rem;
+}
