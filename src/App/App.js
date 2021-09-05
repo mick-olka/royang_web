@@ -21,7 +21,7 @@ class App extends Component {
 
     componentDidMount() {
         window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors);
-        this.props.initApp();   //  has promise in reducer, takes time to set
+        this.props.initApp(this.props.pageNum, this.props.pageLimit);   //  has promise in reducer, takes time to set
     }
     componentWillUnmount() {
         window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors);
@@ -51,6 +51,8 @@ const mapStateToProps = (state) => {
     return ({
         initialized: state.mainReducer.initialized,
         links: state.mainReducer.links,
+        pageNum: state.productsReducer.paginatorData.currentPage,
+        pageLimit: state.productsReducer.paginatorData.pageLimit,
     });
 };
 

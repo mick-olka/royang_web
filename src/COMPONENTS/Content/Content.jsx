@@ -14,7 +14,7 @@ function Content({links, findProducts, ...props}) {
             <Header/>
             <div className="middle_pane">
                 <div>
-                    <Search findProducts={findProducts} redirectTo={"/results"} {...props} />
+                    <Search findProducts={findProducts} redirectTo={"/search"} {...props} />
                 <Navbar links={links}/>
                 </div>
                 <div className="content_pane" >

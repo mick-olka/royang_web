@@ -1,6 +1,6 @@
 import * as axios from "axios";
 
-export const apiURL = 'http://192.168.1.163:7500/';
+export const apiURL = 'http://192.168.1.24:7500/';
 
 const instance = axios.create({
     withCredentials: true,
@@ -12,9 +12,9 @@ const instance = axios.create({
 
 export const productsAPI = {
 
-    getProducts () {
+    getProducts (page=0, limit=6) {
         return instance.get(
-            'products',
+            `products?page=${page}&limit=${limit}`,
         ).then(response => {
             return response.data;
         });
@@ -58,10 +58,9 @@ export const productsAPI = {
         });
     },
 
-    findProducts (str) {
-        return instance.post(
-          'products/find',
-            {string: str}
+    findProducts (str="") {
+        return instance.get(
+          `search?str=${str}`,
         ).then(res => {
             return res.data;
             });

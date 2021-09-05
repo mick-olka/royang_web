@@ -1,0 +1,13 @@
+
+.pageIndex {
+    display: flex;
+}
+
+.pageIndex span{
+    display: inline-block;
+    padding: 0.5rem;
+}
+
+.selectedPage{
+    font-weight: bolder;
+}

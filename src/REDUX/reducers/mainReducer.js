@@ -28,16 +28,14 @@ const mainReducer = (state = initialState, action) => {
     }
 };
 
-const setInitializedSuccessAC = () => (
-    {type: SET_INITIALIZED_SUCCESS}
-);
+const setInitializedSuccessAC = () => ({type: SET_INITIALIZED_SUCCESS});
 
 //=====THUNKS=======
 
-export const initApp = () =>
+export const initApp = (page, limit) =>
     async (dispatch) => {
         try {
-            await Promise.all([dispatch(checkAuth()), dispatch(getProducts()), dispatch(getLists())]);
+            await Promise.all([dispatch(checkAuth()), dispatch(getProducts(page, limit)), dispatch(getLists())]);
     } catch (e) {
         //console.log(e);
     }

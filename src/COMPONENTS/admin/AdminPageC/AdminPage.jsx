@@ -63,7 +63,7 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists, deleteProdu
             <div className="middle_pane">
 
                 <div className="adminNavbar">
-                    <Search findProducts={findProducts} redirectTo={"/admin/results"} {...props} />
+                    <Search findProducts={findProducts} redirectTo={"/admin/search"} {...props} />
                     <Navbar links={links}/>
                     <p>----------</p>
                     <p>Lists</p>
@@ -77,7 +77,7 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists, deleteProdu
                         <Route path="/admin/lists/:listUrl" render={() => <TypePaneC/>}/>
                         <Route path="/admin/login/pw" render={() => <ChangePW changePW={changePW} />}/>
                         <Route path="/admin/new" render={() => <CreateProductC/>}/>
-                        <Route path="/admin/results" render={() => <MainAdminPage products={productsFound} />}/>
+                        <Route path="/admin/search" render={() => <MainAdminPage products={productsFound} />}/>
                         <Route path="/admin" render={() => <MainAdminPage products={products} />}/>
                         <Route render={() => (<NotFound/>)}/>
                     </Switch>
