@@ -6,9 +6,11 @@ const SET_PRODUCT_FORM = "productsReducer/SET_PRODUCT_FORM";
 const SET_IS_LOADING = "productsReducer/SET_IS_LOADING";
 const SET_ID_OF_CREATED = "productsReducer/SET_ID_OF_CREATED";
 const SET_NEW_ERROR = "productsReducer/SET_HAS_ERROR";
+const SET_FOUND_PRODUCTS = "productsReducer/SET_FOUND_PRODUCTS";
 
 let initialState = {
     products: [],
+    productsFound: [],
     newError: null,
     idOfCreated: "",
     productData: {
@@ -47,6 +49,11 @@ const productsReducer = (state=initialState, action) => {
                 ...state, newError: action.error,
             }
 
+        case SET_FOUND_PRODUCTS:
+            return {
+                ...state, productsFound: [...action.products],
+            }
+
         default:
             return state;
     }
@@ -57,6 +64,7 @@ export const setProductFormAC = (product) => ({type: SET_PRODUCT_FORM, product})
 const setIsLoadingAC = (isLoading) => ({type: SET_IS_LOADING, isLoading});
 const setIdOfCreatedAC = (id) => ({type: SET_ID_OF_CREATED, id});
 const setNewErrorAC = (error) => ({type: SET_NEW_ERROR, error});
+const setProductsFoundAC = (products) => ({type: SET_FOUND_PRODUCTS, products});
 
 //====================================
 
@@ -123,5 +131,14 @@ export const updateProduct = (id, formData, thumbnail) =>
             alert("deleteProduct: "+e);
         }
     }
+
+export const findProducts = (str) => async (dispatch) => {
+    try {
+        let products = await productsAPI.findProducts(str);
+        dispatch(setProductsFoundAC(products));
+    } catch (e) {
+        alert("findProducts: "+e);
+    }
+}
 
 export default productsReducer;

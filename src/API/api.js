@@ -56,6 +56,15 @@ export const productsAPI = {
         ).then(res => {
             return res.data;
         });
+    },
+
+    findProducts (str) {
+        return instance.post(
+          'products/find',
+            {string: str}
+        ).then(res => {
+            return res.data;
+            });
     }
 
 }

@@ -11,8 +11,9 @@ import list from "../ItemsList/ItemsList.module.css";
 import chairIcon from "../../../IMGS/chair.png";
 import {MainContextConsumer} from "../../../UTILS/mainContext";
 import ChangePW from "../AuthAdmin/ChangePW";
+import Search from "../../extra/Search";
 
-function AdminPage({deleteAdminAuth, products, lists, deleteProducts, createList, changePW}) {
+function AdminPage({deleteAdminAuth, products, productsFound, lists, deleteProducts, createList, changePW, findProducts, ...props}) {
 
     let links = [
         {url: "/", name: "Client"},
@@ -46,7 +47,7 @@ function AdminPage({deleteAdminAuth, products, lists, deleteProducts, createList
         );
     }
 
-    const MainPage = () => {
+    const MainAdminPage = ({products}) => {
         return <div>
             <h1>All Products</h1>
             <ItemsList items={products} deleteItems={deleteProducts}>
@@ -62,6 +63,7 @@ function AdminPage({deleteAdminAuth, products, lists, deleteProducts, createList
             <div className="middle_pane">
 
                 <div className="adminNavbar">
+                    <Search findProducts={findProducts} redirectTo={"/admin/results"} {...props} />
                     <Navbar links={links}/>
                     <p>----------</p>
                     <p>Lists</p>
@@ -71,11 +73,12 @@ function AdminPage({deleteAdminAuth, products, lists, deleteProducts, createList
 
                 <div className="content_pane">
                     <Switch>
-                        <Route exact path="/admin" render={() => <MainPage/>}/>
-                        <Route exact path="/admin/products/:prodId?" render={() => <UpdateProductC/>}/>
-                        <Route exact path="/admin/new" render={() => <CreateProductC/>}/>
-                        <Route exact path="/admin/login/pw" render={() => <ChangePW changePW={changePW} />}/>
+                        <Route path="/admin/products/:prodId?" render={() => <UpdateProductC/>}/>
                         <Route path="/admin/lists/:listUrl" render={() => <TypePaneC/>}/>
+                        <Route path="/admin/login/pw" render={() => <ChangePW changePW={changePW} />}/>
+                        <Route path="/admin/new" render={() => <CreateProductC/>}/>
+                        <Route path="/admin/results" render={() => <MainAdminPage products={productsFound} />}/>
+                        <Route path="/admin" render={() => <MainAdminPage products={products} />}/>
                         <Route render={() => (<NotFound/>)}/>
                     </Switch>
                 </div>

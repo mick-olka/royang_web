@@ -6,6 +6,7 @@ import MainPage from "./MainPage";
 let mapStateToProps = (state) => {
     return{
         products: state.productsReducer.products,
+        productsFound: state.productsReducer.productsFound,
     }
 }
 

@@ -6,19 +6,23 @@ import Header from "../Header/Header";
 import Navbar from "../Navbar/Navbar";
 import NotFound from "../extra/NotFound";
 import ProductPageC from "./Product/ProductPageC";
+import Search from "../extra/Search";
 
-function Content({links}) {
+function Content({links, findProducts, ...props}) {
     return (
         <div>
             <Header/>
             <div className="middle_pane">
+                <div>
+                    <Search findProducts={findProducts} redirectTo={"/results"} {...props} />
                 <Navbar links={links}/>
+                </div>
                 <div className="content_pane" >
                     <Switch>
-                    <Route exact path="/" render={() => <MainPageC /> }/>
                     <Route path="/info" render={() => <h1>INFO</h1> }/>
                         <Route path="/products/:prodId" render={() => <ProductPageC /> }/>
-                    <Route render={()=>(<NotFound />)} />
+                        <Route path="/" render={() => <MainPageC /> }/>
+                        {/*<Route render={()=>(<NotFound />)} />*/}
                     </Switch>
                 </div>
             </div>
