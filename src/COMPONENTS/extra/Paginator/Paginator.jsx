@@ -14,6 +14,12 @@ function Paginator({totalItemsCount,
     let leftPortionEdge = (portionNum -1 )*portionSize ;
     let rightPortionEdge = (portionNum * portionSize);
 
+    const onPageChanged0 = (p) => {
+        onPageChanged(p);
+        let a = Math.ceil(p / portionSize);
+        setPortionNum(a);
+    };
+
     let pages = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
@@ -32,13 +38,13 @@ function Paginator({totalItemsCount,
 
     return (
         <div className={s.pageIndex}>
-            <button onClick={()=>{setPortionNum(1)}}> {'<<'} </button>
+            <button disabled={currentPage===1} onClick={()=>{onPageChanged0(currentPage-1)}}> {'prev'} </button>
             {portionNum >1 && <button onClick={()=>{setPortionNum(portionNum-1)}}> {'<'} </button>}
             <div>
             {pagesIndexes}
             </div>
-            {portionsCount > portionNum+1 && <button onClick={()=>{setPortionNum(portionNum+1)}}> {'>'} </button>}
-            <button onClick={()=>{setPortionNum(portionsCount)}}> {'>>'} </button>
+            {portionsCount > portionNum && <button onClick={()=>{setPortionNum(portionNum+1)}}> {'>'} </button>}
+            <button disabled={currentPage===pagesCount} onClick={()=>{onPageChanged0(currentPage+1)}}> {'next'} </button>
         </div>
     );
 }

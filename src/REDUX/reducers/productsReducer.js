@@ -18,7 +18,7 @@ let initialState = {
         currentPage: 1,
         portionNum: 1,
         portionSize: 3,
-        pageLimit: 4,
+        pageLimit: 2,
     },
     productsFound: [],
     newError: null,
