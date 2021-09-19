@@ -11,7 +11,6 @@ import AdminPageC from "../COMPONENTS/admin/AdminPageC/AdminPageC";
 import {Switch} from "react-router-dom";
 import AdminAuthC from "../COMPONENTS/admin/AuthAdmin/AdminAuthC";
 import {MainContextProvider} from "../UTILS/mainContext";
-import {findProducts} from "../REDUX/reducers/productsReducer";
 
 class App extends Component {
 
@@ -36,7 +35,6 @@ class App extends Component {
                     <Route path="/admin" render={() => <AdminPageC/>}/>
                     <Route path="/" render={() => (<Content
                         links={this.props.links}
-                        findProducts={this.props.findProducts}
                         {...this.props}
                     />)}/>
                 </Switch>
@@ -51,14 +49,14 @@ const mapStateToProps = (state) => {
     return ({
         initialized: state.mainReducer.initialized,
         links: state.mainReducer.links,
-        pageNum: state.productsReducer.paginatorData.currentPage,
-        pageLimit: state.productsReducer.paginatorData.pageLimit,
+        pageNum: state.paginatorReducer.currentPage,    //  for products init
+        pageLimit: state.paginatorReducer.pageLimit,    //  for products init
     });
 };
 
 let AppContainer = compose(     //  HOC FOR APP TO PROVIDE MSTP AND MDTP
     withRouter,
-    connect(mapStateToProps, {initApp, findProducts})
+    connect(mapStateToProps, {initApp})
 )(App);
 
 //==============================================

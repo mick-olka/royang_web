@@ -3,6 +3,7 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {getProductById} from "../../../REDUX/reducers/productsReducer";
 import {withRouter} from "react-router-dom";
+import ProductPage from "./ProductPage";
 
 class ProductPageC extends Component {
 
@@ -24,12 +25,11 @@ class ProductPageC extends Component {
 
     render() {
         return (<div>
-                {this.props.isLoading ? <div>Loading...</div> : <div>
-                    PRODUCT {this.state.prodId}
-                    <p>{this.props.productData.name}</p>
-                </div>}
+                {this.props.isLoading ? <div>Loading...</div> :  <ProductPage
+                        prodId = {this.state.prodId}
+                        productData={this.props.productData}
+                    />}
             </div>
-
         );
     }
 }

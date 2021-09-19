@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavLink, Route, Switch} from "react-router-dom";
+import {NavLink, Route, Switch, useLocation} from "react-router-dom";
 import Navbar from "../../Navbar/Navbar";
 import TypeForm from "../TypePage/TypeForm/TypeForm";
 import TypePaneC from "../TypePage/TypePaneC";
@@ -12,8 +12,13 @@ import chairIcon from "../../../IMGS/chair.png";
 import {MainContextConsumer} from "../../../UTILS/mainContext";
 import ChangePW from "../AuthAdmin/ChangePW";
 import Search from "../../extra/Search";
+import SearchWrapper from "../../Content/SearchPage/SearchWrapper";
+import Paginator from "../../extra/Paginator/Paginator";
 
-function AdminPage({deleteAdminAuth, products, productsFound, lists, deleteProducts, createList, changePW, findProducts, ...props}) {
+function AdminPage({deleteAdminAuth, products, productsFound, lists,
+                       deleteProducts, createList, changePW, findProducts,
+                       paginatorData, setCurrentPageAC, setPortionNumAC, getProducts,
+                       ...props}) {
 
     let links = [
         {url: "/", name: "Client"},
@@ -21,7 +26,15 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists, deleteProdu
         {url: "/admin/new", name: "New Product"},
         {url: "/admin/login/pw", name: "PW mod"},
     ];
-    console.log("counted");
+
+    let pn = useLocation().pathname;
+
+    const onPageChanged = (pageNumber) => {
+        if (pn==='/admin') {
+            setCurrentPageAC(pageNumber);
+            getProducts(pageNumber, paginatorData.pageLimit);
+        }
+    }
 
     let typesL = [...lists].map(l => {
         let l0 = {...l};
@@ -63,7 +76,7 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists, deleteProdu
             <div className="middle_pane">
 
                 <div className="adminNavbar">
-                    <Search findProducts={findProducts} redirectTo={"/admin/search"} {...props} />
+                    <Search redirectTo={"/admin/search"} {...props} />
                     <Navbar links={links}/>
                     <p>----------</p>
                     <p>Lists</p>
@@ -77,8 +90,26 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists, deleteProdu
                         <Route path="/admin/lists/:listUrl" render={() => <TypePaneC/>}/>
                         <Route path="/admin/login/pw" render={() => <ChangePW changePW={changePW} />}/>
                         <Route path="/admin/new" render={() => <CreateProductC/>}/>
-                        <Route path="/admin/search" render={() => <MainAdminPage products={productsFound} />}/>
-                        <Route path="/admin" render={() => <MainAdminPage products={products} />}/>
+                        <Route path="/admin/search" render={() =>
+                            // <MainAdminPage products={productsFound} />
+                            <SearchWrapper
+                                products={productsFound}
+                                findProducts={findProducts}
+                                paginatorData={paginatorData}
+                                setCurrentPage={setCurrentPageAC}
+                                setPortionNum={setPortionNumAC}
+                                getProducts={getProducts}>
+                                <MainAdminPage products={productsFound} />
+                            </SearchWrapper>
+                        }/>
+
+                        <Route path="/admin" render={() => <div><MainAdminPage products={products} />
+                            <Paginator
+                            paginatorData={paginatorData}
+                            setPortionNum={setPortionNumAC}
+                            onPageChanged={onPageChanged}
+                        />
+                        </div>}/>
                         <Route render={() => (<NotFound/>)}/>
                     </Switch>
                 </div>

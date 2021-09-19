@@ -1,22 +1,13 @@
 import React from 'react';
 
 function ProductPage(props) {
-    return (
-        <div>
 
-            <div className="gallery">
-
-            </div>
-
-            <div className="info">
-
-            </div>
-
-            <div className="additions">
-                RELATED PRODUCTS
-                SIMILAR PRODUCTS
-            </div>
-
+    // let pr = useParams();
+    // console.log(JSON.stringify(pr));
+    return (<div>
+                <div>PRODUCT</div>
+                {props.prodId}
+                <p>{props.productData.name}</p>
         </div>
     );
 }

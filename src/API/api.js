@@ -12,7 +12,7 @@ const instance = axios.create({
 
 export const productsAPI = {
 
-    getProducts (page=0, limit=6) {
+    getProducts (page=1, limit=6) {
         return instance.get(
             `products?page=${page}&limit=${limit}`,
         ).then(response => {
@@ -58,9 +58,9 @@ export const productsAPI = {
         });
     },
 
-    findProducts (str="") {
+    findProducts (str="", page=1, limit=2) {
         return instance.get(
-          `search?str=${str}`,
+          `search?str=${str}&page=${page}&limit=${limit}`,
         ).then(res => {
             return res.data;
             });

@@ -2,7 +2,8 @@
 import {compose} from "redux";
 import { connect } from "react-redux";
 import MainPage from "./MainPage";
-import {getProducts, setCurrentPageAC, setPortionNumAC} from "../../../REDUX/reducers/productsReducer";
+import {findProducts, getProducts} from "../../../REDUX/reducers/productsReducer";
+import {setCurrentPageAC, setPortionNumAC} from "../../../REDUX/reducers/paginatorReducer";
 
 let mapStateToProps = (state) => {
     return{
@@ -12,10 +13,10 @@ let mapStateToProps = (state) => {
         portionLimit: state.productsReducer.portionLimit,
         portionNum: state.productsReducer.portionNum,
         currentPage: state.productsReducer.currentPage,
-        paginatorData: state.productsReducer.paginatorData,
+        paginatorData: state.paginatorReducer,
     }
 }
 
 export default compose(
-    connect(mapStateToProps, {setCurrentPageAC, setPortionNumAC, getProducts}),
+    connect(mapStateToProps, {setCurrentPageAC, setPortionNumAC, getProducts, findProducts}),
 )(MainPage);
