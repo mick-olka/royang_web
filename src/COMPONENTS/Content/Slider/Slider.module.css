@@ -1,6 +1,7 @@
 .carousel {
     background-color: #fff !important;
     max-height: 25rem;
+    max-width: 50%;
 }
 
 .slickSlider {

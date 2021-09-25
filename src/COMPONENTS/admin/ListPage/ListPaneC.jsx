@@ -2,10 +2,10 @@ import React from 'react';
 import {compose} from "redux";
 import {withRouter} from "react-router-dom";
 import {connect} from "react-redux";
-import TypePane from "./TypePane";
-import {deleteElement, deleteList, getListByUrl, updateList} from "../../../REDUX/reducers/typesReducer";
+import ListPane from "./ListPane";
+import {deleteElement, deleteList, getListByUrl, updateList} from "../../../REDUX/reducers/listsReducer";
 
-class TypePaneC extends React.Component {
+class ListPaneC extends React.Component {
 
     getList = () => {
         this.listUrl = this.props.match.params.listUrl;
@@ -29,7 +29,7 @@ class TypePaneC extends React.Component {
         return (
             <div>
                 {this.props.isLoading ? <div>Loading...</div>
-                    : <TypePane {...this.props} listUrl={this.listUrl} />}
+                    : <ListPane {...this.props} listUrl={this.listUrl} />}
             </div>
         );
     }
@@ -47,4 +47,4 @@ export default compose(
         updateList, getListByUrl, deleteList, deleteElement,
     }),
     withRouter,
-)(TypePaneC);
+)(ListPaneC);

@@ -9,10 +9,6 @@ let mapStateToProps = (state) => {
     return{
         products: state.productsReducer.products,
         productsFound: state.productsReducer.productsFound,
-        totalProductsCount: state.productsReducer.totalProductsCount,
-        portionLimit: state.productsReducer.portionLimit,
-        portionNum: state.productsReducer.portionNum,
-        currentPage: state.productsReducer.currentPage,
         paginatorData: state.paginatorReducer,
     }
 }

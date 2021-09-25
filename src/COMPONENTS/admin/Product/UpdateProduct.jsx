@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import s from "./Product.module.css";
 import ProductForm from "./ProductForm/ProductForm";
 import Select from 'react-select'
-import {MainContextConsumer} from "../../../UTILS/mainContext";
 import chairIcon from "../../../IMGS/chair.png";
 import PhotosPane from "./PhotosPane/PhotosPane";
 import SomeError from "../../extra/SomeError";
@@ -46,15 +45,12 @@ function UpdateProduct({updateProduct, prodId, productData, lists, addElement, n
         return <SomeError returnTo="/admin" error={newError}/>
     }
 
-    return (<MainContextConsumer>
-            {context => (
-                <div className={s.pane}>
+    return ( <div className={s.pane}>
                     <h1>Update Product</h1>
-
                     {/*//===THUMB_PANE========*/}
                     <label>Thumbnail</label>
                     <img className={s.thumbnail}
-                         src={productData.thumbnail ? context.apiURL + productData.thumbnail : chairIcon} alt="img"/>
+                         src={productData.thumbnail ? productData.thumbnail : chairIcon} alt="img"/>
                     <input type="file" disabled={false} onChange={onThumbnailSelected}/>
 
                     {/*//===TYPES_SELECTOR=====*/}
@@ -69,8 +65,7 @@ function UpdateProduct({updateProduct, prodId, productData, lists, addElement, n
 
                     <PhotosPane photos={productData.images} addPhoto={addPhoto} prodId={prodId} deletePhotos={deletePhotos} />
 
-                </div>)}
-        </MainContextConsumer>
+                </div>
     );
 }
 

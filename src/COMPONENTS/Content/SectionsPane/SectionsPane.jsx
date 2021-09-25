@@ -1,7 +1,6 @@
 import React from 'react';
 import s from "./SectionsPane.module.css";
 import ProductCard from "../ProductCard/ProductCard";
-import Paginator from "../../extra/Paginator/Paginator";
 
 const SectionsPane=({products})=>{
 

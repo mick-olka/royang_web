@@ -5,7 +5,7 @@ import {connect} from "react-redux";
 import {
     getProductById, updateProduct,
 } from "../../../REDUX/reducers/productsReducer";
-import {addElement} from "../../../REDUX/reducers/typesReducer";
+import {addElement} from "../../../REDUX/reducers/listsReducer";
 import UpdateProduct from "./UpdateProduct";
 import {addPhoto, deletePhotos} from "../../../REDUX/reducers/photosReducer";
 

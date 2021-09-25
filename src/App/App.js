@@ -10,7 +10,6 @@ import Content from "../COMPONENTS/Content/Content";
 import AdminPageC from "../COMPONENTS/admin/AdminPageC/AdminPageC";
 import {Switch} from "react-router-dom";
 import AdminAuthC from "../COMPONENTS/admin/AuthAdmin/AdminAuthC";
-import {MainContextProvider} from "../UTILS/mainContext";
 
 class App extends Component {
 
@@ -19,6 +18,7 @@ class App extends Component {
     }
 
     componentDidMount() {
+        //  for uncaught errors
         window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors);
         this.props.initApp(this.props.pageNum, this.props.pageLimit);   //  has promise in reducer, takes time to set
     }
@@ -33,10 +33,7 @@ class App extends Component {
                 <Switch>
                     <Route path="/admin/auth" render={() => <AdminAuthC/>}/>
                     <Route path="/admin" render={() => <AdminPageC/>}/>
-                    <Route path="/" render={() => (<Content
-                        links={this.props.links}
-                        {...this.props}
-                    />)}/>
+                    <Route path="/" render={() => <Content {...this.props}/>}/>
                 </Switch>
             </div>
         );
@@ -51,6 +48,8 @@ const mapStateToProps = (state) => {
         links: state.mainReducer.links,
         pageNum: state.paginatorReducer.currentPage,    //  for products init
         pageLimit: state.paginatorReducer.pageLimit,    //  for products init
+        paginatorReducer: state.paginatorReducer,
+        productsReducer: state.productsReducer,
     });
 };
 
@@ -60,14 +59,14 @@ let AppContainer = compose(     //  HOC FOR APP TO PROVIDE MSTP AND MDTP
 )(App);
 
 //==============================================
-
-let AppWrapperF = (props) => {  //  PROVIDES APP_CONTAINER WITH PROVIDER (STORE)
+//  PROVIDES APP_CONTAINER WITH PROVIDER (STORE)
+let AppWrapperF = (props) => {
     return (
         <BrowserRouter>
             <Provider store={store}>
-                <MainContextProvider>
+                {/*<MainContextProvider>*/}
                 <AppContainer/>
-                </MainContextProvider>
+                {/*</MainContextProvider>*/}
             </Provider>
         </BrowserRouter>
     );

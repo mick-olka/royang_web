@@ -9,7 +9,7 @@ import {
     findProducts,
     getProducts,
 } from "../../../REDUX/reducers/productsReducer";
-import {createList} from "../../../REDUX/reducers/typesReducer";
+import {createList} from "../../../REDUX/reducers/listsReducer";
 import {withRouter} from "react-router-dom";
 import {setCurrentPageAC, setPortionNumAC} from "../../../REDUX/reducers/paginatorReducer";
 
@@ -18,10 +18,6 @@ let mapStateToProps = (state) => {
         lists: state.listsReducer.lists,
         products: state.productsReducer.products,
         productsFound: state.productsReducer.productsFound,
-        totalProductsCount: state.productsReducer.totalProductsCount,
-        portionLimit: state.productsReducer.portionLimit,
-        portionNum: state.productsReducer.portionNum,
-        currentPage: state.productsReducer.currentPage,
         paginatorData: state.paginatorReducer,
     }
 }

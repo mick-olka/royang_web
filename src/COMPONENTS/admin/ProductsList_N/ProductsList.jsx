@@ -1,7 +1,6 @@
 import React from 'react';
 import s from "../Product/ProductForm/ProductsList.module.css";
 import {NavLink} from "react-router-dom";
-import {MainContextConsumer} from "../../../UTILS/mainContext";
 import chairIcon from "../../../IMGS/chair.png";
 
 function ProductsList({products, deleteProducts}) {
@@ -35,9 +34,7 @@ function ProductsList({products, deleteProducts}) {
     }
 
     let productsList = products.map((p) => {
-        return <MainContextConsumer key={p._id} >
-            {context => (
-        <div className={s.item} >
+        return <div key={p._id} className={s.item} >
             <input id={p._id} className={s.checkBox}
                    type="checkbox" name="checkbox"
                    onMouseOver={() => handleCheckboxMouseOver(p._id)}
@@ -45,13 +42,11 @@ function ProductsList({products, deleteProducts}) {
             />
 
             <div className={s.imgBox}>
-                <img className={s.thumbnail} src={p.thumbnail? context.apiURL+p.thumbnail : chairIcon} alt="img"/>
+                <img className={s.thumbnail} src={p.thumbnail? p.thumbnail : chairIcon} alt="img"/>
             </div>
             <p><NavLink to={"/admin/products/" + p._id}>{p.name}</NavLink></p>
             <p>$ {p.price}</p>
         </div>
-            )}
-        </MainContextConsumer>
     });
 
     const deleteHandler = () => {

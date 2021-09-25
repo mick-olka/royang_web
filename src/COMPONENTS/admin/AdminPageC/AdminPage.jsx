@@ -1,19 +1,18 @@
 import React from 'react';
 import {NavLink, Route, Switch, useLocation} from "react-router-dom";
 import Navbar from "../../Navbar/Navbar";
-import TypeForm from "../TypePage/TypeForm/TypeForm";
-import TypePaneC from "../TypePage/TypePaneC";
+import ListForm from "../ListPage/ListForm/ListForm";
 import CreateProductC from "../Product/CreateProductC";
 import NotFound from "../../extra/NotFound";
 import UpdateProductC from "../Product/UpdateProductC";
 import ItemsList from "../ItemsList/ItemsList";
 import list from "../ItemsList/ItemsList.module.css";
 import chairIcon from "../../../IMGS/chair.png";
-import {MainContextConsumer} from "../../../UTILS/mainContext";
 import ChangePW from "../AuthAdmin/ChangePW";
 import Search from "../../extra/Search";
 import SearchWrapper from "../../Content/SearchPage/SearchWrapper";
 import Paginator from "../../extra/Paginator/Paginator";
+import ListPaneC from "../ListPage/ListPaneC";
 
 function AdminPage({deleteAdminAuth, products, productsFound, lists,
                        deleteProducts, createList, changePW, findProducts,
@@ -47,16 +46,14 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists,
     }
 
     const ProductItem = ({item}) => {
-        return (<MainContextConsumer>
-                {context => (<>
+        return (<>
                     <div className={list.photoBox}>
-                        <img className={list.photo} src={item.thumbnail ? context.apiURL + item.thumbnail : chairIcon}
+                        <img className={list.photo} src={item.thumbnail ? item.thumbnail : chairIcon}
                              alt="img"/>
                     </div>
                     <p><NavLink to={"/admin/products/" + item._id}>{item.name}</NavLink></p>
                     <p>$ {item.price}</p>
-                </>)}
-            </MainContextConsumer>
+                </>
         );
     }
 
@@ -81,13 +78,13 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists,
                     <p>----------</p>
                     <p>Lists</p>
                     <Navbar links={typesL}/>
-                    <TypeForm onSubmit={onSubmit}/>
+                    <ListForm onSubmit={onSubmit}/>
                 </div>
 
                 <div className="content_pane">
                     <Switch>
                         <Route path="/admin/products/:prodId?" render={() => <UpdateProductC/>}/>
-                        <Route path="/admin/lists/:listUrl" render={() => <TypePaneC/>}/>
+                        <Route path="/admin/lists/:listUrl" render={() => <ListPaneC/>}/>
                         <Route path="/admin/login/pw" render={() => <ChangePW changePW={changePW} />}/>
                         <Route path="/admin/new" render={() => <CreateProductC/>}/>
                         <Route path="/admin/search" render={() =>
@@ -97,8 +94,7 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists,
                                 findProducts={findProducts}
                                 paginatorData={paginatorData}
                                 setCurrentPage={setCurrentPageAC}
-                                setPortionNum={setPortionNumAC}
-                                getProducts={getProducts}>
+                                setPortionNum={setPortionNumAC} >
                                 <MainAdminPage products={productsFound} />
                             </SearchWrapper>
                         }/>

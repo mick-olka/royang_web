@@ -1,9 +1,9 @@
 import {listsAPI} from "../../API/api";
 import {getProductById} from "./productsReducer";
 
-const SET_LISTS = "typesReducer/SET_LISTS";
-const SET_LIST_FORM = "typesReducer/SET_LIST_FORM";
-const SET_IS_LOADING = "typesReducer/SET_IS_LOADING";
+const SET_LISTS = "listsReducer/SET_LISTS";
+const SET_LIST_FORM = "listsReducer/SET_LIST_FORM";
+const SET_IS_LOADING = "listsReducer/SET_IS_LOADING";
 
 let initialState = {
     lists: [],
@@ -11,7 +11,7 @@ let initialState = {
     isLoading: true,
 }
 
-const typesReducer = (state=initialState, action) => {
+const listsReducer = (state=initialState, action) => {
     switch (action.type) {
         case SET_LISTS:
             return {
@@ -116,4 +116,4 @@ export const deleteElement = (url, idArr) => async (dispatch) => {
     }
 }
 
-export default typesReducer;
+export default listsReducer;

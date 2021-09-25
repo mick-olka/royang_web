@@ -1,6 +1,5 @@
 import React from 'react';
 import PhotoForm from "./PhotoForm";
-import {MainContextConsumer} from "../../../../UTILS/mainContext";
 import list from "../../ItemsList/ItemsList.module.css";
 import ItemsList from "../../ItemsList/ItemsList";
 import s from "./PhotosPane.module.css";
@@ -21,9 +20,9 @@ function PhotosPane({photos, prodId, addPhoto, deletePhotos}) {
     }
 
     const onPhotoDelete = (photoIdArr) => {
-        let fileNameArr=[];
-        for (let i=0; i<photoIdArr.length; i++) {
-            let photo = photos.find(p => p._id===photoIdArr[i]);
+        let fileNameArr = [];
+        for (let i = 0; i < photoIdArr.length; i++) {
+            let photo = photos.find(p => p._id === photoIdArr[i]);
             if (photo) {
                 fileNameArr.push(photo.path.split('/').pop());
             }
@@ -32,26 +31,25 @@ function PhotosPane({photos, prodId, addPhoto, deletePhotos}) {
     }
 
     const PhotoItem = ({photo}) => {
-        return <MainContextConsumer>
-            {context => (
-                <>
-                    <div className={list.photoBox}>
-                        <a target="_blank" rel="noreferrer" href={context.apiURL + photo.path}><img className={list.photo} src={context.apiURL + photo.path} alt="product"/></a>
-                    </div>
-                    <p>{photo.mainColor}</p>
-                    <p>{photo.pillColor}</p>
-                </>)}
-        </MainContextConsumer>
+        return <div>
+            <div className={list.photoBox}>
+                <a target="_blank" rel="noreferrer" href={photo.src}>
+                    <img className={list.photo} src={photo.src} alt="product"/>
+                </a>
+            </div>
+            <p>{photo.mainColor}</p>
+            <p>{photo.pillColor}</p>
+        </div>
     }
 
     return (
         <div className={s.photoPane}>
             <p>photo</p>
-            <input type="file" onChange={onPhotoSelected} />
-        <PhotoForm onSubmit={onSubmit} />
-        <ItemsList items={photos} deleteItems={onPhotoDelete} >
-            {photo=> <PhotoItem photo={photo} />}
-        </ItemsList>
+            <input type="file" onChange={onPhotoSelected}/>
+            <PhotoForm onSubmit={onSubmit}/>
+            <ItemsList items={photos} deleteItems={onPhotoDelete}>
+                {photo => <PhotoItem photo={photo}/>}
+            </ItemsList>
         </div>
     );
 }

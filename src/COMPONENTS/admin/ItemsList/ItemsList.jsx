@@ -31,8 +31,12 @@ function ItemsList({items, deleteItems, ...props}) {
         arr=[];
     }
 
-    let productsList = items.map((item) => {
-        return <div key={item._id} className={s.item} >
+    let index = 0;
+
+    let itemsList = items.map((item) => {
+        let i;
+        if (item._id) {i=item._id} else { i=index; index++}
+        return <div key={i} className={s.item} >
                     <input id={item._id} className={s.checkBox}
                            type="checkbox" name="checkbox"
                            onMouseOver={() => handleCheckboxMouseOver(item._id)}
@@ -51,7 +55,7 @@ function ItemsList({items, deleteItems, ...props}) {
                 <button className={s.btn} onClick={uncheckAll} >CANCEL</button>
                 <button className={s.btn} onClick={deleteHandler} >DELETE</button>
             </div>
-            {productsList}
+            {itemsList}
         </div>
     );
 }

@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
-import s from "./TypePane.module.css";
-import TypeForm from "./TypeForm/TypeForm";
+import s from "./ListPane.module.css";
+import ListForm from "./ListForm/ListForm";
 import {Redirect} from "react-router-dom";
 import ProductsList from "../ProductsList_N/ProductsList";
 
-function TypePane({updateList, deleteList, listUrl, listForm, deleteElement}) {
+function ListPane({updateList, deleteList, listUrl, listForm, deleteElement}) {
 
     const onSubmit = (formData) => {
         if (listUrl) {
@@ -28,7 +28,7 @@ function TypePane({updateList, deleteList, listUrl, listForm, deleteElement}) {
             {isDeleted && <Redirect to="/admin" />}
             <h1>Update List</h1>
 
-            <TypeForm onSubmit={onSubmit} listUrl={listUrl} initData={listForm} />
+            <ListForm onSubmit={onSubmit} listUrl={listUrl} initData={listForm} />
 
             <button onClick={onTypeDelete} >DELETE</button>
             {listForm && <ProductsList products={listForm.items} deleteProducts={onElementsDelete} />}
@@ -36,4 +36,4 @@ function TypePane({updateList, deleteList, listUrl, listForm, deleteElement}) {
     );
 }
 
-export default TypePane;
+export default ListPane;

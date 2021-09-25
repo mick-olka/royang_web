@@ -1,14 +1,14 @@
 import React from 'react';
 import {Formik, Form, Field} from 'formik';
 
-const TypeForm = (props) => {
+const ListForm = (props) => {
 
     let initialValues = {
         name: '',
-        url: ''
+        url: props.listUrl,
     };
 
-    if (props.listUrl) initialValues=props.initData;
+    if (props.listUrl) initialValues.name=props.initData.name;
 
     return <div>
         <Formik initialValues={initialValues} onSubmit={(values, {resetForm}) => {
@@ -32,4 +32,4 @@ const TypeForm = (props) => {
     </div>
 };
 
-export default TypeForm;
+export default ListForm;

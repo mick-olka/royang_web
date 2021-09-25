@@ -1,6 +1,6 @@
 import {checkAuth} from "./adminReducer";
 import {getProducts} from "./productsReducer";
-import {getLists} from "./typesReducer";
+import {getLists} from "./listsReducer";
 
 const SET_INITIALIZED_SUCCESS = "mainReducer/SET_INITIALIZED_SUCCESS";
 
