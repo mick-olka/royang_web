@@ -6,8 +6,12 @@
     background-color: #666;
 }
 
+.side_pane {
+    width: 20%;
+}
+
 .navbar_pane {
-    flex: 8rem 0;
+
 }
 
 .middle_pane {
@@ -21,10 +25,24 @@
     width: 8rem;
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1200px) {    /* for fields by sides on big screen */
     .middle_pane {
         width: 70rem;
     }
-
 }
+
+/*@media screen and (max-width: 400px) {    !* for small screens *!*/
+/*    .middle_pane {*/
+/*        flex-direction: column;*/
+/*    }*/
+
+/*    .side_pane {*/
+/*        width: 100%;*/
+/*        display: flex;*/
+/*    }*/
+
+/*    .navbar_pane nav {*/
+/*        display: flex;*/
+/*    }*/
+/*}*/
 

@@ -42,15 +42,15 @@ export const addPhoto = (id, file, mainColor, pillColor) => async (dispatch) => 
     }
 }
 
-export const deletePhotos = (id, fileNameArr) => async (dispatch) => {
+export const deletePhotos = (prodId, photoIdsArr) => async (dispatch) => {
     try {
-        for (let i=0; i<fileNameArr.length; i++) {
-            let res = await photosAPI.deletePhoto(id, fileNameArr[i]);
+        for (let i=0; i<photoIdsArr.length; i++) {
+            let res = await photosAPI.deletePhoto(prodId, photoIdsArr[i]);
             if (res.code === 0) {
                 //console.log('deleted');
             }
         }
-            dispatch(getProductById(id));
+            dispatch(getProductById(prodId));
     } catch (e) {
         alert("deletePhoto: "+e);
     }

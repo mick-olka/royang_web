@@ -5,14 +5,14 @@ import MainPageC from "./MainPageC/MainPageC";
 import Header from "../Header/Header";
 import Navbar from "../Navbar/Navbar";
 import ProductPageC from "./Product/ProductPageC";
-import Search from "../extra/Search";
+import Search from "./SearchPage/Search";
 
 function Content({links, findProducts, paginatorReducer, productsReducer, ...props}) {
     return (
         <div>
             <Header/>
             <div className="middle_pane">
-                <div>
+                <div className="side_pane" >
                     <Search redirectTo={"/search"} {...props} />
                     <Navbar links={links}/>
                 </div>

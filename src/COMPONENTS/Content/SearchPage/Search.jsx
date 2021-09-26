@@ -1,13 +1,14 @@
 
 import React from 'react';
 import {useFormik} from "formik";
+import s from "./Search.module.css";
 
 const Search = ({redirectTo, ...props}) => {
 
     //let [string, setString] = useState("");
 
     const onSubmit = (string) => {
-        props.history.push(redirectTo+"?search="+string);
+        if (string.length>0) props.history.push(redirectTo+"?search="+string);
     }
 
     return (
@@ -37,8 +38,9 @@ let SearchForm = ({onSubmit, error}) => {
                 type="text"
                 onChange={formik.handleChange}
                 value={formik.values.search_input}
+                className={s.search_input}
             />
-            <button type="submit">Search</button>
+            <button type="submit" className={s.search_btn} >Search</button>
         </form>
     );
 }

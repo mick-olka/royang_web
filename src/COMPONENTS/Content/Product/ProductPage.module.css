@@ -1,8 +1,28 @@
 
 .main_box {
-
+    display: flex;
+    margin: 1rem;
 }
 
 .info {
 
+}
+
+.gallery {
+    width: 70%;
+    min-width: 20rem;
+}
+
+.colors {
+    margin: 0.2rem;
+}
+
+.name {
+    font-size: 1.5rem;
+    align-self: center;
+}
+
+.nameDiv {
+    margin-top: 2rem;
+    flex-grow: 3;
 }

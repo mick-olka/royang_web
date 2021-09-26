@@ -9,7 +9,7 @@ import ItemsList from "../ItemsList/ItemsList";
 import list from "../ItemsList/ItemsList.module.css";
 import chairIcon from "../../../IMGS/chair.png";
 import ChangePW from "../AuthAdmin/ChangePW";
-import Search from "../../extra/Search";
+import Search from "../../Content/SearchPage/Search";
 import SearchWrapper from "../../Content/SearchPage/SearchWrapper";
 import Paginator from "../../extra/Paginator/Paginator";
 import ListPaneC from "../ListPage/ListPaneC";

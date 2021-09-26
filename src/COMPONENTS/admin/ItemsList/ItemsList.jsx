@@ -32,15 +32,14 @@ function ItemsList({items, deleteItems, ...props}) {
     }
 
     let index = 0;
-
     let itemsList = items.map((item) => {
-        let i;
-        if (item._id) {i=item._id} else { i=index; index++}
-        return <div key={i} className={s.item} >
-                    <input id={item._id} className={s.checkBox}
+        let indexId;
+        if (item._id) {indexId=item._id} else { indexId=index; index++} //  if we dont have id in item
+        return <div key={indexId} className={s.item} >
+                    <input id={indexId} className={s.checkBox}
                            type="checkbox" name="checkbox"
-                           onMouseOver={() => handleCheckboxMouseOver(item._id)}
-                           onClick={() => toggleChecked(item._id)} />
+                           onMouseOver={() => handleCheckboxMouseOver(indexId)}
+                           onClick={() => toggleChecked(indexId)} />
                     {props.children(item)}
                 </div>
     });

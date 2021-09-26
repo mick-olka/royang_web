@@ -9,11 +9,20 @@ function ProductPage({productData, prodId}) {
 
     console.log(productData);
     return (<div>
-                <div>PRODUCT</div>
+
             <div className={s.main_box}>
-            <h2 className={s.name} >{productData.name}</h2>
-            <Slider photos={productData.images} />
+
+                <div className={s.gallery} >
+                    <div className={s.colors} > 0   0   0   0 </div>
+                    <Slider photos={productData.images}/>
+                </div>
+
+                <div className={s.nameDiv} >
+                <h2 className={s.name}>{productData.name}</h2>
+                </div>
+
             </div>
+
             <div className={s.info}>
                 <p></p>
             </div>

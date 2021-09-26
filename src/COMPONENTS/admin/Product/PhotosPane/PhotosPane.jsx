@@ -19,15 +19,15 @@ function PhotosPane({photos, prodId, addPhoto, deletePhotos}) {
         addPhoto(prodId, photo, values.mainColor, values.pillColor)
     }
 
-    const onPhotoDelete = (photoIdArr) => {
-        let fileNameArr = [];
-        for (let i = 0; i < photoIdArr.length; i++) {
-            let photo = photos.find(p => p._id === photoIdArr[i]);
-            if (photo) {
-                fileNameArr.push(photo.path.split('/').pop());
-            }
-        }
-        deletePhotos(prodId, fileNameArr);
+    const onPhotoDelete = (photoIdsArr) => {
+        // let photoIdsArr = [];
+        // for (let i = 0; i < photoIdArr.length; i++) {
+        //     // let photo = photos.find(p => p._id === photoIdArr[i]);
+        //     // if (photo) {
+        //         photoIdsArr.push(photo._id);
+        //     // }
+        // }
+        deletePhotos(prodId, photoIdsArr);
     }
 
     const PhotoItem = ({photo}) => {
