@@ -1,0 +1,30 @@
+
+.container {
+
+}
+
+.menu_box {
+    position: fixed;
+    top: 6rem;
+    left: 0;
+    display: block;
+    z-index: 10;
+    width: 12rem;
+    background-color: #eea5a5;
+    overflow: hidden;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.item {
+    position: relative;
+    margin: 0.1rem;
+    padding: 0.5rem;
+    background-color: #c1bdbd;
+}
+
+.item:hover {
+    background-color: #858383;
+}

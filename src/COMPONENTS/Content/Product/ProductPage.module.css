@@ -4,8 +4,8 @@
     margin: 1rem;
 }
 
-.info {
-
+.info_box {
+    flex-grow: 3;
 }
 
 .gallery {
@@ -24,5 +24,19 @@
 
 .nameDiv {
     margin-top: 2rem;
-    flex-grow: 3;
+    width: 100%;
+}
+
+.price_box {
+    margin-left: 1rem;
+    text-align: left;
+}
+
+.price {
+    font-size: 1.5rem;
+}
+
+.extra_box {
+    padding: 1rem;
+    background-color: #cadafa;
 }

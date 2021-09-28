@@ -18,7 +18,7 @@ const MainPage = (props) => {
     }
     useEffect(()=> {
         onPageChanged(pageNumber);
-    }, [pn]);
+    }, [pn]);   // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
         <div className={s.mainPage}>

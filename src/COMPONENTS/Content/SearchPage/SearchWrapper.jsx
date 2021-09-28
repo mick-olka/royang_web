@@ -8,7 +8,7 @@ function SearchWrapper({findProducts, paginatorData, onPageChanged, products, se
     const string = new URLSearchParams(search).get('search');
 
     useEffect(()=>{findProducts(string); setCurrentPage(1); setPortionNum(1)},  //  reset paginator on new search
-        [string]);
+        [string]);  // eslint-disable-line react-hooks/exhaustive-deps
 
     const onSearchPageChanged = (pageNumber) => {   //  on next page in search for paginator
         setCurrentPage(pageNumber);
