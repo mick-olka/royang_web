@@ -6,7 +6,7 @@ import chairIcon from "../../../IMGS/chair.png";
 import PhotosPane from "./PhotosPane/PhotosPane";
 import SomeError from "../../extra/SomeError";
 
-function UpdateProduct({updateProduct, prodId, productData, lists, addElement, newError, addPhoto, deletePhotos, isLoading}) {
+function UpdateProduct({updateProduct, prodId, productData, lists, addElement, newError, addPhotos, deletePhotos, isLoading}) {
 
     let thumbnail = null;
 
@@ -51,7 +51,7 @@ function UpdateProduct({updateProduct, prodId, productData, lists, addElement, n
                     <label>Thumbnail</label>
                     <img className={s.thumbnail}
                          src={productData.thumbnail ? productData.thumbnail : chairIcon} alt="img"/>
-                    <input type="file" disabled={false} onChange={onThumbnailSelected}/>
+                    <input type="file" disabled={false} onChange={onThumbnailSelected} />
 
                     {/*//===TYPES_SELECTOR=====*/}
                     <div className={s.selectBox}>
@@ -63,7 +63,7 @@ function UpdateProduct({updateProduct, prodId, productData, lists, addElement, n
 
                     <ProductForm onSubmit={onSubmit} prodId={prodId} initData={productData}/>
 
-                    <PhotosPane photos={productData.images} addPhoto={addPhoto} prodId={prodId} deletePhotos={deletePhotos} />
+                    <PhotosPane images={productData.images} addPhotos={addPhotos} prodId={prodId} deletePhotos={deletePhotos} />
 
                 </div>
     );

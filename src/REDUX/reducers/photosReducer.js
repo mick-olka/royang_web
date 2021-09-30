@@ -31,28 +31,26 @@ export const uploadThumbnail = (id, thumbnail) => async (dispatch) => {
     }
 }
 
-export const addPhoto = (id, file, mainColor, pillColor) => async (dispatch) => {
+export const addPhotos = (id, files, mainColor, pillColor) => async (dispatch) => {
     try {
-        let res = await photosAPI.addPhoto(id, file, mainColor, pillColor);
+        let res = await photosAPI.addPhotos(id, files, mainColor, pillColor);
         if (res.code === 0) {
             dispatch(getProductById(id));
         }
     } catch (e) {
-        alert("addPhoto: "+e);
+        alert("addPhotos: "+e);
     }
 }
 
-export const deletePhotos = (prodId, photoIdsArr) => async (dispatch) => {
+export const deletePhotos = (prodId, photosId) => async (dispatch) => {
     try {
-        for (let i=0; i<photoIdsArr.length; i++) {
-            let res = await photosAPI.deletePhoto(prodId, photoIdsArr[i]);
+            let res = await photosAPI.deletePhotos(prodId, photosId);
             if (res.code === 0) {
                 //console.log('deleted');
             }
-        }
             dispatch(getProductById(prodId));
     } catch (e) {
-        alert("deletePhoto: "+e);
+        alert("deletePhotos: "+e);
     }
 }
 

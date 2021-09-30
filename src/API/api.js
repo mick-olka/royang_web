@@ -81,11 +81,16 @@ export const photosAPI = {
         });
     },
 
-    addPhoto (id, file, mainColor, pillColor) {
+    addPhotos (id, files, mainColor, pillColor) {
         let formData = new FormData();
-        formData.append("path", file);
+        //formData.append("pathArr", files);
+        for (let i=0; i<files.length; i++) {
+            formData.append('pathArr', files[i]);
+        }
         formData.append("mainColor", mainColor);
         formData.append("pillColor", pillColor);
+        console.log(files);
+        console.log(formData);
         return instance.post(
             'photos/'+id, formData,
             {headers: {"Content-Type": "multipart/form-data"} },
@@ -94,9 +99,9 @@ export const photosAPI = {
         });
     },
 
-    deletePhoto (id, photoId) {
+    deletePhotos (id, photosId) {
         return instance.delete(
-            `photos/${id}/${photoId}`,
+            `photos/${id}/${photosId}`,
         ).then(response => {
             return response.data;
         });
@@ -198,6 +203,52 @@ export const listsAPI = {
         return instance.delete(
             `list_elements/${listUrl}/${prodId}`,
             {prodId: prodId}
+        ).then(res => {
+            return res.data;
+        });
+    },
+
+}
+
+export const orderApi = {
+
+    getOrders (page=1, limit=6) {
+        return instance.get(
+            `orders?page=${page}&limit=${limit}`,
+        ).then(response => {
+            return response.data;
+        });
+    },
+
+    getOrderById (id) {
+        return instance.get(
+            'orders/'+id,
+        ).then(response => {
+            return response.data;
+        });
+    },
+
+    createOrder ({name, phone, message, cart, sum}) {
+        return instance.post(
+            'orders',
+            { name: name, phone: phone, message: message, cart: cart, sum: sum }
+        ).then(res => {
+            return res.data;
+        });
+    },
+
+    updateOrder (id, { name, phone, message, cart, sum, status }) {
+        return instance.patch(
+            'orders/'+id,
+            { name: name, phone: phone, message: message, cart: cart, sum: sum, status: status }
+        ).then(res => {
+            return res.data;
+        });
+    },
+
+    deleteOrder (id) {
+        return instance.delete(
+            'orders/'+id,
         ).then(res => {
             return res.data;
         });

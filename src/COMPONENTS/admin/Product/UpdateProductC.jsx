@@ -7,7 +7,7 @@ import {
 } from "../../../REDUX/reducers/productsReducer";
 import {addElement} from "../../../REDUX/reducers/listsReducer";
 import UpdateProduct from "./UpdateProduct";
-import {addPhoto, deletePhotos} from "../../../REDUX/reducers/photosReducer";
+import {addPhotos, deletePhotos} from "../../../REDUX/reducers/photosReducer";
 
 class UpdateProductC extends React.Component {
 
@@ -56,7 +56,7 @@ let mapStateToProps = (state) => {
 
 export default compose(
     connect(mapStateToProps, {
-        updateProduct, getProductById, addElement, addPhoto, deletePhotos,
+        updateProduct, getProductById, addElement, addPhotos, deletePhotos,
     }),
     withRouter,
 )(UpdateProductC);

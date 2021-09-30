@@ -20,7 +20,7 @@ function SearchWrapper({findProducts, paginatorData, onPageChanged, products, se
 
                 <p><NavLink to="/">MAIN</NavLink></p>
 
-                {products.length > 0 ? null : <h2>Nothing Found</h2>}
+                {products.length > 0 ? null : <h2>Nothing Found on "{string}"</h2>}
 
                 {props.children}
                 <Paginator

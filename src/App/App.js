@@ -10,6 +10,8 @@ import Content from "../COMPONENTS/Content/Content";
 import AdminPageC from "../COMPONENTS/admin/AdminPageC/AdminPageC";
 import {Switch} from "react-router-dom";
 import AdminAuthC from "../COMPONENTS/admin/AuthAdmin/AdminAuthC";
+import {findProducts, getProducts} from "../REDUX/reducers/productsReducer";
+import {setCurrentPageAC, setPortionNumAC} from "../REDUX/reducers/paginatorReducer";
 
 class App extends Component {
 
@@ -20,7 +22,7 @@ class App extends Component {
     componentDidMount() {
         //  for uncaught errors
         window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors);
-        this.props.initApp(this.props.pageNum, this.props.pageLimit);   //  has promise in reducer, takes time to set
+        this.props.initApp(this.props.paginatorData.currentPage, this.props.paginatorData.pageLimit);   //  has promise in reducer, takes time to set
     }
     componentWillUnmount() {
         window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors);
@@ -33,7 +35,17 @@ class App extends Component {
                 <Switch>
                     <Route path="/admin/auth" render={() => <AdminAuthC/>}/>
                     <Route path="/admin" render={() => <AdminPageC/>}/>
-                    <Route path="/" render={() => <Content {...this.props}/>}/>
+                    <Route path="/" render={() => <Content
+                        {...this.props}
+                        links={this.props.links}
+                        paginatorData={this.props.paginatorData}
+                        productsData={this.props.productsData}
+                        findProducts={this.props.findProducts}
+                        setPortionNumAC={this.props.setPortionNumAC}
+                        setCurrentPageAC={this.props.setCurrentPageAC}
+                        getProducts={this.props.getProducts}
+                        cartData={this.props.cartData}
+                    />}/>
                 </Switch>
             </div>
         );
@@ -46,16 +58,15 @@ const mapStateToProps = (state) => {
     return ({
         initialized: state.mainReducer.initialized,
         links: state.mainReducer.links,
-        pageNum: state.paginatorReducer.currentPage,    //  for products init
-        pageLimit: state.paginatorReducer.pageLimit,    //  for products init
-        paginatorReducer: state.paginatorReducer,
-        productsReducer: state.productsReducer,
+        paginatorData: state.paginatorReducer,
+        productsData: state.productsReducer,
+        cartData: state.cartReducer,
     });
 };
 
 let AppContainer = compose(     //  HOC FOR APP TO PROVIDE MSTP AND MDTP
     withRouter,
-    connect(mapStateToProps, {initApp})
+    connect(mapStateToProps, {initApp, findProducts, setPortionNumAC, setCurrentPageAC, getProducts})
 )(App);
 
 //==============================================

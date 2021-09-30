@@ -4,51 +4,46 @@ import list from "../../ItemsList/ItemsList.module.css";
 import ItemsList from "../../ItemsList/ItemsList";
 import s from "./PhotosPane.module.css";
 
-function PhotosPane({photos, prodId, addPhoto, deletePhotos}) {
+function PhotosPane({images, prodId, addPhotos, deletePhotos}) {
 
-    let photo = null;
+    let selectedPhotos = null;
 
     const onPhotoSelected = (e) => {
         if (e.target.files.length) {
-            photo = e.target.files[0];
+            selectedPhotos = e.target.files;
         }
     }
 
     const onSubmit = (values) => {
         //console.log(values, photo);
-        addPhoto(prodId, photo, values.mainColor, values.pillColor)
+        addPhotos(prodId, selectedPhotos, values.mainColor, values.pillColor)
     }
 
-    const onPhotoDelete = (photoIdsArr) => {
-        // let photoIdsArr = [];
-        // for (let i = 0; i < photoIdArr.length; i++) {
-        //     // let photo = photos.find(p => p._id === photoIdArr[i]);
-        //     // if (photo) {
-        //         photoIdsArr.push(photo._id);
-        //     // }
-        // }
-        deletePhotos(prodId, photoIdsArr);
+    const onPhotoDelete = (photosId) => {
+        deletePhotos(prodId, photosId[0]);
     }
 
-    const PhotoItem = ({photo}) => {
+    const PhotosItem = ({imagesItem}) => {
         return <div>
             <div className={list.photoBox}>
-                <a target="_blank" rel="noreferrer" href={photo.src}>
-                    <img className={list.photo} src={photo.src} alt="product"/>
-                </a>
+                {imagesItem.pathArr.map(p=>{
+                    return  <a key={p} target="_blank" rel="noreferrer" href={p}>
+                        <img className={list.photo} src={p} alt="product"/>
+                    </a>
+                })}
             </div>
-            <p>{photo.mainColor}</p>
-            <p>{photo.pillColor}</p>
+            <p>{imagesItem.mainColor}</p>
+            <p>{imagesItem.pillColor}</p>
         </div>
     }
 
     return (
         <div className={s.photoPane}>
             <p>photo</p>
-            <input type="file" onChange={onPhotoSelected}/>
+            <input type="file" name="pathArr" onChange={onPhotoSelected} multiple />
             <PhotoForm onSubmit={onSubmit}/>
-            <ItemsList items={photos} deleteItems={onPhotoDelete}>
-                {photo => <PhotoItem photo={photo}/>}
+            <ItemsList items={images} deleteItems={onPhotoDelete}>
+                {imagesItem => <PhotosItem imagesItem={imagesItem}/>}
             </ItemsList>
         </div>
     );

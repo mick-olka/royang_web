@@ -9,6 +9,7 @@ let initialState = {
     links: [
         {url: '/', name: "Main"},
         {url: '/info', name: "Info"},
+        {url: '/order', name: "ORDER"},
         {url: '/admin', name: "admin"},
     ],
     apiURL: "http://192.168.1.162:7500",

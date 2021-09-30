@@ -6,6 +6,7 @@ import productsReducer from "./reducers/productsReducer";
 import photosReducer from "./reducers/photosReducer";
 import listsReducer from "./reducers/listsReducer";
 import paginatorReducer from "./reducers/paginatorReducer";
+import cartReducer from "./reducers/cartReducer";
 
 let reducers = combineReducers({
     mainReducer: mainReducer,
@@ -14,6 +15,7 @@ let reducers = combineReducers({
     listsReducer: listsReducer,
     admin: adminReducer,
     paginatorReducer: paginatorReducer,
+    cartReducer: cartReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;   //  FOR BROWSER EXTENSION

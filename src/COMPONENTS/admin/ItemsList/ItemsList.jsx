@@ -31,10 +31,9 @@ function ItemsList({items, deleteItems, ...props}) {
         arr=[];
     }
 
-    let index = 0;
     let itemsList = items.map((item) => {
-        let indexId;
-        if (item._id) {indexId=item._id} else { indexId=index; index++} //  if we dont have id in item
+        let indexId=item._id;
+
         return <div key={indexId} className={s.item} >
                     <input id={indexId} className={s.checkBox}
                            type="checkbox" name="checkbox"
