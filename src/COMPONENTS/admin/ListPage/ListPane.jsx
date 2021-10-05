@@ -1,10 +1,17 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from "./ListPane.module.css";
 import ListForm from "./ListForm/ListForm";
-import {Redirect} from "react-router-dom";
-import ProductsList from "../ProductsList_N/ProductsList";
+import {Redirect, useLocation} from "react-router-dom";
+import ItemsList0 from "../ItemsList/ItemsList0";
+import ProductItem from "../Product/ProductItem";
 
-function ListPane({updateList, deleteList, listUrl, listForm, deleteElement}) {
+function ListPane({updateList, deleteList, listForm, deleteElement, getListByUrl, isLoading}) {
+
+    let pn = useLocation().pathname;
+    //console.log(pn.split('/').pop());
+    let listUrl = pn.split('/').pop();
+
+    useEffect(() => getListByUrl(listUrl), [getListByUrl, listUrl]);
 
     const onSubmit = (formData) => {
         if (listUrl) {
@@ -23,15 +30,19 @@ function ListPane({updateList, deleteList, listUrl, listForm, deleteElement}) {
 
     let [isDeleted, setIsDeleted] = useState(false);
 
+    if (isLoading || !listForm) return <div>Loading...</div>;
     return (
-        <div className={s.pane} >
-            {isDeleted && <Redirect to="/admin" />}
+        <div className={s.pane}>
+            {isDeleted && <Redirect to="/admin"/>}
             <h1>Update List</h1>
 
-            <ListForm onSubmit={onSubmit} listUrl={listUrl} initData={listForm} />
+            <ListForm onSubmit={onSubmit} listUrl={listUrl} initData={listForm}/>
 
-            <button onClick={onTypeDelete} >DELETE</button>
-            {listForm && <ProductsList products={listForm.items} deleteProducts={onElementsDelete} />}
+            <button onClick={onTypeDelete}>DELETE</button>
+            {listForm && <ItemsList0 items={listForm.items} deleteItems={onElementsDelete}>
+                {item => <ProductItem item={item}/>}
+            </ItemsList0>}
+
         </div>
     );
 }

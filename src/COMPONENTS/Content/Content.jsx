@@ -11,7 +11,7 @@ import MainPage from "./MainPageC/MainPage";
 import OrderPage from "./OrderPage/OrderPage";
 
 function Content({links, paginatorData, productsData, cartData, findProducts,
-                     getProducts, setPortionNumAC, setCurrentPageAC, ...props}) {
+                     getProducts, setPortionNumAC, setCurrentPageAC, deleteItemByIndex, createOrder, ...props}) {
     return (
         <div>
             <Header/>
@@ -25,7 +25,7 @@ function Content({links, paginatorData, productsData, cartData, findProducts,
                         <Route path="/info" render={() => <h1>INFO</h1>}/>
                         <Route path="/products/:prodId" render={() => <ProductPageC/>}/>
 
-                        <Route path="/order" render={() => <OrderPage cartData={cartData} /> }/>
+                        <Route path="/order" render={() => <OrderPage deleteItemByIndex={deleteItemByIndex} cartData={cartData} createOrder={createOrder} /> }/>
 
                         <Route path="/search" render={() => <div>
                             <SearchWrapper

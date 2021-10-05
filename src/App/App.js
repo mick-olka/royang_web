@@ -12,6 +12,7 @@ import {Switch} from "react-router-dom";
 import AdminAuthC from "../COMPONENTS/admin/AuthAdmin/AdminAuthC";
 import {findProducts, getProducts} from "../REDUX/reducers/productsReducer";
 import {setCurrentPageAC, setPortionNumAC} from "../REDUX/reducers/paginatorReducer";
+import {createOrder, deleteItemByIndex} from "../REDUX/reducers/cartReducer";
 
 class App extends Component {
 
@@ -45,6 +46,8 @@ class App extends Component {
                         setCurrentPageAC={this.props.setCurrentPageAC}
                         getProducts={this.props.getProducts}
                         cartData={this.props.cartData}
+                        deleteItemByIndex={this.props.deleteItemByIndex}
+                        createOrder={this.props.createOrder}
                     />}/>
                 </Switch>
             </div>
@@ -66,7 +69,8 @@ const mapStateToProps = (state) => {
 
 let AppContainer = compose(     //  HOC FOR APP TO PROVIDE MSTP AND MDTP
     withRouter,
-    connect(mapStateToProps, {initApp, findProducts, setPortionNumAC, setCurrentPageAC, getProducts})
+    connect(mapStateToProps, {initApp, findProducts, setPortionNumAC,
+        setCurrentPageAC, getProducts, deleteItemByIndex, createOrder})
 )(App);
 
 //==============================================

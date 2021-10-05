@@ -1,17 +1,38 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from "./Product.module.css";
 import ProductForm from "./ProductForm/ProductForm";
 import Select from 'react-select'
 import chairIcon from "../../../IMGS/chair.png";
 import PhotosPane from "./PhotosPane/PhotosPane";
 import SomeError from "../../extra/SomeError";
+import {useLocation} from "react-router-dom";
 
-function UpdateProduct({updateProduct, prodId, productData, lists, addElement, newError, addPhotos, deletePhotos, isLoading}) {
+function UpdateProduct({getProductById, updateProduct, productData, lists,
+                           addElement, newError, addPhotos, deletePhotos,
+                           isLoading, pushToHistory, setIdOfCreatedAC, setChosenProductAC,
+                       }) {
 
     let thumbnail = null;
+    let pn = useLocation().pathname;
+    console.log(pn.split('/').pop());
+    let prodId=pn.split('/').pop();
+
+    useEffect(()=>{
+        setIdOfCreatedAC(null);     //  for resetting create page
+        if (prodId && prodId.length===24) {
+            getProductById(prodId);
+        } else {
+            pushToHistory("/admin");
+        }
+    }, [getProductById, prodId, pushToHistory, setIdOfCreatedAC]);
 
     const onSubmit = (formData) => {
         if (prodId) updateProduct(prodId, formData, thumbnail);
+    }
+
+    const onChoosingProductsBtn = () => {
+        setChosenProductAC({prodId: prodId, name: productData.name});
+        pushToHistory("/admin");
     }
 
     let onThumbnailSelected = (e) => {
@@ -45,6 +66,8 @@ function UpdateProduct({updateProduct, prodId, productData, lists, addElement, n
         return <SomeError returnTo="/admin" error={newError}/>
     }
 
+    if (isLoading) return <div>Loading...</div>;
+
     return ( <div className={s.pane}>
                     <h1>Update Product</h1>
                     {/*//===THUMB_PANE========*/}
@@ -56,9 +79,11 @@ function UpdateProduct({updateProduct, prodId, productData, lists, addElement, n
                     {/*//===TYPES_SELECTOR=====*/}
                     <div className={s.selectBox}>
                         <div>{typesList}</div>
-                        <button disabled={chosenLists.length <= 0} onClick={() => handleSelectSubmit()}>Add to list:
-                        </button>
+                        <button disabled={chosenLists.length <= 0} onClick={() => handleSelectSubmit()}>Add to list:</button>
                         <Select isMulti options={typesToSelect} onChange={(value) => setChosenLists(value)}/>
+
+                        <button onClick={onChoosingProductsBtn}>Choose related or similar products</button>
+
                     </div>
 
                     <ProductForm onSubmit={onSubmit} prodId={prodId} initData={productData}/>

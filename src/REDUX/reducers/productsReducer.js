@@ -8,12 +8,16 @@ const SET_IS_LOADING = "productsReducer/SET_IS_LOADING";
 const SET_ID_OF_CREATED = "productsReducer/SET_ID_OF_CREATED";
 const SET_NEW_ERROR = "productsReducer/SET_HAS_ERROR";
 const SET_FOUND_PRODUCTS = "productsReducer/SET_FOUND_PRODUCTS";
+const SET_CHOSEN_PRODUCT = "productsReducer/SET_CHOSEN_PRODUCT";
+const SET_CHOSEN_ITEMS_IDS = "productsReducer/SET_CHOSEN_ITEMS_IDS";
 
 let initialState = {
     products: [],
+    chosenItemsIds: [],
+    chosenProduct: null,
     productsFound: [],
     newError: null,
-    idOfCreated: "",
+    idOfCreated: null,
     productData: {
         _id: null,
         thumbnail: "",
@@ -55,6 +59,16 @@ const productsReducer = (state=initialState, action) => {
                 ...state, productsFound: [...action.products],
             }
 
+        case SET_CHOSEN_PRODUCT:
+            return {
+                ...state, chosenProduct: {prodId: action.data.prodId, name: action.data.name}
+            }
+
+        case SET_CHOSEN_ITEMS_IDS:
+            return {
+                ...state, chosenItemsIds: [...action.ids],
+            }
+
         default:
             return state;
     }
@@ -63,9 +77,11 @@ const productsReducer = (state=initialState, action) => {
 const setProductsAC = (products) => ({type: SET_PRODUCTS, products});
 export const setProductFormAC = (product) => ({type: SET_PRODUCT_FORM, product});
 const setIsLoadingAC = (isLoading) => ({type: SET_IS_LOADING, isLoading});
-const setIdOfCreatedAC = (id) => ({type: SET_ID_OF_CREATED, id});
+export const setIdOfCreatedAC = (id) => ({type: SET_ID_OF_CREATED, id});
 const setNewErrorAC = (error) => ({type: SET_NEW_ERROR, error});
 const setProductsFoundAC = (products) => ({type: SET_FOUND_PRODUCTS, products});
+export const setChosenProductAC = (data) => ({type: SET_CHOSEN_PRODUCT, data}); //  {prodId, name}  for related choose
+export const setChosenItemsIdsAC = (ids) => ({type: SET_CHOSEN_ITEMS_IDS, ids}); //  [itemId]   for itemsList
 
 //====================================
 

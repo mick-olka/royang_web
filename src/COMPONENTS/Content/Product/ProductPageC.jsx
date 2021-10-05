@@ -5,6 +5,7 @@ import {getProductById} from "../../../REDUX/reducers/productsReducer";
 import {withRouter} from "react-router-dom";
 import ProductPage from "./ProductPage";
 import {addItemToCart} from "../../../REDUX/reducers/cartReducer";
+import NotFound from "../../extra/NotFound";
 
 class ProductPageC extends Component {
 
@@ -25,20 +26,19 @@ class ProductPageC extends Component {
     }
 
     render() {
-        if (this.props.isLoading || this.props.productData._id===null) {
+        if (this.props.isLoading) {
             return <div>Loading...</div>
-        } else return  <ProductPage
+        }
+        if  (this.props.productData._id===null) {
+            return <NotFound />
+        }
+        return  <ProductPage
+            {...this.props}
             prodId = {this.state.prodId}
             productData={this.props.productData}
             addItemToCart={this.props.addItemToCart}
         />
-        // return (<div>
-        //         {this.props.isLoading ? <div>Loading...</div> :  <ProductPage
-        //                 prodId = {this.state.prodId}
-        //                 productData={this.props.productData}
-        //             />}
-        //     </div>
-        // );
+
     }
 }
 

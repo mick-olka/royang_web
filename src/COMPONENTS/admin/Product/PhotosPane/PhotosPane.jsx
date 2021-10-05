@@ -1,7 +1,7 @@
 import React from 'react';
 import PhotoForm from "./PhotoForm";
 import list from "../../ItemsList/ItemsList.module.css";
-import ItemsList from "../../ItemsList/ItemsList";
+import ItemsList0 from "../../ItemsList/ItemsList0";
 import s from "./PhotosPane.module.css";
 
 function PhotosPane({images, prodId, addPhotos, deletePhotos}) {
@@ -42,9 +42,9 @@ function PhotosPane({images, prodId, addPhotos, deletePhotos}) {
             <p>photo</p>
             <input type="file" name="pathArr" onChange={onPhotoSelected} multiple />
             <PhotoForm onSubmit={onSubmit}/>
-            <ItemsList items={images} deleteItems={onPhotoDelete}>
+            <ItemsList0 items={images} deleteItems={onPhotoDelete}>
                 {imagesItem => <PhotosItem imagesItem={imagesItem}/>}
-            </ItemsList>
+            </ItemsList0>
         </div>
     );
 }

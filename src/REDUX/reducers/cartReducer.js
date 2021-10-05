@@ -1,19 +1,22 @@
-import {orderApi, productsAPI} from "../../API/api";
+import {orderApi} from "../../API/api";
 import {setTotalProductsCountAC} from "./paginatorReducer";
 import {setProductFormAC} from "./productsReducer";
 
 const ADD_ITEM_TO_CART = "cartReducer/ADD_ITEM_TO_CART";
-const SET_SUMMARY = "cartReducer/SET_SUMMARY";
-const ADD_TO_SUMMARY = "cartReducer/ADD_TO_SUMMARY";
+//const SET_SUMMARY = "cartReducer/SET_SUMMARY";
+//const ADD_TO_SUMMARY = "cartReducer/ADD_TO_SUMMARY";
+const COUNT_SUMMARY = "cartReducer/COUNT_SUMMARY";
 const SET_IS_LOADING = "cartReducer/SET_IS_LOADING";
 const SET_ORDERS = "cartReducer/SET_ORDERS";
 const SET_NEW_ERROR = "cartReducer/SET_NEW_ERROR";
+const DELETE_ITEM = "cartReducer/DELETE_ITEM";
+const SET_INDEXES = "cartReducer/SET_INDEXES";
 
 let initialState = {
-    isLoading: true,
-    cart: [],
-    summary: 0,
-    orders: [],
+    isLoading: true,    //  for admin
+    cart: [],   //  for client
+    sum: 0,
+    orders: [], //  for admin page
     newError: null,
 }
 
@@ -22,24 +25,39 @@ const cartReducer = (state = initialState, action) => {
 
         case ADD_ITEM_TO_CART:
             let newItem = {
-                prodId: action.item.prodId,
+                product: action.item.product,
                 name: action.item.name,
                 code: action.item.code,
+                photo: action.item.photo,
                 mainColor: action.item.mainColor,
                 pillColor: action.item.pillColor,
                 count: action.item.count,
-                sum: action.item.sum,
+                price: action.item.price,
             }
             return {
                 ...state,
                 cart: [...state.cart, newItem],
             }
 
-        case SET_SUMMARY:
-            return {...state, summary: action.sum}
+        case DELETE_ITEM:
+            let cartCopy = [...state.cart];
+            cartCopy.splice(action.index, 1);
+            console.log(action.index);
+            return {...state, cart: cartCopy}
 
-        case ADD_TO_SUMMARY:
-            return {...state, summary: state.summary+action.sum}
+        case SET_INDEXES:
+            let cartCopy0 = [...state.cart];
+            for (let i=0; i<cartCopy0.length; i++) {
+                cartCopy0[i]={...cartCopy0[i], index: i}
+            }
+            return {...state, cart: cartCopy0}
+
+        case COUNT_SUMMARY:
+            let sum=0;
+            for (let i=0; i<state.cart.length; i++) {
+                sum+=(state.cart[i].price*state.cart[i].count);
+            }
+            return {...state, sum: sum}
 
         default:
             return state;
@@ -47,25 +65,29 @@ const cartReducer = (state = initialState, action) => {
 };
 
 const addItemToCartAC = (item) => ({type: ADD_ITEM_TO_CART, item});
-const setSummaryAC = (sum) => ({type: ADD_ITEM_TO_CART, sum});
-const addToSummaryAC = (sum) => ({type: ADD_TO_SUMMARY, sum});
+const removeItemByIndexAC = (index) => ({type: DELETE_ITEM, index});
+//const setSummaryAC = (sum) => ({type: ADD_ITEM_TO_CART, sum});
+//const addToSummaryAC = (sum) => ({type: ADD_TO_SUMMARY, sum});
+const countSummaryAC = () => ({type: COUNT_SUMMARY});
 const setIsLoadingAC = (isLoading) => ({type: SET_IS_LOADING, isLoading});
 const setOrdersAC = (orders) => ({type: SET_ORDERS, orders});
 const setNewErrorAC = (error) => ({type: SET_NEW_ERROR, error});
+const setIndexesAC = () => ({type: SET_INDEXES});
 
 //=====THUNKS=======
 
 export const addItemToCart = (item) =>
     async (dispatch) => {
-        dispatch(addToSummaryAC(item.sum));
         dispatch(addItemToCartAC(item));
-        try {
-            //await Promise.all([dispatch(checkAuth()), dispatch(getProducts(page, limit)), dispatch(getLists())]);
-    } catch (e) {
-        //console.log(e);
+        dispatch(countSummaryAC());
+        dispatch(setIndexesAC());
     }
-        //dispatch(setInitializedSuccessAC());
-        //setTimeout(()=> dispatch(setInitializedSuccessAC()), 500);   //  promise
+
+export const deleteItemByIndex = (index) =>
+    async (dispatch) => {
+        dispatch(removeItemByIndexAC(index));
+        dispatch(countSummaryAC());
+        dispatch(setIndexesAC());
     }
 
 export const getOrders = (page, limit) => async (dispatch) => {
@@ -105,7 +127,7 @@ export const createOrder = (formData) =>
 export const updateOrder = (id, formData) =>
     async (dispatch) => {
         try {
-            let res = await productsAPI.updateProduct(id, formData);
+            let res = await orderApi.updateOrder(id, formData);
             if (res.code === 0) {
                 dispatch(getOrderById(id));
                 dispatch(getOrders());

@@ -23,32 +23,12 @@ const MainPage = ({ paginatorData, products, setCurrentPageAC, getProducts, setP
 
             <div>
                 <SectionsPane products={products}/>
+
                 <Paginator
                     paginatorData={paginatorData}
                     setPortionNum={setPortionNumAC}
                     onPageChanged={onPageChanged}   />
             </div>
-
-            {/*<Switch>*/}
-            {/*    /!*<Route path="/search" render={() => <div>*!/*/}
-            {/*    /!*    <SearchWrapper*!/*/}
-            {/*    /!*        products={productsFound}*!/*/}
-            {/*    /!*        findProducts={findProducts}*!/*/}
-            {/*    /!*        paginatorData={paginatorData}*!/*/}
-            {/*    /!*        setPortionNum={setPortionNumAC}*!/*/}
-            {/*    /!*        setCurrentPage={setCurrentPageAC} >*!/*/}
-            {/*    /!*        <SectionsPane products={productsFound}/>*!/*/}
-            {/*    /!*    </SearchWrapper>*!/*/}
-            {/*    /!*</div>  }/>*!/*/}
-
-            {/*    <Route path="/" render={() => <div>*/}
-            {/*        <SectionsPane products={products}/>*/}
-            {/*        <Paginator*/}
-            {/*            paginatorData={paginatorData}*/}
-            {/*            setPortionNum={setPortionNumAC}*/}
-            {/*            onPageChanged={onPageChanged}   />*/}
-            {/*    </div>  }/>*/}
-            {/*</Switch>*/}
 
         </div>
     );

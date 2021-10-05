@@ -7,7 +7,7 @@ let initialState = {
         totalProductsCount: 0,
         currentPage: 1,
         portionNum: 1,
-        portionSize: 3,
+        portionSize: 2,
         pageLimit: 2,
 }
 

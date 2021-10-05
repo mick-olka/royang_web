@@ -1,9 +1,7 @@
 import React from 'react';
 import s from "../Product/ProductForm/ProductsList.module.css";
-import {NavLink} from "react-router-dom";
-import chairIcon from "../../../IMGS/chair.png";
 
-function ProductsList({products, deleteProducts}) {
+function ItemsList0({items, deleteItems, ...props}) {
     let isMouseDown = false;
     document.body.onmousedown = () => {isMouseDown = true}
     document.body.onmouseup = () => {isMouseDown = false}
@@ -33,24 +31,20 @@ function ProductsList({products, deleteProducts}) {
         arr=[];
     }
 
-    let productsList = products.map((p) => {
-        return <div key={p._id} className={s.item} >
-            <input id={p._id} className={s.checkBox}
-                   type="checkbox" name="checkbox"
-                   onMouseOver={() => handleCheckboxMouseOver(p._id)}
-                   onClick={() => toggleChecked(p._id)}
-            />
+    let itemsList = items.map((item) => {
+        let indexId=item._id;
 
-            <div className={s.imgBox}>
-                <img className={s.thumbnail} src={p.thumbnail? p.thumbnail : chairIcon} alt="img"/>
-            </div>
-            <p><NavLink to={"/admin/products/" + p._id}>{p.name}</NavLink></p>
-            <p>$ {p.price}</p>
+        return <div key={indexId} className={s.item} >
+            <input id={indexId} className={s.checkBox}
+                   type="checkbox" name="checkbox"
+                   onMouseOver={() => handleCheckboxMouseOver(indexId)}
+                   onClick={() => toggleChecked(indexId)} />
+            {props.children(item)}
         </div>
     });
 
     const deleteHandler = () => {
-        deleteProducts(arr);
+        deleteItems(arr);
     }
 
     return (
@@ -59,9 +53,9 @@ function ProductsList({products, deleteProducts}) {
                 <button className={s.btn} onClick={uncheckAll} >CANCEL</button>
                 <button className={s.btn} onClick={deleteHandler} >DELETE</button>
             </div>
-            {productsList}
+            {itemsList}
         </div>
     );
 }
 
-export default ProductsList;
+export default ItemsList0;

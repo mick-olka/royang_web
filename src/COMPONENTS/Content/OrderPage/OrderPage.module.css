@@ -3,4 +3,18 @@
     min-height: 5rem;
     margin: 0.5rem;
     background-color: #e8c8c8;
+    display: flex;
+    flex-direction: column;
+}
+
+.cart_item {
+    display: flex;
+    justify-content: space-around;
+    background-color: #bbc6de;
+    margin: 0.2rem 0.5rem;
+    min-height: 3rem;
+}
+
+.delete_btn {
+
 }
