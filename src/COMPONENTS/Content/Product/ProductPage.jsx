@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import s from "./ProductPage.module.css";
 import Slider from "../Slider/Slider";
 import ColorMenu from "./ColorMenu";
+import chairIcon from "../../../IMGS/chair.png";
 
 //  product
 //     _id: doc._id,
@@ -21,7 +22,7 @@ function ProductPage({productData, prodId, addItemToCart, ...props}) {
 
     let [itemForCart, setItemForCart] = useState({
         product: prodId,
-        photo: productData.images[0].pathArr[0],
+        photo: productData.images[0]? productData.images[0].pathArr[0] : chairIcon,
         name: productData.name,
         code: productData.code,
         mainColor: "none",

@@ -3,7 +3,7 @@ import OrderForm from "./OrderForm";
 import s from "./OrderPage.module.css"
 import {NavLink} from "react-router-dom";
 
-function OrderPage({cartData, deleteItemByIndex, createOrder}) {
+function OrderPage({cartData, deleteItemByIndex, createOrder, ...props}) {
 
     let [alert, setAlert] =useState(null);
 
@@ -13,6 +13,10 @@ function OrderPage({cartData, deleteItemByIndex, createOrder}) {
         if (orderData.cart.length>0) {
             setAlert(null);
             createOrder(orderData);
+            for (let i=0; i<cartData.cart.length; i++) {
+                deleteItemByIndex(cartData.cart[i].index);
+            }
+            props.history.push("/order_done");
         }
         else setAlert("Choose product");
     }

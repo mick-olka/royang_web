@@ -1,26 +1,11 @@
 import React from 'react';
 import {Formik, Form, Field, FieldArray} from 'formik';
 
-const ProductForm = (props) => {
-
-    let initialValues = {
-        features: [
-            {key: "width", value: "0"},
-            {key: "height", value: "0"},
-            {key: "depth", value: "0"},
-            {key: "weight", value: "0"},
-        ],
-        name: '',
-        code: '',
-        price: 0,
-        oldPrice: 0,
-    };
-
-    if (props.prodId) initialValues=props.initData;
+const ProductForm = ({initialValues, onSubmit }) => {
 
     return <div>
         <Formik initialValues={initialValues} onSubmit={values => {
-            props.onSubmit(values)
+            onSubmit(values)
         }}>
             {({values}) => (
                 <Form>

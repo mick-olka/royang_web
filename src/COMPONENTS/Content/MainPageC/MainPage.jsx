@@ -2,17 +2,17 @@ import React, {useEffect} from 'react';
 import s from "./MainPage.module.css";
 import SectionsPane from "../SectionsPane/SectionsPane";
 import SlickSlider from "../Slider/SlickSlider";
-import Paginator from "../../extra/Paginator/Paginator";
+import PaginatorC from "../../extra/Paginator/PaginatorC";
 
-const MainPage = ({ paginatorData, products, setCurrentPageAC, getProducts, setPortionNumAC, ...props}) => {
+const MainPage = ({ products, setCurrentPageAC, getProducts}) => {
 
     // let pn = useLocation().pathname;
     const onPageChanged = (pageNumber) => {     //  WHEN RETURNED FROM SEARCH PAGE
             setCurrentPageAC(pageNumber);
-            getProducts(pageNumber, paginatorData.pageLimit);
+            getProducts(pageNumber);
     }
     useEffect(()=> {
-        onPageChanged(paginatorData.currentPage);
+        onPageChanged(1);   //  For returning after search
     }, []);   // eslint-disable-line react-hooks/exhaustive-deps
 
     return (
@@ -24,10 +24,7 @@ const MainPage = ({ paginatorData, products, setCurrentPageAC, getProducts, setP
             <div>
                 <SectionsPane products={products}/>
 
-                <Paginator
-                    paginatorData={paginatorData}
-                    setPortionNum={setPortionNumAC}
-                    onPageChanged={onPageChanged}   />
+                <PaginatorC onPageChanged={onPageChanged}   />
             </div>
 
         </div>

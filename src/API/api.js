@@ -156,9 +156,9 @@ export const listsAPI = {
         });
     },
 
-    getListByUrl (url) {
+    getListByUrl (url, page=1, limit=2) {
         return instance.get(
-            'lists/'+url,
+            `lists/${url}?page=${page}&limit=${limit}`,
         ).then(response => {
             return response.data;
         });
@@ -214,7 +214,7 @@ export const orderApi = {
 
     getOrders (page=1, limit=6) {
         return instance.get(
-            `orders?page=${page}&limit=${limit}`,
+            `orders }`,
         ).then(response => {
             return response.data;
         });

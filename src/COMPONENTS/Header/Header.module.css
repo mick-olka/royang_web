@@ -1,9 +1,11 @@
 .header {
     width: 100%;
     background-color: #aba5a5;
+    display: flex;
 }
 
 .name{
+    right: 0;
     background-color: #9b5e5e;
     font-size: 2rem;
     padding: 0.5rem;

@@ -1,6 +1,6 @@
 import {productsAPI} from "../../API/api";
 import {uploadThumbnail} from "./photosReducer";
-import {setTotalProductsCountAC} from "./paginatorReducer";
+import {setTotalItemsCountAC} from "./paginatorReducer";
 
 const SET_PRODUCTS = "productsReducer/SET_PRODUCTS";
 const SET_PRODUCT_FORM = "productsReducer/SET_PRODUCT_FORM";
@@ -9,7 +9,6 @@ const SET_ID_OF_CREATED = "productsReducer/SET_ID_OF_CREATED";
 const SET_NEW_ERROR = "productsReducer/SET_HAS_ERROR";
 const SET_FOUND_PRODUCTS = "productsReducer/SET_FOUND_PRODUCTS";
 const SET_CHOSEN_PRODUCT = "productsReducer/SET_CHOSEN_PRODUCT";
-const SET_CHOSEN_ITEMS_IDS = "productsReducer/SET_CHOSEN_ITEMS_IDS";
 
 let initialState = {
     products: [],
@@ -26,6 +25,8 @@ let initialState = {
     },
     isLoading: true,
 }
+
+const prodLim = 2;
 
 const productsReducer = (state=initialState, action) => {
     switch (action.type) {
@@ -64,11 +65,6 @@ const productsReducer = (state=initialState, action) => {
                 ...state, chosenProduct: {prodId: action.data.prodId, name: action.data.name}
             }
 
-        case SET_CHOSEN_ITEMS_IDS:
-            return {
-                ...state, chosenItemsIds: [...action.ids],
-            }
-
         default:
             return state;
     }
@@ -81,15 +77,14 @@ export const setIdOfCreatedAC = (id) => ({type: SET_ID_OF_CREATED, id});
 const setNewErrorAC = (error) => ({type: SET_NEW_ERROR, error});
 const setProductsFoundAC = (products) => ({type: SET_FOUND_PRODUCTS, products});
 export const setChosenProductAC = (data) => ({type: SET_CHOSEN_PRODUCT, data}); //  {prodId, name}  for related choose
-export const setChosenItemsIdsAC = (ids) => ({type: SET_CHOSEN_ITEMS_IDS, ids}); //  [itemId]   for itemsList
 
 //====================================
 
-export const getProducts = (page, limit) => async (dispatch) => {
+export const getProducts = (page, limit=prodLim) => async (dispatch) => {
     dispatch(setIsLoadingAC(true));
     let response = await productsAPI.getProducts(page, limit);
     dispatch(setProductsAC(response.products));
-    dispatch(setTotalProductsCountAC(response.count));
+    dispatch(setTotalItemsCountAC(response.count));
     dispatch(setIsLoadingAC(false));
 }
 
@@ -149,11 +144,11 @@ export const updateProduct = (id, formData, thumbnail) =>
         }
     }
 
-export const findProducts = (str, page, limit) => async (dispatch) => {
+export const findProducts = (str, page, limit=prodLim) => async (dispatch) => {
     try {
         let response = await productsAPI.findProducts(str, page, limit);
         dispatch(setProductsFoundAC(response.result));
-        dispatch(setTotalProductsCountAC(response.count));
+        dispatch(setTotalItemsCountAC(response.count));
     } catch (e) {
         alert("findProducts: "+e);
     }

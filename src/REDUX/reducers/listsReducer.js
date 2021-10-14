@@ -1,5 +1,6 @@
 import {listsAPI} from "../../API/api";
 import {getProductById} from "./productsReducer";
+import {setTotalItemsCountAC} from "./paginatorReducer";
 
 const SET_LISTS = "listsReducer/SET_LISTS";
 const SET_LIST_FORM = "listsReducer/SET_LIST_FORM";
@@ -47,10 +48,11 @@ export const getLists = () => async (dispatch) => {
     dispatch(setIsLoadingAC(false));
 }
 
-export const getListByUrl = (url) => async (dispatch) => {
+export const getListByUrl = (url, page) => async (dispatch) => {
     dispatch(setIsLoadingAC(true));
-    let response = await listsAPI.getListByUrl(url);
+    let response = await listsAPI.getListByUrl(url, page);
     dispatch(setListFormAC(response));
+    dispatch(setTotalItemsCountAC(response.count));
     dispatch(setIsLoadingAC(false));
 }
 

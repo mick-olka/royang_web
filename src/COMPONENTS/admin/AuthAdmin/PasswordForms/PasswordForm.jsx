@@ -17,6 +17,7 @@ function PasswordForm({onSubmit, error}) {
                 id="password"
                 name="password"
                 type="password"
+                autoFocus={true}
                 onChange={formik.handleChange}
                 value={formik.values.password}
             />

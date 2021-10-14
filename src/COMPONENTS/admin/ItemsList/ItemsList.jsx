@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import s from "../Product/ProductForm/ProductsList.module.css";
 
-function ItemsList({items, deleteItems, itemsIdArr, setItemsIdArr, ...props}) {
+function ItemsList({items, deleteItems, itemsIdsArr, setItemsIdArr, ...props}) {
     let isMouseDown = false;
     document.body.onmousedown = () => {isMouseDown = true}
     document.body.onmouseup = () => {isMouseDown = false}
@@ -18,7 +18,7 @@ function ItemsList({items, deleteItems, itemsIdArr, setItemsIdArr, ...props}) {
     //     console.log(arr);
     // }
     //
-    console.log("REFR: "+itemsIdArr);
+    //console.log("REFR: "+itemsIdArr);
 
     //
     const uncheckAll = () => {
@@ -27,21 +27,22 @@ function ItemsList({items, deleteItems, itemsIdArr, setItemsIdArr, ...props}) {
     //
     useEffect(()=> {
         for (let i = 0; i < items.length; i++) {
-            if (itemsIdArr.indexOf(items[i]._id) !== -1) document.getElementById(items[i]._id).checked = true;
+            if (itemsIdsArr.indexOf(items[i]._id) !== -1) document.getElementById(items[i]._id).checked = true;
         }
-    }, [items, itemsIdArr]);
+    }, [items, itemsIdsArr]);
 
     const onCheckboxClick = (id) => {
-        let index = itemsIdArr.indexOf(id);
+        let index = itemsIdsArr.indexOf(id);
         if (index !== -1) {    //  if available
-            let arrCopy = [...itemsIdArr];
+            let arrCopy = [...itemsIdsArr];
             arrCopy.splice(index, 1);
             setItemsIdArr([...arrCopy]);
             document.getElementById(id).checked = false;
         } else {
-            setItemsIdArr([...itemsIdArr, id]);
+            setItemsIdArr([...itemsIdsArr, id]);
             document.getElementById(id).checked = true;
         }
+        console.log(itemsIdsArr);
     }
 
     const handleCheckboxMouseOver = (id) => {
@@ -65,7 +66,7 @@ function ItemsList({items, deleteItems, itemsIdArr, setItemsIdArr, ...props}) {
     });
 
     const deleteHandler = () => {
-        deleteItems(itemsIdArr);
+        deleteItems(itemsIdsArr);
     }
 
 
@@ -73,7 +74,7 @@ function ItemsList({items, deleteItems, itemsIdArr, setItemsIdArr, ...props}) {
     return (
         <div>
             <div className={s.controlPane} >
-                <p>{itemsIdArr.length} items chosen</p>
+                <p>{itemsIdsArr.length} items chosen</p>
                 <button className={s.btn} onClick={uncheckAll} >CANCEL</button>
                 <button className={s.btn} onClick={deleteHandler} >DELETE</button>
             </div>

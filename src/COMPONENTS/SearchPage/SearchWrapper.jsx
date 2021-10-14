@@ -1,18 +1,18 @@
 import React, {useEffect} from 'react';
 import {NavLink, useLocation} from "react-router-dom";
-import Paginator from "../../extra/Paginator/Paginator";
+import PaginatorC from "../extra/Paginator/PaginatorC";
 
-function SearchWrapper({findProducts, paginatorData, onPageChanged, products, setPortionNum, setCurrentPage, ...props}) {
+function SearchWrapper({findProducts, onPageChanged, products, setCurrentPage, setPortionNumAC, ...props}) {
 
     const search = useLocation().search;
     const string = new URLSearchParams(search).get('search');
 
-    useEffect(()=>{findProducts(string); setCurrentPage(1); setPortionNum(1)},  //  reset paginator on new search
+    useEffect(()=>{findProducts(string); setCurrentPage(1); setPortionNumAC(1)},  //  reset paginator on new search
         [string]);  // eslint-disable-line react-hooks/exhaustive-deps
 
     const onSearchPageChanged = (pageNumber) => {   //  on next page in search for paginator
         setCurrentPage(pageNumber);
-        findProducts(string, pageNumber, paginatorData.pageLimit);
+        findProducts(string, pageNumber);
     }
 
     return (<div>
@@ -23,11 +23,7 @@ function SearchWrapper({findProducts, paginatorData, onPageChanged, products, se
                 {products.length > 0 ? null : <h2>Nothing Found on "{string}"</h2>}
 
                 {props.children}
-                <Paginator
-                    paginatorData={paginatorData}
-                    setPortionNum={setPortionNum}
-                    onPageChanged={onSearchPageChanged}
-                />
+                <PaginatorC onPageChanged={onSearchPageChanged} />
         </div>
     );
 }

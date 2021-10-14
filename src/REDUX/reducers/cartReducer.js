@@ -1,5 +1,5 @@
 import {orderApi} from "../../API/api";
-import {setTotalProductsCountAC} from "./paginatorReducer";
+import {setTotalItemsCountAC} from "./paginatorReducer";
 import {setProductFormAC} from "./productsReducer";
 
 const ADD_ITEM_TO_CART = "cartReducer/ADD_ITEM_TO_CART";
@@ -11,17 +11,24 @@ const SET_ORDERS = "cartReducer/SET_ORDERS";
 const SET_NEW_ERROR = "cartReducer/SET_NEW_ERROR";
 const DELETE_ITEM = "cartReducer/DELETE_ITEM";
 const SET_INDEXES = "cartReducer/SET_INDEXES";
+const SET_ORDER_DATA = "cartReducer/SET_ORDER_DATA";
 
 let initialState = {
     isLoading: true,    //  for admin
     cart: [],   //  for client
     sum: 0,
     orders: [], //  for admin page
+    orderData: {
+        _id: null,
+    },
     newError: null,
 }
 
 const cartReducer = (state = initialState, action) => {
     switch (action.type) {
+
+        case SET_ORDERS:
+            return {...state, orders: [...action.orders]}
 
         case ADD_ITEM_TO_CART:
             let newItem = {
@@ -59,6 +66,9 @@ const cartReducer = (state = initialState, action) => {
             }
             return {...state, sum: sum}
 
+        case SET_ORDER_DATA:
+            return { ...state, orderData: action.orderData }
+
         default:
             return state;
     }
@@ -73,6 +83,7 @@ const setIsLoadingAC = (isLoading) => ({type: SET_IS_LOADING, isLoading});
 const setOrdersAC = (orders) => ({type: SET_ORDERS, orders});
 const setNewErrorAC = (error) => ({type: SET_NEW_ERROR, error});
 const setIndexesAC = () => ({type: SET_INDEXES});
+const setOrderDataAC = (orderData) => ({ type: SET_ORDER_DATA, orderData });
 
 //=====THUNKS=======
 
@@ -93,8 +104,8 @@ export const deleteItemByIndex = (index) =>
 export const getOrders = (page, limit) => async (dispatch) => {
     dispatch(setIsLoadingAC(true));
     let response = await orderApi.getOrders(page, limit);
-    dispatch(setOrdersAC(response.products));
-    dispatch(setTotalProductsCountAC(response.count));
+    dispatch(setOrdersAC(response.orders));
+    dispatch(setTotalItemsCountAC(response.count));
     dispatch(setIsLoadingAC(false));
 }
 
@@ -102,7 +113,7 @@ export const getOrderById = (id) => async (dispatch) => {
     try {
         dispatch(setIsLoadingAC(true));
         let response = await orderApi.getOrderById(id);
-        await dispatch(setProductFormAC(response));
+        await dispatch(setOrderDataAC(response));
         dispatch(setIsLoadingAC(false));
         dispatch(setNewErrorAC(null));
     } catch (e) {
@@ -137,7 +148,7 @@ export const updateOrder = (id, formData) =>
         }
     }
 
-export const deleteOrder = (idArr) => async (dispatch) => {
+export const deleteOrders = (idArr) => async (dispatch) => {
     try {
         for (let i=0; i<idArr.length; i++) {
             let res = await orderApi.deleteOrder(idArr[i]);

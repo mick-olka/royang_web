@@ -10,9 +10,19 @@ import Content from "../COMPONENTS/Content/Content";
 import AdminPageC from "../COMPONENTS/admin/AdminPageC/AdminPageC";
 import {Switch} from "react-router-dom";
 import AdminAuthC from "../COMPONENTS/admin/AuthAdmin/AdminAuthC";
-import {findProducts, getProducts} from "../REDUX/reducers/productsReducer";
-import {setCurrentPageAC, setPortionNumAC} from "../REDUX/reducers/paginatorReducer";
+import {getProducts} from "../REDUX/reducers/productsReducer";
+import {setCurrentPageAC} from "../REDUX/reducers/paginatorReducer";
 import {createOrder, deleteItemByIndex} from "../REDUX/reducers/cartReducer";
+import {ContactsContext} from "../UTILS/contacts_context";
+
+const contacts = {
+    phones: [
+        +380962962920,
+        +380962962920,
+        +380962962920,
+    ],
+    mail: "nikolaygutsal@gmail.com"
+}
 
 class App extends Component {
 
@@ -37,17 +47,15 @@ class App extends Component {
                     <Route path="/admin/auth" render={() => <AdminAuthC/>}/>
                     <Route path="/admin" render={() => <AdminPageC/>}/>
                     <Route path="/" render={() => <Content
-                        {...this.props}
-                        links={this.props.links}
-                        paginatorData={this.props.paginatorData}
-                        productsData={this.props.productsData}
-                        findProducts={this.props.findProducts}
-                        setPortionNumAC={this.props.setPortionNumAC}
-                        setCurrentPageAC={this.props.setCurrentPageAC}
-                        getProducts={this.props.getProducts}
-                        cartData={this.props.cartData}
-                        deleteItemByIndex={this.props.deleteItemByIndex}
-                        createOrder={this.props.createOrder}
+                        {...this.props}//
+                        links={this.props.links}//
+                        lists={this.props.lists}//
+                        productsData={this.props.productsData}//
+                        setCurrentPageAC={this.props.setCurrentPageAC}//
+                        getProducts={this.props.getProducts}//
+                        cartData={this.props.cartData}//
+                        deleteItemByIndex={this.props.deleteItemByIndex}//
+                        createOrder={this.props.createOrder}//
                     />}/>
                 </Switch>
             </div>
@@ -64,12 +72,13 @@ const mapStateToProps = (state) => {
         paginatorData: state.paginatorReducer,
         productsData: state.productsReducer,
         cartData: state.cartReducer,
+        lists: state.listsReducer.lists,
     });
 };
 
 let AppContainer = compose(     //  HOC FOR APP TO PROVIDE MSTP AND MDTP
     withRouter,
-    connect(mapStateToProps, {initApp, findProducts, setPortionNumAC,
+    connect(mapStateToProps, {initApp,
         setCurrentPageAC, getProducts, deleteItemByIndex, createOrder})
 )(App);
 
@@ -80,8 +89,10 @@ let AppWrapperF = (props) => {
         <BrowserRouter>
             <Provider store={store}>
                 {/*<MainContextProvider>*/}
+                <ContactsContext.Provider value={contacts}>
                 <AppContainer/>
                 {/*</MainContextProvider>*/}
+                </ContactsContext.Provider>
             </Provider>
         </BrowserRouter>
     );

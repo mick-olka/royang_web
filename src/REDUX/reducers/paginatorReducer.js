@@ -1,10 +1,10 @@
 
 const SET_PORTION_NUM = "productsReducer/SET_PORTION_NUM";
 const SET_CURRENT_PAGE = "productsReducer/SET_CURRENT_PAGE";
-const SET_TOTAL_PRODUCTS_COUNT = "productsReducer/SET_TOTAL_PRODUCTS_COUNT";
+const SET_TOTAL_ITEMS_COUNT = "productsReducer/SET_TOTAL_ITEMS_COUNT";
 
 let initialState = {
-        totalProductsCount: 0,
+        totalItemsCount: 0,
         currentPage: 1,
         portionNum: 1,
         portionSize: 2,
@@ -24,9 +24,9 @@ const paginatorReducer = (state=initialState, action) => {
                 ...state, currentPage: action.currentPage,
             }
 
-        case SET_TOTAL_PRODUCTS_COUNT:
+        case SET_TOTAL_ITEMS_COUNT:
             return {
-                ...state, totalProductsCount: action.count,
+                ...state, totalItemsCount: action.count,
             }
 
         default:
@@ -36,7 +36,7 @@ const paginatorReducer = (state=initialState, action) => {
 
 export const setPortionNumAC = (portionNum) => ({type: SET_PORTION_NUM, portionNum});
 export const setCurrentPageAC = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
-export const setTotalProductsCountAC = (count) => ({type: SET_TOTAL_PRODUCTS_COUNT, count});
+export const setTotalItemsCountAC = (count) => ({type: SET_TOTAL_ITEMS_COUNT, count});
 
 //====================================
 

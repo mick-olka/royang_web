@@ -1,9 +1,22 @@
 import React, {useEffect} from 'react';
-import s from "./Product.module.css";
-import ProductForm from "./ProductForm/ProductForm";
-import chairIcon from "../../../IMGS/chair.png";
+import s from "../Product.module.css";
+import ProductForm from "../ProductForm/ProductForm";
+import chairIcon from "../../../../IMGS/chair.png";
 
 function CreateProduct({createProduct, idOfCreated, pushToHistory}) {
+
+    let initialValues = {
+        features: [
+            {key: "width", value: "0"},
+            {key: "height", value: "0"},
+            {key: "depth", value: "0"},
+            {key: "weight", value: "0"},
+        ],
+        name: '',
+        code: '',
+        price: 0,
+        oldPrice: 0,
+    };
 
     let thumbnail=null;
 
@@ -29,7 +42,7 @@ function CreateProduct({createProduct, idOfCreated, pushToHistory}) {
             <img className={s.thumbnail} src={chairIcon} alt="img"/>
             <input type="file" disabled={false} onChange={onThumbnailSelected} />
 
-            <ProductForm onSubmit={onSubmit} />
+            <ProductForm initialValues={initialValues} onSubmit={onSubmit} />
 
         </div>
     );

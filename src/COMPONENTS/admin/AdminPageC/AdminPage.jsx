@@ -1,41 +1,49 @@
-import React from 'react';
-import {NavLink, Route, Switch} from "react-router-dom";
+import React, {useEffect} from 'react';
+import {NavLink, Route, Switch, useLocation} from "react-router-dom";
 import Navbar from "../../Navbar/Navbar";
 import ListForm from "../ListPage/ListForm/ListForm";
 import NotFound from "../../extra/NotFound";
 import ChangePW from "../AuthAdmin/ChangePW";
-import Search from "../../Content/SearchPage/Search";
-import SearchWrapper from "../../Content/SearchPage/SearchWrapper";
-import Paginator from "../../extra/Paginator/Paginator";
-import UpdateProduct from "../Product/UpdateProduct";
-import CreateProduct from "../Product/CreateProduct";
-import ListPane from "../ListPage/ListPane";
+import Search from "../../SearchPage/Search";
 import ProductItem from "../Product/ProductItem";
-import ItemsList from "../ItemsList/ItemsList";
+import ItemsListC from "../ItemsList/ItemsListC";
+import UpdateProductC from "../Product/UpdateProduct/UpdateProductC";
+import PaginatorC from "../../extra/Paginator/PaginatorC";
+import SearchPageC from "../../SearchPage/SearchPageC";
+import CreateProductC from "../Product/CreateProduct/CreateProductC";
+import OrdersC from "../Orders/OrdersC";
+import OrderEditPageC from "../Orders/OrderEditPageC";
+import ListsSelect from "../ListSelect/ListsSelect";
+import ListPaneC from "../ListPage/ListPaneC";
+import MainAdminPageC from "./MainAdminPageC";
 
-function AdminPage({deleteAdminAuth, products, productsFound, lists,
-                       deleteProducts, createList, changePW, findProducts,
-                       paginatorData, setCurrentPageAC, setPortionNumAC, getProducts,
-    getProductById, updateProduct, addElement, addPhotos, deletePhotos, updateProductProps, setChosenProductAC,
-    createProduct, idOfCreated,
-    pushToHistory, setIdOfCreatedAC,
+function AdminPage({
+                       deleteAdminAuth, products, productsFound, lists,
+                       deleteProducts, createList, changePW,
+                       setCurrentPageAC, getProducts,
                        updateList, deleteList, deleteElement, listPageProps, getListByUrl,
-                       chosenProduct, chosenItemsIds, setChosenItemsIdsAC,
-                       ...props}) {
+                       chosenProduct,
+                       addElement, itemsIdsArr,
+                       ...props
+                   }) {
 
     let links = [
         {url: "/", name: "Client"},
         {url: "/admin", name: "Admin"},
         {url: "/admin/new", name: "New Product"},
         {url: "/admin/login/pw", name: "PW mod"},
+        {url: "/admin/orders", name: "ORDERS"},
     ];
 
-    //let pn = useLocation().pathname;
+    let pn = useLocation().pathname;
+    useEffect(() => {
 
-    const onPageChanged = (pageNumber) => {
-            setCurrentPageAC(pageNumber);
-            getProducts(pageNumber, paginatorData.pageLimit);
-    }
+    }, [pn]);
+    //
+    // const onPageChanged = (pageNumber) => {
+    //         setCurrentPageAC(pageNumber);
+    //         getProducts(pageNumber);
+    // }
 
     let typesL = [...lists].map(l => {
         let l0 = {...l};
@@ -59,22 +67,20 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists,
     //     );
     // }
 
-    const MainAdminPage = ({products}) => {
-        //let [itemsIdArr, setItemsIdArr] = useState([]);
-        console.log("R MainAdminPane");
+    const PaneWithProducts = ({products}) => {
+
         return <div>
-            <h1>All Products</h1>
-            {chosenProduct? <div><h3>Choose related to {chosenProduct.name}</h3>
+            {chosenProduct ? <div><h3>Choose related to {chosenProduct.name}</h3>
                 <button>Set as related</button>
                 <button>Set as similar</button>
             </div> : null}
-            <ItemsList items={products} deleteItems={deleteProducts} itemsIdArr={chosenItemsIds} setItemsIdArr={setChosenItemsIdsAC} >
+            <ItemsListC items={products} deleteItems={deleteProducts}>
                 {item => <ProductItem item={item}/>}
-            </ItemsList>
+            </ItemsListC>
         </div>;
     }
 
-    console.log("R AdminPane^");
+    //console.log("R AdminPane^");
     return (
         <div>
             <NavLink to="/admin"><h1>ADMIN</h1></NavLink>
@@ -92,44 +98,26 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists,
 
                 <div className="content_pane">
                     <Switch>
-                        <Route path="/admin/products/:prodId?" render={() => <UpdateProduct
-                            getProductById={getProductById} updateProduct={updateProduct}
-                            addElement={addElement} addPhotos={addPhotos} deletePhotos={deletePhotos}
-                            pushToHistory={pushToHistory} setIdOfCreatedAC={setIdOfCreatedAC}
-                            setChosenProductAC={setChosenProductAC}
-                            {...updateProductProps}
-                        />}/>
+                        <Route path="/admin/products/:prodId?" render={() => <UpdateProductC/>}/>
 
-                        <Route path="/admin/lists/:listUrl"
-                               render={() => <ListPane {...listPageProps}
-                                                       updateList={updateList}
-                                                       deleteList={deleteList}
-                                                       getListByUrl={getListByUrl}
-                                                       deleteElement={deleteElement} />}/>
+                        <Route path="/admin/lists/:listUrl" render={() => <ListPaneC/>}/>
 
-                        <Route path="/admin/login/pw" render={() => <ChangePW changePW={changePW} />}/>
-                        <Route path="/admin/new" render={() => <CreateProduct createProduct={createProduct}
-                                                                              lists={lists} pushToHistory={pushToHistory} idOfCreated={idOfCreated} />}/>
+                        <Route path="/admin/login/pw" render={() => <ChangePW changePW={changePW}/>}/>
+                        <Route path="/admin/new" render={() => <CreateProductC/>}/>
                         <Route path="/admin/search" render={() =>
-                            // <MainAdminPage products={productsFound} />
-                            <SearchWrapper
-                                products={productsFound}
-                                paginatorData={paginatorData}
-                                findProducts={findProducts}
-                                setCurrentPage={setCurrentPageAC}
-                                setPortionNum={setPortionNumAC} >
-                                <MainAdminPage products={productsFound}  />
-                            </SearchWrapper>
+                            // <MainAdminPageC products={productsFound} />
+                            <SearchPageC>
+                                <PaneWithProducts products={productsFound}/>
+                            </SearchPageC>
                         }/>
 
-                        <Route path="/admin" render={() => <div>
-                            <MainAdminPage products={products} chosenProduct={chosenProduct} />
-                            <Paginator
-                            paginatorData={paginatorData}
-                            setPortionNum={setPortionNumAC}
-                            onPageChanged={onPageChanged}
-                        />
-                        </div>}/>
+                        <Route path="/admin/orders/:orderId" render={() => <OrderEditPageC/>}/>
+
+                        <Route path="/admin/orders" render={() => <OrdersC/>}/>
+
+                        <Route path="/admin" render={() => <MainAdminPageC>
+                            <PaneWithProducts products={products}/>
+                        </MainAdminPageC>}/>
                         <Route render={() => (<NotFound/>)}/>
                     </Switch>
                 </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import s from "./Paginator.module.css";
 
 function Paginator({paginatorData, setPortionNum, onPageChanged}) {
-    const {totalProductsCount:totalItemsCount, pageLimit, portionNum, portionSize, currentPage} = paginatorData;
+    const {totalItemsCount, pageLimit, portionNum, portionSize, currentPage} = paginatorData;
 //  portion is a few indexes
     let pagesCount = Math.ceil(totalItemsCount / pageLimit);
     let portionsCount = Math.ceil(pagesCount / portionSize);
