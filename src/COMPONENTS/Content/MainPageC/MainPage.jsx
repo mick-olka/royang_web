@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import s from "./MainPage.module.css";
 import SectionsPane from "../SectionsPane/SectionsPane";
-import SlickSlider from "../Slider/SlickSlider";
+import MainSlider from "../Slider/MainSlider";
 import PaginatorC from "../../extra/Paginator/PaginatorC";
 
 const MainPage = ({ products, setCurrentPageAC, getProducts}) => {
@@ -17,9 +17,8 @@ const MainPage = ({ products, setCurrentPageAC, getProducts}) => {
 
     return (
         <div className={s.mainPage}>
-            <h1>MAIN PAGE</h1>
 
-            <SlickSlider/>
+            <MainSlider />
 
             <div>
                 <SectionsPane products={products}/>

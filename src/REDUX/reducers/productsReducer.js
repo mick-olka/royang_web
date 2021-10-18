@@ -1,6 +1,7 @@
 import {productsAPI} from "../../API/api";
 import {uploadThumbnail} from "./photosReducer";
 import {setTotalItemsCountAC} from "./paginatorReducer";
+import global_data from "../global_data";
 
 const SET_PRODUCTS = "productsReducer/SET_PRODUCTS";
 const SET_PRODUCT_FORM = "productsReducer/SET_PRODUCT_FORM";
@@ -20,13 +21,14 @@ let initialState = {
     productData: {
         _id: null,
         thumbnail: "",
+        oldPrice: 0,
         images: [],
         types: [],
     },
     isLoading: true,
 }
 
-const prodLim = 2;
+const prodLim = global_data.page_limit;
 
 const productsReducer = (state=initialState, action) => {
     switch (action.type) {
@@ -62,7 +64,7 @@ const productsReducer = (state=initialState, action) => {
 
         case SET_CHOSEN_PRODUCT:
             return {
-                ...state, chosenProduct: {prodId: action.data.prodId, name: action.data.name}
+                ...state, chosenProduct: action.data,
             }
 
         default:
@@ -108,6 +110,13 @@ export const createProduct = (formData, thumbnail) =>
             let res = await productsAPI.createProduct(formData);
             if (res.code === 0) {
                 if (thumbnail) await dispatch(uploadThumbnail(res.result._id, thumbnail));
+                dispatch(setProductFormAC({
+                    _id: null,
+                    thumbnail: "",
+                    oldPrice: 0,
+                    images: [],
+                    types: [],
+                }));
                 dispatch(setIdOfCreatedAC(res.result._id));
                 dispatch(getProducts());
             }

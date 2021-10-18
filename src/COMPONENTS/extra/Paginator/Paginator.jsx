@@ -31,16 +31,16 @@ function Paginator({paginatorData, setPortionNum, onPageChanged}) {
 
     // console.log("total i: "+totalItemsCount);
     if (totalItemsCount>0)
-    return ( <div className={s.pageIndex}>
-        <button disabled={currentPage===1} onClick={()=>{onPageChanged0(currentPage-1)}}> {'prev'} </button>
-        {portionNum >1 && <button onClick={()=>{setPortionNum(portionNum-1)}}> {'<'} </button>}
+    return ( <div className={s.paginator}>
+        <button className={s.change_page} disabled={currentPage===1} onClick={()=>{onPageChanged0(currentPage-1)}}> {'попередня'} </button>
+        {portionNum >1 && <button className={s.change_portion} onClick={()=>{setPortionNum(portionNum-1)}}> {'<'} </button>}
         <div>
             {pagesIndexes}
         </div>
-        {portionsCount > portionNum && <button onClick={()=>{setPortionNum(portionNum+1)}}> {'>'} </button>}
-        <button disabled={currentPage===pagesCount} onClick={()=>{onPageChanged0(currentPage+1)}}> {'next'} </button>
+        {portionsCount > portionNum && <button className={s.change_portion} onClick={()=>{setPortionNum(portionNum+1)}}> {'>'} </button>}
+        <button className={s.change_page} disabled={currentPage===pagesCount} onClick={()=>{onPageChanged0(currentPage+1)}}> {'наступна'} </button>
     </div>)
-        else return <div>No Products For Paginator</div>;
+        else return <div>-----------------</div>;
 }
 
 export default Paginator;

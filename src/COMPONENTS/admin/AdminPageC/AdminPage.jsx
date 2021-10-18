@@ -8,31 +8,31 @@ import Search from "../../SearchPage/Search";
 import ProductItem from "../Product/ProductItem";
 import ItemsListC from "../ItemsList/ItemsListC";
 import UpdateProductC from "../Product/UpdateProduct/UpdateProductC";
-import PaginatorC from "../../extra/Paginator/PaginatorC";
 import SearchPageC from "../../SearchPage/SearchPageC";
 import CreateProductC from "../Product/CreateProduct/CreateProductC";
 import OrdersC from "../Orders/OrdersC";
 import OrderEditPageC from "../Orders/OrderEditPageC";
-import ListsSelect from "../ListSelect/ListsSelect";
 import ListPaneC from "../ListPage/ListPaneC";
 import MainAdminPageC from "./MainAdminPageC";
+import SliderEditPageC from "../SliderEdit/SliderEditPageC";
 
 function AdminPage({
                        deleteAdminAuth, products, productsFound, lists,
                        deleteProducts, createList, changePW,
                        setCurrentPageAC, getProducts,
                        updateList, deleteList, deleteElement, listPageProps, getListByUrl,
-                       chosenProduct,
+                       chosenProduct, updateProduct, setChosenProductAC,
                        addElement, itemsIdsArr,
                        ...props
                    }) {
 
     let links = [
-        {url: "/", name: "Client"},
-        {url: "/admin", name: "Admin"},
-        {url: "/admin/new", name: "New Product"},
-        {url: "/admin/login/pw", name: "PW mod"},
+        {url: "/", name: "CLIENT"},
+        {url: "/admin", name: "ADMIN"},
+        {url: "/admin/new", name: "NEW PROD"},
         {url: "/admin/orders", name: "ORDERS"},
+        {url: "/admin/slider", name: "SLIDER"},
+        {url: "/admin/login/pw", name: "edit PW"},
     ];
 
     let pn = useLocation().pathname;
@@ -69,10 +69,27 @@ function AdminPage({
 
     const PaneWithProducts = ({products}) => {
 
+        const updateSimilarOrRelated = (data) => {
+            updateProduct(chosenProduct._id, data);
+            console.log(data);
+            setChosenProductAC(null);
+            props.history.push("/admin/products/"+chosenProduct._id);
+        }
+
+        const onSetAsSimilar =()=> {
+            let newSimilarProds = {similarProducts: [...chosenProduct.similarProducts, ...itemsIdsArr]}
+            updateSimilarOrRelated(newSimilarProds);
+        }
+
+        const onSetAsRelated =()=> {
+            let newRelatedProds = {relatedProducts: [...chosenProduct.relatedProducts, ...itemsIdsArr]}
+            updateSimilarOrRelated(newRelatedProds);
+        }
+
         return <div>
             {chosenProduct ? <div><h3>Choose related to {chosenProduct.name}</h3>
-                <button>Set as related</button>
-                <button>Set as similar</button>
+                <button onClick={onSetAsRelated} >Set as related</button>
+                <button onClick={onSetAsSimilar} >Set as similar</button>
             </div> : null}
             <ItemsListC items={products} deleteItems={deleteProducts}>
                 {item => <ProductItem item={item}/>}
@@ -83,16 +100,20 @@ function AdminPage({
     //console.log("R AdminPane^");
     return (
         <div>
+            <div className="admin_header" >
             <NavLink to="/admin"><h1>ADMIN</h1></NavLink>
-            <button onClick={deleteAdminAuth}>LOGOUT</button>
+            <button style={{marginLeft: "auto"}} onClick={deleteAdminAuth}>LOGOUT</button>
+            </div>
             <div className="middle_pane">
 
                 <div className="adminNavbar">
                     <Search redirectTo={"/admin/search"} {...props} />
                     <Navbar links={links}/>
-                    <p>----------</p>
+                    <p>----------------</p>
                     <p>Lists</p>
                     <Navbar links={typesL}/>
+                    <br/>
+                    <p>--Create list---</p>
                     <ListForm onSubmit={onSubmit}/>
                 </div>
 
@@ -105,7 +126,6 @@ function AdminPage({
                         <Route path="/admin/login/pw" render={() => <ChangePW changePW={changePW}/>}/>
                         <Route path="/admin/new" render={() => <CreateProductC/>}/>
                         <Route path="/admin/search" render={() =>
-                            // <MainAdminPageC products={productsFound} />
                             <SearchPageC>
                                 <PaneWithProducts products={productsFound}/>
                             </SearchPageC>
@@ -114,6 +134,8 @@ function AdminPage({
                         <Route path="/admin/orders/:orderId" render={() => <OrderEditPageC/>}/>
 
                         <Route path="/admin/orders" render={() => <OrdersC/>}/>
+
+                        <Route path="/admin/slider" render={() => <SliderEditPageC />}/>
 
                         <Route path="/admin" render={() => <MainAdminPageC>
                             <PaneWithProducts products={products}/>

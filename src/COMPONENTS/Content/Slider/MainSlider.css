@@ -1,0 +1,17 @@
+
+.slick-next::before, .slick-prev::before {
+    color: var(--c_black_purple);
+    font-size: 2rem;
+}
+
+.slick-prev {
+    left: -35px;
+}
+
+.slick-list {
+    margin-left: 0.8rem;
+}
+
+button svg {
+    fill: var(--c_black_purple) !important;
+}

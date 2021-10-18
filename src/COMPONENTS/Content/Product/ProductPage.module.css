@@ -6,6 +6,7 @@
 
 .info_box {
     flex-grow: 3;
+    margin-left: 2rem;
 }
 
 .gallery {
@@ -13,8 +14,8 @@
     min-width: 20rem;
 }
 
-.colors {
-    margin: 0.2rem;
+.colors_div {
+    margin: 2rem 0;
 }
 
 .name {
@@ -28,15 +29,102 @@
 }
 
 .price_box {
-    margin-left: 1rem;
+    text-align: left;
+
+}
+
+.orderInfo {
+    margin: 2rem 0;
     text-align: left;
 }
 
+.orderInfo p {
+    margin: 0.5rem;
+}
+
+.orderInfo span {
+    font-weight: bolder;
+}
+
+.count_input {
+    font-size: 1rem;
+    font-weight: bolder;
+    width: 5rem;
+    margin-left: 1rem;
+    border: none;
+    background-color: transparent;
+    height: 1.5rem;
+    border-bottom: 1px solid grey;
+}
+
+.toCart_btn, .order_btn {
+    display: block;
+    width: 80%;
+    font-size: 1.1rem;
+    font-weight: bolder;
+    margin: 0.2rem;
+    padding: 0.5rem;
+    border-radius: 1rem;
+}
+
+.toCart_btn {
+    background-color: #5f5fdc;
+}
+
 .price {
+    font-size: 2rem;
+}
+
+.old_price {
     font-size: 1.5rem;
+    color: var(--c_grey);
+    text-decoration: line-through;
+    margin-right: 1rem;
 }
 
 .extra_box {
     padding: 1rem;
-    background-color: #cadafa;
+    /*background-color: #cadafa;*/
+    /*background-color: rgba(188, 125, 81, 0.27);*/
+    background-image: linear-gradient(to right, rgba(188, 125, 81, 0.27), transparent);
+}
+
+.features_list {
+    text-align: left;
+}
+
+.features_list p {
+    margin: 0.5rem;
+}
+
+.features_list span {
+    font-weight: bold;
+}
+
+.features_list h2 {
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.related_products_div, .similar_products_div {
+    margin-top: 2rem;
+    min-height: 5rem;
+}
+
+.related_products_div, .similar_products_div h2 {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.products_pane {
+    display: flex;
+    /*grid-template-columns: repeat(3, 1fr);*/
+    height: 13rem;
+    overflow: auto;
+}
+
+.products_pane div {
+    width: 10rem;
+    margin-right: 1rem;
 }

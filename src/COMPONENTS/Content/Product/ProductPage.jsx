@@ -3,6 +3,7 @@ import s from "./ProductPage.module.css";
 import Slider from "../Slider/Slider";
 import ColorMenu from "./ColorMenu";
 import chairIcon from "../../../IMGS/chair.png";
+import ProductCard from "../ProductCard/ProductCard";
 
 //  product
 //     _id: doc._id,
@@ -81,14 +82,13 @@ function ProductPage({productData, prodId, addItemToCart, ...props}) {
         props.history.push("/order");
     }
 
+
     return (<div>
 
             <div className={s.main_box}>
 
                 <div className={s.gallery}>
-                    <div className={s.colors}>
-                        <ColorMenu colors={colors} setColors={setColorsAndPhotos} reset={resetColorsAndPhotos}/>
-                    </div>
+
                     <Slider photos={chosenPhotos.length < 1 ? allImgs : chosenPhotos}/>
                 </div>
 
@@ -97,8 +97,25 @@ function ProductPage({productData, prodId, addItemToCart, ...props}) {
                         <h2 className={s.name}>{productData.name}</h2>
                     </div>
                     <div className={s.price_box}>
-                        <span className={s.price}>{productData.price}</span><span> grn</span>
+
+                        {productData.oldPrice&&productData.oldPrice>0 && <span className={s.old_price}>{productData.oldPrice}</span>}
+                        <span className={s.price} style={productData.oldPrice&&productData.oldPrice>0 && {color: "red"}} >{productData.price} </span><span> грн</span>
                     </div>
+
+                    <div className={s.colors_div}>
+                        <ColorMenu colors={colors} setColors={setColorsAndPhotos} reset={resetColorsAndPhotos}/>
+                    </div>
+
+                    <div className={s.orderInfo} >
+                        <span>Count</span>
+                        <input className={s.count_input} type="number" value={itemForCart.count} onChange={e => setCount(e.target.value)}/>
+                        <p><span>Chosen mColor: </span>{itemForCart.mainColor}</p>
+                        <p><span>Chosen pColor: </span>{itemForCart.pillColor}</p>
+                    </div>
+
+                    <button onClick={onClickAddItemToCart} className={s.toCart_btn} >Add to Cart</button>
+                    <button onClick={onOrderSubmit} className={s.order_btn} >Order</button>
+
                 </div>
 
             </div>
@@ -106,20 +123,35 @@ function ProductPage({productData, prodId, addItemToCart, ...props}) {
 
             <div className={s.extra_box}>
 
-                <div className={s.features}>
+                <div className={s.features_list}>
+                    <h2>Характеристики</h2>
                     {productData.features.map(f => {
-                        return <p key={f.key}><span>{f.key}: </span><span> {f.value}</span></p>
+                        return <p key={f.key}><span>{f.key}: </span>{f.value}</p>
                     })}
                 </div>
 
-                <div className={s.orderInfo} >
-                    <p><span>Chosen mColor: </span>{itemForCart.mainColor}</p>
-                    <p><span>Chosen pColor: </span>{itemForCart.pillColor}</p>
+                {productData.relatedProducts.length>0 &&
+                <div className={s.related_products_div}>
+                    <h2>Related Products</h2>
+                    <div  className={s.products_pane} >
+                    {productData.relatedProducts.map(p => {
+                        return <ProductCard name={p.name} thumbnail={p.thumbnail} price={p.price} _id={p._id} lessSpace={true}/>
+                    })}
+                    </div>
                 </div>
+                }
 
-                <input type="number" value={itemForCart.count} onChange={e => setCount(e.target.value)}/>
-                <button onClick={onClickAddItemToCart} >Add to Cart</button>
-                <button onClick={onOrderSubmit} >Order</button>
+                {productData.similarProducts.length>0 &&
+                <div className={s.similar_products_div}>
+                    <h2>Similar Products</h2>
+                    <div className={s.products_pane} >
+                        {productData.similarProducts.map(p => {
+                            return <ProductCard name={p.name} thumbnail={p.thumbnail} price={p.price} _id={p._id} lessSpace={true}/>
+                        })}
+                    </div>
+                </div>
+                }
+
             </div>
 
         </div>

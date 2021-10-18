@@ -17,9 +17,8 @@ function Slider({photos}) {
     }
     return (
         <div className={s.carousel}>
-            SLIDER
             <Carousel images={images} objectFit={"contain"} playIcon={false}
-                      style={{height: "24rem", backgroundColor: "grey"}} />
+                      style={{height: "24rem", backgroundColor: "transparent", borderRadius: "0.3rem"}} />
         </div>
     );
 }

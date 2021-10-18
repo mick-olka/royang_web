@@ -32,9 +32,11 @@ footer, header, hgroup, menu, nav, section {
 
 html {
   min-width: 940px;
+  background-color: var(--c_white);
 }
 
 body {
+  position: relative;
   line-height: 1;
 }
 ol, ul {

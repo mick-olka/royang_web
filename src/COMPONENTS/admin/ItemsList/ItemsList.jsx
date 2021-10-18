@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import s from "../Product/ProductForm/ProductsList.module.css";
+import s from "./ItemsList.module.css";
 
 function ItemsList({items, deleteItems, itemsIdsArr, setItemsIdArr, ...props}) {
     let isMouseDown = false;
@@ -27,7 +27,9 @@ function ItemsList({items, deleteItems, itemsIdsArr, setItemsIdArr, ...props}) {
     //
     useEffect(()=> {
         for (let i = 0; i < items.length; i++) {
-            if (itemsIdsArr.indexOf(items[i]._id) !== -1) document.getElementById(items[i]._id).checked = true;
+            if (itemsIdsArr.indexOf(items[i]._id) !== -1) {
+                document.getElementById(items[i]._id).checked = true;
+            }
         }
     }, [items, itemsIdsArr]);
 
@@ -74,9 +76,9 @@ function ItemsList({items, deleteItems, itemsIdsArr, setItemsIdArr, ...props}) {
     return (
         <div>
             <div className={s.controlPane} >
-                <p>{itemsIdsArr.length} items chosen</p>
-                <button className={s.btn} onClick={uncheckAll} >CANCEL</button>
-                <button className={s.btn} onClick={deleteHandler} >DELETE</button>
+                <p className={s.items_chosen} >{itemsIdsArr.length} items chosen</p>
+                <button className={s.btn+" "+s.cancel_btn} onClick={uncheckAll} >CANCEL</button>
+                <button className={s.btn+" "+s.delete_btn} onClick={deleteHandler} >DELETE</button>
             </div>
             {itemsList}
         </div>

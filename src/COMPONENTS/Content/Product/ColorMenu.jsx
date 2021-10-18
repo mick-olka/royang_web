@@ -29,12 +29,16 @@ function ColorMenu({colors, setColors, reset}) {  //  colors = { name: Str, src:
     });
 
     return (<div className={s.container}  >
-            <button onClick={toggleMenu} >CHOOSE COLOR</button>
-        <div className={s.menu_box} style={isHidden ?
-            {transition: 'max-height 0.3s ease-in', maxHeight: "0"} :
-            {transition: 'max-height 0.5s ease-in', maxHeight: "100%"}} >
-            <button onClick={toggleMenu} >X</button>
-            <button onClick={onReset} >reset</button>
+            <button onClick={toggleMenu} className={s.open_btn} >{isHidden? "CHOOSE COLOR" : "CLOSE"}</button>
+        <div className={s.menu_box}
+             style={isHidden ?
+                 {display: "none"} :
+                 {display: "block"}}
+        >
+
+            <button className={s.reset_btn} onClick={onReset} >reset</button>
+            <button className={s.x_btn} onClick={toggleMenu} > </button>
+
             {items}
         </div>
         </div>

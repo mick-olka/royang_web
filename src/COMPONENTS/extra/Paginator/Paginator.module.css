@@ -1,13 +1,28 @@
 
-.pageIndex {
+.paginator {
     display: flex;
+    justify-content: center;
 }
 
-.pageIndex span{
+.paginator span{
     display: inline-block;
     padding: 0.5rem;
 }
 
 .selectedPage{
     font-weight: bolder;
+}
+
+.change_page {
+    border: none;
+    font-size: 1.2rem;
+    text-decoration: underline;
+    margin: 0 1rem;
+    background-color: transparent;
+}
+
+.change_portion {
+    border-radius: 0.4rem;
+    height: 1.5rem;
+    margin-top: 0.3rem;
 }

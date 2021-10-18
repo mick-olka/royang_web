@@ -1,17 +1,20 @@
 
 .container {
-
+    position: relative;
 }
 
 .menu_box {
-    position: fixed;
-    top: 6rem;
+    position: absolute;
+    top: 2.5rem;
     left: 0;
     display: block;
     z-index: 10;
     width: 12rem;
-    background-color: #eea5a5;
-    overflow: hidden;
+    background-color: #f3f2f2;
+    border: 1px solid grey;
+    box-shadow: 2px 2px 5px 0 rgba(0,0,0,0.55);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
 }
 
 .hidden {
@@ -19,12 +22,47 @@
 }
 
 .item {
-    position: relative;
-    margin: 0.1rem;
+    margin: 0.4rem 0.1rem;
     padding: 0.5rem;
-    background-color: #c1bdbd;
+    background-color: var(--c_bright_orange);
+    border: 1px solid grey;
+    border-radius: 0.3rem;
+    overflow: hidden;
 }
 
 .item:hover {
-    background-color: #858383;
+    opacity: 0.5;
+}
+
+.x_btn {
+    border: none;
+    /*font-size: 2rem;*/
+    /*font-family: 'Kanit', sans-serif;*/
+    position: absolute;
+    top: -0.5rem;
+    right: 0;
+    background-color: transparent;
+}
+
+.x_btn:after{
+    display: inline-block;
+    content: "\00d7"; /* This will render the 'X' */
+    font-size: 2.5rem;
+    font-weight: bolder;
+}
+
+.reset_btn {
+    border: 1px solid grey;
+    border-radius: 0.4rem;
+    display: block;
+    margin: 0 0.1rem;
+    height: 1.5rem;
+    width: 85%;
+    background-color: var(--c_grey);
+}
+
+.open_btn{
+    width: 10rem;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import s from "../Product/ProductForm/ProductsList.module.css";
+import s from "./ProductsList.module.css";
 
 function ItemsList0({items, deleteItems, ...props}) {
     let isMouseDown = false;

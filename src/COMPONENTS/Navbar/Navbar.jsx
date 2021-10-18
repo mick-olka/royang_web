@@ -11,7 +11,7 @@ const Navbar = (props) => {
     );
 
     return (
-        <div className="navbar_pane">
+        <div className={s.navbar_pane}>
             <nav>
                 {links}
             </nav>

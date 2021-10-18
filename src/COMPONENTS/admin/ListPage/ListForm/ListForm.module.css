@@ -1,0 +1,12 @@
+
+.list_form_div {
+    margin-right: 1rem;
+}
+
+.input_div {
+    position: relative;
+}
+
+.input_div input {
+    width: 100%;
+}

@@ -37,14 +37,12 @@ export const productsAPI = {
         });
     },
 
-    updateProduct (id, {name, code, price, figures, features,
-                       images, relatedProducts, similarProducts}) {
+    updateProduct (id, {name, code, price, oldPrice, figures, features, relatedProducts, similarProducts}) {
         return instance.patch(
             'products/'+id,
-            { name: name, code: code, price: price,
+            { name: name, code: code, price: price, oldPrice: oldPrice,
                 figures: figures, features: features,
-                images: images, relatedProducts:
-                relatedProducts, similarProducts: similarProducts }
+                relatedProducts: relatedProducts, similarProducts: similarProducts }
         ).then(res => {
             return res.data;
         });
@@ -214,7 +212,7 @@ export const orderApi = {
 
     getOrders (page=1, limit=6) {
         return instance.get(
-            `orders }`,
+            `orders?page=${page}&limit=${limit}`,
         ).then(response => {
             return response.data;
         });
@@ -249,6 +247,47 @@ export const orderApi = {
     deleteOrder (id) {
         return instance.delete(
             'orders/'+id,
+        ).then(res => {
+            return res.data;
+        });
+    },
+
+}
+
+export const sliderApi = {
+
+    getSlides () {
+        return instance.get(
+            `slider`,
+        ).then(response => {
+            return response.data;
+        });
+    },
+
+    createSlide ({text, lower_text, img, nav_link}) {
+
+        let formData = new FormData();
+        formData.append("img", img);
+        formData.append("text", text);
+        formData.append("lower_text", lower_text);
+        formData.append("nav_link", nav_link);
+        // return instance.post(
+        //     'photos/thumbnail/'+id, formData,
+        //     {headers: {"Content-Type": "multipart/form-data"} },
+        // ).then(response => {
+        //     return response.data;
+        // });
+        return instance.post(
+            'slider', formData,
+            {headers: {"Content-Type": "multipart/form-data"} },
+        ).then(res => {
+            return res.data;
+        });
+    },
+
+    deleteSlide (id) {
+        return instance.delete(
+            'slider/'+id,
         ).then(res => {
             return res.data;
         });

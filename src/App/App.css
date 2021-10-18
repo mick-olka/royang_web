@@ -1,7 +1,39 @@
 
+:root {
+  --c_white: #fff;
+  --c_grey: #A4ACA5;
+  --c_orange: #c55a03;
+  --c_bright_orange: #f8cca4;
+  --c_transparent_orange: rgba(234, 99, 5, 0.82);
+  --c_black_purple: #25192B;
+}
+
+button {
+  background-color: var(--c_transparent_orange);
+  border: 1px solid lightgrey;
+}
+
+button:hover {
+  opacity: 0.5;
+}
+
 .App {
-  text-align: center;
+  /*text-align: center;*/
   font-family: 'Rubik', sans-serif;
+  background-color: var(--c_white);
+  min-height: 100%;
+}
+
+*::-webkit-scrollbar,
+*::-webkit-scrollbar-thumb {
+  width: 40px;
+  border-radius: 13px;
+  background-clip: padding-box;
+  border: 10px solid transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 0 10px;
 }
 
 .App-logo {

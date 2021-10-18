@@ -2,6 +2,7 @@
 import React from 'react';
 import {useFormik} from "formik";
 import s from "./Search.module.css";
+import search_icon from "../../IMGS/ICONS/search.png";
 
 const Search = ({redirectTo, ...props}) => {
 
@@ -31,7 +32,7 @@ let SearchForm = ({onSubmit, error}) => {
     });
 
     return (
-        <form onSubmit={formik.handleSubmit}>
+        <form className={s.search_form} onSubmit={formik.handleSubmit}>
             <input
                 id="search_input"
                 name="search_input"
@@ -40,7 +41,7 @@ let SearchForm = ({onSubmit, error}) => {
                 value={formik.values.search_input}
                 className={s.search_input}
             />
-            <button type="submit" className={s.search_btn} >Search</button>
+            <button type="submit" className={s.search_btn} ><img className={s.search_icon} src={search_icon} alt="search"/></button>
         </form>
     );
 }

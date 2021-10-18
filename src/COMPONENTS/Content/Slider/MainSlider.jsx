@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
+import "./MainSlider.css";
 import s from "./Slider.module.css";
+import {compose} from "redux";
+import {connect} from "react-redux";
 
-export default class SlickSlider extends Component {
+class MainSlider extends Component {
 
     constructor(props) {
         super(props);
@@ -43,7 +46,15 @@ export default class SlickSlider extends Component {
     }
 
     render() {
-        const arr = [1, 2, 3, 4, 5, 6];
+        const preload = {
+            text: "loading",
+            lower_text: "loading",
+            nav_link: "loading",
+        }
+        let arr=[];
+        if (!this.props.slides) {arr.push({...preload, _id: 0}, {...preload, _id: 1}, {...preload, _id: 2})}
+        else arr = [...this.props.slides];
+        if (arr.length<3) {arr.push(arr[0], arr[0])}
         let settings = {
             dots: true,
             infinite: true,
@@ -52,30 +63,19 @@ export default class SlickSlider extends Component {
             slidesToScroll: 1
         };
         return (
-            <div className={s.slickSlider} >
-                <h2>width:  {this.state.width}</h2>
-                <Slider {...settings}>
-                    {/*<div>*/}
-                    {/*    <h3>1</h3>*/}
-                    {/*</div>*/}
-                    {/*<div>*/}
-                    {/*    <h3>2</h3>*/}
-                    {/*</div>*/}
-                    {/*<div>*/}
-                    {/*    <h3>3</h3>*/}
-                    {/*</div>*/}
-                    {/*<div>*/}
-                    {/*    <h3>4</h3>*/}
-                    {/*</div>*/}
-                    {/*<div>*/}
-                    {/*    <h3>5</h3>*/}
-                    {/*</div>*/}
-                    {/*<div>*/}
-                    {/*    <h3>6</h3>*/}
-                    {/*</div>*/}
+            <div className={s.mainSlider} >
+                {/*<h2>width:  {this.state.width}</h2>*/}
+                <Slider {...settings} >
+
                     {arr.map(i=>{
-                        return <div key={i} className={s.slickSlider__item} >
-                            <h3>{i}</h3>
+                        return <div key={i._id} className={s.mainSlider__item} >
+                            <a target="_blank" href={i.nav_link} >
+                            <img src={i.img} alt="slide_img" className={s.m_slide_img} />
+                            <div className={s.text_div} >
+                                <h3>{i.text}</h3>
+                                <p>{i.lower_text}</p>
+                            </div>
+                            </a>
                         </div>
                     })}
                 </Slider>
@@ -83,3 +83,14 @@ export default class SlickSlider extends Component {
         );
     }
 }
+
+let mapStateToProps = (state) => {
+    return ({
+        slides: state.sliderReducer.slides,
+    });
+}
+
+// export default MainSlider;
+export default compose(
+    connect(mapStateToProps, {}),
+)(MainSlider);

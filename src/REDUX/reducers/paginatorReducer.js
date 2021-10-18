@@ -1,3 +1,4 @@
+import global_data from "../global_data";
 
 const SET_PORTION_NUM = "productsReducer/SET_PORTION_NUM";
 const SET_CURRENT_PAGE = "productsReducer/SET_CURRENT_PAGE";
@@ -7,8 +8,8 @@ let initialState = {
         totalItemsCount: 0,
         currentPage: 1,
         portionNum: 1,
-        portionSize: 2,
-        pageLimit: 2,
+        portionSize: 4,
+        pageLimit: global_data.page_limit,
 }
 
 const paginatorReducer = (state=initialState, action) => {

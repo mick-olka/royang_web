@@ -17,9 +17,9 @@ import {ContactsContext} from "../UTILS/contacts_context";
 
 const contacts = {
     phones: [
-        +380962962920,
-        +380962962920,
-        +380962962920,
+        "+380962962920",
+        "+380962962920",
+        "+380962962920",
     ],
     mail: "nikolaygutsal@gmail.com"
 }

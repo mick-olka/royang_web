@@ -1,6 +1,7 @@
 import {checkAuth} from "./adminReducer";
 import {getProducts} from "./productsReducer";
 import {getLists} from "./listsReducer";
+import {getSlides} from "./sliderReducer";
 
 const SET_INITIALIZED_SUCCESS = "mainReducer/SET_INITIALIZED_SUCCESS";
 const SET_ITEMS_IDS_ARRAY = "mainReducer/SET_ITEMS_IDS_ARRAY";
@@ -45,7 +46,7 @@ export const setItemsIdsArrAC = (idsArr) => ({type: SET_ITEMS_IDS_ARRAY, idsArr}
 export const initApp = (page, limit) =>
     async (dispatch) => {
         try {
-            await Promise.all([dispatch(checkAuth()), dispatch(getProducts(page, limit)), dispatch(getLists())]);
+            await Promise.all([dispatch(checkAuth()), dispatch(getSlides()), dispatch(getProducts(page, limit)), dispatch(getLists())]);
     } catch (e) {
         //console.log(e);
     }

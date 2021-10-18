@@ -1,20 +1,115 @@
 
+.container {
+    margin-left: 2rem;
+}
+
 .cart_box {
     min-height: 5rem;
     margin: 0.5rem;
-    background-color: #e8c8c8;
+    padding: 0 1rem 1rem;
+    /*background-image: linear-gradient(to right, var(--c_bright_orange), transparent);*/
+    border-radius: 1rem;
+    border: 2px dashed grey;
     display: flex;
     flex-direction: column;
 }
 
 .cart_item {
+    position: relative;
     display: flex;
-    justify-content: space-around;
-    background-color: #bbc6de;
+    justify-content: left;
+    /*background-color: rgba(100, 149, 237, 0.34);*/
+    border: 1px solid grey;
     margin: 0.2rem 0.5rem;
-    min-height: 3rem;
+    padding-left: 0.5rem;
+    min-height: 5rem;
+    overflow: hidden;
+    align-items: center;
+    box-shadow: 2px 2px 4px 0 rgba(0,0,0,0.25);
+}
+
+.thumbnail {
+    max-height: 4rem;
+    object-fit: contain;
+}
+
+.cart_item * {
+    width: 30%;
+    margin-right: 2rem;
+    min-height: 100%;
 }
 
 .delete_btn {
+    width: 3rem;
+    background-color: transparent;
+    border: none;
+    color: var(--c_black_purple);
+    font-weight: bolder;
+    margin-left: auto;
+    margin-right: 0;
+    border-radius: 50%;
+}
 
+.delete_btn:after{
+    position: relative;
+    top: -5px;
+    right: -1px;
+    display: inline-block;
+    content: "\00d7"; /* This will render the 'X' */
+    font-size: 2.5rem;
+    font-weight: bolder;
+}
+
+.form_box {
+    margin-left: 1rem;
+}
+
+.sum_p {
+    font-size: 1.2rem;
+    font-weight: bolder;
+}
+
+.form_box label {
+    font-weight: bolder;
+}
+
+.form_input_item {
+    position: relative;
+    margin: 1rem;
+}
+
+.form_input_item input, textarea {
+    position: absolute;
+    left: 10rem;
+    width: 15rem;
+}
+
+#comment textarea {
+    resize: none;
+}
+
+.submit_btn {
+    padding: 0.5rem;
+    border-radius: 1rem;
+    width: 10rem;
+    margin-top: 5rem;
+    font-size: 1.5rem;
+    font-weight: bolder;
+    font-family: 'Kanit', sans-serif;
+}
+
+.heading_h {
+    font-size: 2rem;
+    font-weight: bolder;
+    font-family: 'Kanit', sans-serif;
+    margin-left: 5rem;
+    background: -webkit-linear-gradient(var(--c_black_purple), var(--c_orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.go_choose {
+    text-align: center;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
 }

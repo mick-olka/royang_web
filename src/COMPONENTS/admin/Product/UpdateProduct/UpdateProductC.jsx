@@ -28,18 +28,28 @@ let mapDispatchToProps = (dispatch) => {
 }
 
 class UpdateProductC extends Component {
-    prodId=null;
-componentDidMount() {
-
-    this.prodId = this.props.location.pathname.split('/').pop();
-    //console.log(prodId);
-
-    this.props.setIdOfCreatedAC(null);     //  for resetting create page
-    if (this.prodId && this.prodId.length===24) {
-        this.props.getProductById(this.prodId);
-    } else {
-        this.props.pushToHistory("/admin");
+    constructor(props) {
+        super(props);
+        this.state={prodId: ""};
     }
+
+    async componentDidMount() {
+
+        await this.setState({prodId: this.props.location.pathname.split('/').pop()});
+        //console.log(prodId);
+
+        this.props.setIdOfCreatedAC(null);     //  for resetting create page
+        if (this.state.prodId && this.state.prodId.length === 24) {
+            await this.props.getProductById(this.state.prodId);
+        } else {
+            this.props.history.push("/admin");
+        }
+    }
+
+componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevState.prodId!==this.state.prodId) {
+            this.props.getProductById(this.state.prodId);
+        }
 }
 
     pushToHistory = (path) => {

@@ -1,14 +1,14 @@
 
 .sectionsPage {
-    background-color: #999;
-    margin: 0.2rem;
+    background-color: var(--c_white);
+    margin: 0.2rem 0.2rem 0.2rem 3rem;
     padding: 0.1rem;
 }
 
 .sectionsPane {
     margin: 0.1rem;
     padding: 0.1rem;
-    border: 2px solid grey;
+    /*border: 2px solid grey;*/
     display: grid;
     grid-template-columns: repeat(3, 1fr);
 }

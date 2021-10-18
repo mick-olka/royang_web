@@ -1,6 +1,7 @@
 import React from 'react';
 import {myFormInput} from "../../../UTILS/FormUtils";
 import {useFormik} from "formik";
+import s from "./OrderPage.module.css";
 
 const validate = values => {
     const errors = {};
@@ -36,25 +37,32 @@ function OrderForm({onSubmit}) {
     return (
         <div>
             <form onSubmit={formik.handleSubmit}>
-                <div>
+                <div className={s.form_input_item} >
                 <label htmlFor="name">Name</label>
                 {myFormInput("name", "text", formik.values.name, formik.handleChange)}
                 </div>
                 {formik.errors.name ? <div>{formik.errors.name}</div> : null}
 
-                <div>
+                <div className={s.form_input_item} >
                 <label htmlFor="phone">Phone</label>
                 {myFormInput("phone", "text", formik.values.phone, formik.handleChange)}
                 </div>
                 {formik.errors.phone ? <div>{formik.errors.phone}</div> : null}
 
-                <div>
+                <div className={s.form_input_item} id={s.comment} >
                 <label htmlFor="message">Comment</label>
-                {myFormInput("message", "text", formik.values.message, formik.handleChange)}
+                    <textarea
+                        id={"message"}
+                        name={"message"}
+                        rows={5}
+                        onChange={formik.handleChange}
+                        value={formik.values.message}
+                    />
+                {/*{myFormInput("message", "textarea", formik.values.message, formik.handleChange)}*/}
                 </div>
                 {formik.errors.message ? <div>{formik.errors.message}</div> : null}
 
-                <div><button type="submit" >SUBMIT</button></div>
+                <div><button className={s.submit_btn} type="submit" >SUBMIT</button></div>
             </form>
         </div>
     );

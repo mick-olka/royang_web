@@ -34,28 +34,29 @@ function OrderPage({cartData, deleteItemByIndex, createOrder, ...props}) {
     // }]
 
     return (
-        <div>
-            <h1>CART</h1>
+        <div className={s.container} >
+            <h1 className={s.heading_h} >CART</h1>
             <div className={s.cart_box}>
-                {cartData.cart.length<1 ? <NavLink to="/">Go choose product</NavLink> : null}
-
+                <NavLink to="/"><p className={s.go_choose} >Go choose product</p></NavLink>
                 {cartData.cart.map(item=>{
                     return <div key={item.index} className={s.cart_item} > {/*need more complex key*/}
-                        <img style={{maxWidth: "4rem"}} src={item.photo} alt="prod_img"/>
+                        <img className={s.thumbnail} src={item.photo} alt="prod_img"/>
                         <p><NavLink to={"products/"+item.product}> {item.name}</NavLink></p>
-                        <p>{item.count}</p>
-                        <p>{item.price*item.count}</p>
-                        <button className={s.delete_btn} onClick={()=>deleteItemByIndex(item.index)} >delete</button>
+                        <p>count: {item.count}</p>
+                        <p>sum: {item.price*item.count}</p>
+                        <button className={s.delete_btn} onClick={()=>deleteItemByIndex(item.index)} > </button>
                     </div>
                 })}
 
             </div>
 
-            <div><p>SUM: {cartData.sum}</p></div>
+            <div className={s.form_box}>
+            <div><p className={s.sum_p} >SUM: {cartData.sum}</p></div>
 
             <OrderForm onSubmit={onSubmit} />
             <div className={s.alert} >{alert}</div>
 
+            </div>
         </div>
     );
 }

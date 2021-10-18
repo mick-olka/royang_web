@@ -1,12 +1,63 @@
 .header {
+    top: 0;
     width: 100%;
-    background-color: #aba5a5;
+    /*background-color: #eee8d5;*/
     display: flex;
+    position: fixed;
+    /*border-bottom: 1px solid var(--c_black_purple);*/
+    box-shadow: 2px 2px 3px 0 rgba(0,0,0,0.55);
+    z-index: 100;
+    background-color: #fff;
 }
 
-.name{
+.name_div{
     right: 0;
-    background-color: #9b5e5e;
-    font-size: 2rem;
+    color: var(--c_black_purple);
+    font-weight: bolder;
+    font-size: 3rem;
     padding: 0.5rem;
+    justify-content: space-around;
+    margin: 0 3rem;
+    font-family: 'Kanit', sans-serif;
+    text-shadow: 1px 1px black;
+}
+
+.phones_div {
+    margin-left: auto;
+}
+
+.cart_div {
+    /*flex: 1 1 auto;*/
+    margin: 0 3rem;
+}
+
+.cart_icon {
+    margin-top: 0.5rem;
+    width: 3rem;
+}
+
+.or_l {
+    color: var(--c_orange);
+}
+
+.bor_l {
+    color: var(--c_orange);
+}
+
+.bl_l {
+    color: var(--c_black_purple);
+}
+
+.gr_l {
+    color: var(--c_grey);
+}
+
+.call_time_div {
+    font-weight: bolder;
+    margin-left: 1rem;
+    align-self: center;
+}
+
+.phone_li {
+    margin: 0.3rem;
 }

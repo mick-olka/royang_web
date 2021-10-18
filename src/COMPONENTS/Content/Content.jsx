@@ -40,6 +40,7 @@ function Content({links, lists, productsData, cartData, getProducts, setCurrentP
                     <Search redirectTo={"/find"} {...props} />
                     <Navbar links={links}/>
                     <br/>
+                    <p style={{marginLeft: "2rem"}} >Категорії</p>
                     <Navbar links={lists}/>
                 </div>
                 <div className="content_pane">

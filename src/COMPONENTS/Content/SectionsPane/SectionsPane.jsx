@@ -11,17 +11,13 @@ const SectionsPane=({products})=>{
             name={p.name}
             thumbnail={p.thumbnail}
             price={p.price}
-
+            oldPrice={p.oldPrice}
         />
     });
 
     return (
-        <div className={s.sectionsPage} >
-            <h1>SECTIONS</h1>
         <div className={s.sectionsPane} >
-            {productsList}
-        </div>
-
+            {productsList.length<1 ? <h2>No Products</h2> : productsList}
         </div>
     );
 }

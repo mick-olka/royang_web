@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 import s from "./ListPane.module.css";
 import ListForm from "./ListForm/ListForm";
-import {Redirect, useLocation} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 import ProductItem from "../Product/ProductItem";
 import ItemsListC from "../ItemsList/ItemsListC";
 import PaginatorC from "../../extra/Paginator/PaginatorC";
@@ -11,7 +11,6 @@ function ListPane({listUrl, updateList, deleteList, listForm, deleteElement, get
     //let pn = useLocation().pathname;
     //console.log(pn.split('/').pop());
     //let listUrl = pn.split('/').pop();
-
     //useEffect(() => getListByUrl(listUrl), [getListByUrl, listUrl]);
 
     const onSubmit = (formData) => {
