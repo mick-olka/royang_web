@@ -12,8 +12,8 @@ class MainSlider extends Component {
         this.updateDimensions = this.updateDimensions.bind(this);
         this.state = {
             width:  800,
-            height: 182,
-            slidesToShow: 3,
+            height: 190,
+            slidesToShow: 2,
         }
     }
 
@@ -22,11 +22,11 @@ class MainSlider extends Component {
      */
     updateDimensions() {
         if(window.innerWidth < 900) {
-            this.setState({ width: 450, height: 102, slidesToShow: 2 });
+            this.setState({ width: 450, height: 150, slidesToShow: 2 });
         } else {
             let update_width  = window.innerWidth-100;
             let update_height = Math.round(update_width/4.4);
-            this.setState({ width: update_width, height: update_height, slidesToShow: 3  });
+            this.setState({ width: update_width, height: update_height, slidesToShow: 2  });
         }
     }
 
@@ -60,7 +60,8 @@ class MainSlider extends Component {
             infinite: true,
             speed: 500,
             slidesToShow: this.state.slidesToShow,
-            slidesToScroll: 1
+            slidesToScroll: 1,
+            autoplay: true,
         };
         return (
             <div className={s.mainSlider} >
@@ -69,7 +70,7 @@ class MainSlider extends Component {
 
                     {arr.map(i=>{
                         return <div key={i._id} className={s.mainSlider__item} >
-                            <a target="_blank" href={i.nav_link} >
+                            <a target="_blank" rel="noopener noreferrer" href={i.nav_link} >
                             <img src={i.img} alt="slide_img" className={s.m_slide_img} />
                             <div className={s.text_div} >
                                 <h3>{i.text}</h3>

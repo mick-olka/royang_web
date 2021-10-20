@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import "./content.css";
-import {Route, Switch} from "react-router-dom";
+import {NavLink, Route, Switch} from "react-router-dom";
 import Header from "../Header/Header";
 import Navbar from "../Navbar/Navbar";
 import ProductPageC from "./Product/ProductPageC";
@@ -12,6 +12,7 @@ import SearchPageC from "../SearchPage/SearchPageC";
 import NotFound from "../extra/NotFound";
 import ListPageC from "./ListPage/ListPageC";
 import OrderDone from "./OrderPage/OrderDone";
+import InfoPage from "./InfoPage/InfoPage";
 
 function Content({links, lists, productsData, cartData, getProducts, setCurrentPageAC, deleteItemByIndex, createOrder, ...props}) {
 
@@ -38,14 +39,15 @@ function Content({links, lists, productsData, cartData, getProducts, setCurrentP
             <div className="middle_pane">
                 <div className="side_pane" >
                     <Search redirectTo={"/find"} {...props} />
-                    <Navbar links={links}/>
+                    <Navbar isHashLinks={true} links={links}/>
                     <br/>
-                    <p style={{marginLeft: "2rem"}} >Категорії</p>
-                    <Navbar links={lists}/>
+                    <p style={{marginLeft: "2rem", fontWeight: "bolder"}} >Категорії</p>
+                    <Navbar isHashLinks={false} links={lists}/>
+                    <p className="admin_link"><NavLink to={"/admin"}>admin</NavLink></p>
                 </div>
                 <div className="content_pane">
                     <Switch>
-                        <Route path="/info" render={() => <h1>INFO</h1>}/>
+                        <Route path="/info" render={() => <InfoPage /> }/>
 
                         <Route path="/products/:prodId" render={() => <ProductPageC/>}/>
 

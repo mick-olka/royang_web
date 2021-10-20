@@ -19,7 +19,7 @@
 .m_slide_img {
     object-fit: contain;
     position: absolute;
-    top: 45%;
+    top: 50%;
     left: 50%;
     margin: 0 -50% 0 auto;
     transform: translate(-50%, -50%);
@@ -32,7 +32,7 @@
     position: absolute;
     width: 80%;
     left: 50%;
-    top: 55%;
+    top: 50%;
     transform: translate(-50%, -50%);
     background-color: var(--c_transparent_orange);
     opacity: 0.8;

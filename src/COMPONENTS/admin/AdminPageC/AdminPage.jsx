@@ -15,6 +15,7 @@ import OrderEditPageC from "../Orders/OrderEditPageC";
 import ListPaneC from "../ListPage/ListPaneC";
 import MainAdminPageC from "./MainAdminPageC";
 import SliderEditPageC from "../SliderEdit/SliderEditPageC";
+import TextEditPageC from "../TextEditPage/TextEditPageC";
 
 function AdminPage({
                        deleteAdminAuth, products, productsFound, lists,
@@ -32,6 +33,7 @@ function AdminPage({
         {url: "/admin/new", name: "NEW PROD"},
         {url: "/admin/orders", name: "ORDERS"},
         {url: "/admin/slider", name: "SLIDER"},
+        {url: "/admin/text", name: "TEXT"},
         {url: "/admin/login/pw", name: "edit PW"},
     ];
 
@@ -136,6 +138,8 @@ function AdminPage({
                         <Route path="/admin/orders" render={() => <OrdersC/>}/>
 
                         <Route path="/admin/slider" render={() => <SliderEditPageC />}/>
+
+                        <Route path="/admin/text" render={() => <TextEditPageC />}/>
 
                         <Route path="/admin" render={() => <MainAdminPageC>
                             <PaneWithProducts products={products}/>

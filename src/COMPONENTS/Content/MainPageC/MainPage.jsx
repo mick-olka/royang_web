@@ -1,8 +1,9 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import s from "./MainPage.module.css";
 import SectionsPane from "../SectionsPane/SectionsPane";
 import MainSlider from "../Slider/MainSlider";
 import PaginatorC from "../../extra/Paginator/PaginatorC";
+import {TextContext} from "../../../UTILS/text_context";
 
 const MainPage = ({ products, setCurrentPageAC, getProducts}) => {
 
@@ -15,8 +16,15 @@ const MainPage = ({ products, setCurrentPageAC, getProducts}) => {
         onPageChanged(1);   //  For returning after search
     }, []);   // eslint-disable-line react-hooks/exhaustive-deps
 
+    const text_blocks = useContext(TextContext);
+    const main_page_text=text_blocks[1].text;
+    const main_page_lower_text=text_blocks[2].text;
+
     return (
         <div className={s.mainPage}>
+
+            <h3 className={s.main_page_text} >{main_page_text}</h3>
+            <p className={s.main_page_lower_text} >{main_page_lower_text}</p>
 
             <MainSlider />
 

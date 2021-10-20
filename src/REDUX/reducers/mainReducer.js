@@ -2,6 +2,7 @@ import {checkAuth} from "./adminReducer";
 import {getProducts} from "./productsReducer";
 import {getLists} from "./listsReducer";
 import {getSlides} from "./sliderReducer";
+import {getAllText} from "./textReducer";
 
 const SET_INITIALIZED_SUCCESS = "mainReducer/SET_INITIALIZED_SUCCESS";
 const SET_ITEMS_IDS_ARRAY = "mainReducer/SET_ITEMS_IDS_ARRAY";
@@ -9,10 +10,10 @@ const SET_ITEMS_IDS_ARRAY = "mainReducer/SET_ITEMS_IDS_ARRAY";
 let initialState = {
     initialized: false,
     links: [
-        {url: '/', name: "Main"},
-        {url: '/info', name: "Info"},
-        {url: '/order', name: "ORDER"},
-        {url: '/admin', name: "admin"},
+        {url: '/info#rotang', name: "Про Ротанг"},
+        {url: '/order', name: "Корзина"},
+        {url: '/info#us', name: "Про Нас"},
+        {url: '/info#delivery', name: "Про Доставку"},
     ],
     itemsIdsArr: [],
     apiURL: "http://192.168.1.162:7500",
@@ -46,7 +47,8 @@ export const setItemsIdsArrAC = (idsArr) => ({type: SET_ITEMS_IDS_ARRAY, idsArr}
 export const initApp = (page, limit) =>
     async (dispatch) => {
         try {
-            await Promise.all([dispatch(checkAuth()), dispatch(getSlides()), dispatch(getProducts(page, limit)), dispatch(getLists())]);
+            await Promise.all([dispatch(checkAuth()), dispatch(getSlides()),
+                dispatch(getProducts(page, limit)), dispatch(getLists()), dispatch(getAllText())]);
     } catch (e) {
         //console.log(e);
     }

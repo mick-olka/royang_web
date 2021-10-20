@@ -1,0 +1,22 @@
+
+.info_page {
+    width: 50rem;
+    margin: 0 auto;
+}
+
+.article {
+    margin: 1rem;
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+}
+
+.article_header {
+    font-weight: bolder;
+    font-size: 3rem;
+    margin: 2rem;
+}
+
+.article span {
+    display: block;
+    height: 5rem;
+}

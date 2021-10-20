@@ -8,6 +8,7 @@ import listsReducer from "./reducers/listsReducer";
 import paginatorReducer from "./reducers/paginatorReducer";
 import cartReducer from "./reducers/cartReducer";
 import sliderReducer from "./reducers/sliderReducer";
+import textReducer from "./reducers/textReducer";
 
 let reducers = combineReducers({
     mainReducer: mainReducer,
@@ -18,6 +19,7 @@ let reducers = combineReducers({
     paginatorReducer: paginatorReducer,
     cartReducer: cartReducer,
     sliderReducer: sliderReducer,
+    textReducer: textReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;   //  FOR BROWSER EXTENSION

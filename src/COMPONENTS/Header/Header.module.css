@@ -8,6 +8,7 @@
     box-shadow: 2px 2px 3px 0 rgba(0,0,0,0.55);
     z-index: 100;
     background-color: #fff;
+    min-width: 50rem;
 }
 
 .name_div{
@@ -17,13 +18,22 @@
     font-size: 3rem;
     padding: 0.5rem;
     justify-content: space-around;
-    margin: 0 3rem;
+    margin: 0 2rem;
     font-family: 'Kanit', sans-serif;
     text-shadow: 1px 1px black;
 }
 
 .phones_div {
+    text-align: left;
     margin-left: auto;
+    min-width: 9rem;
+}
+
+.header_text_div {
+    text-align: center;
+    width: available;
+    display: flex;
+    align-items: center;
 }
 
 .cart_div {
@@ -54,10 +64,16 @@
 
 .call_time_div {
     font-weight: bolder;
-    margin-left: 1rem;
+    margin-left: 0;
     align-self: center;
 }
 
 .phone_li {
     margin: 0.3rem;
+}
+
+@media screen and (max-width: 1200px) {
+    .cart_div {
+        margin: 0 1rem;
+    }
 }

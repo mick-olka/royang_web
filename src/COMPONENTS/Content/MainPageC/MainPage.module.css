@@ -1,3 +1,14 @@
 .mainPage {
     width: 100%;
 }
+
+.main_page_text, .main_page_lower_text {
+    font-size: 1.2rem;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.main_page_lower_text {
+    opacity: 0.7;
+    font-size: 1rem;
+}

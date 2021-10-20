@@ -294,3 +294,49 @@ export const sliderApi = {
     },
 
 }
+
+export const textAPI = {
+
+    getAllText () {
+        return instance.get(
+            'text',
+        ).then(response => {
+            return response.data;
+        });
+    },
+
+    getTextByName (name) {
+        return instance.get(
+            `text/${name}`,
+        ).then(response => {
+            return response.data;
+        });
+    },
+
+    createText (name, text, nav_link) {
+        return instance.post(
+            'text/',
+            { name: name, text: text, nav_link: nav_link }
+        ).then(res => {
+            return res.data;
+        });
+    },
+
+    updateText (name, text, nav_link) {
+        return instance.patch(
+            'text/'+name,
+            { name: name, text: text, nav_link: nav_link }
+        ).then(res => {
+            return res.data;
+        });
+    },
+
+    deleteText (name) {
+        return instance.delete(
+            'text/'+name,
+        ).then(res => {
+            return res.data;
+        });
+    },
+
+}

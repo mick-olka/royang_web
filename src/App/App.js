@@ -7,22 +7,30 @@ import {compose} from "redux";
 import store from "../REDUX/reduxStore";
 import {initApp} from "../REDUX/reducers/mainReducer";
 import Content from "../COMPONENTS/Content/Content";
-import AdminPageC from "../COMPONENTS/admin/AdminPageC/AdminPageC";
+// import AdminPageC from "../COMPONENTS/admin/AdminPageC/AdminPageC";
 import {Switch} from "react-router-dom";
 import AdminAuthC from "../COMPONENTS/admin/AuthAdmin/AdminAuthC";
 import {getProducts} from "../REDUX/reducers/productsReducer";
 import {setCurrentPageAC} from "../REDUX/reducers/paginatorReducer";
 import {createOrder, deleteItemByIndex} from "../REDUX/reducers/cartReducer";
-import {ContactsContext} from "../UTILS/contacts_context";
+import {TextContext} from "../UTILS/text_context";
 
-const contacts = {
-    phones: [
-        "+380962962920",
-        "+380962962920",
-        "+380962962920",
-    ],
-    mail: "nikolaygutsal@gmail.com"
+const AdminPageC = React.lazy(()=>import("../COMPONENTS/admin/AdminPageC/AdminPageC"));
+
+const adminPageCWithSuspense =()=> {
+    return <React.Suspense fallback={<div>...Loading...</div>} >
+        <AdminPageC />
+    </React.Suspense>
 }
+
+// const contacts = {
+//     phones: [
+//         "+380962962920",
+//         "+380962962920",
+//         "+380962962920",
+//     ],
+//     mail: "nikolaygutsal@gmail.com"
+// }
 
 class App extends Component {
 
@@ -43,9 +51,10 @@ class App extends Component {
         if (!this.props.initialized) return <div className="App">Loading...</div>
         return (
             <div className="App">
+                <TextContext.Provider value={this.props.text_blocks}>
                 <Switch>
                     <Route path="/admin/auth" render={() => <AdminAuthC/>}/>
-                    <Route path="/admin" render={() => <AdminPageC/>}/>
+                    <Route path="/admin" render={adminPageCWithSuspense}/>
                     <Route path="/" render={() => <Content
                         {...this.props}//
                         links={this.props.links}//
@@ -58,6 +67,7 @@ class App extends Component {
                         createOrder={this.props.createOrder}//
                     />}/>
                 </Switch>
+                </TextContext.Provider>
             </div>
         );
     }
@@ -73,6 +83,7 @@ const mapStateToProps = (state) => {
         productsData: state.productsReducer,
         cartData: state.cartReducer,
         lists: state.listsReducer.lists,
+        text_blocks: state.textReducer.text_blocks,
     });
 };
 
@@ -89,10 +100,8 @@ let AppWrapperF = (props) => {
         <BrowserRouter>
             <Provider store={store}>
                 {/*<MainContextProvider>*/}
-                <ContactsContext.Provider value={contacts}>
                 <AppContainer/>
                 {/*</MainContextProvider>*/}
-                </ContactsContext.Provider>
             </Provider>
         </BrowserRouter>
     );

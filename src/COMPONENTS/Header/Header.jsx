@@ -1,11 +1,17 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import s from "./Header.module.css";
 import {NavLink} from "react-router-dom";
 import cart_icon from "../../IMGS/ICONS/laundry-basket_color.png"
 import global_data from "../../REDUX/global_data";
+import {TextContext} from "../../UTILS/text_context";
 
 const Header = (props) => {
-    return (<div className={s.header}>
+
+    const text_blocks = useContext(TextContext);
+    const header_text_block=text_blocks[0].text;
+
+    return (
+    <div className={s.header}>
                     <div className={s.name_div}>
                         <NavLink style={{textDecoration: "none"}} to={"/"}>
                         <h1>
@@ -21,6 +27,9 @@ const Header = (props) => {
                         </h1>
                         </NavLink>
                     </div>
+        <div className={s.header_text_div} >
+            <p>{header_text_block}</p>
+        </div>
                     <div className={s.phones_div} >
                         <ul>
 
@@ -39,6 +48,7 @@ const Header = (props) => {
                         </NavLink>
                     </div>
                 </div>
+
     );
 }
 

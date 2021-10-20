@@ -50,7 +50,7 @@
     z-index: 5;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 960px) {
     .section {
         display: block;
         width: 90%;
