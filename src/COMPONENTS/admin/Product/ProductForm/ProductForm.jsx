@@ -1,5 +1,6 @@
 import React from 'react';
 import {Formik, Form, Field, FieldArray} from 'formik';
+import s from "./ProductForm.module.css";
 
 const ProductForm = ({initialValues, onSubmit }) => {
 
@@ -56,7 +57,7 @@ const ProductForm = ({initialValues, onSubmit }) => {
                                     </button>
                                 )}
                                 <div>
-                                    <button type="submit">Submit</button>
+                                    <button className={s.submit_btn} type="submit">SAVE</button>
                                 </div>
                             </div>
                         )}

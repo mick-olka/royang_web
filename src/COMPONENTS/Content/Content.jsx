@@ -43,7 +43,6 @@ function Content({links, lists, productsData, cartData, getProducts, setCurrentP
                     <br/>
                     <p style={{marginLeft: "2rem", fontWeight: "bolder"}} >Категорії</p>
                     <Navbar isHashLinks={false} links={lists}/>
-                    <p className="admin_link"><NavLink to={"/admin"}>admin</NavLink></p>
                 </div>
                 <div className="content_pane">
                     <Switch>
@@ -74,6 +73,7 @@ function Content({links, lists, productsData, cartData, getProducts, setCurrentP
                     </Switch>
                 </div>
             </div>
+            <p className="admin_link"><NavLink to={"/admin"}>admin</NavLink></p>
         </div>
     );
 }

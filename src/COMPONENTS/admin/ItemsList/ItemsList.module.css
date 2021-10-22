@@ -10,6 +10,7 @@
 }
 
 .photoBox {
+    display: flex;
     position: relative;
     margin-left: 2rem;
     max-height: 100%;

@@ -99,14 +99,13 @@ function UpdateProduct({
     return (<div className={s.pane}>
             <h1>Update Product</h1>
             {/*//===THUMB_PANE========*/}
-            <label>Thumbnail</label>
             <img className={s.thumbnail}
                  src={productData.thumbnail ? productData.thumbnail : chairIcon} alt="img"/>
             <input type="file" disabled={false} onChange={onThumbnailSelected}/>
-
+<br/> <br/>
             {/*//===TYPES_SELECTOR=====*/}
             <div className={s.selectBox}>
-                <div>{typesList}</div>
+                <div><span style={{fontWeight:"bolder"}} >Available in: </span> {typesList}</div>
                 {/*<button disabled={chosenLists.length <= 0} onClick={() => handleSelectSubmit()}>Add to list:</button>*/}
                 {/*<Select isMulti options={typesToSelect} onChange={(value) => setChosenLists(value)}/>*/}
                 <ListsSelect lists={lists} addElement={addElement} prodIdArr={[prodId]}/>

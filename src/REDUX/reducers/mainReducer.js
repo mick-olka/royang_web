@@ -10,10 +10,10 @@ const SET_ITEMS_IDS_ARRAY = "mainReducer/SET_ITEMS_IDS_ARRAY";
 let initialState = {
     initialized: false,
     links: [
+        {url: '/info#plastic_rotang', name: "Про Полі-Ротанг"},
         {url: '/info#rotang', name: "Про Ротанг"},
-        {url: '/order', name: "Корзина"},
-        {url: '/info#us', name: "Про Нас"},
         {url: '/info#delivery', name: "Про Доставку"},
+        {url: '/order', name: "Корзина"},
     ],
     itemsIdsArr: [],
     apiURL: "http://192.168.1.162:7500",

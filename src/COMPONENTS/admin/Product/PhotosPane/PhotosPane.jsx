@@ -24,7 +24,7 @@ function PhotosPane({images, prodId, addPhotos, deletePhotos}) {
     }
 
     const PhotosItem = ({imagesItem}) => {
-        return <div>
+        return <div className={s.images_list_item} >
             <div className={list.photoBox}>
                 {imagesItem.pathArr.map(p=>{
                     return  <a key={p} target="_blank" rel="noreferrer" href={p}>
@@ -32,14 +32,14 @@ function PhotosPane({images, prodId, addPhotos, deletePhotos}) {
                     </a>
                 })}
             </div>
-            <p>{imagesItem.mainColor}</p>
-            <p>{imagesItem.pillColor}</p>
+            <p className={s.color_name} >{imagesItem.mainColor}</p>
+            <p className={s.color_name} >{imagesItem.pillColor}</p>
         </div>
     }
 
     return (
         <div className={s.photoPane}>
-            <p>photo</p>
+            <p style={{fontSize: "1.5rem"}} >Add Photo</p>
             <input type="file" name="pathArr" onChange={onPhotoSelected} multiple />
             <PhotoForm onSubmit={onSubmit}/>
             <ItemsListC items={images} deleteItems={onPhotoDelete} >

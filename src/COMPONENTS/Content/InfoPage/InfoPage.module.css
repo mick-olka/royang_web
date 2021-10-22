@@ -1,7 +1,7 @@
 
 .info_page {
-    width: 50rem;
-    margin: 0 auto;
+    max-width: 60rem;
+    margin: 0 auto 5rem;
 }
 
 .article {
@@ -19,4 +19,9 @@
 .article span {
     display: block;
     height: 5rem;
+}
+
+.article_part {
+    margin: 1rem 0;
+    text-indent: 5rem;
 }

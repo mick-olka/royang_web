@@ -98,8 +98,8 @@ function ProductPage({productData, prodId, addItemToCart, ...props}) {
                     </div>
                     <div className={s.price_box}>
 
-                        {productData.oldPrice&&productData.oldPrice>0 && <span className={s.old_price}>{productData.oldPrice}</span>}
-                        <span className={s.price} style={productData.oldPrice&&productData.oldPrice>0 && {color: "red"}} >{productData.price} </span><span> грн</span>
+                        {productData.oldPrice>0 ? <span className={s.old_price}>{productData.oldPrice}</span> : null}
+                        <span className={s.price} style={productData.oldPrice>0 ? {color: "red"}: null} >{productData.price} </span><span> грн</span>
                     </div>
 
                     <div className={s.colors_div}>
@@ -109,8 +109,8 @@ function ProductPage({productData, prodId, addItemToCart, ...props}) {
                     <div className={s.orderInfo} >
                         <span>Count</span>
                         <input className={s.count_input} type="number" value={itemForCart.count} onChange={e => setCount(e.target.value)}/>
-                        <p><span>Chosen mColor: </span>{itemForCart.mainColor}</p>
-                        <p><span>Chosen pColor: </span>{itemForCart.pillColor}</p>
+                        <p><span>Chosen mColor: </span>{itemForCart.mainColor || "none"}</p>
+                        <p><span>Chosen pColor: </span>{itemForCart.pillColor || "none"}</p>
                     </div>
 
                     <button onClick={onClickAddItemToCart} className={s.toCart_btn} >Add to Cart</button>
@@ -125,7 +125,7 @@ function ProductPage({productData, prodId, addItemToCart, ...props}) {
 
                 <div className={s.features_list}>
                     <h2>Характеристики</h2>
-                    {productData.features.map(f => {
+                    {productData.features && productData.features.map(f => {
                         return <p key={f.key}><span>{f.key}: </span>{f.value}</p>
                     })}
                 </div>

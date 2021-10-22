@@ -13,13 +13,13 @@ function PhotoForm({onSubmit}) {
         },
     });
     return (
-        <div>
+        <div style={{margin: "1rem"}} >
             <form onSubmit={formik.handleSubmit}>
                 <label htmlFor="mainColor">Main Color</label>
                 {myFormInput("mainColor", "text", formik.values.mainColor, formik.handleChange)}
                 <label htmlFor="pillColor">Pill Color</label>
                 {myFormInput("pillColor", "text", formik.values.pillColor, formik.handleChange)}
-                <div><button type="submit" >+ PHOTO</button></div>
+                <div><button style={{padding: "0.2rem", width: "10rem", fontSize: "1.2rem"}} type="submit" >+ PHOTO</button></div>
             </form>
         </div>
     );

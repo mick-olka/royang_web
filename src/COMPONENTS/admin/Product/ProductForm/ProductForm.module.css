@@ -1,0 +1,12 @@
+
+input {
+    padding: 0.1rem;
+    font-size: 1.1rem;
+    margin: 0.2rem;
+}
+
+.submit_btn {
+    padding: 1rem;
+    width: 100%;
+    font-size: 2rem;
+}
