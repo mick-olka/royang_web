@@ -36,6 +36,7 @@
     font-weight: bold;
     margin-left: 0.3rem;
     align-self: center;
+    color: var(--c_black_purple);
 }
 
 .old_price {

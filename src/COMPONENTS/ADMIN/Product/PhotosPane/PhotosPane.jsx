@@ -27,7 +27,7 @@ function PhotosPane({images, prodId, addPhotos, deletePhotos}) {
         return <div className={s.images_list_item} >
             <div className={list.photoBox}>
                 {imagesItem.pathArr.map(p=>{
-                    return  <a key={p} target="_blank" rel="noreferrer" href={p}>
+                    return  <a key={p} target="_blank" rel="noopener noreferrer" href={p}>
                         <img className={list.photo} src={p} alt="product"/>
                     </a>
                 })}

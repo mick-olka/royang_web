@@ -1,6 +1,5 @@
 import {orderApi} from "../../API/api";
 import {setTotalItemsCountAC} from "./paginatorReducer";
-import {setProductFormAC} from "./productsReducer";
 
 const ADD_ITEM_TO_CART = "cartReducer/ADD_ITEM_TO_CART";
 //const SET_SUMMARY = "cartReducer/SET_SUMMARY";
@@ -14,10 +13,10 @@ const SET_INDEXES = "cartReducer/SET_INDEXES";
 const SET_ORDER_DATA = "cartReducer/SET_ORDER_DATA";
 
 let initialState = {
-    isLoading: true,    //  for admin
+    isLoading: true,    //  for ADMIN
     cart: [],   //  for client
     sum: 0,
-    orders: [], //  for admin page
+    orders: [], //  for ADMIN page
     orderData: {
         _id: null,
     },

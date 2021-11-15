@@ -16,12 +16,13 @@ function CreateProduct({createProduct, idOfCreated, pushToHistory}) {
         code: '',
         price: 0,
         oldPrice: 0,
+        index: 0,
     };
 
     let thumbnail=null;
 
     useEffect(()=>{
-        if (idOfCreated!=null) pushToHistory("/admin/products/"+idOfCreated)},
+        if (idOfCreated!=null) pushToHistory("/ADMIN/products/"+idOfCreated)},
         [idOfCreated, pushToHistory]);
 
     const onSubmit = async (formData) => {

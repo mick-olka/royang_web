@@ -37,12 +37,10 @@ export const productsAPI = {
         });
     },
 
-    updateProduct (id, {name, code, price, oldPrice, figures, features, relatedProducts, similarProducts}) {
+    updateProduct (id, formData) {
         return instance.patch(
             'products/'+id,
-            { name: name, code: code, price: price, oldPrice: oldPrice,
-                figures: figures, features: features,
-                relatedProducts: relatedProducts, similarProducts: similarProducts }
+            { ...formData }
         ).then(res => {
             return res.data;
         });
@@ -100,6 +98,22 @@ export const photosAPI = {
     deletePhotos (id, photosId) {
         return instance.delete(
             `photos/${id}/${photosId}`,
+        ).then(response => {
+            return response.data;
+        });
+    },
+
+    getGallery () {
+        return instance.get(
+            `photos/gallery`,
+        ).then(response => {
+            return response.data;
+        });
+    },
+
+    getColors () {
+        return instance.get(
+            `photos/colors`,
         ).then(response => {
             return response.data;
         });

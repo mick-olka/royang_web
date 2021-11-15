@@ -81,6 +81,7 @@
 .form_input_item input, textarea {
     position: absolute;
     left: 10rem;
+    top: 0;
     width: 15rem;
 }
 

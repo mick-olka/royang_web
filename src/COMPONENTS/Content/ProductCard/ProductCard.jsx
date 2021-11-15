@@ -17,8 +17,8 @@ function ProductCard({name, thumbnail, price, oldPrice, _id, lessSpace}) {
                 </div>
                 <div className={s.infoPart} >
                     <p>{name}</p>
-                    {oldPrice>0 && <p className={s.old_price} >{oldPrice} грн</p>}
-                    <p style={oldPrice>0 ? {color: "red"}:null} >{price} грн</p>
+                    {oldPrice>0 && <p style={{fontSize: "0.8rem"}} className={s.old_price} >{oldPrice} грн</p>}
+                    <p style={oldPrice>0 ? {fontSize: "1.1rem"}:null} >{price} грн</p>
                 </div>
         </div>
         </NavLink>

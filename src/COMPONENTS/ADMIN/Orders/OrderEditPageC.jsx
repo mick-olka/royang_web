@@ -5,6 +5,7 @@ import {withRouter} from "react-router-dom";
 import {WithAuthRedirect} from "../../../HOC/WithAuthRedirect";
 import {connect} from "react-redux";
 import {getOrderById, updateOrder} from "../../../REDUX/reducers/cartReducer";
+import Loading from "../../Extra/Loading";
 
 let mapStateToProps = (state) => {
     return {
@@ -37,7 +38,7 @@ class OrderEditPageC extends Component {
     }
 
     render() {
-        if (!this.props.orderData._id) return <div>Loading...</div>;
+        if (!this.props.orderData._id) return <div><Loading /></div>;
         return <OrderEditPage orderId={this.state.orderId} {...this.props} />;
     }
 }

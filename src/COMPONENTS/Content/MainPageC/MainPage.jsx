@@ -2,7 +2,7 @@ import React, {useContext, useEffect} from 'react';
 import s from "./MainPage.module.css";
 import SectionsPane from "../SectionsPane/SectionsPane";
 import MainSlider from "../Slider/MainSlider";
-import PaginatorC from "../../extra/Paginator/PaginatorC";
+import PaginatorC from "../../Extra/Paginator/PaginatorC";
 import {TextContext} from "../../../UTILS/text_context";
 
 const MainPage = ({ products, setCurrentPageAC, getProducts}) => {

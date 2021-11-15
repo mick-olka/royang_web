@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import ListPane from "./ListPane";
 import {deleteElement, deleteList, getListByUrl, updateList} from "../../../REDUX/reducers/listsReducer";
 import {setCurrentPageAC, setPortionNumAC} from "../../../REDUX/reducers/paginatorReducer";
+import Loading from "../../Extra/Loading";
 
 class ListPaneC extends React.Component {
 
@@ -37,7 +38,7 @@ class ListPaneC extends React.Component {
 
     render() {
 
-        if (this.props.isLoading) {return <div>Loading...</div>}
+        if (this.props.isLoading) {return <div><Loading /></div>}
 
         return (
             <ListPane {...this.props} listUrl={this.state.listUrl} />

@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {NavLink, Route, Switch, useLocation} from "react-router-dom";
 import Navbar from "../../Navbar/Navbar";
 import ListForm from "../ListPage/ListForm/ListForm";
-import NotFound from "../../extra/NotFound";
+import NotFound from "../../Extra/NotFound";
 import ChangePW from "../AuthAdmin/ChangePW";
 import Search from "../../SearchPage/Search";
 import ProductItem from "../Product/ProductItem";
@@ -49,7 +49,7 @@ function AdminPage({
 
     let typesL = [...lists].map(l => {
         let l0 = {...l};
-        l0.url = "/admin/lists/" + l0.url;
+        l0.url = "/ADMIN/lists/" + l0.url;
         return l0;
     });
 
@@ -63,7 +63,7 @@ function AdminPage({
     //                     <img className={list.photo} src={item.thumbnail ? item.thumbnail : chairIcon}
     //                          alt="img"/>
     //                 </div>
-    //                 <p><NavLink to={"/admin/products/" + item._id}>{item.name}</NavLink></p>
+    //                 <p><NavLink to={"/ADMIN/products/" + item._id}>{item.name}</NavLink></p>
     //                 <p>$ {item.price}</p>
     //             </>
     //     );
@@ -75,7 +75,7 @@ function AdminPage({
             updateProduct(chosenProduct._id, data);
             console.log(data);
             setChosenProductAC(null);
-            props.history.push("/admin/products/"+chosenProduct._id);
+            props.history.push("/ADMIN/products/"+chosenProduct._id);
         }
 
         const onSetAsSimilar =()=> {
@@ -109,7 +109,7 @@ function AdminPage({
             <div className="middle_pane">
 
                 <div className="adminNavbar">
-                    <Search redirectTo={"/admin/search"} {...props} />
+                    <Search redirectTo={"/ADMIN/search"} {...props} />
                     <Navbar links={links}/>
                     <p>----------------</p>
                     <p>Lists</p>

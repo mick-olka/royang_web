@@ -29,7 +29,7 @@ class CreateProductC extends Component {
 //     if (prodId && prodId.length===24) {
 //         this.props.getProductById(prodId);
 //     } else {
-//         this.props.pushToHistory("/admin");
+//         this.props.pushToHistory("/ADMIN");
 //     }
 // }
 

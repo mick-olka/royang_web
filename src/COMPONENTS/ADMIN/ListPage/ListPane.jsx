@@ -4,7 +4,8 @@ import ListForm from "./ListForm/ListForm";
 import {Redirect} from "react-router-dom";
 import ProductItem from "../Product/ProductItem";
 import ItemsListC from "../ItemsList/ItemsListC";
-import PaginatorC from "../../extra/Paginator/PaginatorC";
+import PaginatorC from "../../Extra/Paginator/PaginatorC";
+import Loading from "../../Extra/Loading";
 
 function ListPane({listUrl, updateList, deleteList, listForm, deleteElement, getListByUrl, isLoading, setCurrentPageAC}) {
 
@@ -35,7 +36,7 @@ function ListPane({listUrl, updateList, deleteList, listForm, deleteElement, get
 
     let [isDeleted, setIsDeleted] = useState(false);
 
-    if (isLoading || !listForm) return <div>Loading...</div>;
+    if (isLoading || !listForm) return <div><Loading /></div>;
     return (
         <div className={s.pane}>
             <h1>{listForm.name}</h1>

@@ -5,7 +5,8 @@ import {getProductById} from "../../../REDUX/reducers/productsReducer";
 import {withRouter} from "react-router-dom";
 import ProductPage from "./ProductPage";
 import {addItemToCart} from "../../../REDUX/reducers/cartReducer";
-import NotFound from "../../extra/NotFound";
+import NotFound from "../../Extra/NotFound";
+import Loading from "../../Extra/Loading";
 
 class ProductPageC extends Component {
 
@@ -27,7 +28,7 @@ class ProductPageC extends Component {
 
     render() {
         if (this.props.isLoading) {
-            return <div>Loading...</div>
+            return <div><Loading /></div>
         }
         if  (this.props.productData._id===null) {
             return <NotFound />

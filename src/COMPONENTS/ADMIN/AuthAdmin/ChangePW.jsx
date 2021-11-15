@@ -12,7 +12,7 @@ function ChangePW ({changePW}) {
     }
 
     // if (isAdmin) {
-    //     return <Redirect to={'/admin'} />
+    //     return <Redirect to={'/ADMIN'} />
     // }
 
     return (

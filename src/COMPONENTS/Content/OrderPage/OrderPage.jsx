@@ -35,15 +35,15 @@ function OrderPage({cartData, deleteItemByIndex, createOrder, ...props}) {
 
     return (
         <div className={s.container} >
-            <h1 className={s.heading_h} >CART</h1>
+            <h1 className={s.heading_h} >Корзина</h1>
             <div className={s.cart_box}>
-                <NavLink to="/"><p className={s.go_choose} >Go choose product</p></NavLink>
+                <NavLink to="/"><p className={s.go_choose} >Обрати Товар</p></NavLink>
                 {cartData.cart.map(item=>{
                     return <div key={item.index} className={s.cart_item} > {/*need more complex key*/}
                         <img className={s.thumbnail} src={item.photo} alt="prod_img"/>
                         <p><NavLink to={"products/"+item.product}> {item.name}</NavLink></p>
-                        <p>count: {item.count}</p>
-                        <p>sum: {item.price*item.count}</p>
+                        <p>к-ть: {item.count}</p>
+                        <p>вартість: {item.price*item.count}</p>
                         <button className={s.delete_btn} onClick={()=>deleteItemByIndex(item.index)} > </button>
                     </div>
                 })}
@@ -51,7 +51,7 @@ function OrderPage({cartData, deleteItemByIndex, createOrder, ...props}) {
             </div>
 
             <div className={s.form_box}>
-            <div><p className={s.sum_p} >SUM: {cartData.sum}</p></div>
+            <div><p className={s.sum_p} >Всього: {cartData.sum} грн</p></div>
 
             <OrderForm onSubmit={onSubmit} />
             <div className={s.alert} >{alert}</div>

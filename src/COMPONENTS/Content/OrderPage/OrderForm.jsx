@@ -38,19 +38,21 @@ function OrderForm({onSubmit}) {
         <div>
             <form onSubmit={formik.handleSubmit}>
                 <div className={s.form_input_item} >
-                <label htmlFor="name">Name</label>
+                <label htmlFor="name">Ім'я</label>
                 {myFormInput("name", "text", formik.values.name, formik.handleChange)}
                 </div>
                 {formik.errors.name ? <div>{formik.errors.name}</div> : null}
 
                 <div className={s.form_input_item} >
-                <label htmlFor="phone">Phone</label>
+                <label htmlFor="phone">Телефон</label>
                 {myFormInput("phone", "text", formik.values.phone, formik.handleChange)}
                 </div>
                 {formik.errors.phone ? <div>{formik.errors.phone}</div> : null}
 
                 <div className={s.form_input_item} id={s.comment} >
-                <label htmlFor="message">Comment</label>
+                <label htmlFor="message">Коментарій</label>
+                    <p> (запитання) </p>
+                    <p> (місце доставки) </p>
                     <textarea
                         id={"message"}
                         name={"message"}
@@ -62,7 +64,7 @@ function OrderForm({onSubmit}) {
                 </div>
                 {formik.errors.message ? <div>{formik.errors.message}</div> : null}
 
-                <div><button className={s.submit_btn} type="submit" >SUBMIT</button></div>
+                <div><button className={s.submit_btn} type="submit" >Відправити</button></div>
             </form>
         </div>
     );

@@ -1,5 +1,7 @@
 import React from 'react';
 import s from "./InfoPage.module.css";
+import Sales from "./Sales";
+import Contacts from "./Contacts";
 
 function InfoPage(props) {
     return (
@@ -96,6 +98,16 @@ function InfoPage(props) {
             </div>
 
             <div className={s.article}>
+                <span id={"discounts"}> </span>
+                <Sales />
+            </div>
+
+            <div className={s.article}>
+                <span id={"contacts"}> </span>
+                <Contacts />
+            </div>
+
+            <div className={s.article}>
                 <span id={"delivery"}> </span>
 
                 <h2 className={s.article_header}>Про Доставку</h2>
@@ -124,12 +136,12 @@ function InfoPage(props) {
 
                 </p>
                 <p className={s.article_part}>
-                    Делівері: <a target="_blank"
+                    Делівері: <a target="_blank" rel="noopener noreferrer"
                                  href="https://delivery-auto.com.ua/uk-UA/CalculateCost">https://delivery-auto.com.ua/uk-UA/CalculateCost</a>
                 </p>
                 <p className={s.article_part}>
-                    Нова пошта: <a target="_blank"
-                                    href="http://novaposhta.ua/frontend/calculator"> http://novaposhta.ua/frontend/calculator </a>
+                    Нова пошта: <a target="_blank" rel="noopener noreferrer"
+                                   href="http://novaposhta.ua/frontend/calculator"> http://novaposhta.ua/frontend/calculator </a>
                 </p>
             </div>
         </div>

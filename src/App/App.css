@@ -16,10 +16,27 @@ button {
 button:hover {
   opacity: 0.5;
 }
+/*thumbnails in slider*/
+._t1897 {
+  object-fit: contain;
+}
+
+@media screen and (max-width: 1024px) {
+  /*maximize btn*/
+  ._1oKnM {
+    top: 10% !important;
+    right: 5% !important;
+  }
+
+  ._3WRGR {
+    width: 3rem;
+    height: 3rem;
+  }
+}
 
 .App {
   /*text-align: center;*/
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Rubik', inherit;
   background-color: var(--c_white);
   min-height: 100%;
 }

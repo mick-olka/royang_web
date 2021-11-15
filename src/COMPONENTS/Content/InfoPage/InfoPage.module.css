@@ -18,10 +18,31 @@
 
 .article span {
     display: block;
-    height: 5rem;
+    height: 7.5rem;
 }
 
 .article_part {
     margin: 1rem 0;
     text-indent: 5rem;
+}
+
+.gallery_img {
+    max-width: 80%;
+    margin: 1rem auto;
+}
+
+.gallery_div {
+    position: relative;
+}
+
+.colors_div {
+    font-size: 1.1rem;
+}
+
+.colors_div img {
+    margin-bottom: 2rem;
+}
+
+.colors_div strong {
+    font-weight: bolder;
 }

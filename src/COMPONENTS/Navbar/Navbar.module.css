@@ -4,7 +4,12 @@
 
 .linkDiv {
     text-align: left;
-    margin: 0.7rem 0.3rem;
+    margin: 0.7rem 1.5rem 0.7rem 0.3rem;
+}
+
+.linkDiv a {
+    color: var(--c_black_purple) !important;
+    font-size: 1.3rem;
 }
 
 .navbar_pane {

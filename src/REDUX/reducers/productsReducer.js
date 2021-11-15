@@ -24,6 +24,7 @@ let initialState = {
         oldPrice: 0,
         images: [],
         types: [],
+        index: 0,
     },
     isLoading: true,
 }

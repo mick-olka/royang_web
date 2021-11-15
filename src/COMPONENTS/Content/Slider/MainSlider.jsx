@@ -70,7 +70,9 @@ class MainSlider extends Component {
 
                     {arr.map(i=>{
                         return <div key={i._id} className={s.mainSlider__item} >
-                            <a target="_blank" rel="noopener noreferrer" href={i.nav_link} >
+                            <a
+                                target="_blank" rel="noopener noreferrer"
+                                href={i.nav_link} >
                             <img src={i.img} alt="slide_img" className={s.m_slide_img} />
                             <div className={s.text_div} >
                                 <h3>{i.text}</h3>

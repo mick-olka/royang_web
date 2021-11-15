@@ -2,11 +2,11 @@ import React from 'react';
 import {Formik, Form, Field, FieldArray} from 'formik';
 import s from "./ProductForm.module.css";
 
-const ProductForm = ({initialValues, onSubmit }) => {
+const ProductForm = (props) => {
 
     return <div>
-        <Formik initialValues={initialValues} onSubmit={values => {
-            onSubmit(values)
+        <Formik initialValues={props.initialValues} onSubmit={values => {
+            props.onSubmit(values)
         }}>
             {({values}) => (
                 <Form>
@@ -25,6 +25,10 @@ const ProductForm = ({initialValues, onSubmit }) => {
                     <div>
                         <label htmlFor="oldPrice">Old Price: </label>
                         <Field type="number" name="oldPrice"/>
+                    </div>
+                    <div>
+                        <label htmlFor="index">Index: </label>
+                        <Field type="number" name="index"/>
                     </div>
                     <FieldArray
                         name="features"
@@ -57,7 +61,7 @@ const ProductForm = ({initialValues, onSubmit }) => {
                                     </button>
                                 )}
                                 <div>
-                                    <button className={s.submit_btn} type="submit">SAVE</button>
+                                    <button className={s.submit_btn} type="submit" >SAVE</button>
                                 </div>
                             </div>
                         )}

@@ -9,15 +9,17 @@ import SectionsPane from "./SectionsPane/SectionsPane";
 import MainPage from "./MainPageC/MainPage";
 import OrderPage from "./OrderPage/OrderPage";
 import SearchPageC from "../SearchPage/SearchPageC";
-import NotFound from "../extra/NotFound";
+import NotFound from "../Extra/NotFound";
 import ListPageC from "./ListPage/ListPageC";
 import OrderDone from "./OrderPage/OrderDone";
 import InfoPage from "./InfoPage/InfoPage";
+import PhotoGalleryC from "./InfoPage/PhotoGalleryC";
+import Colors from "./InfoPage/Colors";
 
-function Content({links, lists, productsData, cartData, getProducts, setCurrentPageAC, deleteItemByIndex, createOrder, ...props}) {
+function Content({links, lists, productsData, cartData, getProducts, setCurrentPageAC, deleteItemByIndex, createOrder, colors, ...props}) {
 
-    let lists0=[];
     useEffect(()=>{
+        let lists0;
         function findAndRemove(array, property, value) {
             array.forEach(function(result, index) {
                 array[index].url="/lists/"+array[index].url;
@@ -31,20 +33,23 @@ function Content({links, lists, productsData, cartData, getProducts, setCurrentP
         lists0=[...lists];
         findAndRemove(lists0, 'name', 'slider');
 
-    }, []);
+    }, [lists]);
 
     return (
         <div>
-            <Header/>
+            <Header links={links} />
             <div className="middle_pane">
+
                 <div className="side_pane" >
                     <Search redirectTo={"/find"} {...props} />
-                    <Navbar isHashLinks={true} links={links}/>
-                    <br/>
-                    <p style={{marginLeft: "2rem", fontWeight: "bolder"}} >Категорії</p>
-                    <Navbar isHashLinks={false} links={lists}/>
+                    <Navbar links={lists}/>
+
+
                 </div>
                 <div className="content_pane">
+                    {/*<div className="horizontal_navbar" >*/}
+                    {/*    <Navbar fontSize={"0.5rem"} links={links}/>*/}
+                    {/*</div>*/}
                     <Switch>
                         <Route path="/info" render={() => <InfoPage /> }/>
 
@@ -62,18 +67,22 @@ function Content({links, lists, productsData, cartData, getProducts, setCurrentP
                             </SearchPageC>
                         </div>  }/>
 
-                        <Route exact path="/" render={() => <MainPage
+                        <Route path="/gallery" render={() => <PhotoGalleryC />}/>
+
+                        <Route path="/colors" render={() => <Colors colors={colors} />}/>
+
+                        <Route path="/" render={() => <MainPage
                             products={productsData.products}
                             setCurrentPageAC={setCurrentPageAC}
                             getProducts={getProducts}
                         />}/>
 
-                        <Route path="*" render={()=><NotFound />}/>
+                        {/*<Route path="*" render={()=><NotFound />}/>*/}
 
                     </Switch>
                 </div>
             </div>
-            <p className="admin_link"><NavLink to={"/admin"}>admin</NavLink></p>
+            <p className="admin_link"><NavLink to={"/ADMIN"}>admin</NavLink></p>
         </div>
     );
 }

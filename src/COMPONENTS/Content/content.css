@@ -1,6 +1,5 @@
 .content_pane {
     position: relative;
-    top: 6rem;
     left: 6rem;
     width: 75%;
     /*padding: 0.5rem;*/
@@ -10,7 +9,6 @@
 
 .side_pane {
     position: fixed;
-    top: 5rem;
     left: 1rem;
     min-height: 40rem;
     width: 11rem;
@@ -19,8 +17,8 @@
     padding: 0.5rem 0.2rem 2rem 0.2rem;
     border-radius: 0.2rem;
     /*box-shadow: 1px 2px 2px 2px rgba(0,0,0,0.25);*/
-    font-size: 1.2rem;
-    z-index: 50;
+    font-size: 1.3rem;
+    z-index: 150;
 }
 
 .navbar_pane {
@@ -28,9 +26,28 @@
 }
 
 .middle_pane {
+    top: 8rem;
     position: relative;
     margin: 0.2rem auto;
     display: flex;
+    justify-content: center;
+}
+
+.horizontal_navbar {
+    /*top: 4rem;*/
+    /*height: 4rem;*/
+    margin-left: 2rem;
+    position: relative;
+    width: 95%;
+    z-index: 10;
+    background-color: #fff;
+    align-items: center;
+}
+
+.horizontal_navbar div nav {
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
     justify-content: center;
 }
 

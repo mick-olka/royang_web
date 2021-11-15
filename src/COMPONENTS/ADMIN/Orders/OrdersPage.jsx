@@ -1,6 +1,6 @@
 import React from 'react';
 import ItemsListC from "../ItemsList/ItemsListC";
-import PaginatorC from "../../extra/Paginator/PaginatorC";
+import PaginatorC from "../../Extra/Paginator/PaginatorC";
 import OrderItem from "./OrderItem";
 
 function OrdersPage({ orders, setCurrentPageAC, getOrders, deleteOrders }) {

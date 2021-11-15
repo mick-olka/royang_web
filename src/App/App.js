@@ -7,15 +7,16 @@ import {compose} from "redux";
 import store from "../REDUX/reduxStore";
 import {initApp} from "../REDUX/reducers/mainReducer";
 import Content from "../COMPONENTS/Content/Content";
-// import AdminPageC from "../COMPONENTS/admin/AdminPageC/AdminPageC";
+// import AdminPageC from "../COMPONENTS/ADMIN/AdminPageC/AdminPageC";
 import {Switch} from "react-router-dom";
-import AdminAuthC from "../COMPONENTS/admin/AuthAdmin/AdminAuthC";
+import AdminAuthC from "../COMPONENTS/ADMIN/AuthAdmin/AdminAuthC";
 import {getProducts} from "../REDUX/reducers/productsReducer";
 import {setCurrentPageAC} from "../REDUX/reducers/paginatorReducer";
 import {createOrder, deleteItemByIndex} from "../REDUX/reducers/cartReducer";
 import {TextContext} from "../UTILS/text_context";
+import Loading from "../COMPONENTS/Extra/Loading";
 
-const AdminPageC = React.lazy(()=>import("../COMPONENTS/admin/AdminPageC/AdminPageC"));
+const AdminPageC = React.lazy(()=>import("../COMPONENTS/ADMIN/AdminPageC/AdminPageC"));
 
 const adminPageCWithSuspense =()=> {
     return <React.Suspense fallback={<div>...Loading...</div>} >
@@ -48,7 +49,7 @@ class App extends Component {
     }
 
     render() {
-        if (!this.props.initialized) return <div className="App">Loading...</div>
+        if (!this.props.initialized) return <div className="App"><Loading /></div>
         return (
             <div className="App">
                 <TextContext.Provider value={this.props.text_blocks}>
@@ -65,6 +66,7 @@ class App extends Component {
                         cartData={this.props.cartData}//
                         deleteItemByIndex={this.props.deleteItemByIndex}//
                         createOrder={this.props.createOrder}//
+                        colors={this.props.colors}
                     />}/>
                 </Switch>
                 </TextContext.Provider>
@@ -84,6 +86,7 @@ const mapStateToProps = (state) => {
         cartData: state.cartReducer,
         lists: state.listsReducer.lists,
         text_blocks: state.textReducer.text_blocks,
+        colors: state.photosReducer.colors,
     });
 };
 

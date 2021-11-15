@@ -3,9 +3,10 @@ import s from "../Product.module.css";
 import ProductForm from "../ProductForm/ProductForm";
 import chairIcon from "../../../../IMGS/chair.png";
 import PhotosPane from "../PhotosPane/PhotosPane";
-import SomeError from "../../../extra/SomeError";
+import SomeError from "../../../Extra/SomeError";
 import ListsSelect from "../../ListSelect/ListsSelect";
 import ItemsListC from "../../ItemsList/ItemsListC";
+import Loading from "../../../Extra/Loading";
 
 function UpdateProduct({
                            prodId, updateProduct,
@@ -24,7 +25,7 @@ function UpdateProduct({
     //     if (prodId && prodId.length===24) {
     //         getProductById(prodId);
     //     } else {
-    //         pushToHistory("/admin");
+    //         pushToHistory("/ADMIN");
     //     }
     // }, [getProductById, prodId, pushToHistory, setIdOfCreatedAC]);
 
@@ -35,7 +36,7 @@ function UpdateProduct({
 
     const onChoosingProductsBtn = () => {
         setChosenProductAC(productData);
-        pushToHistory("/admin");
+        pushToHistory("/ADMIN");
     }
 
     let onThumbnailSelected = (e) => {
@@ -94,7 +95,7 @@ function UpdateProduct({
         return <SomeError returnTo="/admin" error={newError}/>
     }
 
-    if (isLoading && !productData._id) return <div>Loading...</div>;
+    if (isLoading && !productData._id) return <div><Loading /></div>;
 
     return (<div className={s.pane}>
             <h1>Update Product</h1>

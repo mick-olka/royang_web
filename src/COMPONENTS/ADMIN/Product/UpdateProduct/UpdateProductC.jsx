@@ -14,6 +14,7 @@ import {
 } from "../../../../REDUX/reducers/productsReducer";
 import {addElement} from "../../../../REDUX/reducers/listsReducer";
 import {addPhotos, deletePhotos} from "../../../../REDUX/reducers/photosReducer";
+import Loading from "../../../Extra/Loading";
 
 let mapStateToProps = (state) => {
     return {
@@ -42,7 +43,7 @@ class UpdateProductC extends Component {
         if (this.state.prodId && this.state.prodId.length === 24) {
             await this.props.getProductById(this.state.prodId);
         } else {
-            this.props.history.push("/admin");
+            this.props.history.push("/ADMIN");
         }
     }
 
@@ -58,9 +59,9 @@ componentDidUpdate(prevProps, prevState, snapshot) {
 
     render() {
         //console.log("R AdminPaneC");
-        if (this.props.updateProductProps.productData._id==null) return <div>Loading...</div>
+        if (this.props.updateProductProps.productData._id==null) return <div><Loading /></div>
         return (
-            <UpdateProduct prodId={this.prodId} {...this.props} pushToHistory={this.pushToHistory} />
+            <UpdateProduct prodId={this.state.prodId} {...this.props} pushToHistory={this.pushToHistory} />
         );
     }
 }

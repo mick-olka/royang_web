@@ -1,6 +1,6 @@
 import React from 'react';
 import ListsSelect from "../ListSelect/ListsSelect";
-import PaginatorC from "../../extra/Paginator/PaginatorC";
+import PaginatorC from "../../Extra/Paginator/PaginatorC";
 import {bindActionCreators, compose} from "redux";
 import {getProducts} from "../../../REDUX/reducers/productsReducer";
 import {setCurrentPageAC, setPortionNumAC} from "../../../REDUX/reducers/paginatorReducer";

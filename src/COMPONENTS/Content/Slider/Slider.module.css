@@ -3,6 +3,11 @@
     max-height: 25rem;
 }
 
+.li img {
+    width: auto !important;
+    height: 100%;
+}
+
 .mainSlider {
     margin: 0.6rem auto 3rem;
     max-width: 90%;
@@ -35,7 +40,7 @@
     top: 50%;
     transform: translate(-50%, -50%);
     background-color: var(--c_transparent_orange);
-    opacity: 0.8;
+    opacity: 0.9;
     padding: 1rem;
     border-radius: 1rem;
     font-family: "Comic Sans MS", serif;
