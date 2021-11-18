@@ -16,18 +16,6 @@ function UpdateProduct({
 
     let {lists, newError, productData, isLoading} = updateProductProps;
     let thumbnail = null;
-    // let pn = useLocation().pathname;
-    // console.log(pn.split('/').pop());
-    // let prodId=pn.split('/').pop();
-
-    // useEffect(()=>{
-    //     setIdOfCreatedAC(null);     //  for resetting create page
-    //     if (prodId && prodId.length===24) {
-    //         getProductById(prodId);
-    //     } else {
-    //         pushToHistory("/ADMIN");
-    //     }
-    // }, [getProductById, prodId, pushToHistory, setIdOfCreatedAC]);
 
     const onSubmit = (formData) => {
         console.log(formData);
@@ -36,7 +24,7 @@ function UpdateProduct({
 
     const onChoosingProductsBtn = () => {
         setChosenProductAC(productData);
-        pushToHistory("/ADMIN");
+        pushToHistory("/admin");
     }
 
     let onThumbnailSelected = (e) => {
@@ -69,27 +57,6 @@ function UpdateProduct({
     let typesList = productData.types.map(t => {
         return <p key={t}>{t}</p>
     });
-
-    // let typesToSelect = [];
-    // let l0;
-    // if (lists) {
-    //     for (let i=0; i<lists.length; i++) {
-    //         let productHasType = productData.types.find(t => t === lists[i].name);
-    //         if (!productHasType) {
-    //             l0 = {...lists[i]};
-    //             typesToSelect.push({value: l0.url, label: l0.name});
-    //         }
-    //     }
-    // }
-
-    // const handleSelectSubmit = () => {
-    //     let chosen_lists = chosenLists.map(l => {
-    //         return l.value;
-    //     });
-    //     addElement(chosen_lists, prodId);
-    // }
-
-    // let [chosenLists, setChosenLists] = useState([]);
 
     if (newError) {
         return <SomeError returnTo="/admin" error={newError}/>

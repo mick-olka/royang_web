@@ -5,20 +5,6 @@ import ColorMenu from "./ColorMenu";
 import chairIcon from "../../../IMGS/chair.png";
 import ProductCard from "../ProductCard/ProductCard";
 
-//  product
-//     _id: doc._id,
-//     name: doc.name,
-//     code: doc.code,
-//     price: doc.price,
-//     oldPrice: doc.oldPrice,
-//     images: images0,
-//     features: doc.features,
-//     relatedProducts: doc.relatedProducts,
-//     similarProducts: doc.similarProducts,
-//     thumbnail: link + doc.thumbnail,
-//     types: doc.types,
-//     url: link + "products/" + doc._id,
-
 function ProductPage({productData, prodId, addItemToCart, ...props}) {
 
     let [itemForCart, setItemForCart] = useState({
@@ -49,7 +35,6 @@ function ProductPage({productData, prodId, addItemToCart, ...props}) {
         setChosenPhotos(photos[0].pathArr.map(p => {
             return {src: p}
         }));
-        //console.log(photos);
     }
 
     const resetColorsAndPhotos = () => {
@@ -107,14 +92,15 @@ function ProductPage({productData, prodId, addItemToCart, ...props}) {
                     </div>
 
                     <div className={s.orderInfo} >
-                        <span>Count</span>
+                        <span>Кількість</span>
                         <input className={s.count_input} type="number" value={itemForCart.count} onChange={e => setCount(e.target.value)}/>
-                        <p><span>Chosen mColor: </span>{itemForCart.mainColor || "none"}</p>
-                        <p><span>Chosen pColor: </span>{itemForCart.pillColor || "none"}</p>
+                        <p><span>Колір каркасу: </span>{itemForCart.mainColor || "не вибрано"}</p>
+                        <p><span>Колір тканини: </span>{itemForCart.pillColor || "не вибрано"}</p>
                     </div>
 
-                    <button onClick={onClickAddItemToCart} className={s.toCart_btn} >Add to Cart</button>
-                    <button onClick={onOrderSubmit} className={s.order_btn} >Order</button>
+                    <button onClick={onClickAddItemToCart} className={s.toCart_btn} >Додати в кошик</button>
+                    <button onClick={onOrderSubmit} className={s.order_btn} >Замовити</button>
+                    <p>Або подзвоніть менеджеру щоб замовити*</p>
 
                 </div>
 
@@ -129,6 +115,13 @@ function ProductPage({productData, prodId, addItemToCart, ...props}) {
                         return <p key={f.key}><span>{f.key}: </span>{f.value}</p>
                     })}
                 </div>
+
+                { productData.description && <div className={s.description_div} >
+                    <h3>Опис:</h3>
+                    <p className={s.description}>
+                        {productData.description}
+                    </p>
+                </div> }
 
                 {productData.relatedProducts.length>0 &&
                 <div className={s.related_products_div}>

@@ -62,13 +62,15 @@
     width: 80%;
     font-size: 1.1rem;
     font-weight: bolder;
-    margin: 0.2rem;
+    margin: 0.4rem;
     padding: 0.5rem;
-    border-radius: 1rem;
+    border-radius: 0.6rem;
+    border: 1px solid grey;
+    box-shadow: 1px 2px 2px 2px rgba(0,0,0,0.25);
 }
 
 .toCart_btn {
-    background-color: #5f5fdc;
+    background-color: var(--c_bright_orange);
 }
 
 .price {

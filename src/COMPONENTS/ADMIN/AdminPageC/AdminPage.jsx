@@ -16,6 +16,7 @@ import ListPaneC from "../ListPage/ListPaneC";
 import MainAdminPageC from "./MainAdminPageC";
 import SliderEditPageC from "../SliderEdit/SliderEditPageC";
 import TextEditPageC from "../TextEditPage/TextEditPageC";
+import {Helmet} from "react-helmet";
 
 function AdminPage({
                        deleteAdminAuth, products, productsFound, lists,
@@ -102,6 +103,10 @@ function AdminPage({
     //console.log("R AdminPane^");
     return (
         <div>
+            <Helmet>
+                <meta name="robots" content="noindex"/>
+            </Helmet>
+
             <div className="admin_header" >
             <NavLink to="/admin"><h1>ADMIN</h1></NavLink>
             <button style={{marginLeft: "auto"}} onClick={deleteAdminAuth}>LOGOUT</button>

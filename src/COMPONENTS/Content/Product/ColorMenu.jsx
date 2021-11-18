@@ -19,7 +19,6 @@ function ColorMenu({colors, setColors, reset}) {  //  colors = { name: Str, src:
         setChosenId(null);
     }
 
-    //let list = ["0==", "1==", "2=="];
     let items = colors.map(i=> {
         return <div key={i._id} className={s.item} onClick={()=>onSetColors(i._id)}
         style={chosenId===i._id? {fontWeight: "bold"}:{fontWeight: "normal"}}>

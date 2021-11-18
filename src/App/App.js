@@ -7,7 +7,6 @@ import {compose} from "redux";
 import store from "../REDUX/reduxStore";
 import {initApp} from "../REDUX/reducers/mainReducer";
 import Content from "../COMPONENTS/Content/Content";
-// import AdminPageC from "../COMPONENTS/ADMIN/AdminPageC/AdminPageC";
 import {Switch} from "react-router-dom";
 import AdminAuthC from "../COMPONENTS/ADMIN/AuthAdmin/AdminAuthC";
 import {getProducts} from "../REDUX/reducers/productsReducer";
@@ -23,15 +22,6 @@ const adminPageCWithSuspense =()=> {
         <AdminPageC />
     </React.Suspense>
 }
-
-// const contacts = {
-//     phones: [
-//         "+380962962920",
-//         "+380962962920",
-//         "+380962962920",
-//     ],
-//     mail: "nikolaygutsal@gmail.com"
-// }
 
 class App extends Component {
 

@@ -4,8 +4,18 @@ import s from "./ProductForm.module.css";
 
 const ProductForm = (props) => {
 
+    let initValues = {
+        name: props.initialValues.name,
+        code: props.initialValues.code,
+        price: props.initialValues.price,
+        oldPrice: props.initialValues.oldPrice,
+        index: props.initialValues.index,
+        features: props.initialValues.features,
+        description: props.initialValues.description,
+    }
+
     return <div>
-        <Formik initialValues={props.initialValues} onSubmit={values => {
+        <Formik initialValues={initValues} onSubmit={values => {
             props.onSubmit(values)
         }}>
             {({values}) => (
@@ -60,12 +70,17 @@ const ProductForm = (props) => {
                                         + feature
                                     </button>
                                 )}
-                                <div>
-                                    <button className={s.submit_btn} type="submit" >SAVE</button>
-                                </div>
+
                             </div>
                         )}
                     />
+                    <div>
+                        <label htmlFor="description">Description: </label>
+                        <Field type="text" component="textarea" name="description"/>
+                    </div>
+                    <div>
+                        <button className={s.submit_btn} type="submit" >SAVE</button>
+                    </div>
                 </Form>
             )}
         </Formik>

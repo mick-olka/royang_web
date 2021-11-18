@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import "./content.css";
-import {NavLink, Route, Switch} from "react-router-dom";
+import {Route, Switch} from "react-router-dom";
 import Header from "../Header/Header";
 import Navbar from "../Navbar/Navbar";
 import ProductPageC from "./Product/ProductPageC";
@@ -9,7 +9,6 @@ import SectionsPane from "./SectionsPane/SectionsPane";
 import MainPage from "./MainPageC/MainPage";
 import OrderPage from "./OrderPage/OrderPage";
 import SearchPageC from "../SearchPage/SearchPageC";
-import NotFound from "../Extra/NotFound";
 import ListPageC from "./ListPage/ListPageC";
 import OrderDone from "./OrderPage/OrderDone";
 import InfoPage from "./InfoPage/InfoPage";
@@ -82,7 +81,6 @@ function Content({links, lists, productsData, cartData, getProducts, setCurrentP
                     </Switch>
                 </div>
             </div>
-            <p className="admin_link"><NavLink to={"/ADMIN"}>admin</NavLink></p>
         </div>
     );
 }

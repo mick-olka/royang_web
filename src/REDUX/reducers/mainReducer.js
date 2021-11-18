@@ -55,10 +55,9 @@ export const initApp = (page, limit) =>
             await Promise.all([dispatch(checkAuth()), dispatch(getSlides()),
                 dispatch(getProducts(page, limit)), dispatch(getLists()), dispatch(getAllText()), dispatch(getColors())]);
     } catch (e) {
-        //console.log(e);
+        console.log(e);
     }
         dispatch(setInitializedSuccessAC());
-        //setTimeout(()=> dispatch(setInitializedSuccessAC()), 500);   //  promise
     }
 
 export default mainReducer;

@@ -2,10 +2,18 @@ import React from 'react';
 import s from "./InfoPage.module.css";
 import Sales from "./Sales";
 import Contacts from "./Contacts";
+import {Helmet} from "react-helmet";
 
 function InfoPage(props) {
     return (
         <div className={s.info_page}>
+
+            <Helmet>
+                <meta
+                    name="description"
+                    content="Про ротанг. Плетеная мебель. Изготовление плетёной мебели из ротанга."
+                />
+            </Helmet>
 
             <div className={s.article}>
                 <span id={"rotang"}> </span>
