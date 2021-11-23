@@ -2,7 +2,6 @@ import React from 'react';
 import OrderEditForm from "./OrderEditForm";
 
 function OrderEditPage({orderId, orderData, updateOrder}) {
-    console.log(orderData);
 
     const onSubmit = (formData) => {
         updateOrder(orderId, formData);

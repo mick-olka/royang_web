@@ -8,9 +8,15 @@
   --c_black_purple: #25192B;
 }
 
+body, .root, .middle_pane {
+  position: relative;
+  height: fit-content;
+}
+
 button {
   background-color: var(--c_transparent_orange);
   border: 1px solid lightgrey;
+  color: black;
 }
 
 button:hover {

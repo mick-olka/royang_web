@@ -28,10 +28,10 @@ export const productsAPI = {
         });
     },
 
-    createProduct ({name, code, price, oldPrice, features}) {
+    createProduct ({name, code, price, oldPrice, description, features}) {
         return instance.post(
             'products',
-            { name: name, code: code, price: price, oldPrice: oldPrice, features: features }
+            { name: name, code: code, price: price, oldPrice: oldPrice, features: features, description: description }
         ).then(res => {
             return res.data;
         });
@@ -185,10 +185,10 @@ export const listsAPI = {
             });
     },
 
-    updateList (url, name, newUrl) {
+    updateList (url, name, newUrl, index=0) {
         return instance.patch(
             'lists/'+url,
-            { name: name, url: newUrl }
+            { name: name, url: newUrl, index: index }
         ).then(res => {
             return res.data;
         });

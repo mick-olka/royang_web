@@ -1,4 +1,21 @@
 
+.container {
+
+}
+
+.inputs_div div {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+
+.i_label {
+    margin: auto 0;
+}
+
+.t_area {
+
+}
+
 input {
     padding: 0.1rem;
     font-size: 1.1rem;
@@ -9,6 +26,7 @@ textarea {
     width: 30rem;
     height: 10rem;
     position: relative;
+    resize: none;
 }
 
 .submit_btn {

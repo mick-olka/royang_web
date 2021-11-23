@@ -33,11 +33,13 @@ function UpdateProduct({
 
     const getArrWithoutDeleted = (initArr, idsArr) => {    //  for similar and related
         let similarArr = [...initArr];
-        let similarProductsWithoutDeleted=[];
-        for (let i=0; i<similarArr.length; i++) {
+        let similarProductsWithoutDeleted = [];
+        for (let i = 0; i < similarArr.length; i++) {
             let isDeleting = false;
-            for (let t=0; t<idsArr.length; t++) {
-                if (similarArr[i]._id===idsArr[t]) {isDeleting=true}
+            for (let t = 0; t < idsArr.length; t++) {
+                if (similarArr[i]._id === idsArr[t]) {
+                    isDeleting = true
+                }
             }
             if (!isDeleting) similarProductsWithoutDeleted.push(similarArr[i]._id);
         }
@@ -62,23 +64,27 @@ function UpdateProduct({
         return <SomeError returnTo="/admin" error={newError}/>
     }
 
-    if (isLoading && !productData._id) return <div><Loading /></div>;
+    if (isLoading && !productData._id) return <div><Loading/></div>;
 
     return (<div className={s.pane}>
             <h1>Update Product</h1>
+            <br/><br/>
+            <div style={{display: "flex"}} >
             {/*//===THUMB_PANE========*/}
+            <div style={{width: "10rem"}} >
             <img className={s.thumbnail}
                  src={productData.thumbnail ? productData.thumbnail : chairIcon} alt="img"/>
             <input type="file" disabled={false} onChange={onThumbnailSelected}/>
-<br/> <br/>
+            </div>
+
             {/*//===TYPES_SELECTOR=====*/}
             <div className={s.selectBox}>
-                <div><span style={{fontWeight:"bolder"}} >Available in: </span> {typesList}</div>
-                {/*<button disabled={chosenLists.length <= 0} onClick={() => handleSelectSubmit()}>Add to list:</button>*/}
-                {/*<Select isMulti options={typesToSelect} onChange={(value) => setChosenLists(value)}/>*/}
+                <div style={{height: "2rem"}} ><span style={{fontWeight: "bolder"}}>Available in: </span> {typesList}</div>
+                <div style={{display: "flex"}} >
                 <ListsSelect lists={lists} addElement={addElement} prodIdArr={[prodId]}/>
-                <button onClick={onChoosingProductsBtn}>Choose related or similar products</button>
-
+                <button style={{height: "3rem"}} onClick={onChoosingProductsBtn}>Choose related or similar products</button>
+                </div>
+            </div>
             </div>
 
             <ProductForm initialValues={productData} onSubmit={onSubmit}/>
@@ -87,20 +93,20 @@ function UpdateProduct({
                         prodId={prodId} deletePhotos={deletePhotos}
             />
 
-            <div className={s.similar_products_div} >
+            <div className={s.similar_products_div}>
                 Similar Products
-                <ItemsListC items={productData.similarProducts} deleteItems={onSimilarDelete} >
-                    {(item)=> <div style={{display: "flex", marginLeft: "2rem"}} >
+                <ItemsListC items={productData.similarProducts} deleteItems={onSimilarDelete}>
+                    {(item) => <div style={{display: "flex", marginLeft: "2rem"}}>
                         <img style={{width: "2rem"}} src={item.thumbnail} alt="thumb"/>
                         <p style={{marginLeft: "2rem"}}>{item.name}</p>
                     </div>}
                 </ItemsListC>
             </div>
 
-            <div className={s.related_products_div} >
+            <div className={s.related_products_div}>
                 Related Products
-                <ItemsListC items={productData.relatedProducts} deleteItems={onRelatedDelete} >
-                    {(item)=> <div style={{display: "flex", marginLeft: "2rem"}} >
+                <ItemsListC items={productData.relatedProducts} deleteItems={onRelatedDelete}>
+                    {(item) => <div style={{display: "flex", marginLeft: "2rem"}}>
                         <img style={{width: "2rem"}} src={item.thumbnail} alt="thumb"/>
                         <p style={{marginLeft: "2rem"}}>{item.name}</p>
                     </div>}

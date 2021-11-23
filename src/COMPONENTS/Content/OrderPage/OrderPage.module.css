@@ -34,7 +34,6 @@
 }
 
 .cart_item * {
-    width: 30%;
     margin-right: 2rem;
     min-height: 100%;
 }
@@ -71,29 +70,34 @@
 
 .form_box label {
     font-weight: bolder;
+    font-size: 1.2rem;
 }
 
 .form_input_item {
+    display: grid;
+    grid-template-columns: 2fr 6fr 6fr;
+    width: 40rem;
+    grid-gap: 1rem;
     position: relative;
     margin: 1rem;
 }
 
-.form_input_item input, textarea {
-    position: absolute;
-    left: 10rem;
-    top: 0;
+.form_input_item input {
     width: 15rem;
+    font-size: 1.2rem;
 }
 
 #comment textarea {
     resize: none;
+    width: 30rem;
+    font-size: 1.2rem;
 }
 
 .submit_btn {
     padding: 0.5rem;
     border-radius: 1rem;
-    width: 10rem;
-    margin-top: 5rem;
+    width: 25rem;
+    margin: 1rem 0 5rem;
     font-size: 1.5rem;
     font-weight: bolder;
     font-family: 'Kanit', sans-serif;
@@ -113,4 +117,9 @@
     text-align: center;
     font-size: 1.3rem;
     margin-bottom: 1rem;
+}
+
+.order_done_div {
+    font-size: 1.8rem;
+    text-align: center;
 }

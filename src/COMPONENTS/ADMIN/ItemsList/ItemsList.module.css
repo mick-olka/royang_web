@@ -4,7 +4,7 @@
     padding: 0.2rem;
     background-color: #fff;
     border: 2px solid black;
-    height: 3rem;
+    min-height: 3rem;
     position: relative;
     display: flex;
 }
@@ -12,9 +12,9 @@
 .photoBox {
     display: flex;
     position: relative;
-    margin-left: 2rem;
-    max-height: 100%;
-    max-width: 4rem;
+    margin-left: 1rem;
+    max-height: 3rem;
+    max-width: 5rem;
 }
 
 .photo {
@@ -22,18 +22,18 @@
     max-width: 100%;
 }
 
-.item {
-    margin: 0.3rem;
-    padding: 0.2rem;
-    background-color: #fff;
-    border: 1px solid black;
-    height: 2.3rem;
-    position: relative;
-    display: flex;
-}
+/*.item {*/
+/*    margin: 0.3rem;*/
+/*    padding: 0.2rem;*/
+/*    background-color: #fff;*/
+/*    border: 1px solid black;*/
+/*    height: 2.3rem;*/
+/*    position: relative;*/
+/*    display: flex;*/
+/*}*/
 
 .item p {
-    width: 25%;
+    width: 45%;
 }
 
 .imgBox {

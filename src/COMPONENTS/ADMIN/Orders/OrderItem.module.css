@@ -1,0 +1,5 @@
+.input_div  {
+    display: grid;
+    grid-template-columns: 1fr 12fr;
+    align-items: center;
+}

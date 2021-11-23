@@ -10,7 +10,7 @@ function ProductItem({item}) {
                      alt="img"/>
             </div>
             <p><NavLink to={"/ADMIN/products/" + item._id}>{item.name}</NavLink></p>
-            <p>$ {item.price}</p>
+            <p>{item.price} грн</p>
         </>
     );
 }

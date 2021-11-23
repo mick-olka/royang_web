@@ -11,9 +11,12 @@ import {Switch} from "react-router-dom";
 import AdminAuthC from "../COMPONENTS/ADMIN/AuthAdmin/AdminAuthC";
 import {getProducts} from "../REDUX/reducers/productsReducer";
 import {setCurrentPageAC} from "../REDUX/reducers/paginatorReducer";
-import {createOrder, deleteItemByIndex} from "../REDUX/reducers/cartReducer";
+import {createOrder, deleteItemByIndex, updateItemCount} from "../REDUX/reducers/cartReducer";
 import {TextContext} from "../UTILS/text_context";
 import Loading from "../COMPONENTS/Extra/Loading";
+import SomeError from "../COMPONENTS/Extra/SomeError";
+import PopupWrapper from "../COMPONENTS/Extra/Popup/PopupWrapper";
+import Popup from "../COMPONENTS/Extra/Popup/Popup";
 
 const AdminPageC = React.lazy(()=>import("../COMPONENTS/ADMIN/AdminPageC/AdminPageC"));
 
@@ -25,8 +28,13 @@ const adminPageCWithSuspense =()=> {
 
 class App extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state={showPopup: false, reason: null};
+    }
+
     catchAllUnhandledErrors = (reason, promise) => {
-        alert("Error: "+reason);
+        this.setState({showPopup: true, reason: "Виникла Якась Помилка :("});
     }
 
     componentDidMount() {
@@ -34,18 +42,37 @@ class App extends Component {
         window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors);
         this.props.initApp(this.props.paginatorData.currentPage, this.props.paginatorData.pageLimit);   //  has promise in reducer, takes time to set
     }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (this.props.isServerError && this.state.showPopup===false) {
+            this.setState({showPopup: true, reason: "З нашим сервером щось сталося :( Магазин скоро запрацює!"});
+        }
+    }
+
     componentWillUnmount() {
         window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors);
     }
 
+
     render() {
+
         if (!this.props.initialized) return <div className="App"><Loading /></div>
+
         return (
             <div className="App">
+
+                {this.state.showPopup &&
+                <PopupWrapper onClose={()=>this.setState({showPopup: false})} >
+                    {(closePopup) => (<Popup closePopup={closePopup} message={this.state.reason} />)}
+                </PopupWrapper>
+                }
+
+                <div id="popup_root"></div>
                 <TextContext.Provider value={this.props.text_blocks}>
                 <Switch>
                     <Route path="/admin/auth" render={() => <AdminAuthC/>}/>
                     <Route path="/admin" render={adminPageCWithSuspense}/>
+                    <Route path="/some_error" render={()=><SomeError/>}/>
                     <Route path="/" render={() => <Content
                         {...this.props}//
                         links={this.props.links}//
@@ -57,6 +84,7 @@ class App extends Component {
                         deleteItemByIndex={this.props.deleteItemByIndex}//
                         createOrder={this.props.createOrder}//
                         colors={this.props.colors}
+                        updateItemCount={this.props.updateItemCount}
                     />}/>
                 </Switch>
                 </TextContext.Provider>
@@ -77,13 +105,14 @@ const mapStateToProps = (state) => {
         lists: state.listsReducer.lists,
         text_blocks: state.textReducer.text_blocks,
         colors: state.photosReducer.colors,
+        isServerError: state.mainReducer.isServerError,
     });
 };
 
 let AppContainer = compose(     //  HOC FOR APP TO PROVIDE MSTP AND MDTP
     withRouter,
     connect(mapStateToProps, {initApp,
-        setCurrentPageAC, getProducts, deleteItemByIndex, createOrder})
+        setCurrentPageAC, getProducts, deleteItemByIndex, createOrder, updateItemCount})
 )(App);
 
 //==============================================

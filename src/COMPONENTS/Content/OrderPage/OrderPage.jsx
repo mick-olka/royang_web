@@ -1,15 +1,18 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import OrderForm from "./OrderForm";
 import s from "./OrderPage.module.css"
 import {NavLink} from "react-router-dom";
 
-function OrderPage({cartData, deleteItemByIndex, createOrder, ...props}) {
+function OrderPage({cartData, deleteItemByIndex, createOrder, updateItemCount, ...props}) {
 
-    let [alert, setAlert] =useState(null);
+    let [alert, setAlert] =useState(null);  //  in case user haven't chosen product and pressed confirm
+
+    useEffect(()=>{
+        localStorage.cart=JSON.stringify(cartData.cart);    //  save cart items to localStorage on cart change
+    }, [cartData]);
 
     const onSubmit = (values) => {
         let orderData = {...values, sum: cartData.sum, cart: cartData.cart};
-        console.log(orderData);
         if (orderData.cart.length>0) {
             setAlert(null);
             createOrder(orderData);
@@ -18,36 +21,27 @@ function OrderPage({cartData, deleteItemByIndex, createOrder, ...props}) {
             }
             props.history.push("/order_done");
         }
-        else setAlert("Choose product");
+        else setAlert("Спочатку Оберіть Товар :)");
     }
-
-    //  cart = [{
-        // name: "SOFA"
-        // photo: "http://192.168.1.164:7500/uploads/2021-09-30T14:00:28.598ZIMG_0509.JPG"
-        // code: "3323"
-        // count: 1
-        // mainColor: "none"
-        // pillColor: "none"
-        // price: 1400
-        // product: "6155a641a0fec0ea7843ca0d"
-        // index: 2
-    // }]
 
     return (
         <div className={s.container} >
             <h1 className={s.heading_h} >Корзина</h1>
             <div className={s.cart_box}>
-                <NavLink to="/"><p className={s.go_choose} >Обрати Товар</p></NavLink>
                 {cartData.cart.map(item=>{
-                    return <div key={item.index} className={s.cart_item} > {/*need more complex key*/}
+                    return <div key={item.code} className={s.cart_item} > {/*need more complex key*/}
                         <img className={s.thumbnail} src={item.photo} alt="prod_img"/>
                         <p><NavLink to={"products/"+item.product}> {item.name}</NavLink></p>
-                        <p>к-ть: {item.count}</p>
+                        <p>колір: {item.mainColor}/{item.pillColor}</p>
+                        <span>к-ть: </span><input type="number" onChange={(e)=>{updateItemCount(item.index, e.target.value)}} min="1" value={item.count} ></input>
                         <p>вартість: {item.price*item.count}</p>
                         <button className={s.delete_btn} onClick={()=>deleteItemByIndex(item.index)} > </button>
                     </div>
                 })}
 
+            </div>
+            <div style={{width: "fit-content", margin: "0 auto"}} >
+            <NavLink to="/"><p className={s.go_choose} >Додати Товар</p></NavLink>
             </div>
 
             <div className={s.form_box}>

@@ -4,6 +4,7 @@ import Slider from "../Slider/Slider";
 import ColorMenu from "./ColorMenu";
 import chairIcon from "../../../IMGS/chair.png";
 import ProductCard from "../ProductCard/ProductCard";
+import SectionsPane from "../SectionsPane/SectionsPane";
 
 function ProductPage({productData, prodId, addItemToCart, ...props}) {
 
@@ -12,8 +13,8 @@ function ProductPage({productData, prodId, addItemToCart, ...props}) {
         photo: productData.images[0]? productData.images[0].pathArr[0] : chairIcon,
         name: productData.name,
         code: productData.code,
-        mainColor: "none",
-        pillColor: "none",
+        mainColor: "не вибрано",
+        pillColor: "не вибрано",
         count: 1,
         price: productData.price,   //  for sum
     });
@@ -41,8 +42,8 @@ function ProductPage({productData, prodId, addItemToCart, ...props}) {
         setItemForCart({
             ...itemForCart,
             photo: productData.images[0].pathArr[0],
-            mainColor: "none",
-            pillColor: "none",
+            mainColor: "не вибрано",
+            pillColor: "не вибрано",
         });
         setChosenPhotos([]);
     }
@@ -93,12 +94,12 @@ function ProductPage({productData, prodId, addItemToCart, ...props}) {
 
                     <div className={s.orderInfo} >
                         <span>Кількість</span>
-                        <input className={s.count_input} type="number" value={itemForCart.count} onChange={e => setCount(e.target.value)}/>
+                        <input className={s.count_input} type="number" min="1" value={itemForCart.count} onChange={e => setCount(e.target.value)}/>
                         <p><span>Колір каркасу: </span>{itemForCart.mainColor || "не вибрано"}</p>
                         <p><span>Колір тканини: </span>{itemForCart.pillColor || "не вибрано"}</p>
                     </div>
 
-                    <button onClick={onClickAddItemToCart} className={s.toCart_btn} >Додати в кошик</button>
+                    {/*<button onClick={onClickAddItemToCart} className={s.toCart_btn} >Додати в кошик</button>*/}
                     <button onClick={onOrderSubmit} className={s.order_btn} >Замовити</button>
                     <p>Або подзвоніть менеджеру щоб замовити*</p>
 
@@ -112,36 +113,29 @@ function ProductPage({productData, prodId, addItemToCart, ...props}) {
                 <div className={s.features_list}>
                     <h2>Характеристики</h2>
                     {productData.features && productData.features.map(f => {
-                        return <p key={f.key}><span>{f.key}: </span>{f.value}</p>
+                        return <p key={f.key}>{f.key} : <span>{f.value}</span></p>
                     })}
                 </div>
+                <br/><br/>
 
                 { productData.description && <div className={s.description_div} >
-                    <h3>Опис:</h3>
-                    <p className={s.description}>
-                        {productData.description}
-                    </p>
+                    <h3 style={{fontSize: "1.2rem", fontWeight: "bolder"}} >Опис:</h3>
+                    <div className={s.description}>
+                        {productData.description.split("\n").map(p=>{return <p key={Math.random()*10} style={{margin: "1rem"}} >{p}</p>})}
+                    </div>
                 </div> }
 
                 {productData.relatedProducts.length>0 &&
                 <div className={s.related_products_div}>
-                    <h2>Related Products</h2>
-                    <div  className={s.products_pane} >
-                    {productData.relatedProducts.map(p => {
-                        return <ProductCard name={p.name} thumbnail={p.thumbnail} price={p.price} _id={p._id} lessSpace={true}/>
-                    })}
-                    </div>
+                    <h2>Пов'язані товари</h2>
+                    <SectionsPane products={productData.relatedProducts}/>
                 </div>
                 }
 
                 {productData.similarProducts.length>0 &&
                 <div className={s.similar_products_div}>
-                    <h2>Similar Products</h2>
-                    <div className={s.products_pane} >
-                        {productData.similarProducts.map(p => {
-                            return <ProductCard name={p.name} thumbnail={p.thumbnail} price={p.price} _id={p._id} lessSpace={true}/>
-                        })}
-                    </div>
+                    <h2>Схожі товари</h2>
+                    <SectionsPane products={productData.similarProducts}/>
                 </div>
                 }
 

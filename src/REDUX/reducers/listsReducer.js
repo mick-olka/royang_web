@@ -68,10 +68,10 @@ export const createList = (name, url) =>
         }
     }
 
-export const updateList = (url, name, newUrl) =>
+export const updateList = (url, name, newUrl, index) =>
     async (dispatch) => {
         try {
-            let res = await listsAPI.updateList(url, name, newUrl);
+            let res = await listsAPI.updateList(url, name, newUrl, index);
             if (res.code === 0) {
                 dispatch(getLists());
             }

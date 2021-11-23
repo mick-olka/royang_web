@@ -16,12 +16,8 @@ function SearchWrapper({findProducts, onPageChanged, products, setCurrentPage, s
     }
 
     return (<div>
-                <h2>Results for {string}</h2>
-
-                <p><NavLink to="/">MAIN</NavLink></p>
-
-                {products.length > 0 ? null : <h2>Nothing Found on "{string}"</h2>}
-
+                <h3 style={{fontSize: "1.5rem", fontWeight: "bolder", margin: "2rem"}} >Результати пошуку {string} </h3>
+                {/*{products.length > 0 ? null : <h2>Нічого не знайдено на запит {string}</h2>}*/}
                 {props.children}
                 <PaginatorC onPageChanged={onSearchPageChanged} />
         </div>

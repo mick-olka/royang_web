@@ -21,12 +21,12 @@ class MainSlider extends Component {
      * Calculate & Update state of new dimensions
      */
     updateDimensions() {
-        if(window.innerWidth < 900) {
+        if(window.innerWidth < 1200) {
             this.setState({ width: 450, height: 150, slidesToShow: 2 });
         } else {
             let update_width  = window.innerWidth-100;
             let update_height = Math.round(update_width/4.4);
-            this.setState({ width: update_width, height: update_height, slidesToShow: 2  });
+            this.setState({ width: update_width, height: update_height, slidesToShow: 3  });
         }
     }
 
@@ -52,7 +52,7 @@ class MainSlider extends Component {
             nav_link: "loading",
         }
         let arr=[];
-        if (!this.props.slides) {arr.push({...preload, _id: 0}, {...preload, _id: 1}, {...preload, _id: 2})}
+        if (this.props.slides.length<1) {arr.push({...preload, _id: 0}, {...preload, _id: 1}, {...preload, _id: 2})}
         else arr = [...this.props.slides];
         if (arr.length<3) {arr.push(arr[0], arr[0])}
         let settings = {
@@ -63,6 +63,7 @@ class MainSlider extends Component {
             slidesToScroll: 1,
             autoplay: true,
         };
+
         return (
             <div className={s.mainSlider} >
                 {/*<h2>width:  {this.state.width}</h2>*/}

@@ -7,16 +7,18 @@ function CreateProduct({createProduct, idOfCreated, pushToHistory}) {
 
     let initialValues = {
         features: [
-            {key: "width", value: "0"},
-            {key: "height", value: "0"},
-            {key: "depth", value: "0"},
-            {key: "weight", value: "0"},
+            {key: "Ширина, см.", value: "0"},
+            {key: "Глибина, см", value: "0"},
+            {key: "Висота, см", value: "0"},
+            {key: "Країна", value: "Україна"},
+            {key: "Матеріал", value: "Алюміній, поліетиленова стрічка, скло "},
         ],
         name: '',
         code: '',
         price: 0,
         oldPrice: 0,
         index: 0,
+        description: "",
     };
 
     let thumbnail=null;
@@ -27,7 +29,6 @@ function CreateProduct({createProduct, idOfCreated, pushToHistory}) {
 
     const onSubmit = async (formData) => {
         await createProduct(formData, thumbnail);
-        // setIsCreated(true);
     }
 
     let onThumbnailSelected=(e)=> {

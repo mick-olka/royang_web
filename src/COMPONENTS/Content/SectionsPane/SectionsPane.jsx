@@ -17,7 +17,7 @@ const SectionsPane=({products})=>{
 
     return (
         <div className={s.sectionsPane} >
-            {productsList.length<1 ? <h2>No Products</h2> : productsList}
+            {productsList.length<1 ? <h2>Нічого немає :(</h2> : productsList}
         </div>
     );
 }

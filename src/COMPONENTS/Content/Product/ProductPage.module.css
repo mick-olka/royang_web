@@ -34,7 +34,7 @@
 }
 
 .orderInfo {
-    margin: 2rem 0;
+    margin: 1rem 0;
     text-align: left;
 }
 
@@ -114,19 +114,7 @@
     min-height: 5rem;
 }
 
-.related_products_div, .similar_products_div h2 {
-    font-weight: bold;
+.related_products_div h2, .similar_products_div h2 {
+    font-weight: bolder;
     font-size: 1.2rem;
-}
-
-.products_pane {
-    display: flex;
-    /*grid-template-columns: repeat(3, 1fr);*/
-    height: 13rem;
-    overflow: auto;
-}
-
-.products_pane div {
-    width: 10rem;
-    margin-right: 1rem;
 }

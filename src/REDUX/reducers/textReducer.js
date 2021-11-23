@@ -37,8 +37,12 @@ export const setTextFormAC = (textData) => ({type: SET_TEXT_FORM, textData});
 //====================================
 
 export const getAllText = () => async (dispatch) => {
-    let response = await textAPI.getAllText();
-    dispatch(setAllTextAC(response.text_blocks));
+    try {
+        let response = await textAPI.getAllText();
+        dispatch(setAllTextAC(response.text_blocks));
+    } catch (e) {
+        console.log(e);
+    }
 }
 
 export const createText = (name, text, nav_link) =>

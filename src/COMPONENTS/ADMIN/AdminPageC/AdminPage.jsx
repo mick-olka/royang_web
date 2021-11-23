@@ -42,11 +42,6 @@ function AdminPage({
     useEffect(() => {
 
     }, [pn]);
-    //
-    // const onPageChanged = (pageNumber) => {
-    //         setCurrentPageAC(pageNumber);
-    //         getProducts(pageNumber);
-    // }
 
     let typesL = [...lists].map(l => {
         let l0 = {...l};
@@ -57,18 +52,6 @@ function AdminPage({
     const onSubmit = (formData) => {    //  Create List
         createList(formData.name, formData.url);
     }
-
-    // const ProductItem = ({item}) => {
-    //     return (<>
-    //                 <div className={list.photoBox}>
-    //                     <img className={list.photo} src={item.thumbnail ? item.thumbnail : chairIcon}
-    //                          alt="img"/>
-    //                 </div>
-    //                 <p><NavLink to={"/ADMIN/products/" + item._id}>{item.name}</NavLink></p>
-    //                 <p>$ {item.price}</p>
-    //             </>
-    //     );
-    // }
 
     const PaneWithProducts = ({products}) => {
 
@@ -100,7 +83,6 @@ function AdminPage({
         </div>;
     }
 
-    //console.log("R AdminPane^");
     return (
         <div>
             <Helmet>
@@ -108,10 +90,13 @@ function AdminPage({
             </Helmet>
 
             <div className="admin_header" >
-            <NavLink to="/admin"><h1>ADMIN</h1></NavLink>
-            <button style={{marginLeft: "auto"}} onClick={deleteAdminAuth}>LOGOUT</button>
+                <div>
+                    <div><NavLink to="/admin"><h1>ADMIN</h1></NavLink></div>
+<div style={{fontSize: "0.9rem", textDecoration: "underline"}} onClick={deleteAdminAuth}>LOGOUT</div>
+
+                </div>
             </div>
-            <div className="middle_pane">
+            <div className="middle_pane middle_pane_admin">
 
                 <div className="adminNavbar">
                     <Search redirectTo={"/ADMIN/search"} {...props} />

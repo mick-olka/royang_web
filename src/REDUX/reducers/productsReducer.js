@@ -2,6 +2,7 @@ import {productsAPI} from "../../API/api";
 import {uploadThumbnail} from "./photosReducer";
 import {setTotalItemsCountAC} from "./paginatorReducer";
 import global_data from "../global_data";
+import {setIsServerErrorAC} from "./mainReducer";
 
 const SET_PRODUCTS = "productsReducer/SET_PRODUCTS";
 const SET_PRODUCT_FORM = "productsReducer/SET_PRODUCT_FORM";
@@ -84,11 +85,17 @@ export const setChosenProductAC = (data) => ({type: SET_CHOSEN_PRODUCT, data}); 
 //====================================
 
 export const getProducts = (page, limit=prodLim) => async (dispatch) => {
-    dispatch(setIsLoadingAC(true));
-    let response = await productsAPI.getProducts(page, limit);
-    dispatch(setProductsAC(response.products));
-    dispatch(setTotalItemsCountAC(response.count));
-    dispatch(setIsLoadingAC(false));
+    try {
+        dispatch(setIsLoadingAC(true));
+        let response = await productsAPI.getProducts(page, limit);
+        dispatch(setProductsAC(response.products));
+        dispatch(setTotalItemsCountAC(response.count));
+        dispatch(setIsLoadingAC(false));
+    } catch (e) {
+        dispatch(setNewErrorAC(e.message));
+        dispatch(setIsLoadingAC(false));
+        dispatch(setIsServerErrorAC(true));
+    }
 }
 
 export const getProductById = (id) => async (dispatch) => {
@@ -99,7 +106,6 @@ export const getProductById = (id) => async (dispatch) => {
         dispatch(setIsLoadingAC(false));
         dispatch(setNewErrorAC(null));
     } catch (e) {
-        //alert("getProductById: "+e.message);
         dispatch(setNewErrorAC(e.message));
         dispatch(setIsLoadingAC(false));
     }

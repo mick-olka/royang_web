@@ -1,12 +1,16 @@
 
 .list_form_div {
     margin-right: 1rem;
+    margin-bottom: 2rem;
 }
 
 .input_div {
     position: relative;
+    display: grid;
+    grid-template-columns: 1fr 12fr;
+    align-items: center;
 }
 
 .input_div input {
-    width: 100%;
+    width: 10rem;
 }

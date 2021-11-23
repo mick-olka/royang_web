@@ -1,0 +1,9 @@
+.text_edit_item {
+    margin-left: 1rem;
+    display: flex;
+    max-height: 5rem;
+}
+
+.text_edit_item input {
+    max-height: 1.5rem;
+}

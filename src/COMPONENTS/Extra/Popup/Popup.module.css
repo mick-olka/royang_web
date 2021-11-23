@@ -1,0 +1,24 @@
+
+.popup {
+    position: relative;
+    padding: 2rem;
+    top: 10rem;
+    width: 40rem;
+    height: 10rem;
+    z-index: 1000;
+    background-color: rgba(255,255,255,0.99);
+    text-align: center;
+    font-size: 2rem;
+    box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.55);
+    border-radius: 1rem;
+}
+
+.background {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(255,255,255,0.75);
+}

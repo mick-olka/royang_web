@@ -7,9 +7,13 @@ const ListForm = (props) => {
     let initialValues = {
         name: '',
         url: props.listUrl ? props.listUrl: "",
+        index: 0,
     };
 
-    if (props.listUrl) initialValues.name=props.initData.name;
+    if (props.listUrl) {
+        initialValues.name=props.initData.name;
+        initialValues.index=props.initData.index;
+    };
 
     return <div className={s.list_form_div} >
         <Formik initialValues={initialValues} onSubmit={(values, {resetForm}) => {
@@ -26,7 +30,11 @@ const ListForm = (props) => {
                         <label htmlFor="url">URL: </label>
                         <Field name="url"/>
                     </div>
-                    <button type="submit">Create List</button>
+                    <div className={s.input_div} >
+                        <label htmlFor="index">Index: </label>
+                        <Field type="number" name="index"/>
+                    </div>
+                    <button style={{width: "100%", fontSize: "1.5rem"}} type="submit">SAVE</button>
                 </Form>
             )}
         </Formik>

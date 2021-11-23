@@ -15,10 +15,9 @@ import InfoPage from "./InfoPage/InfoPage";
 import PhotoGalleryC from "./InfoPage/PhotoGalleryC";
 import Colors from "./InfoPage/Colors";
 
-function Content({links, lists, productsData, cartData, getProducts, setCurrentPageAC, deleteItemByIndex, createOrder, colors, ...props}) {
+function Content({links, lists, productsData, cartData, getProducts, setCurrentPageAC, deleteItemByIndex, createOrder, colors, updateItemCount, ...props}) {
 
     useEffect(()=>{
-        let lists0;
         function findAndRemove(array, property, value) {
             array.forEach(function(result, index) {
                 array[index].url="/lists/"+array[index].url;
@@ -28,11 +27,11 @@ function Content({links, lists, productsData, cartData, getProducts, setCurrentP
                 }
             });
         }
-
-        lists0=[...lists];
+        let lists0=[...lists];
         findAndRemove(lists0, 'name', 'slider');
-
     }, [lists]);
+
+    // const [showPopup, setShowPopup] = useState(false);
 
     return (
         <div>
@@ -58,7 +57,7 @@ function Content({links, lists, productsData, cartData, getProducts, setCurrentP
 
                         <Route path="/order_done" render={() => <OrderDone />}/>
 
-                        <Route path="/order" render={() => <OrderPage {...props} deleteItemByIndex={deleteItemByIndex} cartData={cartData} createOrder={createOrder} /> }/>
+                        <Route path="/order" render={() => <OrderPage {...props} deleteItemByIndex={deleteItemByIndex} cartData={cartData} createOrder={createOrder} updateItemCount={updateItemCount} /> }/>
 
                         <Route path="/find" render={() => <div>
                             <SearchPageC>
@@ -81,6 +80,13 @@ function Content({links, lists, productsData, cartData, getProducts, setCurrentP
                     </Switch>
                 </div>
             </div>
+
+            {/*{showPopup &&*/}
+            {/*<PopupWrapper onClose={()=>setShowPopup(false)} >*/}
+            {/*    {(closePopup) => (<Popup closePopup={closePopup} message={"Some Error Occurred"} />)}*/}
+            {/*</PopupWrapper>*/}
+            {/*}*/}
+            {/*<button style={{position: "absolute", zIndex: 1000}} onClick={()=>setShowPopup(true)} >POPUP</button>*/}
         </div>
     );
 }

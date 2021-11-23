@@ -1,3 +1,4 @@
+
 .content_pane {
     position: relative;
     left: 6rem;
@@ -58,6 +59,12 @@
 .admin_header {
     font-size: 1.5rem;
     display: flex;
+    justify-content: space-around;
+}
+
+.admin_header div {
+    display: inline-block;
+    margin: 0 3rem;
 }
 
 @media screen and (min-width: 1200px) {    /* for fields by sides on big screen */
@@ -77,6 +84,21 @@
     color: transparent;
 }
 
+.middle_pane_admin {
+    top: 1rem;
+}
+
+input:focus {
+    outline:none;
+}
+
+textarea:focus {
+    outline: none;
+}
+
+.test {
+    box-shadow: 1px 2px 2px 2px rgb(0, 161, 31);
+}
 /*@media screen and (max-width: 400px) {    !* for small screens *!*/
 /*    .middle_pane {*/
 /*        flex-direction: column;*/

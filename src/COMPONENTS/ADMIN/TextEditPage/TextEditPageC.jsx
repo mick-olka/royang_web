@@ -22,8 +22,6 @@ class TextEditPageC extends Component {
 
     onSubmit(formData) {
         this.props.updateText(formData.name, formData.text, formData.nav_link);
-        // console.log(formData);
-        // console.log(this.state.img);
         this.props.getAllText();
     }
 
@@ -46,8 +44,6 @@ class TextEditPageC extends Component {
                         <EditTextForm initValues={item} onSubmit={this.onSubmit} />
                     </div>)}
                 </ItemsListC>
-
-                {/*<EditTextForm onSubmit={this.onSubmit} />*/}
 
             </div>
         );

@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, {useState} from 'react';
 import s from "./ListPane.module.css";
 import ListForm from "./ListForm/ListForm";
 import {Redirect} from "react-router-dom";
@@ -7,16 +7,20 @@ import ItemsListC from "../ItemsList/ItemsListC";
 import PaginatorC from "../../Extra/Paginator/PaginatorC";
 import Loading from "../../Extra/Loading";
 
-function ListPane({listUrl, updateList, deleteList, listForm, deleteElement, getListByUrl, isLoading, setCurrentPageAC}) {
-
-    //let pn = useLocation().pathname;
-    //console.log(pn.split('/').pop());
-    //let listUrl = pn.split('/').pop();
-    //useEffect(() => getListByUrl(listUrl), [getListByUrl, listUrl]);
+function ListPane({
+                      listUrl,
+                      updateList,
+                      deleteList,
+                      listForm,
+                      deleteElement,
+                      getListByUrl,
+                      isLoading,
+                      setCurrentPageAC
+                  }) {
 
     const onSubmit = (formData) => {
         if (listUrl) {
-            updateList(listUrl, formData.name, formData.url);
+            updateList(listUrl, formData.name, formData.url, formData.index);
         }
     }
 
@@ -29,30 +33,29 @@ function ListPane({listUrl, updateList, deleteList, listForm, deleteElement, get
         deleteElement(listUrl, idArr);
     }
 
-    const onPageChanged=(pageNumber)=> {     //  WHEN RETURNED FROM SEARCH PAGE
+    const onPageChanged = (pageNumber) => {     //  WHEN RETURNED FROM SEARCH PAGE
         setCurrentPageAC(pageNumber);
         getListByUrl(listUrl, pageNumber);
     }
 
-    let [isDeleted, setIsDeleted] = useState(false);
+    let [isDeleted, setIsDeleted] = useState(false);    //  for redirecting after delete
 
-    if (isLoading || !listForm) return <div><Loading /></div>;
+    if (isLoading || !listForm) return <div><Loading/></div>;
     return (
         <div className={s.pane}>
-            <h1>{listForm.name}</h1>
-            <br/>
+            <h1 style={{textAlign: "center", fontSize: "1.8rem", display: "inline-block"}} >{listForm.name}</h1>
+            <button style={{backgroundColor: "red", display: "inline-block"}} onClick={onTypeDelete}>DELETE</button>
+            <br/><br/>
             {isDeleted && <Redirect to="/admin"/>}
-            <h1>Update List</h1>
 
             <ListForm onSubmit={onSubmit} listUrl={listUrl} initData={listForm}/>
 
-            <button onClick={onTypeDelete}>DELETE</button>
             {listForm && <ItemsListC
-                                    items={listForm.items} deleteItems={onElementsDelete}>
+                items={listForm.items} deleteItems={onElementsDelete}>
                 {item => <ProductItem item={item}/>}
             </ItemsListC>}
 
-            <PaginatorC onPageChanged={onPageChanged} />
+            <PaginatorC onPageChanged={onPageChanged}/>
 
         </div>
     );

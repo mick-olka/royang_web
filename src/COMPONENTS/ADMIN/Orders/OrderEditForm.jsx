@@ -1,30 +1,30 @@
 import React from 'react';
 import {Formik, Form, Field, FieldArray} from 'formik';
+import s from "./OrderItem.module.css";
 
 const OrderEditForm = ({initialValues, onSubmit }) => {
 
     return <div>
         <Formik initialValues={initialValues} onSubmit={values => {
             onSubmit(values)
-            //console.log(values)
         }}>
             {({values}) => (
                 <Form>
-                    <div>
+                    <div className={s.input_div} >
                         <label htmlFor="name">Name: </label>
                         <Field name="name"/>
                     </div>
-                    <div>
+                    <div className={s.input_div} >
                         <label htmlFor="phone">Phone: </label>
                         <Field name="phone"/>
                     </div>
-                    <div>
+                    <div className={s.input_div} >
                         <label htmlFor="sum">Sum: </label>
                         <Field type="number" name="sum"/>
                     </div>
-                    <div>
+                    <div className={s.input_div} >
                         <label htmlFor="message">Message: </label>
-                        <Field name="message"/>
+                        <Field name="message" component="textarea"  />
                     </div>
 
                     <FieldArray
@@ -33,13 +33,13 @@ const OrderEditForm = ({initialValues, onSubmit }) => {
                             <div>
                                 {values.cart.map(({item}, index) => (
                                         <div key={index}>
-                                            <label htmlFor="prodItem">{`cart.${index}.product.name`}</label>
+                                            <label htmlFor="prodItem">{values.cart[index].product.name}</label>
                                             <Field name={`cart.${index}.mainColor`}/>
                                             <Field name={`cart.${index}.pillColor`}/>
                                             <Field type="number" name={`cart.${index}.count`}/>
                                             <button
                                                 type="button"
-                                                onClick={() => arrayHelpers.remove(index)} // remove a friend from the list
+                                                onClick={() => arrayHelpers.remove(index)} // remove an item from the list
                                             >-
                                             </button>
 

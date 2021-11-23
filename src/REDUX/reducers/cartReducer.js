@@ -2,8 +2,6 @@ import {orderApi} from "../../API/api";
 import {setTotalItemsCountAC} from "./paginatorReducer";
 
 const ADD_ITEM_TO_CART = "cartReducer/ADD_ITEM_TO_CART";
-//const SET_SUMMARY = "cartReducer/SET_SUMMARY";
-//const ADD_TO_SUMMARY = "cartReducer/ADD_TO_SUMMARY";
 const COUNT_SUMMARY = "cartReducer/COUNT_SUMMARY";
 const SET_IS_LOADING = "cartReducer/SET_IS_LOADING";
 const SET_ORDERS = "cartReducer/SET_ORDERS";
@@ -11,6 +9,7 @@ const SET_NEW_ERROR = "cartReducer/SET_NEW_ERROR";
 const DELETE_ITEM = "cartReducer/DELETE_ITEM";
 const SET_INDEXES = "cartReducer/SET_INDEXES";
 const SET_ORDER_DATA = "cartReducer/SET_ORDER_DATA";
+const UPDATE_ITEM_COUNT = "cartReducer/UPDATE_ITEM_COUNT";
 
 let initialState = {
     isLoading: true,    //  for ADMIN
@@ -30,6 +29,17 @@ const cartReducer = (state = initialState, action) => {
             return {...state, orders: [...action.orders]}
 
         case ADD_ITEM_TO_CART:
+             // state.cart.map(i=>
+             //        if (i.code === action.item.code) return {...i, count: parseInt(i.count+action.item.count)} : {...i}
+             //    );
+            for (let i=0; i<state.cart.length; i++) {
+                if (state.cart[i].code===action.item.code) {
+                    state.cart[i].count+=parseInt(action.item.count);
+                    state.cart[i].mainColor=action.item.mainColor;
+                    state.cart[i].pillColor=action.item.pillColor;
+                    return {...state, cart: [...state.cart]}
+                }
+            }
             let newItem = {
                 product: action.item.product,
                 name: action.item.name,
@@ -68,6 +78,13 @@ const cartReducer = (state = initialState, action) => {
         case SET_ORDER_DATA:
             return { ...state, orderData: action.orderData }
 
+        case UPDATE_ITEM_COUNT:
+            return {...state, cart: state.cart.map(i=>
+                    i.index === action.index ? {...i, count: parseInt(action.count)||0} : {...i}
+                )}
+
+
+
         default:
             return state;
     }
@@ -75,16 +92,22 @@ const cartReducer = (state = initialState, action) => {
 
 const addItemToCartAC = (item) => ({type: ADD_ITEM_TO_CART, item});
 const removeItemByIndexAC = (index) => ({type: DELETE_ITEM, index});
-//const setSummaryAC = (sum) => ({type: ADD_ITEM_TO_CART, sum});
-//const addToSummaryAC = (sum) => ({type: ADD_TO_SUMMARY, sum});
 const countSummaryAC = () => ({type: COUNT_SUMMARY});
 const setIsLoadingAC = (isLoading) => ({type: SET_IS_LOADING, isLoading});
 const setOrdersAC = (orders) => ({type: SET_ORDERS, orders});
 const setNewErrorAC = (error) => ({type: SET_NEW_ERROR, error});
 const setIndexesAC = () => ({type: SET_INDEXES});
 const setOrderDataAC = (orderData) => ({ type: SET_ORDER_DATA, orderData });
+const updateItemCountAC = (index, count) => ({ type: UPDATE_ITEM_COUNT, index, count });
 
 //=====THUNKS=======
+
+export const updateItemCount = (index, count) =>
+    async (dispatch) => {
+    if (count<0) count=0;
+        dispatch(updateItemCountAC(index, count));
+        dispatch(countSummaryAC());
+    }
 
 export const addItemToCart = (item) =>
     async (dispatch) => {

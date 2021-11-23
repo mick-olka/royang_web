@@ -45,7 +45,7 @@ export const getColors = () => async (dispatch) => {
         let res = await photosAPI.getColors();
         dispatch(setColorsAC(res));
     } catch (e) {
-        alert("get_colors: "+e);
+        console.log("get_colors: "+e);
     }
 }
 
