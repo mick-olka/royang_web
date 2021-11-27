@@ -3,7 +3,6 @@ import s from "./ProductPage.module.css";
 import Slider from "../Slider/Slider";
 import ColorMenu from "./ColorMenu";
 import chairIcon from "../../../IMGS/chair.png";
-import ProductCard from "../ProductCard/ProductCard";
 import SectionsPane from "../SectionsPane/SectionsPane";
 
 function ProductPage({productData, prodId, addItemToCart, ...props}) {
@@ -51,9 +50,9 @@ function ProductPage({productData, prodId, addItemToCart, ...props}) {
     const setCount = (count) => {
         setItemForCart({...itemForCart, count: count});
     }
-    const onClickAddItemToCart = () => {
-        addItemToCart(itemForCart);
-    }
+    // const onClickAddItemToCart = () => {
+    //     addItemToCart(itemForCart);
+    // }
 
     let allImgs = [];
     for (let i = 0; i < productData.images.length; i++) {

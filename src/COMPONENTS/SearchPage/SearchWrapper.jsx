@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {NavLink, useLocation} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import PaginatorC from "../Extra/Paginator/PaginatorC";
 
 function SearchWrapper({findProducts, onPageChanged, products, setCurrentPage, setPortionNumAC, ...props}) {

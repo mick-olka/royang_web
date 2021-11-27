@@ -5,7 +5,6 @@ const ADD_ITEM_TO_CART = "cartReducer/ADD_ITEM_TO_CART";
 const COUNT_SUMMARY = "cartReducer/COUNT_SUMMARY";
 const SET_IS_LOADING = "cartReducer/SET_IS_LOADING";
 const SET_ORDERS = "cartReducer/SET_ORDERS";
-const SET_NEW_ERROR = "cartReducer/SET_NEW_ERROR";
 const DELETE_ITEM = "cartReducer/DELETE_ITEM";
 const SET_INDEXES = "cartReducer/SET_INDEXES";
 const SET_ORDER_DATA = "cartReducer/SET_ORDER_DATA";
@@ -95,7 +94,6 @@ const removeItemByIndexAC = (index) => ({type: DELETE_ITEM, index});
 const countSummaryAC = () => ({type: COUNT_SUMMARY});
 const setIsLoadingAC = (isLoading) => ({type: SET_IS_LOADING, isLoading});
 const setOrdersAC = (orders) => ({type: SET_ORDERS, orders});
-const setNewErrorAC = (error) => ({type: SET_NEW_ERROR, error});
 const setIndexesAC = () => ({type: SET_INDEXES});
 const setOrderDataAC = (orderData) => ({ type: SET_ORDER_DATA, orderData });
 const updateItemCountAC = (index, count) => ({ type: UPDATE_ITEM_COUNT, index, count });
@@ -136,13 +134,10 @@ export const getOrderById = (id) => async (dispatch) => {
         dispatch(setIsLoadingAC(true));
         let response = await orderApi.getOrderById(id);
         await dispatch(setOrderDataAC(response));
-        dispatch(setIsLoadingAC(false));
-        dispatch(setNewErrorAC(null));
     } catch (e) {
-        //alert("getProductById: "+e.message);
-        dispatch(setNewErrorAC(e.message));
-        dispatch(setIsLoadingAC(false));
+
     }
+    dispatch(setIsLoadingAC(false));
 }
 
 export const createOrder = (formData) =>

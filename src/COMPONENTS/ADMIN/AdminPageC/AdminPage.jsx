@@ -5,8 +5,6 @@ import ListForm from "../ListPage/ListForm/ListForm";
 import NotFound from "../../Extra/NotFound";
 import ChangePW from "../AuthAdmin/ChangePW";
 import Search from "../../SearchPage/Search";
-import ProductItem from "../Product/ProductItem";
-import ItemsListC from "../ItemsList/ItemsListC";
 import UpdateProductC from "../Product/UpdateProduct/UpdateProductC";
 import SearchPageC from "../../SearchPage/SearchPageC";
 import CreateProductC from "../Product/CreateProduct/CreateProductC";
@@ -16,17 +14,9 @@ import ListPaneC from "../ListPage/ListPaneC";
 import MainAdminPageC from "./MainAdminPageC";
 import SliderEditPageC from "../SliderEdit/SliderEditPageC";
 import TextEditPageC from "../TextEditPage/TextEditPageC";
-import {Helmet} from "react-helmet";
+import AdminProductsPaneC from "../ProductsPaneA/AdminProductsPaneC";
 
-function AdminPage({
-                       deleteAdminAuth, products, productsFound, lists,
-                       deleteProducts, createList, changePW,
-                       setCurrentPageAC, getProducts,
-                       updateList, deleteList, deleteElement, listPageProps, getListByUrl,
-                       chosenProduct, updateProduct, setChosenProductAC,
-                       addElement, itemsIdsArr,
-                       ...props
-                   }) {
+function AdminPage({deleteAdminAuth, products, productsFound, lists, createList, changePW, pushToHistory}) {
 
     let links = [
         {url: "/", name: "CLIENT"},
@@ -45,7 +35,7 @@ function AdminPage({
 
     let typesL = [...lists].map(l => {
         let l0 = {...l};
-        l0.url = "/ADMIN/lists/" + l0.url;
+        l0.url = "/admin/lists/" + l0.url;
         return l0;
     });
 
@@ -53,41 +43,11 @@ function AdminPage({
         createList(formData.name, formData.url);
     }
 
-    const PaneWithProducts = ({products}) => {
-
-        const updateSimilarOrRelated = (data) => {
-            updateProduct(chosenProduct._id, data);
-            console.log(data);
-            setChosenProductAC(null);
-            props.history.push("/ADMIN/products/"+chosenProduct._id);
-        }
-
-        const onSetAsSimilar =()=> {
-            let newSimilarProds = {similarProducts: [...chosenProduct.similarProducts, ...itemsIdsArr]}
-            updateSimilarOrRelated(newSimilarProds);
-        }
-
-        const onSetAsRelated =()=> {
-            let newRelatedProds = {relatedProducts: [...chosenProduct.relatedProducts, ...itemsIdsArr]}
-            updateSimilarOrRelated(newRelatedProds);
-        }
-
-        return <div>
-            {chosenProduct ? <div><h3>Choose related to {chosenProduct.name}</h3>
-                <button onClick={onSetAsRelated} >Set as related</button>
-                <button onClick={onSetAsSimilar} >Set as similar</button>
-            </div> : null}
-            <ItemsListC items={products} deleteItems={deleteProducts}>
-                {item => <ProductItem item={item}/>}
-            </ItemsListC>
-        </div>;
-    }
-
     return (
         <div>
-            <Helmet>
-                <meta name="robots" content="noindex"/>
-            </Helmet>
+            {/*<Helmet>*/}
+            {/*    <meta name="robots" content="noindex"/>*/}
+            {/*</Helmet>*/}
 
             <div className="admin_header" >
                 <div>
@@ -99,7 +59,7 @@ function AdminPage({
             <div className="middle_pane middle_pane_admin">
 
                 <div className="adminNavbar">
-                    <Search redirectTo={"/ADMIN/search"} {...props} />
+                    <Search redirectTo={"/ADMIN/search"} pushToHistory={pushToHistory} />
                     <Navbar links={links}/>
                     <p>----------------</p>
                     <p>Lists</p>
@@ -119,7 +79,7 @@ function AdminPage({
                         <Route path="/admin/new" render={() => <CreateProductC/>}/>
                         <Route path="/admin/search" render={() =>
                             <SearchPageC>
-                                <PaneWithProducts products={productsFound}/>
+                                <AdminProductsPaneC products={productsFound}/>
                             </SearchPageC>
                         }/>
 
@@ -132,7 +92,7 @@ function AdminPage({
                         <Route path="/admin/text" render={() => <TextEditPageC />}/>
 
                         <Route path="/admin" render={() => <MainAdminPageC>
-                            <PaneWithProducts products={products}/>
+                            <AdminProductsPaneC products={products}/>
                         </MainAdminPageC>}/>
                         <Route render={() => (<NotFound/>)}/>
                     </Switch>

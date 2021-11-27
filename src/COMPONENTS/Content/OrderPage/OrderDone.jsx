@@ -1,5 +1,4 @@
 import React from 'react';
-import {NavLink} from "react-router-dom";
 import global_data from "../../../REDUX/global_data";
 import s from "./OrderPage.module.css";
 

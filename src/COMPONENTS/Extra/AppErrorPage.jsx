@@ -1,15 +1,13 @@
 import React from 'react';
-import {NavLink} from "react-router-dom";
 
-function SomeError(props) {
+function AppErrorPage({error}) {
     return (
         <div>
             <p>Вибачте, у нас тимчасові технічні проблеми :(</p>
             <p>Магазин скоро повернеться</p>
-            <h1>{props.error}</h1>
-            <NavLink to={props.returnTo} >Return back</NavLink>
+            <h1>{error}</h1>
         </div>
     );
 }
 
-export default SomeError;
+export default AppErrorPage;

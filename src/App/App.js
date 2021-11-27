@@ -14,9 +14,9 @@ import {setCurrentPageAC} from "../REDUX/reducers/paginatorReducer";
 import {createOrder, deleteItemByIndex, updateItemCount} from "../REDUX/reducers/cartReducer";
 import {TextContext} from "../UTILS/text_context";
 import Loading from "../COMPONENTS/Extra/Loading";
-import SomeError from "../COMPONENTS/Extra/SomeError";
 import PopupWrapper from "../COMPONENTS/Extra/Popup/PopupWrapper";
 import Popup from "../COMPONENTS/Extra/Popup/Popup";
+import AppErrorPage from "../COMPONENTS/Extra/AppErrorPage";
 
 const AdminPageC = React.lazy(()=>import("../COMPONENTS/ADMIN/AdminPageC/AdminPageC"));
 
@@ -43,11 +43,11 @@ class App extends Component {
         this.props.initApp(this.props.paginatorData.currentPage, this.props.paginatorData.pageLimit);   //  has promise in reducer, takes time to set
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (this.props.isServerError && this.state.showPopup===false) {
-            this.setState({showPopup: true, reason: "З нашим сервером щось сталося :( Магазин скоро запрацює!"});
-        }
-    }
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     if (this.props.isServerError && this.state.showPopup===false) {
+    //         this.setState({showPopup: true, reason: "З нашим сервером щось сталося :( Магазин скоро запрацює!"});
+    //     }
+    // }
 
     componentWillUnmount() {
         window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors);
@@ -58,6 +58,8 @@ class App extends Component {
 
         if (!this.props.initialized) return <div className="App"><Loading /></div>
 
+        if (this.props.error) return <AppErrorPage error={this.props.error} />
+
         return (
             <div className="App">
 
@@ -67,12 +69,12 @@ class App extends Component {
                 </PopupWrapper>
                 }
 
-                <div id="popup_root"></div>
+                <div id="popup_root" />
                 <TextContext.Provider value={this.props.text_blocks}>
                 <Switch>
                     <Route path="/admin/auth" render={() => <AdminAuthC/>}/>
                     <Route path="/admin" render={adminPageCWithSuspense}/>
-                    <Route path="/some_error" render={()=><SomeError/>}/>
+                    <Route path="/some_error" render={()=><AppErrorPage/>}/>
                     <Route path="/" render={() => <Content
                         {...this.props}//
                         links={this.props.links}//
@@ -105,7 +107,7 @@ const mapStateToProps = (state) => {
         lists: state.listsReducer.lists,
         text_blocks: state.textReducer.text_blocks,
         colors: state.photosReducer.colors,
-        isServerError: state.mainReducer.isServerError,
+        error: state.mainReducer.error,
     });
 };
 

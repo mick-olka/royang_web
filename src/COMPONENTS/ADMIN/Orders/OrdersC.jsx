@@ -26,10 +26,6 @@ componentDidMount() {
     this.props.getOrders(1, 2);
 }
 
-    pushToHistory = (path) => {
-        this.props.history.push(path);
-    }
-
     render() {
         return (
             <OrdersPage {...this.props} />

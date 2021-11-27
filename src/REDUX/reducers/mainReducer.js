@@ -8,8 +8,7 @@ import {addItemToCart} from "./cartReducer";
 
 const SET_INITIALIZED_SUCCESS = "mainReducer/SET_INITIALIZED_SUCCESS";
 const SET_ITEMS_IDS_ARRAY = "mainReducer/SET_ITEMS_IDS_ARRAY";
-const SET_IS_SERVER_ERROR = "mainReducer/SET_IS_SERVER_ERROR";
-const SHOW_SUCCESS = "mainReducer/SHOW_SUCCESS";
+const SET_ERROR = "mainReducer/SET_ERROR";
 
 let initialState = {
     initialized: false,
@@ -25,8 +24,7 @@ let initialState = {
     ],
     itemsIdsArr: [],
     apiURL: "http://192.168.1.162:7500",
-    isServerError: false,
-    showSuccess: false,
+    error: null,
 }
 
 const mainReducer = (state = initialState, action) => {
@@ -44,11 +42,10 @@ const mainReducer = (state = initialState, action) => {
                 itemsIdsArr: action.idsArr,
             }
 
-        case SET_IS_SERVER_ERROR:
-            return {...state, isServerError: action.isError}
-
-        case SHOW_SUCCESS:
-            return {...state, showSuccess: action.show}
+        case SET_ERROR:
+            return {
+                ...state, error: action.error_text,
+            }
 
         default:
             return state;
@@ -57,30 +54,25 @@ const mainReducer = (state = initialState, action) => {
 
 const setInitializedSuccessAC = () => ({type: SET_INITIALIZED_SUCCESS});
 export const setItemsIdsArrAC = (idsArr) => ({type: SET_ITEMS_IDS_ARRAY, idsArr});
-export const setIsServerErrorAC = (isError) => ({type: SET_IS_SERVER_ERROR, isError});
-export const showSuccessAC = (show) => ({type: SHOW_SUCCESS, show});
-
-const downloadLocalStorage = (dispatch) => {
-    if (localStorage.cart) {
-        let cart = JSON.parse(localStorage.cart);
-        cart.map(i => {
-            dispatch(addItemToCart(i));
-        });
-    }
-}
+export const setErrorAC = (error_text) => ({type: SET_ERROR, error_text});
 
 //=====THUNKS=======
 
 export const initApp = (page, limit) =>
     async (dispatch) => {
         try {
-            downloadLocalStorage(dispatch);
+            if (localStorage.cart) {    //  download from storage
+                let cart = JSON.parse(localStorage.cart);
+                cart.map(i => {
+                    return dispatch(addItemToCart(i));
+                });
+            }
             await Promise.all([dispatch(checkAuth()), dispatch(getSlides()),
                 dispatch(getProducts(page, limit)), dispatch(getLists()), dispatch(getAllText()), dispatch(getColors())]);
     } catch (e) {
         console.log(e);
-        setIsServerErrorAC(true);
-    }
+        dispatch(setErrorAC("Initialization Error"));
+        }
         dispatch(setInitializedSuccessAC());
     }
 

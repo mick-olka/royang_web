@@ -4,12 +4,10 @@ import {useFormik} from "formik";
 import s from "./Search.module.css";
 import search_icon from "../../IMGS/ICONS/search.png";
 
-const Search = ({redirectTo, ...props}) => {
-
-    //let [string, setString] = useState("");
+const Search = ({redirectTo, pushToHistory}) => {
 
     const onSubmit = (string) => {
-        if (string.length>0) props.history.push(redirectTo+"?search="+string);
+        if (string.length>0) pushToHistory(redirectTo+"?search="+string);
     }
 
     return (

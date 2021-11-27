@@ -2,13 +2,11 @@ import {productsAPI} from "../../API/api";
 import {uploadThumbnail} from "./photosReducer";
 import {setTotalItemsCountAC} from "./paginatorReducer";
 import global_data from "../global_data";
-import {setIsServerErrorAC} from "./mainReducer";
 
 const SET_PRODUCTS = "productsReducer/SET_PRODUCTS";
 const SET_PRODUCT_FORM = "productsReducer/SET_PRODUCT_FORM";
 const SET_IS_LOADING = "productsReducer/SET_IS_LOADING";
 const SET_ID_OF_CREATED = "productsReducer/SET_ID_OF_CREATED";
-const SET_NEW_ERROR = "productsReducer/SET_HAS_ERROR";
 const SET_FOUND_PRODUCTS = "productsReducer/SET_FOUND_PRODUCTS";
 const SET_CHOSEN_PRODUCT = "productsReducer/SET_CHOSEN_PRODUCT";
 
@@ -17,7 +15,6 @@ let initialState = {
     chosenItemsIds: [],
     chosenProduct: null,
     productsFound: [],
-    newError: null,
     idOfCreated: null,
     productData: {
         _id: null,
@@ -54,11 +51,6 @@ const productsReducer = (state=initialState, action) => {
                 ...state, idOfCreated: action.id,
             }
 
-        case SET_NEW_ERROR:
-            return {
-                ...state, newError: action.error,
-            }
-
         case SET_FOUND_PRODUCTS:
             return {
                 ...state, productsFound: [...action.products],
@@ -78,7 +70,6 @@ const setProductsAC = (products) => ({type: SET_PRODUCTS, products});
 export const setProductFormAC = (product) => ({type: SET_PRODUCT_FORM, product});
 const setIsLoadingAC = (isLoading) => ({type: SET_IS_LOADING, isLoading});
 export const setIdOfCreatedAC = (id) => ({type: SET_ID_OF_CREATED, id});
-const setNewErrorAC = (error) => ({type: SET_NEW_ERROR, error});
 const setProductsFoundAC = (products) => ({type: SET_FOUND_PRODUCTS, products});
 export const setChosenProductAC = (data) => ({type: SET_CHOSEN_PRODUCT, data}); //  {prodId, name}  for related choose
 
@@ -90,12 +81,10 @@ export const getProducts = (page, limit=prodLim) => async (dispatch) => {
         let response = await productsAPI.getProducts(page, limit);
         dispatch(setProductsAC(response.products));
         dispatch(setTotalItemsCountAC(response.count));
-        dispatch(setIsLoadingAC(false));
     } catch (e) {
-        dispatch(setNewErrorAC(e.message));
-        dispatch(setIsLoadingAC(false));
-        dispatch(setIsServerErrorAC(true));
+
     }
+    dispatch(setIsLoadingAC(false));
 }
 
 export const getProductById = (id) => async (dispatch) => {
@@ -103,12 +92,10 @@ export const getProductById = (id) => async (dispatch) => {
         dispatch(setIsLoadingAC(true));
         let response = await productsAPI.getProductById(id);
         await dispatch(setProductFormAC(response));
-        dispatch(setIsLoadingAC(false));
-        dispatch(setNewErrorAC(null));
     } catch (e) {
-        dispatch(setNewErrorAC(e.message));
-        dispatch(setIsLoadingAC(false));
+
     }
+    dispatch(setIsLoadingAC(false));
 }
 
 export const createProduct = (formData, thumbnail) =>

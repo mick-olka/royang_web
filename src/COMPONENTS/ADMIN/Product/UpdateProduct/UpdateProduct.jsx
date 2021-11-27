@@ -3,7 +3,6 @@ import s from "../Product.module.css";
 import ProductForm from "../ProductForm/ProductForm";
 import chairIcon from "../../../../IMGS/chair.png";
 import PhotosPane from "../PhotosPane/PhotosPane";
-import SomeError from "../../../Extra/SomeError";
 import ListsSelect from "../../ListSelect/ListsSelect";
 import ItemsListC from "../../ItemsList/ItemsListC";
 import Loading from "../../../Extra/Loading";
@@ -14,7 +13,7 @@ function UpdateProduct({
                            pushToHistory, setChosenProductAC, updateProductProps,
                        }) {
 
-    let {lists, newError, productData, isLoading} = updateProductProps;
+    let {lists, productData, isLoading} = updateProductProps;
     let thumbnail = null;
 
     const onSubmit = (formData) => {
@@ -59,10 +58,6 @@ function UpdateProduct({
     let typesList = productData.types.map(t => {
         return <p key={t}>{t}</p>
     });
-
-    if (newError) {
-        return <SomeError returnTo="/admin" error={newError}/>
-    }
 
     if (isLoading && !productData._id) return <div><Loading/></div>;
 
