@@ -9,6 +9,7 @@ import {addItemToCart} from "./cartReducer";
 const SET_INITIALIZED_SUCCESS = "mainReducer/SET_INITIALIZED_SUCCESS";
 const SET_ITEMS_IDS_ARRAY = "mainReducer/SET_ITEMS_IDS_ARRAY";
 const SET_IS_SERVER_ERROR = "mainReducer/SET_IS_SERVER_ERROR";
+const SHOW_SUCCESS = "mainReducer/SHOW_SUCCESS";
 
 let initialState = {
     initialized: false,
@@ -25,6 +26,7 @@ let initialState = {
     itemsIdsArr: [],
     apiURL: "http://192.168.1.162:7500",
     isServerError: false,
+    showSuccess: false,
 }
 
 const mainReducer = (state = initialState, action) => {
@@ -45,6 +47,9 @@ const mainReducer = (state = initialState, action) => {
         case SET_IS_SERVER_ERROR:
             return {...state, isServerError: action.isError}
 
+        case SHOW_SUCCESS:
+            return {...state, showSuccess: action.show}
+
         default:
             return state;
     }
@@ -53,6 +58,7 @@ const mainReducer = (state = initialState, action) => {
 const setInitializedSuccessAC = () => ({type: SET_INITIALIZED_SUCCESS});
 export const setItemsIdsArrAC = (idsArr) => ({type: SET_ITEMS_IDS_ARRAY, idsArr});
 export const setIsServerErrorAC = (isError) => ({type: SET_IS_SERVER_ERROR, isError});
+export const showSuccessAC = (show) => ({type: SHOW_SUCCESS, show});
 
 const downloadLocalStorage = (dispatch) => {
     if (localStorage.cart) {
