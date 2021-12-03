@@ -45,9 +45,6 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists, createList,
 
     return (
         <div>
-            {/*<Helmet>*/}
-            {/*    <meta name="robots" content="noindex"/>*/}
-            {/*</Helmet>*/}
 
             <div className="admin_header" >
                 <div>
@@ -59,7 +56,7 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists, createList,
             <div className="middle_pane middle_pane_admin">
 
                 <div className="adminNavbar">
-                    <Search redirectTo={"/ADMIN/search"} pushToHistory={pushToHistory} />
+                    <Search redirectTo={"/admin/search"} pushToHistory={pushToHistory} />
                     <Navbar links={links}/>
                     <p>----------------</p>
                     <p>Lists</p>

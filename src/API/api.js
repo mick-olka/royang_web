@@ -1,86 +1,97 @@
 import * as axios from "axios";
+import {setErrorF} from "../App/App";
 
 export const apiURL = 'http://192.168.1.164:7500/';
 
 const instance = axios.create({
     withCredentials: true,
     baseURL: apiURL,
-    headers: {
-
-    },
+    headers: {},
 });
+
+const showPopup = (text) => {
+    let small_popup = document.getElementById("small_popup");
+    small_popup.innerText = text;
+    small_popup.style.right = "1px";
+    small_popup.style.opacity="1";
+    setTimeout(() => {
+        small_popup.style.right = "-15rem";
+        small_popup.style.opacity="0";
+    }, 2000);
+}
 
 export const productsAPI = {
 
-    getProducts (page=1, limit=6) {
+    getProducts(page = 1, limit = 6) {
         return instance.get(
             `products?page=${page}&limit=${limit}`,
         ).then(response => {
+            console.log(response);
             return response.data;
         });
     },
 
-    getProductById (id) {
+    getProductById(id) {
         return instance.get(
-            'products/'+id,
+            'products/' + id,
         ).then(response => {
             return response.data;
         });
     },
 
-    createProduct ({name, code, price, oldPrice, description, features}) {
+    createProduct(productData) {
         return instance.post(
             'products',
-            { name: name, code: code, price: price, oldPrice: oldPrice, features: features, description: description }
+            {...productData}
         ).then(res => {
             return res.data;
         });
     },
 
-    updateProduct (id, formData) {
+    updateProduct(id, formData) {
         return instance.patch(
-            'products/'+id,
-            { ...formData }
+            'products/' + id,
+            {...formData}
         ).then(res => {
             return res.data;
         });
     },
 
-    deleteProduct (id) {
+    deleteProduct(id) {
         return instance.delete(
-            'products/'+id,
+            'products/' + id,
         ).then(res => {
             return res.data;
         });
     },
 
-    findProducts (str="", page=1, limit=2) {
+    findProducts(str = "", page = 1, limit = 2) {
         return instance.get(
-          `search?str=${str}&page=${page}&limit=${limit}`,
+            `search?str=${str}&page=${page}&limit=${limit}`,
         ).then(res => {
             return res.data;
-            });
+        });
     }
 
 }
 
 export const photosAPI = {
 
-    setThumbnail (id, file) {
+    setThumbnail(id, file) {
         let formData = new FormData();
         formData.append("thumbnail", file);
         return instance.post(
-            'photos/thumbnail/'+id, formData,
-            {headers: {"Content-Type": "multipart/form-data"} },
+            'photos/thumbnail/' + id, formData,
+            {headers: {"Content-Type": "multipart/form-data"}},
         ).then(response => {
             return response.data;
         });
     },
 
-    addPhotos (id, files, mainColor, pillColor) {
+    addPhotos(id, files, mainColor, pillColor) {
         let formData = new FormData();
         //formData.append("pathArr", files);
-        for (let i=0; i<files.length; i++) {
+        for (let i = 0; i < files.length; i++) {
             formData.append('pathArr', files[i]);
         }
         formData.append("mainColor", mainColor);
@@ -88,14 +99,14 @@ export const photosAPI = {
         console.log(files);
         console.log(formData);
         return instance.post(
-            'photos/'+id, formData,
-            {headers: {"Content-Type": "multipart/form-data"} },
+            'photos/' + id, formData,
+            {headers: {"Content-Type": "multipart/form-data"}},
         ).then(response => {
             return response.data;
         });
     },
 
-    deletePhotos (id, photosId) {
+    deletePhotos(id, photosId) {
         return instance.delete(
             `photos/${id}/${photosId}`,
         ).then(response => {
@@ -103,7 +114,7 @@ export const photosAPI = {
         });
     },
 
-    getGallery () {
+    getGallery() {
         return instance.get(
             `photos/gallery`,
         ).then(response => {
@@ -111,7 +122,7 @@ export const photosAPI = {
         });
     },
 
-    getColors () {
+    getColors() {
         return instance.get(
             `photos/colors`,
         ).then(response => {
@@ -123,33 +134,41 @@ export const photosAPI = {
 
 export const adminAPI = {
 
-    setAuth (password) {
+    setAuth(password) {
         return instance.post(
             'admin/login',
             {data: password}
         ).then(response => {
+            console.log(response);
             return response.data;
+        }).catch(function (error) {
+            if (error.response) {
+                // console.log(error.response.data);
+                // console.log(error.response.status);
+                showPopup(error.response.data.error);
+            }
         });
     },
 
-    getAuth () {
+    getAuth() {
         return instance.get(
             'admin/login/check',
         ).then(response => {
+            console.log(response);
             return response.data;
         });
     },
 
-    changePW (password, oldPassword) {
+    changePW(password, oldPassword) {
         return instance.post(
             'admin/login/pw',
             {data: password, oldData: oldPassword}
-        ).then(response=>{
+        ).then(response => {
             return response.data;
         })
     },
 
-    deleteAuth () {
+    deleteAuth() {
         return instance.delete(
             'admin/login',
         ).then(response => {
@@ -160,7 +179,7 @@ export const adminAPI = {
 
 export const listsAPI = {
 
-    getLists () {
+    getLists() {
         return instance.get(
             'lists',
         ).then(response => {
@@ -168,7 +187,7 @@ export const listsAPI = {
         });
     },
 
-    getListByUrl (url, page=1, limit=2) {
+    getListByUrl(url, page = 1, limit = 2) {
         return instance.get(
             `lists/${url}?page=${page}&limit=${limit}`,
         ).then(response => {
@@ -176,42 +195,42 @@ export const listsAPI = {
         });
     },
 
-    createList (name, url) {
-            return instance.post(
-                'lists/',
-                { name: name, url: url }
-            ).then(res => {
-                return res.data;
-            });
-    },
-
-    updateList (url, name, newUrl, index=0) {
-        return instance.patch(
-            'lists/'+url,
-            { name: name, url: newUrl, index: index }
-        ).then(res => {
-            return res.data;
-        });
-    },
-
-    deleteList (url) {
-        return instance.delete(
-            'lists/'+url,
-        ).then(res => {
-            return res.data;
-        });
-    },
-
-    addElement (listUrl, prodId) {
+    createList(name, url) {
         return instance.post(
-           'list_elements/'+listUrl,
+            'lists/',
+            {name: name, url: url}
+        ).then(res => {
+            return res.data;
+        });
+    },
+
+    updateList(url, name, newUrl, index = 0) {
+        return instance.patch(
+            'lists/' + url,
+            {name: name, url: newUrl, index: index}
+        ).then(res => {
+            return res.data;
+        });
+    },
+
+    deleteList(url) {
+        return instance.delete(
+            'lists/' + url,
+        ).then(res => {
+            return res.data;
+        });
+    },
+
+    addElement(listUrl, prodId) {
+        return instance.post(
+            'list_elements/' + listUrl,
             {prodId: prodId}
         ).then(res => {
             return res.data;
         });
     },
 
-    deleteElement (listUrl, prodId) {
+    deleteElement(listUrl, prodId) {
         return instance.delete(
             `list_elements/${listUrl}/${prodId}`,
             {prodId: prodId}
@@ -224,7 +243,7 @@ export const listsAPI = {
 
 export const orderApi = {
 
-    getOrders (page=1, limit=6) {
+    getOrders(page = 1, limit = 6) {
         return instance.get(
             `orders?page=${page}&limit=${limit}`,
         ).then(response => {
@@ -232,35 +251,35 @@ export const orderApi = {
         });
     },
 
-    getOrderById (id) {
+    getOrderById(id) {
         return instance.get(
-            'orders/'+id,
+            'orders/' + id,
         ).then(response => {
             return response.data;
         });
     },
 
-    createOrder ({name, phone, message, cart, sum}) {
+    createOrder({name, phone, message, cart, sum}) {
         return instance.post(
             'orders',
-            { name: name, phone: phone, message: message, cart: cart, sum: sum }
+            {name: name, phone: phone, message: message, cart: cart, sum: sum}
         ).then(res => {
             return res.data;
         });
     },
 
-    updateOrder (id, { name, phone, message, cart, sum, status }) {
+    updateOrder(id, {name, phone, message, cart, sum, status}) {
         return instance.patch(
-            'orders/'+id,
-            { name: name, phone: phone, message: message, cart: cart, sum: sum, status: status }
+            'orders/' + id,
+            {name: name, phone: phone, message: message, cart: cart, sum: sum, status: status}
         ).then(res => {
             return res.data;
         });
     },
 
-    deleteOrder (id) {
+    deleteOrder(id) {
         return instance.delete(
-            'orders/'+id,
+            'orders/' + id,
         ).then(res => {
             return res.data;
         });
@@ -270,7 +289,7 @@ export const orderApi = {
 
 export const sliderApi = {
 
-    getSlides () {
+    getSlides() {
         return instance.get(
             `slider`,
         ).then(response => {
@@ -278,30 +297,24 @@ export const sliderApi = {
         });
     },
 
-    createSlide ({text, lower_text, img, nav_link}) {
+    createSlide({text, lower_text, img, nav_link}) {
 
         let formData = new FormData();
         formData.append("img", img);
         formData.append("text", text);
         formData.append("lower_text", lower_text);
         formData.append("nav_link", nav_link);
-        // return instance.post(
-        //     'photos/thumbnail/'+id, formData,
-        //     {headers: {"Content-Type": "multipart/form-data"} },
-        // ).then(response => {
-        //     return response.data;
-        // });
         return instance.post(
             'slider', formData,
-            {headers: {"Content-Type": "multipart/form-data"} },
+            {headers: {"Content-Type": "multipart/form-data"}},
         ).then(res => {
             return res.data;
         });
     },
 
-    deleteSlide (id) {
+    deleteSlide(id) {
         return instance.delete(
-            'slider/'+id,
+            'slider/' + id,
         ).then(res => {
             return res.data;
         });
@@ -311,7 +324,7 @@ export const sliderApi = {
 
 export const textAPI = {
 
-    getAllText () {
+    getAllText() {
         return instance.get(
             'text',
         ).then(response => {
@@ -319,7 +332,7 @@ export const textAPI = {
         });
     },
 
-    getTextByName (name) {
+    getTextByName(name) {
         return instance.get(
             `text/${name}`,
         ).then(response => {
@@ -327,27 +340,27 @@ export const textAPI = {
         });
     },
 
-    createText (name, text, nav_link) {
+    createText(name, text, nav_link) {
         return instance.post(
             'text/',
-            { name: name, text: text, nav_link: nav_link }
+            {name: name, text: text, nav_link: nav_link}
         ).then(res => {
             return res.data;
         });
     },
 
-    updateText (name, text, nav_link) {
+    updateText(name, text, nav_link) {
         return instance.patch(
-            'text/'+name,
-            { name: name, text: text, nav_link: nav_link }
+            'text/' + name,
+            {name: name, text: text, nav_link: nav_link}
         ).then(res => {
             return res.data;
         });
     },
 
-    deleteText (name) {
+    deleteText(name) {
         return instance.delete(
-            'text/'+name,
+            'text/' + name,
         ).then(res => {
             return res.data;
         });

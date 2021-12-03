@@ -5,7 +5,7 @@ import {BrowserRouter, Route, withRouter} from "react-router-dom";
 import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import store from "../REDUX/reduxStore";
-import {initApp} from "../REDUX/reducers/mainReducer";
+import {initApp, setError} from "../REDUX/reducers/mainReducer";
 import Content from "../COMPONENTS/Content/Content";
 import {Switch} from "react-router-dom";
 import AdminAuthC from "../COMPONENTS/ADMIN/AuthAdmin/AdminAuthC";
@@ -26,6 +26,10 @@ const adminPageCWithSuspense =()=> {
     </React.Suspense>
 }
 
+export const setErrorF = (err_text) => {
+    this.props.setError(err_text);
+}
+
 class App extends Component {
 
     constructor(props) {
@@ -44,8 +48,15 @@ class App extends Component {
     }
 
     // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     if (this.props.isServerError && this.state.showPopup===false) {
-    //         this.setState({showPopup: true, reason: "З нашим сервером щось сталося :( Магазин скоро запрацює!"});
+    //     if (this.props.error!==null) {
+    //         let small_popup = document.getElementById("small_popup");
+    //         small_popup.innerText = this.props.error;
+    //         small_popup.style.right = "1px";
+    //         small_popup.style.opacity="1";
+    //         setTimeout(() => {
+    //             small_popup.style.right = "-5rem";
+    //             small_popup.style.opacity="0";
+    //         }, 1000);
     //     }
     // }
 
@@ -58,7 +69,7 @@ class App extends Component {
 
         if (!this.props.initialized) return <div className="App"><Loading /></div>
 
-        if (this.props.error) return <AppErrorPage error={this.props.error} />
+        // if (this.props.error) return <AppErrorPage error={this.props.error} />
 
         return (
             <div className="App">
@@ -70,6 +81,8 @@ class App extends Component {
                 }
 
                 <div id="popup_root" />
+                <div id="small_popup" />
+
                 <TextContext.Provider value={this.props.text_blocks}>
                 <Switch>
                     <Route path="/admin/auth" render={() => <AdminAuthC/>}/>
@@ -114,7 +127,7 @@ const mapStateToProps = (state) => {
 let AppContainer = compose(     //  HOC FOR APP TO PROVIDE MSTP AND MDTP
     withRouter,
     connect(mapStateToProps, {initApp,
-        setCurrentPageAC, getProducts, deleteItemByIndex, createOrder, updateItemCount})
+        setCurrentPageAC, getProducts, deleteItemByIndex, createOrder, updateItemCount, setError})
 )(App);
 
 //==============================================
@@ -123,9 +136,7 @@ let AppWrapperF = (props) => {
     return (
         <BrowserRouter>
             <Provider store={store}>
-                {/*<MainContextProvider>*/}
                 <AppContainer/>
-                {/*</MainContextProvider>*/}
             </Provider>
         </BrowserRouter>
     );

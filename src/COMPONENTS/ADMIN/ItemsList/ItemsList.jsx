@@ -1,21 +1,27 @@
 import React, {useEffect} from 'react';
 import s from "./ItemsList.module.css";
+import {useSmallPopup} from "../../../hooks/small_popup.hook";
 
 function ItemsList({items, deleteItems, itemsIdsArr, setItemsIdArr, ...props}) {
     let isMouseDown = false;
     document.body.onmousedown = () => {isMouseDown = true}
     document.body.onmouseup = () => {isMouseDown = false}
 
+    const showSmallPopup = useSmallPopup();
+
     const uncheckAll = () => {
         setItemsIdArr([]);
     }
 
+    useEffect(()=>{
+        setItemsIdArr([]);
+    }, [setItemsIdArr]);
+
     useEffect(()=> {
         for (let i = 0; i < items.length; i++) {
-            if (itemsIdsArr.indexOf(items[i]._id) !== -1) {
-                document.getElementById(items[i]._id).checked = true;
-            } else document.getElementById(items[i]._id).checked = false;
+            document.getElementById(items[i]._id).checked = itemsIdsArr.indexOf(items[i]._id) !== -1;
         }
+        showSmallPopup(itemsIdsArr.length + " items");
     }, [items, itemsIdsArr]);
 
     const onCheckboxClick = (id) => {

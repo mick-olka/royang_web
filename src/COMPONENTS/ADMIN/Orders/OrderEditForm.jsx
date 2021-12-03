@@ -1,6 +1,6 @@
 import React from 'react';
 import {Formik, Form, Field, FieldArray} from 'formik';
-import s from "./OrderItem.module.css";
+import s from "./Orders.module.css";
 
 const OrderEditForm = ({initialValues, onSubmit }) => {
 

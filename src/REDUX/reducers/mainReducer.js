@@ -58,6 +58,12 @@ export const setErrorAC = (error_text) => ({type: SET_ERROR, error_text});
 
 //=====THUNKS=======
 
+export const setError = (error_text) => (dispatch)=>{
+    dispatch(setErrorAC(error_text));
+    setTimeout(()=>{dispatch(setErrorAC(null))}, 1000);
+}
+
+
 export const initApp = (page, limit) =>
     async (dispatch) => {
         try {

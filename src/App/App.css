@@ -6,6 +6,7 @@
   --c_bright_orange: #f8cca4;
   --c_transparent_orange: rgba(234, 99, 5, 0.82);
   --c_black_purple: #25192B;
+  overflow-x: hidden;
 }
 
 body, .root, .middle_pane {

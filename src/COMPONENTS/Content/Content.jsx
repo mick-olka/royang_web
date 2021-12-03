@@ -80,13 +80,6 @@ function Content({links, lists, productsData, cartData, getProducts, setCurrentP
                     </Switch>
                 </div>
             </div>
-
-            {/*{showPopup &&*/}
-            {/*<PopupWrapper onClose={()=>setShowPopup(false)} >*/}
-            {/*    {(closePopup) => (<Popup closePopup={closePopup} message={"Some Error Occurred"} />)}*/}
-            {/*</PopupWrapper>*/}
-            {/*}*/}
-            {/*<button style={{position: "absolute", zIndex: 1000}} onClick={()=>setShowPopup(true)} >POPUP</button>*/}
         </div>
     );
 }
