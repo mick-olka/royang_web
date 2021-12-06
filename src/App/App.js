@@ -37,6 +37,10 @@ class App extends Component {
         this.state={showPopup: false, reason: null};
     }
 
+    pushToHistory = (path) => {
+        this.props.history.push(path);
+    }
+
     catchAllUnhandledErrors = (reason, promise) => {
         this.setState({showPopup: true, reason: "Виникла Якась Помилка :("});
     }
@@ -46,19 +50,6 @@ class App extends Component {
         window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors);
         this.props.initApp(this.props.paginatorData.currentPage, this.props.paginatorData.pageLimit);   //  has promise in reducer, takes time to set
     }
-
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     if (this.props.error!==null) {
-    //         let small_popup = document.getElementById("small_popup");
-    //         small_popup.innerText = this.props.error;
-    //         small_popup.style.right = "1px";
-    //         small_popup.style.opacity="1";
-    //         setTimeout(() => {
-    //             small_popup.style.right = "-5rem";
-    //             small_popup.style.opacity="0";
-    //         }, 1000);
-    //     }
-    // }
 
     componentWillUnmount() {
         window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors);
@@ -100,6 +91,7 @@ class App extends Component {
                         createOrder={this.props.createOrder}//
                         colors={this.props.colors}
                         updateItemCount={this.props.updateItemCount}
+                        pushToHistory={this.pushToHistory}
                     />}/>
                 </Switch>
                 </TextContext.Provider>
