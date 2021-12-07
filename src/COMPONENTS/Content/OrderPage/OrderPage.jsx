@@ -3,7 +3,7 @@ import OrderForm from "./OrderForm";
 import s from "./OrderPage.module.css"
 import {NavLink} from "react-router-dom";
 
-function OrderPage({cartData, deleteItemByIndex, createOrder, updateItemCount, ...props}) {
+function OrderPage({cartData, deleteItemByIndex, createOrder, updateItemCount, pushToHistory}) {
 
     let [alert, setAlert] =useState(null);  //  in case user haven't chosen product and pressed confirm
 
@@ -19,7 +19,7 @@ function OrderPage({cartData, deleteItemByIndex, createOrder, updateItemCount, .
             for (let i=0; i<cartData.cart.length; i++) {
                 deleteItemByIndex(cartData.cart[i].index);
             }
-            props.history.push("/order_done");
+            pushToHistory("/order_done");
         }
         else setAlert("Спочатку Оберіть Товар :)");
     }

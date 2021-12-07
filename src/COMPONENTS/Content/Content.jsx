@@ -15,7 +15,7 @@ import InfoPage from "./InfoPage/InfoPage";
 import PhotoGalleryC from "./InfoPage/PhotoGalleryC";
 import Colors from "./InfoPage/Colors";
 
-function Content({links, lists, productsData, cartData, getProducts, setCurrentPageAC, deleteItemByIndex, createOrder, colors, updateItemCount, ...props}) {
+function Content({links, lists, productsData, cartData, getProducts, setCurrentPageAC, deleteItemByIndex, createOrder, colors, updateItemCount, pushToHistory}) {
 
     useEffect(()=>{
         function findAndRemove(array, property, value) {
@@ -31,23 +31,17 @@ function Content({links, lists, productsData, cartData, getProducts, setCurrentP
         findAndRemove(lists0, 'name', 'slider');
     }, [lists]);
 
-    // const [showPopup, setShowPopup] = useState(false);
-
     return (
         <div>
             <Header links={links} />
             <div className="middle_pane">
 
                 <div className="side_pane" >
-                    <Search redirectTo={"/find"} {...props} />
+                    <Search redirectTo={"/find"} pushToHistory={pushToHistory} />
                     <Navbar links={lists}/>
-
-
                 </div>
                 <div className="content_pane">
-                    {/*<div className="horizontal_navbar" >*/}
-                    {/*    <Navbar fontSize={"0.5rem"} links={links}/>*/}
-                    {/*</div>*/}
+
                     <Switch>
                         <Route path="/info" render={() => <InfoPage /> }/>
 
@@ -57,7 +51,7 @@ function Content({links, lists, productsData, cartData, getProducts, setCurrentP
 
                         <Route path="/order_done" render={() => <OrderDone />}/>
 
-                        <Route path="/order" render={() => <OrderPage {...props} deleteItemByIndex={deleteItemByIndex} cartData={cartData} createOrder={createOrder} updateItemCount={updateItemCount} /> }/>
+                        <Route path="/order" render={() => <OrderPage pushToHistory={pushToHistory} deleteItemByIndex={deleteItemByIndex} cartData={cartData} createOrder={createOrder} updateItemCount={updateItemCount} /> }/>
 
                         <Route path="/find" render={() => <div>
                             <SearchPageC>
@@ -74,8 +68,6 @@ function Content({links, lists, productsData, cartData, getProducts, setCurrentP
                             setCurrentPageAC={setCurrentPageAC}
                             getProducts={getProducts}
                         />}/>
-
-                        {/*<Route path="*" render={()=><NotFound />}/>*/}
 
                     </Switch>
                 </div>

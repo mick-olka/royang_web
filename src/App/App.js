@@ -37,6 +37,10 @@ class App extends Component {
         this.state={showPopup: false, reason: null};
     }
 
+    pushToHistory = (path) => {
+        this.props.history.push(path);
+    }
+
     catchAllUnhandledErrors = (reason, promise) => {
         this.setState({showPopup: true, reason: "Виникла Якась Помилка :("});
     }
@@ -87,6 +91,7 @@ class App extends Component {
                         createOrder={this.props.createOrder}//
                         colors={this.props.colors}
                         updateItemCount={this.props.updateItemCount}
+                        pushToHistory={this.pushToHistory}
                     />}/>
                 </Switch>
                 </TextContext.Provider>

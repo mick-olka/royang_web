@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import s from "./ColorMenu.module.css"
+import {showPopup} from "../../../API/api";
 
 function ColorMenu({colors, setColors, reset}) {  //  colors = { name: Str, src: Url }
 
@@ -12,11 +13,13 @@ function ColorMenu({colors, setColors, reset}) {  //  colors = { name: Str, src:
     const onSetColors =(id) => {
         setColors(id);
         setChosenId(id);
+        showPopup("Вибрано колір");
     }
 
     const onReset =()=> {
         reset();
         setChosenId(null);
+        showPopup("Колір скинуто");
     }
 
     let items = colors.map(i=> {
@@ -41,6 +44,7 @@ function ColorMenu({colors, setColors, reset}) {  //  colors = { name: Str, src:
             <button className={s.x_btn} onClick={toggleMenu} > </button>
 
             {items}
+
         </div>
         </div>
     );
