@@ -43,7 +43,8 @@ class MainAdminPageC extends React.Component {
     render() {
         return (
             <div>
-                {this.props.itemsIdsArr.length>0 && <ListsSelect lists={this.props.lists} addElement={this.props.addElement} prodIdArr={this.props.itemsIdsArr} />}
+                {this.props.itemsIdsArr.length>0 &&
+                <div style={{position: "relative", left: "-16px"}} ><ListsSelect lists={this.props.lists} addElement={this.props.addElement} prodIdArr={this.props.itemsIdsArr} /></div>}
                 {this.props.children}
                 <PaginatorC onPageChanged={this.onPageChanged} />
             </div>

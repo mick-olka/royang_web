@@ -47,19 +47,6 @@ class App extends Component {
         this.props.initApp(this.props.paginatorData.currentPage, this.props.paginatorData.pageLimit);   //  has promise in reducer, takes time to set
     }
 
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     if (this.props.error!==null) {
-    //         let small_popup = document.getElementById("small_popup");
-    //         small_popup.innerText = this.props.error;
-    //         small_popup.style.right = "1px";
-    //         small_popup.style.opacity="1";
-    //         setTimeout(() => {
-    //             small_popup.style.right = "-5rem";
-    //             small_popup.style.opacity="0";
-    //         }, 1000);
-    //     }
-    // }
-
     componentWillUnmount() {
         window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors);
     }
