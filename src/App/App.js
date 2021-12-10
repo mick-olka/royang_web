@@ -60,7 +60,8 @@ class App extends Component {
 
         if (!this.props.initialized) return <div className="App"><Loading /></div>
 
-        // if (this.props.error) return <AppErrorPage error={this.props.error} />
+
+        if (this.props.error==="Initialization Error") return <AppErrorPage error={this.props.error} />
 
         return (
             <div className="App">
