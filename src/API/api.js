@@ -1,8 +1,7 @@
 import * as axios from "axios";
-import {setErrorF} from "../App/App";
 
 export const apiURL = 'http://192.168.1.164:7500/';
-
+axios.defaults.withCredentials = true;
 const instance = axios.create({
     withCredentials: true,
     baseURL: apiURL,
@@ -96,8 +95,6 @@ export const photosAPI = {
         }
         formData.append("mainColor", mainColor);
         formData.append("pillColor", pillColor);
-        console.log(files);
-        console.log(formData);
         return instance.post(
             'photos/' + id, formData,
             {headers: {"Content-Type": "multipart/form-data"}},
@@ -154,7 +151,6 @@ export const adminAPI = {
         return instance.get(
             'admin/login/check',
         ).then(response => {
-            console.log(response);
             return response.data;
         });
     },
