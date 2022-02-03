@@ -7,7 +7,7 @@ function ItemsList({items, deleteItems, itemsIdsArr, setItemsIdArr, ...props}) {
     document.body.onmousedown = () => {isMouseDown = true}
     document.body.onmouseup = () => {isMouseDown = false}
 
-    const showSmallPopup = useSmallPopup();
+    //const showSmallPopup = useSmallPopup();
 
     const uncheckAll = () => {
         setItemsIdArr([]);
@@ -21,7 +21,7 @@ function ItemsList({items, deleteItems, itemsIdsArr, setItemsIdArr, ...props}) {
         for (let i = 0; i < items.length; i++) {
             document.getElementById(items[i]._id).checked = itemsIdsArr.indexOf(items[i]._id) !== -1;
         }
-        showSmallPopup(itemsIdsArr.length + " items");
+        //showSmallPopup(itemsIdsArr.length + " items");
     }, [items, itemsIdsArr]);
 
     const onCheckboxClick = (id) => {

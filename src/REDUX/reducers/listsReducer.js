@@ -96,7 +96,6 @@ export const updateList = (url, name, newUrl, index) =>
             for (let i=0; i<urlArr.length; i++) {
                 let res = await listsAPI.addElement(urlArr[i], prodId);
                 if (res.code === 0) {
-                    //dispatch(getListByUrl(urlArr[i]));
                     dispatch(getProductById(prodId));
                 }
             }

@@ -136,12 +136,9 @@ export const adminAPI = {
             'admin/login',
             {data: password}
         ).then(response => {
-            console.log(response);
             return response.data;
         }).catch(function (error) {
             if (error.response) {
-                // console.log(error.response.data);
-                // console.log(error.response.status);
                 showPopup(error.response.data.error);
             }
         });

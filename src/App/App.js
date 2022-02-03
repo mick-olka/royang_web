@@ -80,20 +80,21 @@ class App extends Component {
                     <Route path="/admin/auth" render={() => <AdminAuthC/>}/>
                     <Route path="/admin" render={adminPageCWithSuspense}/>
                     <Route path="/some_error" render={()=><AppErrorPage/>}/>
-                    <Route path="/" render={() => <Content
-                        {...this.props}//
-                        links={this.props.links}//
-                        lists={this.props.lists}//
-                        productsData={this.props.productsData}//
-                        setCurrentPageAC={this.props.setCurrentPageAC}//
-                        getProducts={this.props.getProducts}//
-                        cartData={this.props.cartData}//
-                        deleteItemByIndex={this.props.deleteItemByIndex}//
-                        createOrder={this.props.createOrder}//
-                        colors={this.props.colors}
-                        updateItemCount={this.props.updateItemCount}
-                        pushToHistory={this.pushToHistory}
-                    />}/>
+                    {/*<Route path="/" render={() => <Content*/}
+                    {/*    {...this.props}//*/}
+                    {/*    links={this.props.links}//*/}
+                    {/*    lists={this.props.lists}//*/}
+                    {/*    productsData={this.props.productsData}//*/}
+                    {/*    setCurrentPageAC={this.props.setCurrentPageAC}//*/}
+                    {/*    getProducts={this.props.getProducts}//*/}
+                    {/*    cartData={this.props.cartData}//*/}
+                    {/*    deleteItemByIndex={this.props.deleteItemByIndex}//*/}
+                    {/*    createOrder={this.props.createOrder}//*/}
+                    {/*    colors={this.props.colors}*/}
+                    {/*    updateItemCount={this.props.updateItemCount}*/}
+                    {/*    pushToHistory={this.pushToHistory}*/}
+                    {/*/>}/>*/}
+                    <Route path="/" render={adminPageCWithSuspense} />
                 </Switch>
                 </TextContext.Provider>
             </div>

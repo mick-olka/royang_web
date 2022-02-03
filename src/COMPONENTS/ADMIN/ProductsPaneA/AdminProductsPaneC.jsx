@@ -26,7 +26,6 @@ class AdminProductsPaneC extends React.Component {
 
     updateSimilarOrRelated = (data) => {
         updateProduct(this.props.chosenProduct._id, data);
-        console.log(data);
         setChosenProductAC(null);
         this.props.history.push("/admin/products/" + this.props.chosenProduct._id);
     }

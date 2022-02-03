@@ -105,3 +105,15 @@ input[type=checkbox]
   transform: scale(2);
   padding: 10px;
 }
+
+#small_popup {
+  padding: 1rem;
+  background-color: black;
+  color: white;
+  position: absolute;
+  width: 10rem;
+  top: 2rem;
+  right: -15rem;
+  z-index: 1000;
+  transition: right 1s;
+}
