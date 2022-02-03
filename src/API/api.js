@@ -1,6 +1,6 @@
 import * as axios from "axios";
 
-export const apiURL = 'http://192.168.1.164:7500/';
+export const apiURL = 'http://178.54.240.228:7500/';
 axios.defaults.withCredentials = true;
 const instance = axios.create({
     withCredentials: true,
