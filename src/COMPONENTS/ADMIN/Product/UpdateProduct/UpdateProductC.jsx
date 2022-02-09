@@ -34,34 +34,36 @@ class UpdateProductC extends Component {
         this.state={prodId: ""};
     }
 
-    async componentDidMount() {
-
-        await this.setState({prodId: this.props.location.pathname.split('/').pop()});
-        //console.log(prodId);
-
-        this.props.setIdOfCreatedAC(null);     //  for resetting create page
-        if (this.state.prodId && this.state.prodId.length === 24) {
-            await this.props.getProductById(this.state.prodId);
-        } else {
-            this.props.history.push("/ADMIN");
-        }
+    componentDidMount() {
+        let prodUrl = this.props.location.pathname.split('/').pop();
+        if (prodUrl) {
+            this.props.getProductById(prodUrl);
+        } else this.props.history.push("/admin");
+        // await this.setState({prodId: this.props.location.pathname.split('/').pop()});
+        // //console.log(prodId);
+        //
+        // this.props.setIdOfCreatedAC(null);     //  for resetting create page
+        // if (this.state.prodId) {
+        //     await this.props.getProductById(this.state.prodId);
+        // } else {
+        //     this.props.history.push("/admin");
+        // }
     }
 
-componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevState.prodId!==this.state.prodId) {
-            this.props.getProductById(this.state.prodId);
-        }
-}
+// componentDidUpdate(prevProps, prevState, snapshot) {
+//         if (prevState.prodId!==this.state.prodId) {
+//             this.props.getProductById(this.state.prodId);
+//         }
+// }
 
     pushToHistory = (path) => {
         this.props.history.push(path);
     }
 
     render() {
-        //console.log("R AdminPaneC");
-        if (this.props.updateProductProps.productData._id==null) return <div><Loading /></div>
+        if (this.props.updateProductProps.productData._id==null || this.props.updateProductProps.isLoading) return <div><Loading /></div>
         return (
-            <UpdateProduct prodId={this.state.prodId} {...this.props} pushToHistory={this.pushToHistory} />
+            <UpdateProduct prodId={this.props.updateProductProps.productData._id} {...this.props} pushToHistory={this.pushToHistory} />
         );
     }
 }

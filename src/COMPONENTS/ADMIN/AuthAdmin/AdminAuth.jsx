@@ -10,7 +10,7 @@ function AdminAuth ({authAdmin, isAdmin}) {
     }
 
     if (isAdmin) {
-        return <Redirect to={'/ADMIN'} />
+        return <Redirect to={'/admin'} />
     }
 
     return (

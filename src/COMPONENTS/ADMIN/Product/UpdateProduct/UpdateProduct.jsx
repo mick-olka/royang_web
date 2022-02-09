@@ -19,6 +19,7 @@ function UpdateProduct({
     const onSubmit = (formData) => {
         console.log(formData);
         if (prodId) updateProduct(prodId, formData, thumbnail);
+        else console.log("No prod Id");
     }
 
     const onChoosingProductsBtn = () => {

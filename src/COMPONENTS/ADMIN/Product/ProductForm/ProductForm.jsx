@@ -6,9 +6,10 @@ const ProductForm = (props) => {
 
     let initValues = {
         name: props.initialValues.name,
-        code: props.initialValues.code,
+        url_name: props.initialValues.url_name,
+        code: props.initialValues.code || "",
         price: props.initialValues.price,
-        oldPrice: props.initialValues.oldPrice,
+        oldPrice: props.initialValues.oldPrice || 0,
         index: props.initialValues.index,
         features: props.initialValues.features,
         description: props.initialValues.description,
@@ -26,6 +27,10 @@ const ProductForm = (props) => {
                                 <div>
                                     <label className={s.i_label} htmlFor="name">Name: </label>
                                     <Field name="name"/>
+                                </div>
+                                <div>
+                                    <label className={s.i_label} htmlFor="url_name">URL Name: </label>
+                                    <Field name="url_name"/>
                                 </div>
                                 <div>
                                     <label className={s.i_label}  htmlFor="code">Code: </label>
