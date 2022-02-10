@@ -5,20 +5,20 @@ import s from "./ListForm.module.css";
 const ListForm = (props) => {
 
     let initialValues = {
-        name: '',
-        url: props.listUrl ? props.listUrl: "",
-        index: 0,
+        name: props.initData ? props.initData.name : '',
+        url: props.listUrl || "",
+        index: props.initData ? props.initData.index : 0
     };
 
-    if (props.listUrl) {
-        initialValues.name=props.initData.name;
-        initialValues.index=props.initData.index;
-    };
+    // if (props.listUrl) {
+    //     initialValues.name=props.initData.name;
+    //     initialValues.index=props.initData.index;
+    // };
 
     return <div className={s.list_form_div} >
         <Formik initialValues={initialValues} onSubmit={(values, {resetForm}) => {
             props.onSubmit(values);
-            resetForm();
+            // resetForm({values: {name: "0"}});
         }}>
             {({values}) => (
                 <Form>
@@ -39,6 +39,6 @@ const ListForm = (props) => {
             )}
         </Formik>
     </div>
-};
+}
 
 export default ListForm;

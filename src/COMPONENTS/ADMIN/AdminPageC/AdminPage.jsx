@@ -19,7 +19,7 @@ import AdminProductsPaneC from "../ProductsPaneA/AdminProductsPaneC";
 function AdminPage({deleteAdminAuth, products, productsFound, lists, createList, changePW, pushToHistory}) {
 
     let links = [
-        {url: "/", name: "CLIENT"},
+        // {url: "/", name: "CLIENT"},
         {url: "/admin", name: "ADMIN"},
         {url: "/admin/new", name: "NEW PROD"},
         {url: "/admin/orders", name: "ORDERS"},

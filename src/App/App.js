@@ -6,7 +6,6 @@ import {connect, Provider} from "react-redux";
 import {compose} from "redux";
 import store from "../REDUX/reduxStore";
 import {initApp, setError} from "../REDUX/reducers/mainReducer";
-import Content from "../COMPONENTS/Content/Content";
 import {Switch} from "react-router-dom";
 import AdminAuthC from "../COMPONENTS/ADMIN/AuthAdmin/AdminAuthC";
 import {getProducts} from "../REDUX/reducers/productsReducer";

@@ -113,7 +113,7 @@ input[type=checkbox]
   position: absolute;
   width: 10rem;
   top: 2rem;
-  right: -15rem;
+  right: -35rem;
   z-index: 1000;
   transition: right 1s;
 }

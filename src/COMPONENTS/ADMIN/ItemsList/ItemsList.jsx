@@ -68,7 +68,9 @@ function ItemsList({items, deleteItems, itemsIdsArr, setItemsIdArr, ...props}) {
                 <button className={s.btn+" "+s.cancel_btn} onClick={uncheckAll} >CANCEL</button>
                 <button className={s.btn+" "+s.delete_btn} onClick={deleteHandler} >DELETE</button>
             </div>
-            {itemsList}
+            <div className={s.list_pane} >
+                {itemsList}
+            </div>
         </div>
     );
 }

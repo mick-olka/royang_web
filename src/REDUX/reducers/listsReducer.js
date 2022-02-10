@@ -21,7 +21,7 @@ const listsReducer = (state=initialState, action) => {
 
         case SET_LIST_FORM:
             return {
-                ...state, listForm: action.list,
+                ...state, listForm: {...state.listForm, ...action.list},
             }
 
         case SET_IS_LOADING:
@@ -73,6 +73,7 @@ export const updateList = (url, name, newUrl, index) =>
         try {
             let res = await listsAPI.updateList(url, name, newUrl, index);
             if (res.code === 0) {
+                dispatch(setListFormAC({name: name, index: index, url: newUrl}));
                 dispatch(getLists());
             }
         } catch (e) {

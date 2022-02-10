@@ -1,6 +1,6 @@
 
 let global_data = {
-    page_limit: 10,
+    page_limit: 40,
     phones: [
         "(096) 396 39 30",
         "(096) 396 30 31",
