@@ -3,7 +3,6 @@ import {Formik, Form, Field, FieldArray} from 'formik';
 import s from "./Orders.module.css";
 
 const OrderEditForm = ({initialValues, onSubmit }) => {
-
     return <div>
         <Formik initialValues={initialValues} onSubmit={values => {
             onSubmit(values)
@@ -31,9 +30,9 @@ const OrderEditForm = ({initialValues, onSubmit }) => {
                         name="cart"
                         render={arrayHelpers => (
                             <div>
-                                {values.cart.map(({item}, index) => (
+                                {values.cart.map((item, index) => (
                                         <div key={index}>
-                                            <label htmlFor="prodItem">{values.cart[index].product.name}</label>
+                                            <label htmlFor="prodItem">{values.cart[index].product? values.cart[index].product.name:"product is null"}</label>
                                             <Field name={`cart.${index}.mainColor`}/>
                                             <Field name={`cart.${index}.pillColor`}/>
                                             <Field type="number" name={`cart.${index}.count`}/>

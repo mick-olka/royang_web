@@ -6,8 +6,6 @@
 
 .input_div {
     position: relative;
-    display: grid;
-    grid-template-columns: 1fr 12fr;
     align-items: center;
 }
 

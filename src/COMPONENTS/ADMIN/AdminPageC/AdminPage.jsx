@@ -22,8 +22,8 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists, createList,
         // {url: "/", name: "CLIENT"},
         {url: "/admin", name: "ADMIN"},
         {url: "/admin/new", name: "NEW PROD"},
-        {url: "/admin/orders", name: "ORDERS"},
-        {url: "/admin/slider", name: "SLIDER"},
+        // {url: "/admin/orders", name: "ORDERS"},
+        // {url: "/admin/slider", name: "SLIDER"},
         {url: "/admin/text", name: "TEXT"},
         {url: "/admin/login/pw", name: "edit PW"},
     ];
@@ -58,11 +58,11 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists, createList,
                 <div className="adminNavbar">
                     <Search redirectTo={"/admin/search"} pushToHistory={pushToHistory} />
                     <Navbar links={links}/>
-                    <p>----------------</p>
-                    <p>Lists</p>
+                    <br/>
+                    <h3 style={{fontSize: "1.3rem", textAlign: "center"}} >Lists</h3>
                     <Navbar links={typesL}/>
                     <br/>
-                    <p>--Create list---</p>
+                    <h3 style={{fontSize: "1.3rem", textAlign: "center"}} >New list</h3>
                     <ListForm onSubmit={onSubmit}/>
                 </div>
 

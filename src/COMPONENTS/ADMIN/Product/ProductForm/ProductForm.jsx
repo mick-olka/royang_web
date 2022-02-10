@@ -22,7 +22,7 @@ const ProductForm = (props) => {
             {({values}) => (
                 <Form>
                     <div className={s.container}>
-                        <div style={{display: "flex"}} >
+                        <div className={s.inputs_container} >
                             <div className={s.inputs_div}>
                                 <div>
                                     <label className={s.i_label} htmlFor="name">Name: </label>
@@ -50,7 +50,7 @@ const ProductForm = (props) => {
                                 </div>
                             </div>
                             <div className={s.t_area}>
-                                <label style={{display: "block"}}  htmlFor="description">Description: </label>
+                                <label style={{display: "block", fontWeight: "bolder"}} htmlFor="description">Description: </label>
                                 <Field placeholder="description" type="text" component="textarea" name="description" />
                             </div>
                         </div>

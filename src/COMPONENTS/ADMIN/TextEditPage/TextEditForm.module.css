@@ -1,9 +1,21 @@
 .text_edit_item {
     margin-left: 1rem;
-    display: flex;
-    max-height: 5rem;
+    max-height: 15rem;
+    padding: 0.5rem;
+}
+
+.input_block {
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 10fr;
 }
 
 .text_edit_item input {
     max-height: 1.5rem;
+}
+
+.text_edit_item button {
+    padding: 0.3rem;
+    width: 5rem;
 }

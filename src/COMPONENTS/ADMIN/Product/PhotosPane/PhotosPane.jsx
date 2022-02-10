@@ -15,8 +15,9 @@ function PhotosPane({images, prodId, addPhotos, deletePhotos}) {
     }
 
     const onSubmit = (values) => {
-        //console.log(values, photo);
-        addPhotos(prodId, selectedPhotos, values.mainColor, values.pillColor)
+        if (!selectedPhotos) {
+            alert("No photos :(");
+        } else addPhotos(prodId, selectedPhotos, values.mainColor, values.pillColor)
     }
 
     const onPhotoDelete = (photosId) => {

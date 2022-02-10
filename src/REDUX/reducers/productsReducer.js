@@ -38,7 +38,7 @@ const productsReducer = (state=initialState, action) => {
 
         case SET_PRODUCT_FORM:
             return {
-                ...state, productData: action.product,
+                ...state, productData: {...state.productData, ...action.product},
             }
 
         case SET_IS_LOADING:
@@ -125,6 +125,7 @@ export const updateProduct = (id, formData, thumbnail) =>
             let res = await productsAPI.updateProduct(id, formData);
             if (res.code === 0) {
                 if (thumbnail) await dispatch(uploadThumbnail(id, thumbnail));
+                dispatch(setProductFormAC(formData));
                 dispatch(getProductById(id));
                 dispatch(getProducts());
             }

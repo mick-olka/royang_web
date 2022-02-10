@@ -40,9 +40,7 @@ class TextEditPageC extends Component {
             <div>
 
                 <ItemsListC items={this.props.text_blocks} deleteItems={this.onTextDelete} >
-                    {(item)=>(<div style={{display: "flex", justifyContent: "space-around"}} >
-                        <EditTextForm initValues={item} onSubmit={this.onSubmit} />
-                    </div>)}
+                    {(item)=>(<EditTextForm initValues={item} onSubmit={this.onSubmit} />)}
                 </ItemsListC>
 
             </div>

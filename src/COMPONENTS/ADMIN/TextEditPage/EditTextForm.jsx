@@ -11,24 +11,24 @@ function EditTextForm({onSubmit, initValues}) {
         },
     });
     return (
-        <div>
+        <div style={{width: "100%"}} >
             <form onSubmit={formik.handleSubmit} className={s.text_edit_item} >
-                <div>
+                <div className={s.input_block} >
                 <label htmlFor="name">Name</label>
                 {myFormInput("name", "text", formik.values.name, formik.handleChange)}
                 </div>
 
-                <div>
+                <div className={s.input_block} >
                     <label htmlFor="text">Text</label>
                     {myFormInput("text", "text", formik.values.text, formik.handleChange)}
                 </div>
 
-                <div>
+                <div className={s.input_block} >
                     <label htmlFor="nav_link">Link</label>
                     {myFormInput("nav_link", "text", formik.values.nav_link, formik.handleChange)}
                 </div>
 
-                <div><button style={{height: "100%"}} type="submit" >SAVE</button></div>
+                <div><button type="submit" >SAVE</button></div>
             </form>
         </div>
     );

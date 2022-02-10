@@ -38,6 +38,7 @@ let SearchForm = ({onSubmit, error}) => {
                 onChange={formik.handleChange}
                 value={formik.values.search_input}
                 className={s.search_input}
+                placeholder={"Search"}
             />
             <button type="submit" className={s.search_btn} ><img className={s.search_icon} src={search_icon} alt="search"/></button>
         </form>
