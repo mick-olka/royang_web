@@ -23,7 +23,7 @@ export const productsAPI = {
 
     getProducts(page = 1, limit = 6) {
         return instance.get(
-            `products?page=${page}&limit=${limit}`,
+            `products?page=${page}&limit=${limit}&isAdmin=true`,
         ).then(response => {
             console.log(response);
             return response.data;
@@ -32,7 +32,7 @@ export const productsAPI = {
 
     getProductById(id) {
         return instance.get(
-            'products/' + id,
+            `products/${id}?isAdmin=true`,
         ).then(response => {
             return response.data;
         });
@@ -174,7 +174,7 @@ export const listsAPI = {
 
     getLists() {
         return instance.get(
-            'lists',
+            'lists?isAdmin=true',
         ).then(response => {
             return response.data;
         });
@@ -182,7 +182,7 @@ export const listsAPI = {
 
     getListByUrl(url, page = 1, limit = 2) {
         return instance.get(
-            `lists/${url}?page=${page}&limit=${limit}`,
+            `lists/${url}?page=${page}&limit=${limit}&isAdmin=true`,
         ).then(response => {
             return response.data;
         });

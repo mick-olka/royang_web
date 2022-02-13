@@ -19,3 +19,12 @@ export const myFormInput = (name, type, value, onChange) => {
         value={value}
     />
 }
+
+export const myFormTextarea = (name, value, onChange) => {
+    return <textarea
+        id={name}
+        name={name}
+        onChange={onChange}
+        value={value}
+    />
+}

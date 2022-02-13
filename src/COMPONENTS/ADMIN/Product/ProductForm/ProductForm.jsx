@@ -1,23 +1,31 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Formik, Form, Field, FieldArray} from 'formik';
 import s from "./ProductForm.module.css";
+import Loading from "../../../Extra/Loading";
 
 const ProductForm = (props) => {
-
+    const [locale0, setLocale0] = useState("ua");   //  dummy to rerender form on locale change
+    useEffect(()=>{setLocale0(props.locale)}, [props.locale]);
     let initValues = {
-        name: props.initialValues.name,
+        name: props.initialValues.name[props.locale] || "",
         url_name: props.initialValues.url_name,
         code: props.initialValues.code || "",
         price: props.initialValues.price,
         oldPrice: props.initialValues.oldPrice || 0,
         index: props.initialValues.index,
-        features: props.initialValues.features,
-        description: props.initialValues.description,
+        features: props.initialValues.features[props.locale],
+        description: props.initialValues.description[props.locale] || "",
     }
 
+    if (locale0 !== props.locale) {return <Loading/>}
     return <div>
         <Formik initialValues={initValues} onSubmit={values => {
-            props.onSubmit(values)
+            let newValues = {...props.initialValues, ...values};
+            if (values.name) newValues.name = {...props.initialValues.name, [props.locale]: values.name};
+            if (values.description) newValues.description = {...props.initialValues.description, [props.locale]: values.description};
+            if (values.features) newValues.features = {...props.initialValues.features, [props.locale]: values.features};
+            //console.log(newValues);
+            props.onSubmit(newValues);
         }}>
             {({values}) => (
                 <Form>

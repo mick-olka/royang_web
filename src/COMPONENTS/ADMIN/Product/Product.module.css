@@ -34,3 +34,15 @@
     max-width: 7rem;
     max-height: 7rem;
 }
+
+.locales_div {
+    display: flex;
+}
+
+.locale_btn, .active_locale_btn {
+    padding: 0.3rem;
+}
+
+.active_locale_btn {
+    background-color: grey;
+}

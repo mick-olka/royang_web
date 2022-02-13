@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import s from "../Product.module.css";
 import ProductForm from "../ProductForm/ProductForm";
 import chairIcon from "../../../../IMGS/chair.png";
@@ -15,9 +15,9 @@ function UpdateProduct({
 
     let {lists, productData, isLoading} = updateProductProps;
     let thumbnail = null;
-
+    const [locale, setLocale] = useState("ua");
     const onSubmit = (formData) => {
-        console.log(formData);
+        //console.log(formData);
         if (prodId) updateProduct(prodId, formData, thumbnail);
         else console.log("No prod Id");
     }
@@ -64,7 +64,18 @@ function UpdateProduct({
 
     return (<div className={s.pane}>
             <h1>Update Product</h1>
-            <br/><br/>
+            <br/>
+            <div className={s.locales_div} >
+                <button
+                    className={ locale==="ua" ? s.active_locale_btn : s.locale_btn}
+                    onClick={()=>setLocale("ua")}
+                >UA</button>
+                <button
+                    className={ locale==="ru" ? s.active_locale_btn : s.locale_btn}
+                    onClick={()=>setLocale("ru")}
+                >RU</button>
+            </div>
+            <br/>
             <div style={{display: "flex"}} >
             {/*//===THUMB_PANE========*/}
             <div style={{width: "10rem"}} >
@@ -83,7 +94,7 @@ function UpdateProduct({
             </div>
             </div>
 
-            <ProductForm initialValues={productData} onSubmit={onSubmit}/>
+            <ProductForm initialValues={productData} onSubmit={onSubmit} locale={locale} />
 
             <PhotosPane images={productData.images} addPhotos={addPhotos}
                         prodId={prodId} deletePhotos={deletePhotos}

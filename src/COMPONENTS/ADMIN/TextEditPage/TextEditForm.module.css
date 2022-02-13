@@ -1,6 +1,6 @@
 .text_edit_item {
     margin-left: 1rem;
-    max-height: 15rem;
+    /*max-height: 15rem;*/
     padding: 0.5rem;
 }
 
@@ -18,4 +18,17 @@
 .text_edit_item button {
     padding: 0.3rem;
     width: 5rem;
+}
+
+.form_container {
+    width: auto;
+    height: 2.8rem;
+    max-height: fit-content;
+    overflow: hidden;
+}
+
+.open_btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
 }

@@ -8,7 +8,9 @@ const Navbar = ({links}) => {
     let links0 = links.map(l=> {
 
         return (
-                <div className={s.linkDiv} key={l.url}><NavHashLink exact to={l.url} activeClassName={s.activeLink}>{l.name}</NavHashLink></div>
+                <div className={s.linkDiv} key={l.url}>
+                    <NavHashLink exact to={l.url} activeClassName={s.activeLink}>{l.name["ua"] || l.name}</NavHashLink>
+                </div>
             )
         }
     );

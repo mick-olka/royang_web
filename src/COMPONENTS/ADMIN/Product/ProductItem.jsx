@@ -9,7 +9,7 @@ function ProductItem({item}) {
                 <img className={list.photo} src={item.thumbnail ? item.thumbnail : chairIcon}
                      alt="img"/>
             </div>
-            <p><NavLink to={"/admin/products/" + item.url_name}>{item.name}</NavLink></p>
+            <p><NavLink to={"/admin/products/" + item.url_name}>{item.name["ua"]}</NavLink></p>
             <p>{item.price} грн</p>
         </>
     );

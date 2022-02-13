@@ -1,26 +1,33 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useFormik} from "formik";
-import {myFormInput} from "../../../UTILS/FormUtils";
+import {myFormInput, myFormTextarea} from "../../../UTILS/FormUtils";
 import s from "./TextEditForm.module.css";
 
 function EditTextForm({onSubmit, initValues}) {
+    const [isOpen, setIsOpen] = useState(false);
     const formik = useFormik({
         initialValues: {...initValues},
         onSubmit: values => {
+            //console.log(values);
             onSubmit(values);
         },
     });
     return (
-        <div style={{width: "100%"}} >
+        <div className={s.form_container} style={isOpen? {height: "fit-content"}:null} >
+            <button className={s.open_btn} onClick={()=>setIsOpen(!isOpen)} >{isOpen? 'close':'open'}</button>
             <form onSubmit={formik.handleSubmit} className={s.text_edit_item} >
                 <div className={s.input_block} >
-                <label htmlFor="name">Name</label>
+                <label htmlFor="name" onClick={()=>setIsOpen(!isOpen)} >Name</label>
                 {myFormInput("name", "text", formik.values.name, formik.handleChange)}
                 </div>
 
                 <div className={s.input_block} >
-                    <label htmlFor="text">Text</label>
-                    {myFormInput("text", "text", formik.values.text, formik.handleChange)}
+                    <label htmlFor="text">Text UA</label>
+                    {myFormTextarea("text.ua", formik.values.text['ua'], formik.handleChange)}
+                </div>
+                <div className={s.input_block} >
+                    <label htmlFor="text">Text RU</label>
+                    {myFormTextarea("text.ru", formik.values.text['ru'], formik.handleChange)}
                 </div>
 
                 <div className={s.input_block} >

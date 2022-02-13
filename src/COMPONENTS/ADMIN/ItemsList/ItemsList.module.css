@@ -1,6 +1,6 @@
 .list_pane {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
 }
 .item {
     margin: 0.2rem;
