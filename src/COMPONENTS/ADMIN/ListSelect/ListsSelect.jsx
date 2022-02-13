@@ -23,7 +23,7 @@ function ListsSelect({lists, addElement, prodIdArr}) {
             //let productHasType = productData.types.find(t => t === lists[i].name);
             // if (!productHasType) {
                 l0 = {...lists[i]};
-                typesToSelect.push({value: l0.url, label: l0.name});
+                typesToSelect.push({value: l0.url, label: l0.name['ua']});
             // }
         }
     }

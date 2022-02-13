@@ -1,4 +1,5 @@
 import * as axios from "axios";
+import global_data from "../REDUX/global_data";
 
 export const apiURL = 'http://192.168.1.164:7500/';
 axios.defaults.withCredentials = true;
@@ -66,9 +67,9 @@ export const productsAPI = {
         });
     },
 
-    findProducts(str = "", page = 1, limit = 2) {
+    findProducts(str = "", page = 1, limit = 2, locale="ua") {
         return instance.get(
-            `search?str=${str}&page=${page}&limit=${limit}`,
+            `search?str=${str}&page=${page}&limit=${limit}&locale=${locale}`,
         ).then(res => {
             return res.data;
         });
@@ -186,7 +187,7 @@ export const listsAPI = {
         });
     },
 
-    getListByUrl(url, page = 1, limit = 2) {
+    getListByUrl(url, page = 1, limit = global_data.page_limit) {
         return instance.get(
             `lists/${url}?page=${page}&limit=${limit}&isAdmin=true`,
         ).then(response => {
