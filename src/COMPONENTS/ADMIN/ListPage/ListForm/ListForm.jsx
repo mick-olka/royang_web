@@ -1,6 +1,7 @@
 import React from 'react';
-import {Formik, Form, Field} from 'formik';
+import {Formik, Form, Field, useFormik} from 'formik';
 import s from "./ListForm.module.css";
+import {myFormInput} from "../../../../UTILS/FormUtils";
 
 const ListForm = (props) => {
 
@@ -14,30 +15,43 @@ const ListForm = (props) => {
     //     initialValues.name=props.initData.name;
     //     initialValues.index=props.initData.index;
     // };
+    const formik = useFormik({
+        initialValues: {...initialValues},
+        onSubmit: values => {
+            //console.log(values);
+            props.onSubmit(values);
+        },
+    });
 
     return <div className={s.list_form_div} >
-        <Formik initialValues={initialValues} onSubmit={(values, {resetForm}) => {
-            props.onSubmit(values);
-            // resetForm({values: {name: "0"}});
-        }}>
-            {({values}) => (
-                <Form>
+        {/*<Formik initialValues={initialValues} onSubmit={(values, {resetForm}) => {*/}
+        {/*    props.onSubmit(values);*/}
+        {/*    // resetForm({values: {name: "0"}});*/}
+        {/*}}>*/}
+        {/*    {({values}) => (*/}
+                <form onSubmit={formik.handleSubmit}>
                     <div className={s.input_div} >
-                        <label htmlFor="name">Name: </label>
-                        <Field name="name" />
+                        <label htmlFor="name.ua">Name UA: </label>
+                        {/*<Field name="name.ua" />*/}
+                        {myFormInput("name.ua", "text", formik.values.name['ua'], formik.handleChange)}
+                    </div>
+                    <div className={s.input_div} >
+                        <label htmlFor="name.ru">Name RU: </label>
+                        {/*<Field name="name.ua" />*/}
+                        {myFormInput("name.ru", "text", formik.values.name['ru'], formik.handleChange)}
                     </div>
                     <div className={s.input_div} >
                         <label htmlFor="url">URL: </label>
-                        <Field name="url"/>
+                        {myFormInput("url", "text", formik.values.url, formik.handleChange)}
                     </div>
                     <div className={s.input_div} >
                         <label htmlFor="index">Index: </label>
-                        <Field type="number" name="index"/>
+                        {myFormInput("index", "number", formik.values.index, formik.handleChange)}
                     </div>
                     <button style={{width: "100%", fontSize: "1.5rem"}} type="submit">SAVE</button>
-                </Form>
-            )}
-        </Formik>
+                </form>
+        {/*    )}*/}
+        {/*</Formik>*/}
     </div>
 }
 

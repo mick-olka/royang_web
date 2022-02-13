@@ -43,7 +43,7 @@ function ListPane({
     if (isLoading || !listForm) return <div><Loading/></div>;
     return (
         <div className={s.pane}>
-            <h1 style={{textAlign: "center", fontSize: "1.8rem", display: "inline-block"}} >{listForm.name}</h1>
+            <h1 style={{textAlign: "center", fontSize: "1.8rem", display: "inline-block"}} >{listForm.name['ua']}</h1>
             <button style={{backgroundColor: "red", display: "inline-block"}} onClick={onTypeDelete}>DELETE</button>
             <br/><br/>
             {isDeleted && <Redirect to="/admin"/>}

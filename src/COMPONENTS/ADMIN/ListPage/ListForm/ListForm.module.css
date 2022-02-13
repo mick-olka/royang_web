@@ -7,8 +7,11 @@
 .input_div {
     position: relative;
     align-items: center;
+    display: flex;
+    width: 20rem;
 }
 
 .input_div input {
     width: 10rem;
+    margin-left: auto;
 }

@@ -25,7 +25,6 @@ export const productsAPI = {
         return instance.get(
             `products?page=${page}&limit=${limit}&isAdmin=true`,
         ).then(response => {
-            console.log(response);
             return response.data;
         });
     },
@@ -43,6 +42,7 @@ export const productsAPI = {
             'products',
             {...productData}
         ).then(res => {
+            showPopup('Created');
             return res.data;
         });
     },
@@ -52,6 +52,7 @@ export const productsAPI = {
             'products/' + id,
             {...formData}
         ).then(res => {
+            showPopup('Updated');
             return res.data;
         });
     },
@@ -60,6 +61,7 @@ export const productsAPI = {
         return instance.delete(
             'products/' + id,
         ).then(res => {
+            showPopup('Deleted');
             return res.data;
         });
     },
@@ -83,6 +85,7 @@ export const photosAPI = {
             'photos/thumbnail/' + id, formData,
             {headers: {"Content-Type": "multipart/form-data"}},
         ).then(response => {
+            showPopup('Updated');
             return response.data;
         });
     },
@@ -99,6 +102,7 @@ export const photosAPI = {
             'photos/' + id, formData,
             {headers: {"Content-Type": "multipart/form-data"}},
         ).then(response => {
+            showPopup('Added');
             return response.data;
         });
     },
@@ -107,6 +111,7 @@ export const photosAPI = {
         return instance.delete(
             `photos/${id}/${photosId}`,
         ).then(response => {
+            showPopup('Deleted');
             return response.data;
         });
     },
@@ -157,6 +162,7 @@ export const adminAPI = {
             'admin/login/pw',
             {data: password, oldData: oldPassword}
         ).then(response => {
+            showPopup('Changed');
             return response.data;
         })
     },
@@ -191,8 +197,9 @@ export const listsAPI = {
     createList(name, url) {
         return instance.post(
             'lists/',
-            {name: name, url: url}
+            {name: {ua: name, ru: name+" ru"}, url: url}
         ).then(res => {
+            showPopup('Created');
             return res.data;
         });
     },
@@ -202,6 +209,7 @@ export const listsAPI = {
             'lists/' + url,
             {name: name, url: newUrl, index: index}
         ).then(res => {
+            showPopup('Updated');
             return res.data;
         });
     },
@@ -210,6 +218,7 @@ export const listsAPI = {
         return instance.delete(
             'lists/' + url,
         ).then(res => {
+            showPopup('Deleted');
             return res.data;
         });
     },
@@ -219,6 +228,7 @@ export const listsAPI = {
             'list_elements/' + listUrl,
             {prodId: prodId}
         ).then(res => {
+            showPopup('Added');
             return res.data;
         });
     },
@@ -228,6 +238,7 @@ export const listsAPI = {
             `list_elements/${listUrl}/${prodId}`,
             {prodId: prodId}
         ).then(res => {
+            showPopup('Deleted');
             return res.data;
         });
     },
@@ -336,8 +347,9 @@ export const textAPI = {
     createText(name, text, nav_link) {
         return instance.post(
             'text/',
-            {name: name, text: text, nav_link: nav_link}
+            {name: name, text: {ua: text, ru: text+" ru"}, nav_link: nav_link}
         ).then(res => {
+            showPopup('Created');
             return res.data;
         });
     },
@@ -347,6 +359,7 @@ export const textAPI = {
             'text/' + name,
             {name: name, text: text, nav_link: nav_link}
         ).then(res => {
+            showPopup('Updated');
             return res.data;
         });
     },
@@ -355,6 +368,7 @@ export const textAPI = {
         return instance.delete(
             'text/' + name,
         ).then(res => {
+            showPopup('Deleted');
             return res.data;
         });
     },
