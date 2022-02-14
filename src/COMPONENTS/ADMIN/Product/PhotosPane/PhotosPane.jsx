@@ -33,8 +33,8 @@ function PhotosPane({images, prodId, addPhotos, deletePhotos}) {
                     </a>
                 })}
             </div>
-            <p className={s.color_name} >{imagesItem.mainColor}</p>
-            <p className={s.color_name} >{imagesItem.pillColor}</p>
+            <p className={s.color_name} >{imagesItem.mainColor['ua']}</p>
+            <p className={s.color_name} >{imagesItem.pillColor['ua']}</p>
         </div>
     }
 

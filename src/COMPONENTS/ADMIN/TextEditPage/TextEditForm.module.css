@@ -7,12 +7,16 @@
 .input_block {
     position: relative;
     width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 10fr;
+
 }
 
 .text_edit_item input {
     max-height: 1.5rem;
+}
+
+.text_edit_item textarea {
+    width: 98%;
+    display: block;
 }
 
 .text_edit_item button {
@@ -21,7 +25,7 @@
 }
 
 .form_container {
-    width: auto;
+    width: 90%;
     height: 2.8rem;
     max-height: fit-content;
     overflow: hidden;

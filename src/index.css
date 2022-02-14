@@ -31,7 +31,7 @@ footer, header, hgroup, menu, nav, section {
 }
 
 html {
-  min-width: 940px;
+  min-width: 640px;
   background-color: var(--c_white);
 }
 

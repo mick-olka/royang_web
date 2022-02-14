@@ -9,6 +9,7 @@
 }
 .inputs_container {
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
 }
 
@@ -32,7 +33,7 @@ input {
 }
 
 textarea {
-    width: 40rem;
+    width: 90%;
     height: 12rem;
     position: relative;
     resize: none;

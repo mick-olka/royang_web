@@ -97,8 +97,10 @@ export const photosAPI = {
         for (let i = 0; i < files.length; i++) {
             formData.append('pathArr', files[i]);
         }
-        formData.append("mainColor", mainColor);
-        formData.append("pillColor", pillColor);
+        formData.append("mainColorUA", mainColor['ua']);
+        formData.append("mainColorRU", mainColor['ru']);
+        formData.append("pillColorUA", pillColor['ua']);
+        formData.append("pillColorRU", pillColor['ru']);
         return instance.post(
             'photos/' + id, formData,
             {headers: {"Content-Type": "multipart/form-data"}},
