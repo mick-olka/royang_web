@@ -42,7 +42,15 @@ class TextEditPageC extends Component {
                 <ItemsListC items={this.props.text_blocks} deleteItems={this.onTextDelete} >
                     {(item)=>(<EditTextForm initValues={item} onSubmit={this.onSubmit} />)}
                 </ItemsListC>
-
+                <div className={'hints_block'} >
+                    <h3>Hints</h3><br/>
+                    <p>{"<br/> - new line"}</p>
+                    <p>{"<p>text</p> - new line + indent"}</p>
+                    <p>{"<b>text</b> - bold"}</p>
+                    <p>{"<h3>text</h3> - subheader"}</p>
+                    <p>{"<a href='https://rotang.ua' >text</a> - link to url"}</p>
+                    <p>{"<a href='mailto:mail@rotang.ua' >text</a> - link to email"}</p>
+                </div>
             </div>
         );
     }

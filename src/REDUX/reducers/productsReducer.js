@@ -126,7 +126,7 @@ export const updateProduct = (id, formData, thumbnail) =>
             if (res.code === 0) {
                 if (thumbnail) await dispatch(uploadThumbnail(id, thumbnail));
                 dispatch(setProductFormAC(formData));
-                dispatch(getProductById(formData.url_name));
+                dispatch(getProductById(id));
                 dispatch(getProducts());
             }
         } catch (e) {

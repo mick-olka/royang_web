@@ -25,29 +25,35 @@ let mapDispatchToProps = (dispatch) => {
 class AdminProductsPaneC extends React.Component {
 
     updateSimilarOrRelated = (data) => {
-        updateProduct(this.props.chosenProduct._id, data);
-        setChosenProductAC(null);
+        this.props.updateProduct(this.props.chosenProduct._id, data);
+        this.props.setChosenProductAC(null);
         this.props.history.push("/admin/products/" + this.props.chosenProduct.url_name);
     }
 
     onSetAsSimilar = () => {
-        let newSimilarProds = {similarProducts: [...this.props.chosenProduct.similarProducts, ...this.props.itemsIdsArr]}
+        let prevSimilarProds = this.props.chosenProduct.similarProducts.map(p=>{
+            return p._id;
+        });
+        let newSimilarProds = {similarProducts: [...prevSimilarProds, ...this.props.itemsIdsArr]}
         this.updateSimilarOrRelated(newSimilarProds);
     }
 
     onSetAsRelated = () => {
-        let newRelatedProds = {relatedProducts: [...this.props.chosenProduct.relatedProducts, ...this.props.itemsIdsArr]}
+        let prevRelatedProds = this.props.chosenProduct.relatedProducts.map(p=>{
+            return p._id;
+        });
+        let newRelatedProds = {relatedProducts: [...prevRelatedProds, ...this.props.itemsIdsArr]}
         this.updateSimilarOrRelated(newRelatedProds);
     }
 
     render() {
 
         return <div>
-            {this.props.chosenProduct ? <div><h3>Choose related to {this.props.chosenProduct.name}</h3>
+            {this.props.chosenProduct ? <div><h3>Choose related to {this.props.chosenProduct.name.ua}</h3>
                 <button onClick={this.onSetAsRelated}>Set as related</button>
                 <button onClick={this.onSetAsSimilar}>Set as similar</button>
             </div> : null}
-            <ItemsListC items={this.props.products} deleteItems={deleteProducts}>
+            <ItemsListC items={this.props.products} deleteItems={this.props.deleteProducts}>
                 {item => <ProductItem item={item}/>}
             </ItemsListC>
         </div>;

@@ -16,7 +16,7 @@ import SliderEditPageC from "../SliderEdit/SliderEditPageC";
 import TextEditPageC from "../TextEditPage/TextEditPageC";
 import AdminProductsPaneC from "../ProductsPaneA/AdminProductsPaneC";
 
-function AdminPage({deleteAdminAuth, products, productsFound, lists, createList, changePW, pushToHistory}) {
+function AdminPage({deleteAdminAuth, products, productsFound, lists, createList, changePW, pushToHistory, ...props}) {
 
     let links = [
         // {url: "/", name: "CLIENT"},
@@ -89,7 +89,7 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists, createList,
                         <Route path="/admin/text" render={() => <TextEditPageC />}/>
 
                         <Route path="/admin" render={() => <MainAdminPageC>
-                            <AdminProductsPaneC products={products}/>
+                            <AdminProductsPaneC {...props} products={products}/>
                         </MainAdminPageC>}/>
                         <Route render={() => (<NotFound/>)}/>
                     </Switch>

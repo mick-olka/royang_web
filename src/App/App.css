@@ -117,7 +117,7 @@ input[type=checkbox]
   padding: 1rem;
   background-color: black;
   color: white;
-  position: absolute;
+  position: fixed;
   width: 10rem;
   top: 2rem;
   right: -35rem;

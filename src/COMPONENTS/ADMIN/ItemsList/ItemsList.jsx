@@ -19,7 +19,7 @@ function ItemsList({items, deleteItems, itemsIdsArr, setItemsIdArr, ...props}) {
 
     useEffect(()=> {
         for (let i = 0; i < items.length; i++) {
-            document.getElementById(items[i]._id).checked = itemsIdsArr.indexOf(items[i]._id) !== -1;
+            if (document.getElementById(items[i]._id)) document.getElementById(items[i]._id).checked = itemsIdsArr.indexOf(items[i]._id) !== -1;
         }
         //showSmallPopup(itemsIdsArr.length + " items");
     }, [items, itemsIdsArr]);
@@ -43,10 +43,9 @@ function ItemsList({items, deleteItems, itemsIdsArr, setItemsIdArr, ...props}) {
         }
     }
 
-    let itemsList = items.map((item) => {
+    let itemsList = items.map((item, i) => {
         let indexId=item._id;
-
-        return <div key={indexId} className={s.item} >
+        return <div key={i} className={s.item} >
             <input id={indexId} className={s.checkBox}
                    type="checkbox" name="checkbox"
                    onMouseOver={() => handleCheckboxMouseOver(indexId)}

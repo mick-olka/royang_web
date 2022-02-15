@@ -8,7 +8,6 @@ function EditTextForm({onSubmit, initValues}) {
     const formik = useFormik({
         initialValues: {...initValues},
         onSubmit: values => {
-            //console.log(values);
             onSubmit(values);
         },
     });

@@ -105,7 +105,7 @@ function UpdateProduct({
                 <ItemsListC items={productData.similarProducts} deleteItems={onSimilarDelete}>
                     {(item) => <div style={{display: "flex", marginLeft: "2rem"}}>
                         <img style={{width: "2rem"}} src={item.thumbnail} alt="thumb"/>
-                        <p style={{marginLeft: "2rem"}}>{item.name}</p>
+                        <p style={{marginLeft: "2rem"}}>{item.name && item.name.ua}</p>
                     </div>}
                 </ItemsListC>
             </div>
@@ -115,7 +115,7 @@ function UpdateProduct({
                 <ItemsListC items={productData.relatedProducts} deleteItems={onRelatedDelete}>
                     {(item) => <div style={{display: "flex", marginLeft: "2rem"}}>
                         <img style={{width: "2rem"}} src={item.thumbnail} alt="thumb"/>
-                        <p style={{marginLeft: "2rem"}}>{item.name}</p>
+                        <p style={{marginLeft: "2rem"}}>{item.name && item.name.ua}</p>
                     </div>}
                 </ItemsListC>
             </div>
