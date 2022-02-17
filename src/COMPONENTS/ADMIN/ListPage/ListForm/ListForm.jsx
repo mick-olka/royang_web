@@ -6,7 +6,10 @@ import {myFormInput} from "../../../../UTILS/FormUtils";
 const ListForm = (props) => {
 
     let initialValues = {
-        name: props.initData ? props.initData.name : '',
+        name: {
+            ua: props.initData ? props.initData.name['ua'] : '',
+            ru: props.initData ? props.initData.name['ru'] : '',
+        },
         url: props.listUrl || "",
         index: props.initData ? props.initData.index : 0
     };

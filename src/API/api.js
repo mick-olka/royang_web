@@ -197,10 +197,10 @@ export const listsAPI = {
         });
     },
 
-    createList(name, url) {
+    createList(formData) {
         return instance.post(
             'lists/',
-            {name: {ua: name, ru: name+" ru"}, url: url}
+            {...formData}
         ).then(res => {
             showPopup('Created');
             return res.data;

@@ -40,7 +40,7 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists, createList,
     });
 
     const onSubmit = (formData) => {    //  Create List
-        createList(formData.name, formData.url);
+        createList(formData);
     }
 
     return (

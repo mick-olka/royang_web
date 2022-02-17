@@ -56,10 +56,10 @@ export const getListByUrl = (url, page) => async (dispatch) => {
     dispatch(setIsLoadingAC(false));
 }
 
-export const createList = (name, url) =>
+export const createList = (formData) =>
     async (dispatch) => {
         try {
-            let res = await listsAPI.createList(name, url);
+            let res = await listsAPI.createList(formData);
             if (res.code === 0) {
                 dispatch(getLists());
             }
