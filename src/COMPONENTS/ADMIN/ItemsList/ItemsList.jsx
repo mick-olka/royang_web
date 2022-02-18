@@ -56,9 +56,8 @@ function ItemsList({items, deleteItems, itemsIdsArr, setItemsIdArr, ...props}) {
 
     const deleteHandler = () => {
         deleteItems(itemsIdsArr);
+        setItemsIdArr([]);
     }
-
-
 
     return (
         <div>
