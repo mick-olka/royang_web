@@ -13,6 +13,7 @@ const mapStateToProps = (state) => {
     return {
         chosenProduct: state.productsReducer.chosenProduct,
         itemsIdsArr: state.mainReducer.itemsIdsArr,
+        currency_value: state.textReducer.text_blocks.find(i=>i.name==="currency_value")
     }
 }
 
@@ -54,7 +55,7 @@ class AdminProductsPaneC extends React.Component {
                 <button onClick={this.onSetAsSimilar}>Set as similar</button>
             </div> : null}
             <ItemsListC items={this.props.products} deleteItems={this.props.deleteProducts}>
-                {item => <ProductItem item={item}/>}
+                {item => <ProductItem item={item} currency_value={this.props.currency_value} />}
             </ItemsListC>
         </div>;
     }

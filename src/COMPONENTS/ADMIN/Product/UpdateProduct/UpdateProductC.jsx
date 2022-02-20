@@ -12,7 +12,7 @@ import {
     setIdOfCreatedAC,
     updateProduct
 } from "../../../../REDUX/reducers/productsReducer";
-import {addElement} from "../../../../REDUX/reducers/listsReducer";
+import {addElement, deleteElement} from "../../../../REDUX/reducers/listsReducer";
 import {addPhotos, deletePhotos} from "../../../../REDUX/reducers/photosReducer";
 import Loading from "../../../Extra/Loading";
 
@@ -24,7 +24,7 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        getProductById, updateProduct, addElement, addPhotos, deletePhotos, setIdOfCreatedAC, setChosenProductAC
+        getProductById, updateProduct, addElement, deleteElement, addPhotos, deletePhotos, setIdOfCreatedAC, setChosenProductAC
     }, dispatch);
 }
 
@@ -39,22 +39,7 @@ class UpdateProductC extends Component {
         if (prodUrl) {
             this.props.getProductById(prodUrl);
         } else this.props.history.push("/admin");
-        // await this.setState({prodId: this.props.location.pathname.split('/').pop()});
-        // //console.log(prodId);
-        //
-        // this.props.setIdOfCreatedAC(null);     //  for resetting create page
-        // if (this.state.prodId) {
-        //     await this.props.getProductById(this.state.prodId);
-        // } else {
-        //     this.props.history.push("/admin");
-        // }
     }
-
-// componentDidUpdate(prevProps, prevState, snapshot) {
-//         if (prevState.prodId!==this.state.prodId) {
-//             this.props.getProductById(this.state.prodId);
-//         }
-// }
 
     pushToHistory = (path) => {
         this.props.history.push(path);

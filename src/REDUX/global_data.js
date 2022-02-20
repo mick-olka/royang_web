@@ -7,6 +7,7 @@ let global_data = {
         "(096) 396 30 32",
     ],
     text_boxes: [],
+    site_url: 'http://192.168.1.24:3000/',
 }
 
 export default global_data;

@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import s from "./ItemsList.module.css";
-import {useSmallPopup} from "../../../hooks/small_popup.hook";
 
 function ItemsList({items, deleteItems, itemsIdsArr, setItemsIdArr, ...props}) {
     let isMouseDown = false;

@@ -15,7 +15,8 @@ function ListPane({
                       deleteElement,
                       getListByUrl,
                       isLoading,
-                      setCurrentPageAC
+                      setCurrentPageAC,
+                      currency_value
                   }) {
 
     const onSubmit = (formData) => {
@@ -52,7 +53,7 @@ function ListPane({
 
             {listForm && <ItemsListC
                 items={listForm.items} deleteItems={onElementsDelete}>
-                {item => <ProductItem item={item}/>}
+                {item => <ProductItem item={item} currency_value={currency_value} />}
             </ItemsListC>}
 
             <PaginatorC onPageChanged={onPageChanged}/>

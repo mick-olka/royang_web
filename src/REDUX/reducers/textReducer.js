@@ -6,10 +6,6 @@ const SET_TEXT_FORM = "textReducer/SET_TEXT_FORM";
 let initialState = {
     text_blocks: [
         {_id: 11, name: "Loading", text: "Loading...", nav_link:""},
-        {_id: 12, name: "Loading", text: "Loading...", nav_link:""},
-        {_id: 13, name: "Loading", text: "Loading...", nav_link:""},
-        {_id: 14, name: "Loading", text: "Loading...", nav_link:""},
-        {_id: 15, name: "Loading", text: "Loading...", nav_link:""},
     ],
     textForm: null,
 }

@@ -6,10 +6,11 @@ import PhotosPane from "../PhotosPane/PhotosPane";
 import ListsSelect from "../../ListSelect/ListsSelect";
 import ItemsListC from "../../ItemsList/ItemsListC";
 import Loading from "../../../Extra/Loading";
+import global_data from "../../../../REDUX/global_data";
 
 function UpdateProduct({
                            prodId, updateProduct,
-                           addElement, addPhotos, deletePhotos,
+                           addElement, deleteElement, addPhotos, deletePhotos,
                            pushToHistory, setChosenProductAC, updateProductProps,
                        }) {
 
@@ -17,7 +18,6 @@ function UpdateProduct({
     let thumbnail = null;
     const [locale, setLocale] = useState("ua");
     const onSubmit = (formData) => {
-        //console.log(formData);
         if (prodId) updateProduct(prodId, formData, thumbnail);
         else console.log("No prod Id");
     }
@@ -57,13 +57,13 @@ function UpdateProduct({
     }
 
     let typesList = productData.types.map(t => {
-        return <p key={t}>{t}</p>
+        return <p key={t.url}>{t.name['ua']}</p>
     });
 
     if (isLoading && !productData._id) return <div><Loading/></div>;
 
     return (<div className={s.pane}>
-            <h1>Update Product</h1>
+            <h1>Update Product - <span><a target="__blank" href={`${global_data.site_url}products/${productData.url_name}`}>Open on site</a></span> </h1>
             <br/>
             <div className={s.locales_div} >
                 <button
@@ -88,7 +88,7 @@ function UpdateProduct({
             <div className={s.selectBox}>
                 <div style={{height: "2rem"}} ><span style={{fontWeight: "bolder"}}>Available in: </span> {typesList}</div>
                 <div style={{display: "flex"}} >
-                <ListsSelect lists={lists} addElement={addElement} prodIdArr={[prodId]} />
+                <ListsSelect types={productData.types} lists={lists} addElement={addElement} deleteElement={deleteElement} prodIdArr={[prodId]} />
                 <button style={{height: "3rem"}} onClick={onChoosingProductsBtn}>Choose related or similar products</button>
                 </div>
             </div>

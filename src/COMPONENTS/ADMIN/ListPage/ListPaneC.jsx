@@ -50,6 +50,7 @@ let mapStateToProps = (state) => {
     return ({
         listForm: state.listsReducer.listForm,
         isLoading: state.listsReducer.isLoading,
+        currency_value: state.textReducer.text_blocks.find(t=>t.name==="currency_value"),
     });
 }
 
