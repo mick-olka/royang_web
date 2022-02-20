@@ -1,13 +1,11 @@
 .text_edit_item {
     margin-left: 1rem;
-    /*max-height: 15rem;*/
     padding: 0.5rem;
 }
 
 .input_block {
     position: relative;
     width: 100%;
-
 }
 
 .text_edit_item input {
@@ -17,6 +15,7 @@
 .text_edit_item textarea {
     width: 98%;
     display: block;
+    height: 25rem;
 }
 
 .text_edit_item button {
@@ -35,4 +34,10 @@
     position: absolute;
     top: 1rem;
     right: 1rem;
+}
+
+.text_block_header {
+    font-weight: bold;
+    height: 3rem;
+    font-size: 1.3rem;
 }

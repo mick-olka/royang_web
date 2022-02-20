@@ -16,8 +16,7 @@ function EditTextForm({onSubmit, initValues}) {
             <button className={s.open_btn} onClick={()=>setIsOpen(!isOpen)} >{isOpen? 'close':'open'}</button>
             <form onSubmit={formik.handleSubmit} className={s.text_edit_item} >
                 <div className={s.input_block} >
-                <label htmlFor="name" onClick={()=>setIsOpen(!isOpen)} >Name</label>
-                {myFormInput("name", "text", formik.values.name, formik.handleChange)}
+                <h3 className={s.text_block_header} onClick={()=>setIsOpen(!isOpen)} >{initValues.name || "Loading..."}</h3>
                 </div>
 
                 <div className={s.input_block} >
