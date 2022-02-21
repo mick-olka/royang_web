@@ -111,7 +111,7 @@ export const createProduct = (formData, thumbnail) =>
                     images: [],
                     types: [],
                 }));
-                dispatch(setIdOfCreatedAC(res.result._id));
+                dispatch(setIdOfCreatedAC(res.result.url_name));
                 dispatch(getProducts());
             }
         } catch (e) {

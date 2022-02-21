@@ -10,7 +10,8 @@ import {
     getProductById,
     setChosenProductAC,
     setIdOfCreatedAC,
-    updateProduct
+    updateProduct,
+    createProduct
 } from "../../../../REDUX/reducers/productsReducer";
 import {addElement, deleteElement} from "../../../../REDUX/reducers/listsReducer";
 import {addPhotos, deletePhotos} from "../../../../REDUX/reducers/photosReducer";
@@ -24,7 +25,9 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        getProductById, updateProduct, addElement, deleteElement, addPhotos, deletePhotos, setIdOfCreatedAC, setChosenProductAC
+        getProductById, updateProduct, createProduct, addElement,
+        deleteElement, addPhotos, deletePhotos,
+        setIdOfCreatedAC, setChosenProductAC
     }, dispatch);
 }
 
@@ -41,12 +44,21 @@ class UpdateProductC extends Component {
         } else this.props.history.push("/admin");
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        let prodUrl = this.props.location.pathname.split('/').pop();
+        let prevProdUrl = prevProps.location.pathname.split('/').pop();
+        if (prodUrl!==prevProdUrl) {
+            if (prodUrl) {
+                this.props.getProductById(prodUrl);
+            } else this.props.history.push("/admin");
+        }
+    }
+
     pushToHistory = (path) => {
         this.props.history.push(path);
     }
-
     render() {
-        if (this.props.updateProductProps.productData._id==null || this.props.updateProductProps.isLoading) return <div><Loading /></div>
+        if (this.props.updateProductProps.isLoading || this.props.updateProductProps.productData._id===null) return <div><Loading /></div>
         return (
             <UpdateProduct prodId={this.props.updateProductProps.productData._id} {...this.props} pushToHistory={this.pushToHistory} />
         );

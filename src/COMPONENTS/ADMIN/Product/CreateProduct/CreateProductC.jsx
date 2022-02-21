@@ -21,18 +21,6 @@ let mapDispatchToProps = (dispatch) => {
 
 class CreateProductC extends Component {
 
-// componentDidMount() {
-//     let prodId = this.props.location.pathname.split('/').pop();
-//     //console.log(prodId);
-//
-//     this.props.setIdOfCreatedAC(null);     //  for resetting create page
-//     if (prodId && prodId.length===24) {
-//         this.props.getProductById(prodId);
-//     } else {
-//         this.props.pushToHistory("/ADMIN");
-//     }
-// }
-
     pushToHistory = (path) => {
         this.props.history.push(path);
     }

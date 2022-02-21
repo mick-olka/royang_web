@@ -24,7 +24,7 @@ function CreateProduct({createProduct, idOfCreated, pushToHistory}) {
     let thumbnail=null;
 
     useEffect(()=>{
-        if (idOfCreated!=null) pushToHistory("/ADMIN/products/"+idOfCreated)},
+        if (idOfCreated!=null) pushToHistory("/admin/products/"+idOfCreated)},
         [idOfCreated, pushToHistory]);
 
     const onSubmit = async (formData) => {

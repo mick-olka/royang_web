@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from "../Product.module.css";
 import ProductForm from "../ProductForm/ProductForm";
 import chairIcon from "../../../../IMGS/chair.png";
@@ -9,7 +9,7 @@ import Loading from "../../../Extra/Loading";
 import global_data from "../../../../REDUX/global_data";
 
 function UpdateProduct({
-                           prodId, updateProduct,
+                           prodId, updateProduct, createProduct,
                            addElement, deleteElement, addPhotos, deletePhotos,
                            pushToHistory, setChosenProductAC, updateProductProps,
                        }) {
@@ -56,6 +56,15 @@ function UpdateProduct({
         updateProduct(prodId, {relatedProducts: data});
     }
 
+    const handleDuplication = async () => {
+        let newProdData = {...productData};
+        newProdData.url_name = newProdData.url_name + "_copy_" + Date.now();
+        newProdData.name['ua'] = newProdData.name['ua'] + "_copy";
+        newProdData.name['ru'] = newProdData.name['ru'] + "_copy";
+        await createProduct(newProdData);
+        pushToHistory('/admin/products/'+newProdData.url_name);
+    }
+
     let typesList = productData.types.map(t => {
         return <p key={t.url}>{t.name['ua']}</p>
     });
@@ -64,6 +73,7 @@ function UpdateProduct({
 
     return (<div className={s.pane}>
             <h1>Update Product - <span><a target="__blank" href={`${global_data.site_url}products/${productData.url_name}`}>Open on site</a></span> </h1>
+            <button onClick={handleDuplication} >Duplicate</button>
             <br/>
             <div className={s.locales_div} >
                 <button
