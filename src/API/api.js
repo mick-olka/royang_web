@@ -69,7 +69,7 @@ export const productsAPI = {
 
     findProducts(str = "", page = 1, limit = 2, locale="ua") {
         return instance.get(
-            `search?str=${str}&page=${page}&limit=${limit}&locale=${locale}&isAdmin=true`,
+            `products?str=${str}&page=${page}&limit=${limit}&locale=${locale}&isAdmin=true`,
         ).then(res => {
             return res.data;
         });

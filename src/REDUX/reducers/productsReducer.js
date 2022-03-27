@@ -151,7 +151,7 @@ export const updateProduct = (id, formData, thumbnail) =>
 export const findProducts = (str, page, limit=prodLim) => async (dispatch) => {
     try {
         let response = await productsAPI.findProducts(str, page, limit);
-        dispatch(setProductsFoundAC(response.result));
+        dispatch(setProductsFoundAC(response.products));
         dispatch(setTotalItemsCountAC(response.count));
     } catch (e) {
         alert("findProducts: "+e);
