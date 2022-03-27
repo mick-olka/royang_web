@@ -20,7 +20,6 @@ let mapDispatchToProps = (dispatch) => {
 }
 
 class PaginatorC extends Component {
-
     render() {
         return (
             <SearchWrapper

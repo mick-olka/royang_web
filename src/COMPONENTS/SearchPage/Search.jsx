@@ -7,7 +7,7 @@ import search_icon from "../../IMGS/ICONS/search.png";
 const Search = ({redirectTo, pushToHistory}) => {
 
     const onSubmit = (string) => {
-        if (string.length>0) pushToHistory(redirectTo+"?search="+string);
+        if (string.length>0) pushToHistory(`${redirectTo}?search=${string}`);
     }
 
     return (
