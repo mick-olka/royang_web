@@ -3,7 +3,6 @@ import {NavLink, Route, Switch, useLocation} from "react-router-dom";
 import Navbar from "../../Navbar/Navbar";
 import ListForm from "../ListPage/ListForm/ListForm";
 import NotFound from "../../Extra/NotFound";
-import ChangePW from "../AuthAdmin/ChangePW";
 import Search from "../../SearchPage/Search";
 import UpdateProductC from "../Product/UpdateProduct/UpdateProductC";
 import SearchPageC from "../../SearchPage/SearchPageC";
@@ -15,6 +14,7 @@ import MainAdminPageC from "./MainAdminPageC";
 import SliderEditPageC from "../SliderEdit/SliderEditPageC";
 import TextEditPageC from "../TextEditPage/TextEditPageC";
 import AdminProductsPaneC from "../ProductsPaneA/AdminProductsPaneC";
+import Settings from "./Settings";
 
 function AdminPage({deleteAdminAuth, products, productsFound, lists, createList, changePW, pushToHistory, ...props}) {
 
@@ -25,7 +25,7 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists, createList,
         // {url: "/admin/orders", name: "ORDERS"},
         // {url: "/admin/slider", name: "SLIDER"},
         {url: "/admin/text", name: "TEXT"},
-        {url: "/admin/login/pw", name: "edit PW"},
+        {url: "/admin/settings", name: "Settings"},
     ];
 
     let pn = useLocation().pathname;
@@ -72,7 +72,7 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists, createList,
 
                         <Route path="/admin/lists/:listUrl" render={() => <ListPaneC/>}/>
 
-                        <Route path="/admin/login/pw" render={() => <ChangePW changePW={changePW}/>}/>
+                        <Route path="/admin/settings" render={() => <Settings changePW={changePW}/>}/>
                         <Route path="/admin/new" render={() => <CreateProductC/>}/>
                         <Route path="/admin/search" render={() =>
                             <SearchPageC>

@@ -176,6 +176,22 @@ export const adminAPI = {
         ).then(response => {
             return response.data;
         });
+    },
+    makeBackup() {
+        return instance.get(
+            'make_backup',
+        ).then(response => {
+            showPopup('Backup Made');
+            return response.data;
+        });
+    },
+    restoreBackup() {
+        return instance.get(
+            'restore_backup',
+        ).then(response => {
+            showPopup('Backup Restored');
+            return response.data;
+        });
     }
 }
 

@@ -78,7 +78,27 @@ export const changePW = async (password, oldPassword) => {
         let res = await adminAPI.changePW(password, oldPassword);
         if (res.code === 0) checkAuth();
     } catch (e) {
+        alert(e);
+    }
+}
 
+export const makeBackup = async () => {
+    try {
+        let res = await adminAPI.makeBackup();
+        if (res.code === 0) console.log(res.msg);
+        else console.log(res.error);
+    } catch (e) {
+        alert(e);
+    }
+}
+
+export const restoreBackup = async () => {
+    try {
+        let res = await adminAPI.restoreBackup();
+        if (res.code === 0) console.log(res.msg);
+        else console.log(res.error);
+    } catch (e) {
+        alert(e);
     }
 }
 
@@ -87,5 +107,6 @@ export const deleteAdminAuth = () =>
         let res = await adminAPI.deleteAuth();
         if (res.code === 0) dispatch(setIsAdminAuthAC(false));
     }
+
 
 export default adminReducer;
