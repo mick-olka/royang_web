@@ -93,7 +93,8 @@ export const getProductById = (id) => async (dispatch) => {
         let response = await productsAPI.getProductById(id);
         await dispatch(setProductFormAC(response));
     } catch (e) {
-
+        console.log(e);
+        alert(e.message);
     }
     dispatch(setIsLoadingAC(false));
 }

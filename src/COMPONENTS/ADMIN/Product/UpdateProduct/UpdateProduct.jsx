@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import s from "../Product.module.css";
 import ProductForm from "../ProductForm/ProductForm";
 import chairIcon from "../../../../IMGS/chair.png";
@@ -69,7 +69,8 @@ function UpdateProduct({
         return <p key={t.url}>{t.name['ua']}</p>
     });
 
-    if (isLoading && !productData._id) return <div><Loading/></div>;
+    // if (!productData._id) return <NotFound />;
+    if (isLoading) return <div><Loading/></div>;
 
     return (<div className={s.pane}>
             <h1>Update Product - <span><a target="__blank" href={`${global_data.site_url}products/${productData.url_name}`}>Open on site</a></span> </h1>
