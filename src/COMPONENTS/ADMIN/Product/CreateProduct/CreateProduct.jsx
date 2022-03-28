@@ -19,6 +19,7 @@ function CreateProduct({createProduct, idOfCreated, pushToHistory}) {
         oldPrice: 0,
         index: 0,
         description: "",
+        keywords: [],
     };
 
     let thumbnail=null;

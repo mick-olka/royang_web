@@ -15,6 +15,7 @@ const ProductForm = (props) => {
         index: props.initialValues.index,
         features: props.initialValues.features[props.locale],
         description: props.initialValues.description[props.locale] || "",
+        keywords: props.initialValues.keywords.join(' ') || "",
     }
 
     if (locale0 !== props.locale) {return <Loading/>}
@@ -22,6 +23,7 @@ const ProductForm = (props) => {
         <Formik initialValues={initValues} onSubmit={values => {
             let newValues = {...props.initialValues, ...values};
             if (values.name) newValues.name = {...props.initialValues.name, [props.locale]: values.name};
+            if (values.keywords) newValues.keywords = values.keywords.split(' ');
             if (values.description) newValues.description = {...props.initialValues.description, [props.locale]: values.description};
             if (values.features) newValues.features = {...props.initialValues.features, [props.locale]: values.features};
             //console.log(newValues);
@@ -55,6 +57,10 @@ const ProductForm = (props) => {
                                 <div>
                                     <label className={s.i_label}  htmlFor="index">Index: </label>
                                     <Field type="number" name="index"/>
+                                </div>
+                                <div>
+                                    <label className={s.i_label}  htmlFor="keywords">Keywords: </label>
+                                    <Field name="keywords"/>
                                 </div>
                             </div>
                             <div className={s.t_area}>
