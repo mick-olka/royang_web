@@ -4,14 +4,15 @@ import s from "./ListForm.module.css";
 import {myFormInput} from "../../../../UTILS/FormUtils";
 
 const ListForm = (props) => {
-
     let initialValues = {
         name: {
             ua: props.initData ? props.initData.name['ua'] : '',
             ru: props.initData ? props.initData.name['ru'] : '',
         },
         url: props.listUrl || "",
-        index: props.initData ? props.initData.index : 0
+        index: props.initData ? props.initData.index : 0,
+        description: props.initData && (props.initData.description || ''),
+        keywords: props.initData && (props.initData.keywords.join(' ') || ''),
     };
 
     const formik = useFormik({
@@ -34,6 +35,14 @@ const ListForm = (props) => {
                     <div className={s.input_div} >
                         <label htmlFor="url">URL: </label>
                         {myFormInput("url", "text", formik.values.url, formik.handleChange)}
+                    </div>
+                    <div className={s.input_div} >
+                        <label htmlFor="description">Description: </label>
+                        {myFormInput("description", "text", formik.values.description, formik.handleChange)}
+                    </div>
+                    <div className={s.input_div} >
+                        <label htmlFor="keywords">Keywords: </label>
+                        {myFormInput("keywords", "text", formik.values.keywords, formik.handleChange)}
                     </div>
                     <div className={s.input_div} >
                         <label htmlFor="index">Index: </label>

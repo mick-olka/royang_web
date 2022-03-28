@@ -21,7 +21,7 @@ function ListPane({
 
     const onSubmit = (formData) => {
         if (listUrl) {
-            updateList(listUrl, formData.name, formData.url, formData.index);
+            updateList(listUrl, formData);
         }
     }
 

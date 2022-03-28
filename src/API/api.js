@@ -207,10 +207,10 @@ export const listsAPI = {
         });
     },
 
-    updateList(url, name, newUrl, index = 0) {
+    updateList(url, dat) {
         return instance.patch(
             'lists/' + url,
-            {name: name, url: newUrl, index: index}
+            {name: dat.name, url: dat.url, index: dat.index, description: dat.description, keywords: dat.keywords}
         ).then(res => {
             showPopup('Updated');
             return res.data;

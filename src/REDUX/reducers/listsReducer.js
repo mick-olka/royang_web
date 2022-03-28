@@ -68,12 +68,13 @@ export const createList = (formData) =>
         }
     }
 
-export const updateList = (url, name, newUrl, index) =>
+export const updateList = (url, dat) =>
     async (dispatch) => {
         try {
-            let res = await listsAPI.updateList(url, name, newUrl, index);
+            let newDat = {...dat, keywords: dat.keywords.split(' ')};
+            let res = await listsAPI.updateList(url, newDat);
             if (res.code === 0) {
-                dispatch(setListFormAC({name: name, index: index, url: newUrl}));
+                dispatch(setListFormAC(newDat));
                 dispatch(getLists());
             }
         } catch (e) {
