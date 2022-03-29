@@ -2,10 +2,20 @@ import React, {useEffect, useState} from 'react';
 import {Formik, Form, Field, FieldArray} from 'formik';
 import s from "./ProductForm.module.css";
 import Loading from "../../../Extra/Loading";
-
+const onCtrS = (e) => {
+    if (e.ctrlKey && e.code === 'KeyS') {
+        e.preventDefault();
+        // alert(e.code);
+        document.getElementById('submit_btn').click();
+    }
+}
 const ProductForm = (props) => {
     const [locale0, setLocale0] = useState("ua");   //  dummy to rerender form on locale change
     useEffect(()=>{setLocale0(props.locale)}, [props.locale]);
+    useEffect(()=>{
+        document.addEventListener('keydown', onCtrS);
+        return () => document.removeEventListener('keydown', onCtrS);
+    }, [])
     let initValues = {
         name: props.initialValues.name[props.locale] || "",
         url_name: props.initialValues.url_name,
@@ -106,7 +116,7 @@ const ProductForm = (props) => {
 
                     </div>
                     <div>
-                        <button className={s.submit_btn} type="submit">SAVE</button>
+                        <button id="submit_btn" className={s.submit_btn} type="submit">SAVE</button>
                     </div>
                 </Form>
             )}
