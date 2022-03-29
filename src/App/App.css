@@ -20,7 +20,7 @@ button {
   color: black;
   border-radius: 8px;
   box-shadow: 0 0 2px black;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 label {
@@ -51,7 +51,7 @@ button:hover {
 
 .App {
   /*text-align: center;*/
-  font-family: 'Rubik', inherit;
+  font-family: 'Roboto', inherit, serif;
   background-color: var(--c_white);
   min-height: 100%;
 }

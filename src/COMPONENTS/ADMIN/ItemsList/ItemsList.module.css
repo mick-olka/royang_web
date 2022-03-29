@@ -87,6 +87,16 @@
     margin-top: 1rem;
 }
 
+.are_you_sure_div {
+    flex-direction: column;
+    align-items: center;
+    display: none;
+}
+
+.are_you_sure_div button {
+    padding: 0.5rem;
+}
+
 /*.newProductLink {*/
 /*    display: block;*/
 /*    margin: 0 auto;*/
