@@ -49,7 +49,7 @@ function ListPane({
         <div className={s.pane}>
             <div className={s.header_pane} >
             <h1 style={{textAlign: "center", fontSize: "1.8rem", display: "inline-block"}} >{listForm.name['ua']} |
-            <span className={s.settings_btn} onClick={()=>setShowSettings(!showSettings)} > ⚙️</span></h1>
+            <span className={s.settings_btn} onClick={()=>setShowSettings(!showSettings)} role="img" aria-label="settings" >⚙️</span></h1>
             </div>
             <br/><br/>
             {isDeleted && <Redirect to="/admin"/>}

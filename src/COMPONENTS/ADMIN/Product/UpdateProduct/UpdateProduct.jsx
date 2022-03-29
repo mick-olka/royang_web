@@ -65,10 +65,6 @@ function UpdateProduct({
         pushToHistory('/admin/products/'+newProdData.url_name);
     }
 
-    let typesList = productData.types.map(t => {
-        return <p key={t.url}>{t.name['ua']}</p>
-    });
-
     // if (!productData._id) return <NotFound />;
     if (isLoading) return <div><Loading/></div>;
 
