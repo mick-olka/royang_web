@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavLink, Route, Switch, useLocation} from "react-router-dom";
 import Navbar from "../../Navbar/Navbar";
 import ListForm from "../ListPage/ListForm/ListForm";
@@ -28,9 +28,10 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists, createList,
         {url: "/admin/settings", name: "Settings"},
     ];
 
+    const [showListForm, setShowListForm] = useState(false);
+
     let pn = useLocation().pathname;
     useEffect(() => {
-
     }, [pn]);
 
     let typesL = [...lists].map(l => {
@@ -58,12 +59,13 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists, createList,
                 <div className="adminNavbar">
                     <Search redirectTo={"/admin/search"} pushToHistory={pushToHistory} />
                     <Navbar links={links}/>
-                    <br/>
-                    <h3 style={{fontSize: "1.3rem", textAlign: "center"}} >Lists</h3>
+                    <hr/>
                     <Navbar links={typesL}/>
                     <br/>
-                    <h3 style={{fontSize: "1.3rem", textAlign: "center"}} >New list</h3>
-                    <ListForm onSubmit={onSubmit}/>
+                    <h3 style={{fontSize: "1.5rem", textDecoration: 'underline'}} onClick={()=>setShowListForm(!showListForm)} >new list {showListForm ? '△':'▽'}</h3>
+                    <div style={showListForm ? {display: 'block'}:{display: 'none'}} >
+                        <ListForm onSubmit={onSubmit}/>
+                    </div>
                 </div>
 
                 <div className="content_pane">

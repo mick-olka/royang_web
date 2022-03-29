@@ -46,7 +46,7 @@ class MainAdminPageC extends React.Component {
                 {this.props.itemsIdsArr.length>0 ?
                 <div style={{position: "relative", left: "-16px"}} >
                     <ListsSelect types={[]} lists={this.props.lists} addElement={this.props.addElement} prodIdArr={this.props.itemsIdsArr} />
-                </div> : <div style={{height: "3.7rem"}} ></div>}
+                </div> : null}
                 {this.props.children}
                 <PaginatorC onPageChanged={this.onPageChanged} />
             </div>

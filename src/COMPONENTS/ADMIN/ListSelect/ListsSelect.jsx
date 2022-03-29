@@ -47,12 +47,12 @@ function ListsSelect({lists, addElement, deleteElement, prodIdArr, types}) {
 
     return (
         <div className={s.list_select_div} >
+            <button className={s.btn}
+                //disabled={chosenLists.length <= 0}
+                    onClick={() => handleSelectSubmit()}>Add to lists:</button>
             <Select isMulti
                     options={typesToSelect} defaultValue={defaultTypes}
                     onChange={(value) => setChosenLists(value)} />
-            <button className={s.btn}
-                    //disabled={chosenLists.length <= 0}
-                    onClick={() => handleSelectSubmit()}>Add to lists:</button>
         </div>
     );
 }
