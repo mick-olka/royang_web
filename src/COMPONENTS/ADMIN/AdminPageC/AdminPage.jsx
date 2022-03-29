@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {NavLink, Route, Switch, useLocation} from "react-router-dom";
 import Navbar from "../../Navbar/Navbar";
-import ListForm from "../ListPage/ListForm/ListForm";
 import NotFound from "../../Extra/NotFound";
 import Search from "../../SearchPage/Search";
 import UpdateProductC from "../Product/UpdateProduct/UpdateProductC";
@@ -14,7 +13,7 @@ import MainAdminPageC from "./MainAdminPageC";
 import SliderEditPageC from "../SliderEdit/SliderEditPageC";
 import TextEditPageC from "../TextEditPage/TextEditPageC";
 import AdminProductsPaneC from "../ProductsPaneA/AdminProductsPaneC";
-import Settings from "./Settings";
+import Settings from "./Settings/Settings";
 
 function AdminPage({deleteAdminAuth, products, productsFound, lists, createList, changePW, pushToHistory, ...props}) {
 
@@ -28,7 +27,6 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists, createList,
         {url: "/admin/settings", name: "Settings"},
     ];
 
-    const [showListForm, setShowListForm] = useState(false);
 
     let pn = useLocation().pathname;
     useEffect(() => {
@@ -39,10 +37,6 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists, createList,
         l0.url = "/admin/lists/" + l0.url;
         return l0;
     });
-
-    const onSubmit = (formData) => {    //  Create List
-        createList(formData);
-    }
 
     return (
         <div>
@@ -58,11 +52,6 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists, createList,
                     <Navbar links={links}/>
                     <hr/>
                     <Navbar links={typesL}/>
-                    <br/>
-                    <h3 style={{fontSize: "1.5rem", textDecoration: 'underline'}} onClick={()=>setShowListForm(!showListForm)} >new list {showListForm ? '△':'▽'}</h3>
-                    <div style={showListForm ? {display: 'block'}:{display: 'none'}} >
-                        <ListForm onSubmit={onSubmit}/>
-                    </div>
                 </div>
 
                 <div className="content_pane">
@@ -71,7 +60,7 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists, createList,
 
                         <Route path="/admin/lists/:listUrl" render={() => <ListPaneC/>}/>
 
-                        <Route path="/admin/settings" render={() => <Settings changePW={changePW}/>}/>
+                        <Route path="/admin/settings" render={() => <Settings pushToHistory={pushToHistory} createList={createList} changePW={changePW}/>}/>
                         <Route path="/admin/new" render={() => <CreateProductC/>}/>
                         <Route path="/admin/search" render={() =>
                             <SearchPageC>

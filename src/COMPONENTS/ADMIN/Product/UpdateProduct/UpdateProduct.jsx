@@ -99,20 +99,21 @@ function UpdateProduct({
 
             {/*//===TYPES_SELECTOR=====*/}
             <div className={s.selectBox}>
-                <div style={{height: "2rem"}} ><span style={{fontWeight: "bolder"}}>Available in: </span> {typesList}</div>
+                {/*<div style={{height: "2rem"}} ><span style={{fontWeight: "bolder"}}>Available in: </span> {typesList}</div>*/}
                 <div style={{display: "flex"}} >
                 <ListsSelect types={productData.types} lists={lists} addElement={addElement} deleteElement={deleteElement} prodIdArr={[prodId]} />
-                <button style={{height: "3rem"}} onClick={onChoosingProductsBtn}>Choose related or similar products</button>
                 </div>
             </div>
             </div>
 
             <ProductForm initialValues={productData} onSubmit={onSubmit} locale={locale} />
-
+            <hr/>
             <PhotosPane images={productData.images} addPhotos={addPhotos}
                         prodId={prodId} deletePhotos={deletePhotos}
             />
 
+            <br/><hr/><br/>
+            <button style={{height: "3rem"}} onClick={onChoosingProductsBtn}>Choose related or similar products</button>
             <div className={s.similar_products_div}>
                 Similar Products
                 <ItemsListC items={productData.similarProducts} deleteItems={onSimilarDelete}>
@@ -122,7 +123,7 @@ function UpdateProduct({
                     </div>}
                 </ItemsListC>
             </div>
-
+            <hr/>
             <div className={s.related_products_div}>
                 Related Products
                 <ItemsListC items={productData.relatedProducts} deleteItems={onRelatedDelete}>
@@ -132,7 +133,7 @@ function UpdateProduct({
                     </div>}
                 </ItemsListC>
             </div>
-
+            <hr/>
         </div>
     );
 }
