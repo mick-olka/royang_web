@@ -27,7 +27,7 @@ function PhotoForm({onSubmit}) {
                 <label htmlFor="pillColor.ru">Pill Color RU</label>
                 {myFormInput("pillColor.ru", "text", formik.values.pillColor.ru, formik.handleChange)}
                 </div>
-                <div><button style={{padding: "0.2rem", width: "10rem", fontSize: "1.2rem"}} type="submit" >+ PHOTO</button></div>
+                <div><button style={{padding: "0.2rem", width: "10rem", fontSize: "1.2rem"}} type="submit" >Add</button></div>
             </form>
         </div>
     );

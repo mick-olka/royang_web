@@ -24,7 +24,7 @@
 }
 
 .selectBox {
-    width: 70%;
+    width: 90%;
     display: flex;
     flex-direction: column;
 }
@@ -45,4 +45,9 @@
 
 .active_locale_btn {
     background-color: grey;
+}
+
+.header_div {
+    display: flex;
+    justify-content: space-between;
 }

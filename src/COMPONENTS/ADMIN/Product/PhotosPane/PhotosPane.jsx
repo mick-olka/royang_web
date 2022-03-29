@@ -40,7 +40,7 @@ function PhotosPane({images, prodId, addPhotos, deletePhotos}) {
 
     return (
         <div className={s.photoPane}>
-            <p style={{fontSize: "1.5rem"}} >Add Photo</p>
+            <p style={{fontSize: "1.5rem"}} >Add Photos</p>
             <input type="file" name="pathArr" onChange={onPhotoSelected} multiple />
             <PhotoForm onSubmit={onSubmit}/>
             <ItemsListC items={images} deleteItems={onPhotoDelete} >

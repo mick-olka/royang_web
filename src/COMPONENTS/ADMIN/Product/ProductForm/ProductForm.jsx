@@ -23,10 +23,11 @@ const ProductForm = (props) => {
         <Formik initialValues={initValues} onSubmit={values => {
             let newValues = {...props.initialValues, ...values};
             if (values.name) newValues.name = {...props.initialValues.name, [props.locale]: values.name};
-            if (values.keywords) newValues.keywords = values.keywords.split(' ');
+            if (values.keywords || values.keywords === "") {
+                newValues.keywords = values.keywords === "" ? [] : values.keywords.split(' ');
+            }
             if (values.description) newValues.description = {...props.initialValues.description, [props.locale]: values.description};
             if (values.features) newValues.features = {...props.initialValues.features, [props.locale]: values.features};
-            //console.log(newValues);
             props.onSubmit(newValues);
         }}>
             {({values}) => (

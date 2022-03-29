@@ -73,7 +73,8 @@ function UpdateProduct({
     if (isLoading) return <div><Loading/></div>;
 
     return (<div className={s.pane}>
-            <h1>Update Product - <span><a target="__blank" href={`${global_data.site_url}products/${productData.url_name}`}>Open on site</a></span> </h1>
+            <div className={s.header_div} >
+            <h1>{productData.name[locale]} | <span><a target="__blank" href={`${global_data.site_url}products/${productData.url_name}`}>show on site</a></span> </h1>
             <button onClick={handleDuplication} >Duplicate</button>
             <br/>
             <div className={s.locales_div} >
@@ -86,10 +87,11 @@ function UpdateProduct({
                     onClick={()=>setLocale("ru")}
                 >RU</button>
             </div>
+            </div>
             <br/>
             <div style={{display: "flex"}} >
             {/*//===THUMB_PANE========*/}
-            <div style={{width: "10rem"}} >
+            <div style={{width: "10%"}} >
             <img className={s.thumbnail}
                  src={productData.thumbnail ? productData.thumbnail : chairIcon} alt="img"/>
             <input type="file" disabled={false} onChange={onThumbnailSelected}/>
