@@ -1,7 +1,7 @@
 import React from 'react';
 import {useFormik} from 'formik';
 import s from "./ListForm.module.css";
-import {myFormInput} from "../../../../UTILS/FormUtils";
+import {myFormInput, myFormTextarea} from "../../../../UTILS/FormUtils";
 
 const ListForm = (props) => {
     let initialValues = {
@@ -37,16 +37,16 @@ const ListForm = (props) => {
                         {myFormInput("url", "text", formik.values.url, formik.handleChange)}
                     </div>
                     <div className={s.input_div} >
-                        <label htmlFor="description">Description: </label>
-                        {myFormInput("description", "text", formik.values.description, formik.handleChange)}
-                    </div>
-                    <div className={s.input_div} >
                         <label htmlFor="keywords">Keywords: </label>
                         {myFormInput("keywords", "text", formik.values.keywords, formik.handleChange)}
                     </div>
                     <div className={s.input_div} >
                         <label htmlFor="index">Index: </label>
                         {myFormInput("index", "number", formik.values.index, formik.handleChange)}
+                    </div>
+                    <div className={s.input_div} >
+                        <label htmlFor="description">Description: </label>
+                        {myFormTextarea("description", formik.values.description, formik.handleChange)}
                     </div>
                     <button style={{width: "100%", fontSize: "1.5rem"}} type="submit">SAVE</button>
                 </form>

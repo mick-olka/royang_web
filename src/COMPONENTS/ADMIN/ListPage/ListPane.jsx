@@ -20,6 +20,7 @@ function ListPane({
                   }) {
 
     const onSubmit = (formData) => {
+        setShowSettings(false);
         if (listUrl) {
             updateList(listUrl, formData);
         }
@@ -39,17 +40,26 @@ function ListPane({
         getListByUrl(listUrl, pageNumber);
     }
 
-    let [isDeleted, setIsDeleted] = useState(false);    //  for redirecting after delete
+    const [isDeleted, setIsDeleted] = useState(false);    //  for redirecting after delete
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [showSettings, setShowSettings] = useState(false);
 
     if (isLoading || !listForm) return <div><Loading/></div>;
     return (
         <div className={s.pane}>
-            <h1 style={{textAlign: "center", fontSize: "1.8rem", display: "inline-block"}} >{listForm.name['ua']}</h1>
-            <button style={{backgroundColor: "red", display: "inline-block"}} onClick={onTypeDelete}>DELETE</button>
+            <div className={s.header_pane} >
+            <h1 style={{textAlign: "center", fontSize: "1.8rem", display: "inline-block"}} >{listForm.name['ua']} |
+            <span className={s.settings_btn} onClick={()=>setShowSettings(!showSettings)} > ⚙️</span></h1>
+            </div>
             <br/><br/>
             {isDeleted && <Redirect to="/admin"/>}
 
-            <ListForm onSubmit={onSubmit} listUrl={listUrl} initData={listForm}/>
+            <div style={showSettings ? {display: 'block'}:{display: 'none'}} >
+                <button style={{backgroundColor: "#dd6666", display: "inline-block"}} onClick={()=>setShowConfirm(true)}>Delete Collection</button>
+                <div style={showConfirm ? {display: 'block'}:{display: 'none'}} >Confirm deleting?<button onClick={()=>setShowConfirm(false)} >No</button>
+                    <button onClick={onTypeDelete}>Yes</button></div>
+                <ListForm onSubmit={onSubmit} listUrl={listUrl} initData={listForm}/>
+            </div>
 
             {listForm && <ItemsListC
                 items={listForm.items} deleteItems={onElementsDelete}>
