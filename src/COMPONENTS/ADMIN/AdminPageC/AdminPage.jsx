@@ -20,11 +20,11 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists, createList,
 
     let links = [
         // {url: "/", name: "CLIENT"},
-        {url: "/admin", name: "ADMIN"},
-        {url: "/admin/new", name: "NEW PROD"},
+        {url: "/admin", name: "Main"},
+        {url: "/admin/new", name: "New Prod"},
         // {url: "/admin/orders", name: "ORDERS"},
         // {url: "/admin/slider", name: "SLIDER"},
-        {url: "/admin/text", name: "TEXT"},
+        {url: "/admin/text", name: "Text"},
         {url: "/admin/settings", name: "Settings"},
     ];
 
@@ -48,11 +48,8 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists, createList,
         <div>
 
             <div className="admin_header" >
-                <div>
-                    <div><NavLink to="/admin"><h1>ADMIN</h1></NavLink></div>
+                    <div><NavLink to="/admin"><h1 className="admin_header_name" >ROTANG <span style={{fontSize: '1rem'}} >admin</span></h1></NavLink></div>
 <div style={{fontSize: "0.9rem", textDecoration: "underline"}} onClick={deleteAdminAuth}>LOGOUT</div>
-
-                </div>
             </div>
             <div className="middle_pane middle_pane_admin">
 
