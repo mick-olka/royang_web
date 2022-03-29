@@ -55,8 +55,12 @@ function ItemsList({items, deleteItems, itemsIdsArr, setItemsIdArr, ...props}) {
     });
 
     const deleteHandler = () => {
-        deleteItems(itemsIdsArr);
-        setItemsIdArr([]);
+        if (itemsIdsArr.length>0) {
+            deleteItems(itemsIdsArr);
+            setItemsIdArr([]);
+        } else {
+            setShowConfirm(false);
+        }
     }
 
     return (
