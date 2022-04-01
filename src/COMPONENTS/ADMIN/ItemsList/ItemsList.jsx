@@ -58,6 +58,7 @@ function ItemsList({items, deleteItems, itemsIdsArr, setItemsIdArr, ...props}) {
         if (itemsIdsArr.length>0) {
             deleteItems(itemsIdsArr);
             setItemsIdArr([]);
+            props.pushToHistory('/admin');
         } else {
             setShowConfirm(false);
         }

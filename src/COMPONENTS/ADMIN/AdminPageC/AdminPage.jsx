@@ -64,7 +64,7 @@ function AdminPage({deleteAdminAuth, products, productsFound, lists, createList,
                         <Route path="/admin/new" render={() => <CreateProductC/>}/>
                         <Route path="/admin/search" render={() =>
                             <SearchPageC>
-                                <AdminProductsPaneC products={productsFound}/>
+                                <AdminProductsPaneC products={productsFound} pushToHistory={pushToHistory} />
                             </SearchPageC>
                         }/>
 
