@@ -3,7 +3,7 @@ import s from "../Product.module.css";
 import ProductForm from "../ProductForm/ProductForm";
 import chairIcon from "../../../../IMGS/chair.png";
 
-function CreateProduct({createProduct, idOfCreated, pushToHistory}) {
+function CreateProduct({createProduct, pushToHistory}) {
 
     let initialValues = {
         features: {ua:[
@@ -25,16 +25,13 @@ function CreateProduct({createProduct, idOfCreated, pushToHistory}) {
 
     let thumbnail=null;
 
-    useEffect(()=>{
-        if (idOfCreated!=null) pushToHistory("/admin/products/"+idOfCreated)},
-        [idOfCreated, pushToHistory]);
-
     const onSubmit = async (formData) => {
         let newFormData = {...formData};
         newFormData.name.ru = newFormData.name.ua + ' ru';
         newFormData.description.ru = newFormData.description.ua + ' ru';
         newFormData.features.ru = newFormData.features.ua;
-        await createProduct(formData, thumbnail);
+        let result = await createProduct(formData, thumbnail);
+        pushToHistory('/admin/products/'+result.url_name);
     }
 
     let onThumbnailSelected=(e)=> {

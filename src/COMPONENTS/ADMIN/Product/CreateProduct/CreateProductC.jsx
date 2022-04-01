@@ -9,7 +9,7 @@ import CreateProduct from "./CreateProduct";
 
 let mapStateToProps = (state) => {
     return {
-        idOfCreated: state.productsReducer.idOfCreated
+        // idOfCreated: state.productsReducer.idOfCreated
     }
 }
 
@@ -27,7 +27,7 @@ class CreateProductC extends Component {
 
     render() {
         return (
-            <CreateProduct createProduct={this.props.createProduct} idOfCreated={this.props.idOfCreated} pushToHistory={this.pushToHistory} />
+            <CreateProduct createProduct={this.props.createProduct} pushToHistory={this.pushToHistory} />
         );
     }
 }
