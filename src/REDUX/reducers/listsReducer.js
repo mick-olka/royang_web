@@ -71,7 +71,7 @@ export const createList = (formData) =>
 export const updateList = (url, dat) =>
     async (dispatch) => {
         try {
-            let newDat = {...dat, keywords: dat.keywords.split(' ')};
+            let newDat = {...dat, keywords: dat.keywords.split(', ')};
             let res = await listsAPI.updateList(url, newDat);
             if (res.code === 0) {
                 dispatch(setListFormAC(newDat));

@@ -5,7 +5,6 @@ import Loading from "../../../Extra/Loading";
 const onCtrS = (e) => {
     if (e.ctrlKey && e.code === 'KeyS') {
         e.preventDefault();
-        // alert(e.code);
         document.getElementById('submit_btn').click();
     }
 }
@@ -25,7 +24,7 @@ const ProductForm = (props) => {
         index: props.initialValues.index,
         features: props.initialValues.features[props.locale],
         description: props.initialValues.description[props.locale] || "",
-        keywords: props.initialValues.keywords.join(' ') || "",
+        keywords: props.initialValues.keywords.join(', ') || "",
     }
 
     if (locale0 !== props.locale) {return <Loading/>}
@@ -34,9 +33,9 @@ const ProductForm = (props) => {
             let newValues = {...props.initialValues, ...values};
             if (values.name) newValues.name = {...props.initialValues.name, [props.locale]: values.name};
             if (values.keywords || values.keywords === "") {
-                newValues.keywords = values.keywords === "" ? [] : values.keywords.split(' ');
+                newValues.keywords = values.keywords === "" ? [] : values.keywords.split(', ');
             }
-            if (values.description) newValues.description = {...props.initialValues.description, [props.locale]: values.description};
+            if (values.description || values.description === "") newValues.description = {...props.initialValues.description, [props.locale]: values.description};
             if (values.features) newValues.features = {...props.initialValues.features, [props.locale]: values.features};
             props.onSubmit(newValues);
         }}>

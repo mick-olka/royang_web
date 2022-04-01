@@ -6,19 +6,20 @@ import chairIcon from "../../../../IMGS/chair.png";
 function CreateProduct({createProduct, idOfCreated, pushToHistory}) {
 
     let initialValues = {
-        features: [
+        features: {ua:[
             {key: "Ширина, см.", value: "0"},
             {key: "Глибина, см", value: "0"},
             {key: "Висота, см", value: "0"},
             {key: "Країна", value: "Україна"},
             {key: "Матеріал", value: "Алюміній, поліетиленова стрічка, скло "},
-        ],
-        name: '',
+        ]},
+        name: {ua: ''},
+        url_name: '',
         code: '',
         price: 0,
         oldPrice: 0,
         index: 0,
-        description: "",
+        description: {ua: ""},
         keywords: [],
     };
 
@@ -29,6 +30,10 @@ function CreateProduct({createProduct, idOfCreated, pushToHistory}) {
         [idOfCreated, pushToHistory]);
 
     const onSubmit = async (formData) => {
+        let newFormData = {...formData};
+        newFormData.name.ru = newFormData.name.ua + ' ru';
+        newFormData.description.ru = newFormData.description.ua + ' ru';
+        newFormData.features.ru = newFormData.features.ua;
         await createProduct(formData, thumbnail);
     }
 
@@ -45,7 +50,7 @@ function CreateProduct({createProduct, idOfCreated, pushToHistory}) {
             <img className={s.thumbnail} src={chairIcon} alt="img"/>
             <input type="file" disabled={false} onChange={onThumbnailSelected} />
 
-            <ProductForm initialValues={initialValues} onSubmit={onSubmit} />
+            <ProductForm initialValues={initialValues} onSubmit={onSubmit} locale="ua" />
 
         </div>
     );

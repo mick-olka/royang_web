@@ -12,7 +12,7 @@ const ListForm = (props) => {
         url: props.listUrl || "",
         index: props.initData ? props.initData.index : 0,
         description: props.initData ? (props.initData.description || '') : '',
-        keywords: props.initData ? (props.initData.keywords.join(' ') || '') : '',
+        keywords: props.initData ? (props.initData.keywords.join(', ') || '') : '',
     };
 
     const formik = useFormik({
