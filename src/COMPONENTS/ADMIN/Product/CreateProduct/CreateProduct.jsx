@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import s from "../Product.module.css";
 import ProductForm from "../ProductForm/ProductForm";
 import chairIcon from "../../../../IMGS/chair.png";
