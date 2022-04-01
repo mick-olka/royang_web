@@ -8,6 +8,7 @@ let global_data = {
     ],
     text_boxes: [],
     site_url: 'http://192.168.0.103:3000/',
+    // site_url: 'http://rotang.biz/',
 }
 
 export default global_data;
