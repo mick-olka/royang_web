@@ -41,8 +41,10 @@
 
 .locale_btn, .active_locale_btn {
     padding: 0.3rem;
+    opacity: 0.8;
 }
 
 .active_locale_btn {
-    background-color: grey;
+    font-weight: 800;
+    opacity: 1;
 }
