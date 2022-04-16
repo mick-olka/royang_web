@@ -6,7 +6,7 @@ import global_data from "../global_data";
 const SET_PRODUCTS = "productsReducer/SET_PRODUCTS";
 const SET_PRODUCT_FORM = "productsReducer/SET_PRODUCT_FORM";
 const SET_IS_LOADING = "productsReducer/SET_IS_LOADING";
-const SET_ID_OF_CREATED = "productsReducer/SET_ID_OF_CREATED";
+// const SET_ID_OF_CREATED = "productsReducer/SET_ID_OF_CREATED";
 const SET_FOUND_PRODUCTS = "productsReducer/SET_FOUND_PRODUCTS";
 const SET_CHOSEN_PRODUCT = "productsReducer/SET_CHOSEN_PRODUCT";
 
@@ -46,10 +46,10 @@ const productsReducer = (state=initialState, action) => {
                 ...state, isLoading: action.isLoading,
             }
 
-        case SET_ID_OF_CREATED:
-            return {
-                ...state, idOfCreated: action.id,
-            }
+        // case SET_ID_OF_CREATED:
+        //     return {
+        //         ...state, idOfCreated: action.id,
+        //     }
 
         case SET_FOUND_PRODUCTS:
             return {
@@ -69,7 +69,7 @@ const productsReducer = (state=initialState, action) => {
 const setProductsAC = (products) => ({type: SET_PRODUCTS, products});
 export const setProductFormAC = (product) => ({type: SET_PRODUCT_FORM, product});
 const setIsLoadingAC = (isLoading) => ({type: SET_IS_LOADING, isLoading});
-export const setIdOfCreatedAC = (id) => ({type: SET_ID_OF_CREATED, id});
+// export const setIdOfCreatedAC = (id) => ({type: SET_ID_OF_CREATED, id});
 const setProductsFoundAC = (products) => ({type: SET_FOUND_PRODUCTS, products});
 export const setChosenProductAC = (data) => ({type: SET_CHOSEN_PRODUCT, data}); //  {prodId, name}  for related choose
 
@@ -93,7 +93,8 @@ export const getProductById = (id) => async (dispatch) => {
         let response = await productsAPI.getProductById(id);
         await dispatch(setProductFormAC(response));
     } catch (e) {
-
+        console.log(e);
+        alert(e.message);
     }
     dispatch(setIsLoadingAC(false));
 }
@@ -111,8 +112,9 @@ export const createProduct = (formData, thumbnail) =>
                     images: [],
                     types: [],
                 }));
-                dispatch(setIdOfCreatedAC(res.result.url_name));
+                // dispatch(setIdOfCreatedAC(res.result.url_name));
                 dispatch(getProducts());
+                return res.result;
             }
         } catch (e) {
             alert("createProduct: "+e);

@@ -20,7 +20,7 @@ button {
   color: black;
   border-radius: 8px;
   box-shadow: 0 0 2px black;
-  font-weight: bold;
+  font-weight: 500;
 }
 
 label {
@@ -30,6 +30,7 @@ label {
 button:hover {
   opacity: 0.5;
 }
+
 /*thumbnails in slider*/
 ._t1897 {
   object-fit: contain !important;
@@ -50,7 +51,7 @@ button:hover {
 
 .App {
   /*text-align: center;*/
-  font-family: 'Rubik', inherit;
+  font-family: 'Roboto', inherit, serif;
   background-color: var(--c_white);
   min-height: 100%;
 }

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import s from "../Product.module.css";
 import ProductForm from "../ProductForm/ProductForm";
 import chairIcon from "../../../../IMGS/chair.png";
@@ -65,14 +65,12 @@ function UpdateProduct({
         pushToHistory('/admin/products/'+newProdData.url_name);
     }
 
-    let typesList = productData.types.map(t => {
-        return <p key={t.url}>{t.name['ua']}</p>
-    });
-
-    if (isLoading && !productData._id) return <div><Loading/></div>;
+    // if (!productData._id) return <NotFound />;
+    if (isLoading) return <div><Loading/></div>;
 
     return (<div className={s.pane}>
-            <h1>Update Product - <span><a target="__blank" href={`${global_data.site_url}products/${productData.url_name}`}>Open on site</a></span> </h1>
+            <div className={s.header_div} >
+            <h1>{productData.name[locale]} | <span><a target="__blank" href={`${global_data.site_url}products/${productData.url_name}`}>show on site</a></span> </h1>
             <button onClick={handleDuplication} >Duplicate</button>
             <br/>
             <div className={s.locales_div} >
@@ -85,10 +83,11 @@ function UpdateProduct({
                     onClick={()=>setLocale("ru")}
                 >RU</button>
             </div>
+            </div>
             <br/>
             <div style={{display: "flex"}} >
             {/*//===THUMB_PANE========*/}
-            <div style={{width: "10rem"}} >
+            <div style={{width: "10%"}} >
             <img className={s.thumbnail}
                  src={productData.thumbnail ? productData.thumbnail : chairIcon} alt="img"/>
             <input type="file" disabled={false} onChange={onThumbnailSelected}/>
@@ -96,20 +95,21 @@ function UpdateProduct({
 
             {/*//===TYPES_SELECTOR=====*/}
             <div className={s.selectBox}>
-                <div style={{height: "2rem"}} ><span style={{fontWeight: "bolder"}}>Available in: </span> {typesList}</div>
+                {/*<div style={{height: "2rem"}} ><span style={{fontWeight: "bolder"}}>Available in: </span> {typesList}</div>*/}
                 <div style={{display: "flex"}} >
                 <ListsSelect types={productData.types} lists={lists} addElement={addElement} deleteElement={deleteElement} prodIdArr={[prodId]} />
-                <button style={{height: "3rem"}} onClick={onChoosingProductsBtn}>Choose related or similar products</button>
                 </div>
             </div>
             </div>
 
             <ProductForm initialValues={productData} onSubmit={onSubmit} locale={locale} />
-
+            <hr/>
             <PhotosPane images={productData.images} addPhotos={addPhotos}
                         prodId={prodId} deletePhotos={deletePhotos}
             />
 
+            <br/><hr/><br/>
+            <button style={{height: "3rem"}} onClick={onChoosingProductsBtn}>Choose related or similar products</button>
             <div className={s.similar_products_div}>
                 Similar Products
                 <ItemsListC items={productData.similarProducts} deleteItems={onSimilarDelete}>
@@ -119,7 +119,7 @@ function UpdateProduct({
                     </div>}
                 </ItemsListC>
             </div>
-
+            <hr/>
             <div className={s.related_products_div}>
                 Related Products
                 <ItemsListC items={productData.relatedProducts} deleteItems={onRelatedDelete}>
@@ -129,7 +129,7 @@ function UpdateProduct({
                     </div>}
                 </ItemsListC>
             </div>
-
+            <hr/>
         </div>
     );
 }

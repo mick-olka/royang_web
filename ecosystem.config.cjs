@@ -4,7 +4,7 @@ module.exports = {
 	{
 	name: 'rotang_admin',
 	script: 'npm',
-	args: 'run start',
+	args: 'run prod',
 	},
 	],
 };

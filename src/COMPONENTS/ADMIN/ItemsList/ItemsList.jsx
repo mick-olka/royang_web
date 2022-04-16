@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import s from "./ItemsList.module.css";
 
 function ItemsList({items, deleteItems, itemsIdsArr, setItemsIdArr, ...props}) {
@@ -7,6 +7,7 @@ function ItemsList({items, deleteItems, itemsIdsArr, setItemsIdArr, ...props}) {
     document.body.onmouseup = () => {isMouseDown = false}
 
     //const showSmallPopup = useSmallPopup();
+    const [showConfirm, setShowConfirm] = useState(false);
 
     const uncheckAll = () => {
         setItemsIdArr([]);
@@ -54,8 +55,13 @@ function ItemsList({items, deleteItems, itemsIdsArr, setItemsIdArr, ...props}) {
     });
 
     const deleteHandler = () => {
-        deleteItems(itemsIdsArr);
-        setItemsIdArr([]);
+        if (itemsIdsArr.length>0) {
+            deleteItems(itemsIdsArr);
+            setItemsIdArr([]);
+            props.pushToHistory('/admin');
+        } else {
+            setShowConfirm(false);
+        }
     }
 
     return (
@@ -63,7 +69,13 @@ function ItemsList({items, deleteItems, itemsIdsArr, setItemsIdArr, ...props}) {
             <div className={s.controlPane} >
                 <p className={s.items_chosen} >{itemsIdsArr.length} items chosen</p>
                 <button className={s.btn+" "+s.cancel_btn} onClick={uncheckAll} >CANCEL</button>
-                <button className={s.btn+" "+s.delete_btn} onClick={deleteHandler} >DELETE</button>
+                <button className={s.btn+" "+s.delete_btn} onClick={()=>setShowConfirm(true)} >DELETE</button>
+                <div className={s.are_you_sure_div} style={showConfirm ? {display: 'flex'} : {}} >
+                    Are You Sure?<div>
+                        <button onClick={()=>setShowConfirm(false)} >No</button> --
+                        <button className={s.delete_btn} onClick={deleteHandler} >Yes</button>
+                </div>
+                </div>
             </div>
             <div className={s.list_pane} >
                 {itemsList}

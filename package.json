@@ -30,7 +30,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "sitemap": "babel-node ./src/UTILS/sitemap-generator.js"
+    "sitemap": "babel-node ./src/UTILS/sitemap-generator.js",
+    "prod": "serve -p 3005 -s build"
   },
   "eslintConfig": {
     "extends": [

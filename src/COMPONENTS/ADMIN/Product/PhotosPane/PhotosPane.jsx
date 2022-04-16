@@ -29,7 +29,7 @@ function PhotosPane({images, prodId, addPhotos, deletePhotos}) {
             <div className={list.photoBox}>
                 {imagesItem.pathArr.map(p=>{
                     return  <a key={p} target="_blank" rel="noopener noreferrer" href={p}>
-                        <img className={list.photo} src={p} alt="product"/>
+                        <img className={list.photo} src={p} alt="thumbnail"/>
                     </a>
                 })}
             </div>
@@ -40,7 +40,7 @@ function PhotosPane({images, prodId, addPhotos, deletePhotos}) {
 
     return (
         <div className={s.photoPane}>
-            <p style={{fontSize: "1.5rem"}} >Add Photo</p>
+            <p style={{fontSize: "1.5rem"}} >Add Photos</p>
             <input type="file" name="pathArr" onChange={onPhotoSelected} multiple />
             <PhotoForm onSubmit={onSubmit}/>
             <ItemsListC items={images} deleteItems={onPhotoDelete} >

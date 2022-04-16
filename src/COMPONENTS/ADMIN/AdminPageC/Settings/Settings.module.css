@@ -1,0 +1,18 @@
+
+.pane h2 {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.pane h3 {
+    font-size: 1.5rem;
+    margin: 1rem 4rem 0.5rem;
+}
+
+.backup_pane button {
+    display: block;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+    margin: 1rem;
+}

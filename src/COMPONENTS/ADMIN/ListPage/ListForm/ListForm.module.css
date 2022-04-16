@@ -5,11 +5,12 @@
 }
 
 .input_div {
-    position: relative;
+    width: 38rem;
+    display: flex;
     align-items: center;
 }
 
 .input_div input {
-    width: 10rem;
+    width: 30rem;
     margin-left: auto;
 }

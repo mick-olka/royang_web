@@ -2,10 +2,19 @@ import React, {useEffect, useState} from 'react';
 import {Formik, Form, Field, FieldArray} from 'formik';
 import s from "./ProductForm.module.css";
 import Loading from "../../../Extra/Loading";
-
+const onCtrS = (e) => {
+    if (e.ctrlKey && e.code === 'KeyS') {
+        e.preventDefault();
+        document.getElementById('submit_btn').click();
+    }
+}
 const ProductForm = (props) => {
     const [locale0, setLocale0] = useState("ua");   //  dummy to rerender form on locale change
     useEffect(()=>{setLocale0(props.locale)}, [props.locale]);
+    useEffect(()=>{
+        document.addEventListener('keydown', onCtrS);
+        return () => document.removeEventListener('keydown', onCtrS);
+    }, [])
     let initValues = {
         name: props.initialValues.name[props.locale] || "",
         url_name: props.initialValues.url_name,
@@ -15,6 +24,7 @@ const ProductForm = (props) => {
         index: props.initialValues.index,
         features: props.initialValues.features[props.locale],
         description: props.initialValues.description[props.locale] || "",
+        keywords: props.initialValues.keywords.join(', ') || "",
     }
 
     if (locale0 !== props.locale) {return <Loading/>}
@@ -22,9 +32,11 @@ const ProductForm = (props) => {
         <Formik initialValues={initValues} onSubmit={values => {
             let newValues = {...props.initialValues, ...values};
             if (values.name) newValues.name = {...props.initialValues.name, [props.locale]: values.name};
-            if (values.description) newValues.description = {...props.initialValues.description, [props.locale]: values.description};
+            if (values.keywords || values.keywords === "") {
+                newValues.keywords = values.keywords === "" ? [] : values.keywords.split(', ');
+            }
+            if (values.description || values.description === "") newValues.description = {...props.initialValues.description, [props.locale]: values.description};
             if (values.features) newValues.features = {...props.initialValues.features, [props.locale]: values.features};
-            //console.log(newValues);
             props.onSubmit(newValues);
         }}>
             {({values}) => (
@@ -55,6 +67,10 @@ const ProductForm = (props) => {
                                 <div>
                                     <label className={s.i_label}  htmlFor="index">Index: </label>
                                     <Field type="number" name="index"/>
+                                </div>
+                                <div>
+                                    <label className={s.i_label}  htmlFor="keywords">Keywords: </label>
+                                    <Field name="keywords"/>
                                 </div>
                             </div>
                             <div className={s.t_area}>
@@ -99,7 +115,7 @@ const ProductForm = (props) => {
 
                     </div>
                     <div>
-                        <button className={s.submit_btn} type="submit">SAVE</button>
+                        <button id="submit_btn" className={s.submit_btn} type="submit">SAVE</button>
                     </div>
                 </Form>
             )}

@@ -1,0 +1,13 @@
+
+.pane {
+    margin: 1rem 2rem;
+}
+
+.header_pane {
+    display: flex;
+    justify-content: space-between;
+}
+
+.settings_btn {
+    cursor: pointer;
+}

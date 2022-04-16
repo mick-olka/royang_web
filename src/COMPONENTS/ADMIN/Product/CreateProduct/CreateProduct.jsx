@@ -1,34 +1,37 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import s from "../Product.module.css";
 import ProductForm from "../ProductForm/ProductForm";
 import chairIcon from "../../../../IMGS/chair.png";
 
-function CreateProduct({createProduct, idOfCreated, pushToHistory}) {
+function CreateProduct({createProduct, pushToHistory}) {
 
     let initialValues = {
-        features: [
+        features: {ua:[
             {key: "Ширина, см.", value: "0"},
             {key: "Глибина, см", value: "0"},
             {key: "Висота, см", value: "0"},
             {key: "Країна", value: "Україна"},
             {key: "Матеріал", value: "Алюміній, поліетиленова стрічка, скло "},
-        ],
-        name: '',
+        ]},
+        name: {ua: ''},
+        url_name: '',
         code: '',
         price: 0,
         oldPrice: 0,
         index: 0,
-        description: "",
+        description: {ua: ""},
+        keywords: [],
     };
 
     let thumbnail=null;
 
-    useEffect(()=>{
-        if (idOfCreated!=null) pushToHistory("/admin/products/"+idOfCreated)},
-        [idOfCreated, pushToHistory]);
-
     const onSubmit = async (formData) => {
-        await createProduct(formData, thumbnail);
+        let newFormData = {...formData};
+        newFormData.name.ru = newFormData.name.ua + ' ru';
+        newFormData.description.ru = newFormData.description.ua + ' ru';
+        newFormData.features.ru = newFormData.features.ua;
+        let result = await createProduct(formData, thumbnail);
+        pushToHistory('/admin/products/'+result.url_name);
     }
 
     let onThumbnailSelected=(e)=> {
@@ -44,7 +47,7 @@ function CreateProduct({createProduct, idOfCreated, pushToHistory}) {
             <img className={s.thumbnail} src={chairIcon} alt="img"/>
             <input type="file" disabled={false} onChange={onThumbnailSelected} />
 
-            <ProductForm initialValues={initialValues} onSubmit={onSubmit} />
+            <ProductForm initialValues={initialValues} onSubmit={onSubmit} locale="ua" />
 
         </div>
     );

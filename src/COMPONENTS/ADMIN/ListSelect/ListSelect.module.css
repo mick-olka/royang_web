@@ -1,9 +1,14 @@
 
 .list_select_div {
     width: 100%;
+    display: flex;
     margin: 0 1rem;
 }
 
+.list_select_div div {
+}
+
 .btn {
-    width: 100%;
+    width: 6rem;
+    height: 2.3rem;
 }

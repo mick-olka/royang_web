@@ -9,7 +9,6 @@ import {getUpdateProductProps} from "../../../../REDUX/selectors/products_select
 import {
     getProductById,
     setChosenProductAC,
-    setIdOfCreatedAC,
     updateProduct,
     createProduct
 } from "../../../../REDUX/reducers/productsReducer";
@@ -26,8 +25,7 @@ let mapStateToProps = (state) => {
 let mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         getProductById, updateProduct, createProduct, addElement,
-        deleteElement, addPhotos, deletePhotos,
-        setIdOfCreatedAC, setChosenProductAC
+        deleteElement, addPhotos, deletePhotos, setChosenProductAC
     }, dispatch);
 }
 

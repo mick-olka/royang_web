@@ -54,7 +54,7 @@ class AdminProductsPaneC extends React.Component {
                 <button onClick={this.onSetAsRelated}>Set as related</button>
                 <button onClick={this.onSetAsSimilar}>Set as similar</button>
             </div> : null}
-            <ItemsListC items={this.props.products} deleteItems={this.props.deleteProducts}>
+            <ItemsListC items={this.props.products} deleteItems={this.props.deleteProducts} pushToHistory={this.props.pushToHistory} >
                 {item => <ProductItem item={item} currency_value={this.props.currency_value} />}
             </ItemsListC>
         </div>;

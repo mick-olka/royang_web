@@ -58,9 +58,13 @@
 }
 
 .admin_header {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     display: flex;
     justify-content: space-around;
+}
+
+.admin_header_name {
+    text-decoration: none;
 }
 
 .admin_header div {
@@ -86,7 +90,7 @@
 }
 
 .middle_pane_admin {
-    top: 1rem;
+    top: 0.5rem;
 }
 
 input:focus {

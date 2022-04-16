@@ -2,6 +2,7 @@ import * as axios from "axios";
 import global_data from "../REDUX/global_data";
 
 export const apiURL = 'http://192.168.0.113:7500/';
+// export const apiURL = 'http://185.65.245.26:7500/';
 axios.defaults.withCredentials = true;
 const instance = axios.create({
     withCredentials: true,
@@ -176,6 +177,22 @@ export const adminAPI = {
         ).then(response => {
             return response.data;
         });
+    },
+    makeBackup() {
+        return instance.get(
+            'make_backup',
+        ).then(response => {
+            showPopup('Backup Made');
+            return response.data;
+        });
+    },
+    restoreBackup() {
+        return instance.get(
+            'restore_backup',
+        ).then(response => {
+            showPopup('Backup Restored');
+            return response.data;
+        });
     }
 }
 
@@ -207,10 +224,10 @@ export const listsAPI = {
         });
     },
 
-    updateList(url, name, newUrl, index = 0) {
+    updateList(url, dat) {
         return instance.patch(
             'lists/' + url,
-            {name: name, url: newUrl, index: index}
+            {name: dat.name, url: dat.url, index: dat.index, description: dat.description, keywords: dat.keywords}
         ).then(res => {
             showPopup('Updated');
             return res.data;
