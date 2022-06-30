@@ -12,12 +12,17 @@ import {getProducts} from "../REDUX/reducers/productsReducer";
 import {setCurrentPageAC} from "../REDUX/reducers/paginatorReducer";
 import {createOrder, deleteItemByIndex, updateItemCount} from "../REDUX/reducers/cartReducer";
 import {TextContext} from "../UTILS/text_context";
+import { createBrowserHistory } from 'history';
 import Loading from "../COMPONENTS/Extra/Loading";
 import PopupWrapper from "../COMPONENTS/Extra/Popup/PopupWrapper";
 import Popup from "../COMPONENTS/Extra/Popup/Popup";
 import AppErrorPage from "../COMPONENTS/Extra/AppErrorPage";
 
 const AdminPageC = React.lazy(()=>import("../COMPONENTS/ADMIN/AdminPageC/AdminPageC"));
+
+export const history = createBrowserHistory({
+    basename: process.env.PUBLIC_URL
+});
 
 const adminPageCWithSuspense =()=> {
     return <React.Suspense fallback={<div>...Loading...</div>} >
