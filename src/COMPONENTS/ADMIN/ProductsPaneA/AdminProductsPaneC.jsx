@@ -55,7 +55,7 @@ class AdminProductsPaneC extends React.Component {
                 <button onClick={this.onSetAsSimilar}>Set as similar</button>
             </div> : null}
             <ItemsListC items={this.props.products} deleteItems={this.props.deleteProducts} pushToHistory={this.props.pushToHistory} >
-                {item => <ProductItem item={item} currency_value={this.props.currency_value} />}
+                {item => <ProductItem item={item} currency_value={this.props.currency_value} updateProduct={this.props.updateProduct} />}
             </ItemsListC>
         </div>;
     }

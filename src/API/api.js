@@ -1,8 +1,8 @@
 import * as axios from "axios";
 import global_data from "../REDUX/global_data";
 
-// export const apiURL = 'http://192.168.0.113:7500/';
-export const apiURL = 'https://rotang.biz/api/';
+export const apiURL = 'http://192.168.0.113:7500/api/';
+//export const apiURL = 'https://rotang.biz/api/';
 axios.defaults.withCredentials = true;
 const instance = axios.create({
     withCredentials: true,
